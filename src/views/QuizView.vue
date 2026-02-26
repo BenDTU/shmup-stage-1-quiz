@@ -53,7 +53,7 @@ function handleNext() {
 
         <!-- YouTube player -->
         <div class="mb-4">
-          <YouTubePlayer :video-id="currentQuestion.videoId" :start-time="currentQuestion.startTime" />
+          <YouTubePlayer :video-id="currentQuestion.videoId" :start-time="currentQuestion.startTime" :hidden="!state.isAnswered" />
         </div>
 
         <!-- Guess form -->
