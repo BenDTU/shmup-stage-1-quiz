@@ -9,34 +9,48 @@ const props = defineProps<{
 
 const iframeRef = ref<HTMLIFrameElement | null>(null)
 
+// Tracks whether the YouTube player has initialised and whether it is playing.
+// Used to show a manual "click to play" fallback when autoplay is blocked
+// (e.g. macOS Safari) – the first video will not autoplay without a direct
+// user gesture, but clicking the placeholder IS a gesture Safari accepts.
+const isReady = ref(false)
+const isPlaying = ref(false)
+
 const embedSrc = computed(() => {
   const start = props.startTime ?? 0
   return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&start=${start}&rel=0&modestbranding=1&enablejsapi=1`
 })
 
-// On macOS, autoplay=1 alone can be blocked on the first video because the
-// user-gesture context (e.g. "Start Quiz" click) may expire during SPA
-// navigation before the iframe mounts.  Using enablejsapi=1 and responding to
-// the player's onReady event with an explicit playVideo command ensures the
-// video always starts, regardless of whether the browser honoured autoplay=1.
+function sendPlayCommand() {
+  iframeRef.value?.contentWindow?.postMessage(
+    JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
+    'https://www.youtube-nocookie.com',
+  )
+}
+
 function handleYouTubeMessage(event: MessageEvent) {
   if (event.origin !== 'https://www.youtube-nocookie.com') return
   if (event.source !== iframeRef.value?.contentWindow) return
 
-  let data: { event?: string } = {}
+  let data: { event?: string; info?: unknown } = {}
   try {
     const parsed = typeof event.data === 'string' ? JSON.parse(event.data) : event.data
     if (typeof parsed !== 'object' || parsed === null) return
-    data = parsed as { event?: string }
+    data = parsed as { event?: string; info?: unknown }
   } catch {
     return
   }
 
   if (data.event === 'onReady') {
-    iframeRef.value?.contentWindow?.postMessage(
-      JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
-      'https://www.youtube-nocookie.com',
-    )
+    isReady.value = true
+    // Attempt automatic play – works on Chrome/Firefox; Safari ignores this
+    // when there is no user gesture, but the placeholder click below handles that.
+    sendPlayCommand()
+  }
+
+  if (data.event === 'onStateChange') {
+    // YouTube player state: 1 = playing, anything else = not playing
+    isPlaying.value = data.info === 1
   }
 }
 
@@ -59,6 +73,16 @@ onUnmounted(() => {
       </div>
       <p class="mb-0 fw-semibold fs-5">🎵 Now Playing…</p>
       <p class="mb-0 text-muted small">Listen carefully and enter your guess below!</p>
+      <!-- Shown when the player is ready but autoplay was blocked (e.g. macOS Safari).
+           Clicking this button IS a direct user gesture, which Safari accepts. -->
+      <button
+        v-if="isReady && !isPlaying"
+        class="btn btn-outline-light btn-sm mt-3"
+        type="button"
+        @click="sendPlayCommand"
+      >
+        ▶ Click to play
+      </button>
     </div>
   </div>
 
