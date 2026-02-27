@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps<{
   videoId: string
@@ -9,63 +9,53 @@ const props = defineProps<{
 
 const iframeRef = ref<HTMLIFrameElement | null>(null)
 
-// Whether the user has clicked Play for the current question.
-// Starts false so the iframe src is never set automatically —
-// that is the only reliable way to satisfy Safari's autoplay policy,
-// which requires the media navigation to be initiated synchronously
-// within a user-gesture call stack.
-const hasStarted = ref(false)
-
 const embedSrc = computed(() => {
   const start = props.startTime ?? 0
-  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&start=${start}&rel=0&modestbranding=1`
+  // mute=1 guarantees autoplay on every browser — muted autoplay is universally
+  // permitted (Chrome, Firefox, Safari, iOS Safari).  enablejsapi=1 lets the
+  // YouTube player send us an onReady postMessage so we can unmute immediately.
+  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&mute=1&start=${start}&rel=0&modestbranding=1&enablejsapi=1`
 })
 
-// Each new question resets the player so the user must click Play again.
-watch(() => props.videoId, () => {
-  hasStarted.value = false
-})
-
-function startPlayback() {
-  // Setting src DIRECTLY on the DOM element, synchronously inside the click
-  // handler, is the only approach that works on Safari. Using a reactive
-  // binding (:src="...") goes through Vue's microtask queue and falls outside
-  // Safari's user-gesture window, causing autoplay to be blocked.
-  if (iframeRef.value) {
-    iframeRef.value.src = embedSrc.value
-    hasStarted.value = true
+function handleMessage(event: MessageEvent) {
+  if (event.origin !== 'https://www.youtube-nocookie.com') return
+  if (event.source !== iframeRef.value?.contentWindow) return
+  try {
+    const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data
+    if (data.event === 'onReady') {
+      // The video is now playing (muted). Unmute it so the user can hear it.
+      const win = iframeRef.value?.contentWindow
+      if (win) {
+        win.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), 'https://www.youtube-nocookie.com')
+        win.postMessage(JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }), 'https://www.youtube-nocookie.com')
+      }
+    }
+  } catch {
+    // ignore malformed messages
   }
 }
+
+onMounted(() => window.addEventListener('message', handleMessage))
+onUnmounted(() => window.removeEventListener('message', handleMessage))
 </script>
 
 <template>
+  <!-- The iframe is always rendered at full 16:9 size so that browsers honour
+       autoplay (browsers block autoplay on invisible/zero-size iframes).
+       When the answer is hidden, an overlay sits on top to prevent spoilers
+       while the audio keeps playing underneath. -->
   <div class="ratio ratio-16x9">
-    <!-- Overlay: shown while the user hasn't pressed Play yet, or while
-         the answer is still hidden (to prevent spoilers). -->
-    <div v-if="!hasStarted || hidden" class="audio-overlay audio-placeholder rounded-3 text-center">
-      <template v-if="hasStarted">
-        <div class="bars mb-3" aria-hidden="true">
-          <span></span><span></span><span></span><span></span><span></span>
-        </div>
-        <p class="mb-0 fw-semibold fs-5">🎵 Now Playing…</p>
-        <p class="mb-0 text-muted small">Listen carefully and enter your guess below!</p>
-      </template>
-      <button
-        v-else
-        class="btn btn-outline-light btn-lg"
-        type="button"
-        @click="startPlayback"
-      >
-        ▶ Play
-      </button>
+    <div v-if="hidden" class="audio-overlay audio-placeholder rounded-3 text-center">
+      <div class="bars mb-3" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <p class="mb-0 fw-semibold fs-5">🎵 Now Playing…</p>
+      <p class="mb-0 text-muted small">Listen carefully and enter your guess below!</p>
     </div>
-    <!-- src starts empty; startPlayback() sets it directly inside the click
-         handler so browsers honour autoplay=1. The key forces a fresh iframe
-         (and therefore a fresh src="") for every new question. -->
     <iframe
       ref="iframeRef"
       :key="videoId"
-      src=""
+      :src="embedSrc"
       title="Stage 1 theme"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
