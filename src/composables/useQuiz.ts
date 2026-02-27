@@ -16,6 +16,7 @@ interface QuizState {
 }
 
 const QUIZ_SIZE = 20
+const MAX_PER_FRANCHISE = 3
 
 const state = reactive<QuizState>({
   questions: [],
@@ -39,7 +40,27 @@ const usedGameIds = computed<Set<number>>(
 
 function startQuiz() {
   const shuffled = [...games].sort(() => Math.random() - 0.5)
-  state.questions = shuffled.slice(0, QUIZ_SIZE)
+  const selected: Game[] = []
+  const skipped: Game[] = []
+  const franchiseCounts = new Map<string, number>()
+  for (const game of shuffled) {
+    if (selected.length >= QUIZ_SIZE) break
+    if (game.franchise) {
+      const count = franchiseCounts.get(game.franchise) ?? 0
+      if (count >= MAX_PER_FRANCHISE) {
+        skipped.push(game)
+        continue
+      }
+      franchiseCounts.set(game.franchise, count + 1)
+    }
+    selected.push(game)
+  }
+  // Fallback: fill any remaining slots from franchise-capped games if pool is too small
+  for (const game of skipped) {
+    if (selected.length >= QUIZ_SIZE) break
+    selected.push(game)
+  }
+  state.questions = selected
   state.currentIndex = 0
   state.answers = []
   state.isStarted = true

@@ -3,6 +3,7 @@ export interface GameEntry {
   songName: string
   videoId: string
   startTime?: number // seconds into the video where the stage 1 theme begins (defaults to 0)
+  franchise?: string // series name used to cap franchise representation in a quiz
 }
 
 export type Game = Omit<GameEntry, 'startTime'> & {
@@ -45,16 +46,19 @@ const gameEntries: GameEntry[] = [
     name: 'DoDonPachi',
     songName: '1 & 4 Scene BGM',
     videoId: 'nDMjMv6COIU',
+    franchise: 'DoDonPachi',
   },
   {
     name: 'DoDonPachi DaiFukkatsu',
     songName: 'The Year 2008, Tokyo',
     videoId: 'ZCaPtpNyjf4',
+    franchise: 'DoDonPachi',
   },
   {
     name: 'DoDonPachi DaiOuJou',
     songName: 'East Asia',
     videoId: 'muuApOJSP9E',
+    franchise: 'DoDonPachi',
   },
   {
     name: 'ESP Ra.De.',
@@ -70,16 +74,19 @@ const gameEntries: GameEntry[] = [
     name: 'Gradius',
     songName: 'Challenger 1985',
     videoId: 'nYES6OmvQFQ',
+    franchise: 'Gradius',
   },
   {
     name: 'Gradius II',
     songName: 'Burning Heat',
     videoId: 'FLc1msji0_w',
+    franchise: 'Gradius',
   },
   {
     name: 'Gradius III',
     songName: 'Sand Storm',
     videoId: 'NyQzfqNIKTI',
+    franchise: 'Gradius',
   },
   {
     name: 'Guwange',
@@ -135,16 +142,19 @@ const gameEntries: GameEntry[] = [
     name: 'R-Type',
     songName: 'START ~ BATTLE THEME (Start ~ Stage1)',
     videoId: 'tXrxov_0oj0',
+    franchise: 'R-Type',
   },
   {
     name: 'R-Type II',
     songName: 'Counter Attack',
     videoId: 'idU8lvOP9qA',
+    franchise: 'R-Type',
   },
   {
     name: 'R-Type Leo',
     songName: 'Paradise Planet',
     videoId: 'yu7_I3CnDP8',
+    franchise: 'R-Type',
   },
   {
     name: 'Radiant Silvergun',
@@ -155,11 +165,13 @@ const gameEntries: GameEntry[] = [
     name: 'Raiden',
     songName: 'Gallantry',
     videoId: 'vaGenJ5GXxE',
+    franchise: 'Raiden',
   },
   {
     name: 'Raiden II',
     songName: 'Repeated Tragedy',
     videoId: 'zDS4EMmETsE',
+    franchise: 'Raiden',
   },
   {
     name: 'RefleX',
@@ -170,26 +182,31 @@ const gameEntries: GameEntry[] = [
     name: 'Space Invaders (Game Boy Advance)',
     songName: 'Track 1',
     videoId: 'XUXYxZjt2VI',
+    franchise: 'Space Invaders',
   },
   {
     name: 'Space Invaders (Game Boy Color)',
     songName: 'Mercury',
     videoId: 'DPQlZDOJPSw',
+    franchise: 'Space Invaders',
   },
   {
     name: 'Space Invaders Extreme',
     songName: 'invAde yOu',
-    videoId: 'qpZdqEgRNYA'
+    videoId: 'qpZdqEgRNYA',
+    franchise: 'Space Invaders',
   },
   {
     name: 'Space Invaders Extreme 2',
     songName: 'Invader Disco',
     videoId: 'hAOBf-JY1kU',
+    franchise: 'Space Invaders',
   },
   {
     name: 'Space Invaders Infinity Gene',
     songName: 'Selection (Genetic)',
     videoId: 'N3EJltfL7ok',
+    franchise: 'Space Invaders',
   },
   {
     name: 'Strikers 1945 II',
@@ -199,7 +216,8 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Super R-Type',
     songName: 'Super Sortie',
-    videoId: 'YuGRrVMLkxk'
+    videoId: 'YuGRrVMLkxk',
+    franchise: 'R-Type',
   },
   {
     name: 'Thunder Force IV',
@@ -210,76 +228,91 @@ const gameEntries: GameEntry[] = [
     name: 'Touhou 6: Embodiment of Scarlet Devil',
     songName: 'A Soul as Red as a Ground Cherry',
     videoId: 'nazi6JmAV_c',
+    franchise: 'Touhou',
   },
   {
     name: 'Touhou 7: Perfect Cherry Blossom',
     songName: 'Paradise ~ Deep Mountain',
     videoId: 'hzTtdlTAapw',
+    franchise: 'Touhou',
   },
   {
     name: 'Touhou 8: Imperishable Night',
     songName: 'Illusionary Night ~ Ghostly Eyes',
     videoId: 'buarznoa7ms',
+    franchise: 'Touhou',
   },
   {
     name: 'Touhou 9: Phantasmagoria of Flower View',
     songName: 'Spring Lane ~ Colorful Path',
     videoId: 'LfqQa6JDlS8',
+    franchise: 'Touhou',
   },
   {
     name: 'Touhou 10: Mountain of Faith',
     songName: 'A God That Misses People ~ Romantic Fall',
     videoId: '-NJWjmBT1qo',
+    franchise: 'Touhou',
   },
   {
     name: 'Touhou 11: Subterranean Animism',
     songName: 'The Dark Blowhole',
     videoId: 'MFCAB3KfBcI',
+    franchise: 'Touhou',
   },
   {
     name: 'Touhou 12: Undefined Fantastic Object',
     songName: 'At the End of Spring',
     videoId: 'nn2BUBM-hQ4',
+    franchise: 'Touhou',
   },
   {
     name: 'Touhou 13: Ten Desires',
     songName: 'Night Sakura of Dead Spirits',
     videoId: 'S_s2InH_pFk',
+    franchise: 'Touhou',
   },
   {
     name: 'Touhou 14: Double Dealing Character',
     songName: 'Mist Lake',
     videoId: 'mo1glRtlyTg',
+    franchise: 'Touhou',
   },
   {
     name: 'Touhou 15: Legacy of Lunatic Kingdom',
     songName: 'Unforgettable, the Nostalgic Greenery',
     videoId: 'ucuIXF4YwNY',
+    franchise: 'Touhou',
   },
   {
     name: 'Touhou 16: Hidden Star in Four Seasons',
     songName: 'A Star of Hope Rises in the Blue Sky',
     videoId: 'PVva0VzDAR8',
+    franchise: 'Touhou',
   },
   {
     name: 'Touhou 17: Wily Beast and Weakest Creature',
     songName: 'The Lamentations Known Only by Jizo',
     videoId: 'uJ6VscWKMzA',
+    franchise: 'Touhou',
   },
   {
     name: 'Touhou 18: Unconnected Marketeers',
     songName: 'A Shower of Strange Occurrences',
     videoId: 'W3HOWV3aY_s',
+    franchise: 'Touhou',
   },
   {
     name: 'Touhou 19: Unfinished Dream of All Living Ghost',
     songName: 'The World is Made in an Adorable Way',
     videoId: 'RpvCTe2FN1E',
+    franchise: 'Touhou',
   },
   {
     name: 'Touhou 20: Fossilized Wonders',
     songName: 'Beloved Dwelling of Dust',
     videoId: 'SSZT4pV3RFA',
+    franchise: 'Touhou',
   },
   {
     name: 'Tyrian',
