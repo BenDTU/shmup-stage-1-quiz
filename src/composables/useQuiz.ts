@@ -41,7 +41,7 @@ const usedGameIds = computed<Set<number>>(
 // IDs of games belonging to franchises that have reached the 3-game limit in the current quiz
 const franchiseLimitedGameIds = computed<Set<number>>(() => {
   const shownFranchiseCounts: Partial<Record<Franchise, number>> = {}
-  for (const game of state.questions.slice(0, state.currentIndex + 1)) {
+  for (const game of state.questions.slice(0, state.currentIndex)) {
     if (game.franchise) {
       shownFranchiseCounts[game.franchise] = (shownFranchiseCounts[game.franchise] ?? 0) + 1
     }
