@@ -21,9 +21,15 @@ const audioUnlocked = ref(false)
 // Muted autoplay is permitted by every browser including Safari.
 // enablejsapi=1 lets us send postMessage commands (unMute, loadVideoById)
 // to the running player without ever changing the iframe's src again.
+// origin= is required by the IFrame Player API so postMessage commands
+// (seekTo, unMute, loadVideoById) are accepted when deployed.
 const embedSrc = computed(() => {
   const start = props.startTime ?? 0
-  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&mute=1&enablejsapi=1&start=${start}&rel=0&modestbranding=1`
+  const origin =
+    typeof window !== 'undefined'
+      ? `&origin=${encodeURIComponent(window.location.origin)}`
+      : ''
+  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&mute=1&enablejsapi=1&start=${start}&rel=0&modestbranding=1${origin}`
 })
 
 // Send a postMessage command to the YouTube player.
