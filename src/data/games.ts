@@ -5,7 +5,8 @@ export interface GameEntry {
   startTime?: number // seconds into the video where the stage 1 theme begins (defaults to 0)
 }
 
-export interface Game extends GameEntry {
+export type Game = Omit<GameEntry, 'startTime'> & {
+  startTime: number
   id: number
 }
 
