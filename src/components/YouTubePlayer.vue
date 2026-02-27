@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps<{
   videoId: string
@@ -7,9 +7,45 @@ const props = defineProps<{
   hidden?: boolean
 }>()
 
+const iframeRef = ref<HTMLIFrameElement | null>(null)
+
 const embedSrc = computed(() => {
   const start = props.startTime ?? 0
-  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&start=${start}&rel=0&modestbranding=1`
+  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&start=${start}&rel=0&modestbranding=1&enablejsapi=1`
+})
+
+// On macOS, autoplay=1 alone can be blocked on the first video because the
+// user-gesture context (e.g. "Start Quiz" click) may expire during SPA
+// navigation before the iframe mounts.  Using enablejsapi=1 and responding to
+// the player's onReady event with an explicit playVideo command ensures the
+// video always starts, regardless of whether the browser honoured autoplay=1.
+function handleYouTubeMessage(event: MessageEvent) {
+  if (event.origin !== 'https://www.youtube-nocookie.com') return
+  if (event.source !== iframeRef.value?.contentWindow) return
+
+  let data: { event?: string } = {}
+  try {
+    const parsed = typeof event.data === 'string' ? JSON.parse(event.data) : event.data
+    if (typeof parsed !== 'object' || parsed === null) return
+    data = parsed as { event?: string }
+  } catch {
+    return
+  }
+
+  if (data.event === 'onReady') {
+    iframeRef.value?.contentWindow?.postMessage(
+      JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
+      'https://www.youtube-nocookie.com',
+    )
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('message', handleYouTubeMessage)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('message', handleYouTubeMessage)
 })
 </script>
 
@@ -30,6 +66,7 @@ const embedSrc = computed(() => {
        When hidden, it is visually clipped to 1 px so it remains loaded. -->
   <div :class="hidden ? 'player-offscreen' : 'ratio ratio-16x9'" :aria-hidden="hidden ? 'true' : undefined">
     <iframe
+      ref="iframeRef"
       :key="videoId"
       :src="embedSrc"
       title="Stage 1 theme"
