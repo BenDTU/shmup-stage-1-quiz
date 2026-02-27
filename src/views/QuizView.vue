@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
 import AutocompleteInput from '../components/AutocompleteInput.vue'
@@ -10,6 +10,8 @@ const router = useRouter()
 const { state, isFinished, usedGameIds, submitGuess, nextQuestion } = useQuiz()
 
 const guess = ref('')
+const nextBtn = ref<HTMLButtonElement | null>(null)
+const autocompleteRef = ref<{ focus: () => void } | null>(null)
 
 onMounted(() => {
   if (!state.isStarted || state.questions.length === 0) {
@@ -65,9 +67,13 @@ const isValidGuess = computed(() => {
     return !isGameUsed(gameId)
   })
 })
-function handleSubmit() {
+async function handleSubmit(viaKeyboard = false) {
   if (!isValidGuess.value || state.isAnswered) return
   submitGuess(guess.value)
+  if (viaKeyboard) {
+    await nextTick()
+    nextBtn.value?.focus()
+  }
 }
 
 function handleSkip() {
@@ -81,6 +87,17 @@ function handleNext() {
   } else {
     guess.value = ''
     nextQuestion()
+  }
+}
+
+async function handleNextClick(event: MouseEvent) {
+  // event.detail is 0 for keyboard-triggered clicks (Enter/Space) and ≥1 for mouse clicks
+  const isKeyboard = event.detail === 0
+  const wasFinished = isFinished.value
+  handleNext()
+  if (isKeyboard && !wasFinished) {
+    await nextTick()
+    autocompleteRef.value?.focus()
   }
 }
 </script>
@@ -114,10 +131,11 @@ function handleNext() {
 
             <div v-if="!state.isAnswered">
               <AutocompleteInput
+                ref="autocompleteRef"
                 v-model="guess"
                 :disabled-game-ids="usedGameIds"
                 class="mb-3"
-                @submit="handleSubmit"
+                @submit="handleSubmit(true)"
               />
               <div class="d-flex gap-2">
                 <button
@@ -150,7 +168,7 @@ function handleNext() {
                   </span>
                 </span>
               </div>
-              <button class="btn btn-success w-100" @click="handleNext">
+              <button ref="nextBtn" class="btn btn-success w-100" @click="handleNextClick">
                 {{ isFinished ? 'See Results 🏆' : 'Next Question →' }}
               </button>
             </div>
