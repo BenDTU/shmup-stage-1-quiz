@@ -179,7 +179,7 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Super R-Type',
     songName: 'Super Sortie',
-    videoId: '0MIqgHu3tsg'
+    videoId: 'YuGRrVMLkxk'
   },
   { 
     name: 'Thunder Force IV', 

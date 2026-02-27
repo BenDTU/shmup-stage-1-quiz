@@ -18,9 +18,12 @@ Built with Vue 3, TypeScript, Vite and Bootstrap 5.
 npm install
 npm run dev      # start dev server
 npm run build    # production build
+npm run lint     # lint and check game list sorting
 ```
 
 ## Updating the game list
 
 The list of games and their YouTube video IDs lives in [`src/data/games.ts`](src/data/games.ts).
-Each entry has a `videoId` (YouTube video ID) and an optional `startTime` (seconds) to jump to the stage 1 theme in a full-OST video.
+Each entry has a `videoId` (YouTube video ID) and an optional `startTime` (seconds, omit or leave out if 0) to jump to the stage 1 theme in a full-OST video.
+
+The game list **must stay sorted** alphabetically (with numeric-aware ordering). Run `npm run lint` to verify — the custom `local/sorted-games` ESLint rule will report an error if any entry is out of order.
