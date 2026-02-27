@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps<{
   videoId: string
@@ -7,90 +7,26 @@ const props = defineProps<{
   hidden?: boolean
 }>()
 
-const iframeRef = ref<HTMLIFrameElement | null>(null)
-
-// Tracks whether the YouTube player has initialised and whether it is playing.
-// Used to show a manual "click to play" fallback when autoplay is blocked
-// (e.g. macOS Safari) – the first video will not autoplay without a direct
-// user gesture, but clicking the placeholder IS a gesture Safari accepts.
-const isReady = ref(false)
-const isPlaying = ref(false)
-
 const embedSrc = computed(() => {
   const start = props.startTime ?? 0
-  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&start=${start}&rel=0&modestbranding=1&enablejsapi=1`
-})
-
-function sendPlayCommand() {
-  iframeRef.value?.contentWindow?.postMessage(
-    JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
-    'https://www.youtube-nocookie.com',
-  )
-}
-
-function handleYouTubeMessage(event: MessageEvent) {
-  if (event.origin !== 'https://www.youtube-nocookie.com') return
-  if (event.source !== iframeRef.value?.contentWindow) return
-
-  let data: { event?: string; info?: unknown } = {}
-  try {
-    const parsed = typeof event.data === 'string' ? JSON.parse(event.data) : event.data
-    if (typeof parsed !== 'object' || parsed === null) return
-    data = parsed as { event?: string; info?: unknown }
-  } catch {
-    return
-  }
-
-  if (data.event === 'onReady') {
-    isReady.value = true
-    // Attempt automatic play – works on Chrome/Firefox; Safari ignores this
-    // when there is no user gesture, but the placeholder click below handles that.
-    sendPlayCommand()
-  }
-
-  if (data.event === 'onStateChange') {
-    // YouTube player state: 1 = playing, anything else = not playing
-    isPlaying.value = data.info === 1
-  }
-}
-
-onMounted(() => {
-  window.addEventListener('message', handleYouTubeMessage)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('message', handleYouTubeMessage)
+  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&start=${start}&rel=0&modestbranding=1`
 })
 </script>
 
 <template>
-  <!-- Audio-only placeholder shown while the answer is hidden; wrapped in ratio-16x9 to
-       match the size of the YouTube iframe that appears after the user submits. -->
-  <div v-if="hidden" class="ratio ratio-16x9">
-    <div class="audio-placeholder rounded-3 text-center">
+  <!-- The iframe is always rendered at full 16:9 size so that browsers honour
+       autoplay=1 (browsers block autoplay on invisible/zero-size iframes).
+       When the answer is hidden, an overlay sits on top to prevent spoilers
+       while the audio keeps playing underneath. -->
+  <div class="ratio ratio-16x9">
+    <div v-if="hidden" class="audio-overlay audio-placeholder rounded-3 text-center">
       <div class="bars mb-3" aria-hidden="true">
         <span></span><span></span><span></span><span></span><span></span>
       </div>
       <p class="mb-0 fw-semibold fs-5">🎵 Now Playing…</p>
       <p class="mb-0 text-muted small">Listen carefully and enter your guess below!</p>
-      <!-- Shown when the player is ready but autoplay was blocked (e.g. macOS Safari).
-           Clicking this button IS a direct user gesture, which Safari accepts. -->
-      <button
-        v-if="isReady && !isPlaying"
-        class="btn btn-outline-light btn-sm mt-3"
-        type="button"
-        @click="sendPlayCommand"
-      >
-        ▶ Click to play
-      </button>
     </div>
-  </div>
-
-  <!-- Always keep the iframe in the DOM so audio keeps playing.
-       When hidden, it is visually clipped to 1 px so it remains loaded. -->
-  <div :class="hidden ? 'player-offscreen' : 'ratio ratio-16x9'" :aria-hidden="hidden ? 'true' : undefined">
     <iframe
-      ref="iframeRef"
       :key="videoId"
       :src="embedSrc"
       title="Stage 1 theme"
@@ -101,19 +37,10 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* Keeps the iframe loaded & audio playing without being visible.
-   Uses the standard screen-reader-only visually-hidden pattern so the element
-   occupies no layout space and is invisible without removing it from the DOM. */
-.player-offscreen {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+/* The overlay sits on top of the iframe, covering the video while
+   keeping the iframe fully active so autoplay=1 is honoured. */
+.audio-overlay {
+  z-index: 1;
 }
 
 .audio-placeholder {
