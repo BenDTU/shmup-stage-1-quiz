@@ -225,7 +225,7 @@ const gameEntries: GameEntry[] = [
     name: 'Touhou 9: Phantasmagoria of Flower View',
     songName: 'Spring Lane ~ Colorful Path',
     videoId: 'LfqQa6JDlS8',
-  },  
+  },
   {
     name: 'Touhou 10: Mountain of Faith',
     songName: 'A God That Misses People ~ Romantic Fall',
