@@ -86,7 +86,13 @@ function onKeydown(event: KeyboardEvent) {
       placeholder="Type to search for a game…"
       :value="modelValue"
       :disabled="disabled"
+      role="combobox"
       autocomplete="off"
+      aria-haspopup="listbox"
+      aria-controls="autocomplete-listbox"
+      aria-autocomplete="list"
+      :aria-expanded="isOpen && filteredGames.length > 0"
+      :aria-activedescendant="highlightedIndex >= 0 && filteredGames[highlightedIndex] ? `autocomplete-option-${filteredGames[highlightedIndex].id}` : undefined"
       @input="onInput"
       @focus="onFocus"
       @blur="onBlur"
@@ -94,16 +100,22 @@ function onKeydown(event: KeyboardEvent) {
     />
     <ul
       v-if="isOpen && filteredGames.length > 0"
+      id="autocomplete-listbox"
+      role="listbox"
       class="list-group position-absolute w-100 autocomplete-dropdown shadow"
     >
       <li
         v-for="(game, index) in filteredGames"
+        :id="`autocomplete-option-${game.id}`"
         :key="game.id"
+        role="option"
         class="list-group-item list-group-item-action"
         :class="{
           disabled: disabledGameIds.has(game.id),
           active: index === highlightedIndex && !disabledGameIds.has(game.id),
         }"
+        :aria-selected="index === highlightedIndex && !disabledGameIds.has(game.id)"
+        :aria-disabled="disabledGameIds.has(game.id) || undefined"
         @mousedown.prevent="selectGame(game)"
       >
         {{ game.name }}
