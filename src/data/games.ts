@@ -148,7 +148,7 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'Radiant Silvergun',
-    songName: 'Arrival',
+    songName: 'Return',
     videoId: 'BJnkpw2dyAs',
   },
   {
