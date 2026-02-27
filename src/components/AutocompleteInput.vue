@@ -10,10 +10,14 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   'update:modelValue': [value: string]
+  submit: []
 }>()
 
 const isOpen = ref(false)
 const highlightedIndex = ref(-1)
+const inputRef = ref<HTMLInputElement | null>(null)
+
+defineExpose({ focus: () => inputRef.value?.focus() })
 
 const filteredGames = computed<Game[]>(() => {
   const query = props.modelValue.toLowerCase().trim()
@@ -49,6 +53,9 @@ function onKeydown(event: KeyboardEvent) {
   if (!isOpen.value) {
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       isOpen.value = true
+    } else if (event.key === 'Enter') {
+      event.preventDefault()
+      emit('submit')
     }
     return
   }
@@ -84,8 +91,13 @@ function onKeydown(event: KeyboardEvent) {
       }
     } else if (enabledGames.length === 1 && enabledGames[0]) {
       selectGame(enabledGames[0])
+    } else {
+      emit('submit')
     }
   } else if (event.key === 'Escape') {
+    isOpen.value = false
+    highlightedIndex.value = -1
+  } else if (event.key === 'Tab') {
     isOpen.value = false
     highlightedIndex.value = -1
   }
@@ -95,6 +107,7 @@ function onKeydown(event: KeyboardEvent) {
 <template>
   <div class="position-relative">
     <input
+      ref="inputRef"
       type="text"
       class="form-control"
       placeholder="Type to search for a game…"
@@ -116,6 +129,7 @@ function onKeydown(event: KeyboardEvent) {
       v-if="isOpen && filteredGames.length > 0"
       id="autocomplete-listbox"
       role="listbox"
+      tabindex="-1"
       class="list-group position-absolute w-100 autocomplete-dropdown shadow"
     >
       <li
