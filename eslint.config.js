@@ -36,7 +36,7 @@ const sortedGamesRule = {
           .filter(Boolean)
 
         for (let i = 1; i < names.length; i++) {
-          if (names[i].toLowerCase() < names[i - 1].toLowerCase()) {
+          if (names[i - 1].localeCompare(names[i], undefined, { sensitivity: 'base', numeric: true }) > 0) {
             context.report({
               node: elements[i],
               messageId: 'unsorted',

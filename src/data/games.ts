@@ -171,18 +171,6 @@ const gameEntries: GameEntry[] = [
     startTime: 0 
   },
   { 
-    name: 'Touhou 10: Mountain of Faith', 
-    songName: 'A God That Misses People ~ Romantic Fall', 
-    videoId: '-NJWjmBT1qo', 
-    startTime: 0 
-  },  
-  { 
-    name: 'Touhou 11: Subterranean Animism', 
-    songName: 'The Dark Blowhole', 
-    videoId: 'MFCAB3KfBcI', 
-    startTime: 0 
-  },  
-  { 
     name: 'Touhou 6: Embodiment of Scarlet Devil', 
     songName: 'A Soul as Red as a Ground Cherry', 
     videoId: 'nazi6JmAV_c', 
@@ -200,6 +188,18 @@ const gameEntries: GameEntry[] = [
     videoId: 'buarznoa7ms', 
     startTime: 0 
   },    
+  { 
+    name: 'Touhou 10: Mountain of Faith', 
+    songName: 'A God That Misses People ~ Romantic Fall', 
+    videoId: '-NJWjmBT1qo', 
+    startTime: 0 
+  },  
+  { 
+    name: 'Touhou 11: Subterranean Animism', 
+    songName: 'The Dark Blowhole', 
+    videoId: 'MFCAB3KfBcI', 
+    startTime: 0 
+  },  
   { 
     name: 'Tyrian', 
     songName: 'Tyrian , the level', 
