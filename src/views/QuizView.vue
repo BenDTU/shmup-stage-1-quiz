@@ -21,10 +21,50 @@ const currentQuestion = computed(() => state.questions[state.currentIndex])
 const questionNumber = computed(() => state.currentIndex + 1)
 
 // Only allow submitting a guess that exactly matches a game in the pool
-const isValidGuess = computed(() =>
-  games.some((g) => g.name.toLowerCase() === guess.value.trim().toLowerCase()),
-)
+const isValidGuess = computed(() => {
+  const normalizedGuess = guess.value.trim().toLowerCase()
+  if (!normalizedGuess) return false
 
+  const usedIds: any = usedGameIds as any
+
+  const isGameUsed = (gameId: unknown): boolean => {
+    if (gameId == null) return false
+
+    // Handle Set-like, Array-like, or ref-wrapped collections of used IDs
+    const checkCollection = (collection: any): boolean => {
+      if (!collection) return false
+      if (typeof collection.has === 'function') {
+        return collection.has(gameId)
+      }
+      if (Array.isArray(collection) && typeof collection.includes === 'function') {
+        return collection.includes(gameId)
+      }
+      return false
+    }
+
+    if (checkCollection(usedIds)) return true
+    if (usedIds && 'value' in usedIds) {
+      return checkCollection((usedIds as any).value)
+    }
+
+    return false
+  }
+
+  return games.some((g: any) => {
+    const matchesName =
+      typeof g.name === 'string' && g.name.toLowerCase() === normalizedGuess
+
+    if (!matchesName) return false
+
+    // If there is no id, fall back to name-only behavior
+    const gameId = g.id
+    if (gameId === undefined || gameId === null) {
+      return true
+    }
+
+    return !isGameUsed(gameId)
+  })
+})
 function handleSubmit() {
   if (!isValidGuess.value || state.isAnswered) return
   submitGuess(guess.value)
