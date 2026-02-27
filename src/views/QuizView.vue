@@ -110,7 +110,10 @@ async function handleNextClick(event: MouseEvent) {
 </script>
 
 <template>
-  <main v-if="currentQuestion" class="container py-4">
+  <main
+    v-if="currentQuestion"
+    class="container py-4"
+  >
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <!-- Progress bar -->
@@ -118,23 +121,36 @@ async function handleNextClick(event: MouseEvent) {
           <span class="fw-semibold">Question {{ questionNumber }} of {{ state.questions.length }}</span>
           <span class="text-muted small">Score: {{ state.answers.filter((a) => a.isCorrect).length }} / {{ state.answers.length }}</span>
         </div>
-        <div class="progress mb-4" style="height: 8px">
+        <div
+          class="progress mb-4"
+          style="height: 8px"
+        >
           <div
             class="progress-bar"
             role="progressbar"
             :style="{ width: `${(questionNumber / state.questions.length) * 100}%` }"
-          ></div>
+          />
         </div>
 
         <!-- YouTube player -->
         <div class="mb-4">
-          <YouTubePlayer :video-id="currentQuestion.videoId" :start-time="currentQuestion.startTime" :hidden="!state.isAnswered" @audio-unlocked="audioUnlocked = true" />
+          <YouTubePlayer
+            :video-id="currentQuestion.videoId"
+            :start-time="currentQuestion.startTime"
+            :hidden="!state.isAnswered"
+            @audio-unlocked="audioUnlocked = true"
+          />
         </div>
 
         <!-- Guess form -->
-        <div class="card">
-          <div class="card-body" v-show="audioUnlocked">
-            <h5 class="card-title mb-3">Which game is this stage 1 theme from?</h5>
+        <div
+          v-show="audioUnlocked"
+          class="card"
+        >
+          <div class="card-body">
+            <h5 class="card-title mb-3">
+              Which game is this stage 1 theme from?
+            </h5>
 
             <div v-if="!state.isAnswered">
               <AutocompleteInput
@@ -152,7 +168,10 @@ async function handleNextClick(event: MouseEvent) {
                 >
                   Submit Guess
                 </button>
-                <button class="btn btn-outline-secondary" @click="handleSkipClick">
+                <button
+                  class="btn btn-outline-secondary"
+                  @click="handleSkipClick"
+                >
                   Skip ⏭
                 </button>
               </div>
@@ -175,7 +194,11 @@ async function handleNextClick(event: MouseEvent) {
                   </span>
                 </span>
               </div>
-              <button ref="nextBtn" class="btn btn-success w-100" @click="handleNextClick">
+              <button
+                ref="nextBtn"
+                class="btn btn-success w-100"
+                @click="handleNextClick"
+              >
                 {{ isFinished ? 'See Results 🏆' : 'Next Question →' }}
               </button>
             </div>
