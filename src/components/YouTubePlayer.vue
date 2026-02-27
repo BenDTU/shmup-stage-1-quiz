@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps<{
   videoId: string
@@ -7,52 +7,29 @@ const props = defineProps<{
   hidden?: boolean
 }>()
 
-const iframeRef = ref<HTMLIFrameElement | null>(null)
-
 // Whether the user has performed the one-time audio-unlock interaction.
 // Component-level: persists while the quiz view is mounted; automatically
 // resets when the user navigates away (component is destroyed).
 const audioUnlocked = ref(false)
 
-// Silent pre-warm URL: loads the YouTube player without autoplaying.
-// Having YouTube already running in the iframe means the Play-click
-// gesture navigates YouTube→YouTube (same origin), which browsers
-// reliably allow for audio autoplay — unlike the first-ever load from
-// about:blank which is treated as a cross-origin navigation.
+// Loads the video paused so the player is already initialised before Play.
+// enablejsapi=1 is included so the YouTube Player API is available if needed.
 const preloadSrc = computed(() => {
   const start = props.startTime ?? 0
-  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=0&mute=1&start=${start}&rel=0&modestbranding=1`
+  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=0&mute=1&enablejsapi=1&start=${start}&rel=0&modestbranding=1`
 })
 
+// Used once audio is unlocked. mute=0 explicitly overrides any muted state.
 const embedSrc = computed(() => {
   const start = props.startTime ?? 0
-  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&mute=0&start=${start}&rel=0&modestbranding=1`
+  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&mute=0&enablejsapi=1&start=${start}&rel=0&modestbranding=1`
 })
-
-// Pre-warm the iframe immediately on mount: the YouTube player loads
-// silently so that when the user clicks Play it navigates within the
-// already-running YouTube domain rather than loading from scratch.
-onMounted(() => {
-  if (iframeRef.value) {
-    iframeRef.value.src = preloadSrc.value
-  }
-})
-
-// When the question changes, update the iframe src directly on the
-// persistent element. flush:'post' ensures the DOM has settled.
-watch(() => props.videoId, () => {
-  if (audioUnlocked.value && iframeRef.value) {
-    iframeRef.value.src = embedSrc.value
-  }
-}, { flush: 'post' })
 
 function startAudio() {
-  // Navigate the already-running YouTube iframe to the autoplay URL.
-  // This YouTube→YouTube navigation within the click handler is what
-  // browsers require for audio autoplay permission.
-  if (iframeRef.value) {
-    iframeRef.value.src = embedSrc.value
-  }
+  // Setting audioUnlocked causes Vue's reactive :src binding to switch from
+  // preloadSrc → embedSrc in the same user-gesture microtask flush.
+  // This is a YouTube→YouTube navigation within the gesture context, which
+  // browsers permit for audio autoplay.
   audioUnlocked.value = true
 }
 </script>
@@ -60,9 +37,9 @@ function startAudio() {
 <template>
   <div class="ratio ratio-16x9">
     <!-- One-time Start overlay — only shown before the user's first
-         audio interaction. The iframe behind it is already pre-warmed
-         with a silent YouTube load so that clicking Play navigates
-         within the running YouTube player (enabling audio autoplay). -->
+         audio interaction. The iframe behind it silently pre-loads the
+         video (paused), so that clicking Play is a YouTube→YouTube src
+         switch rather than a cold load — enabling audio autoplay. -->
     <div v-if="!audioUnlocked" class="audio-overlay audio-placeholder rounded-3 text-center">
       <button
         class="btn btn-outline-light btn-lg"
@@ -80,13 +57,15 @@ function startAudio() {
       <p class="mb-0 fw-semibold fs-5">🎵 Now Playing…</p>
       <p class="mb-0 text-muted small">Listen carefully and enter your guess below!</p>
     </div>
-    <!-- The iframe src is managed entirely by JS (onMounted pre-warm,
-         startAudio, and the videoId watcher). No :key so the same
-         element is reused throughout the quiz — avoids any src="" reset
-         between questions that would break the YouTube→YouTube pattern. -->
+    <!-- :key="videoId" gives each question a fresh iframe element.
+         :src binding: shows the video paused (preloadSrc) until the user
+         clicks Play, then switches to autoplay (embedSrc).
+         For Q1 this reactive switch happens within the click gesture's
+         microtask. For Q2+ the fresh iframe is created with embedSrc
+         directly, within the gesture context of the question navigation. -->
     <iframe
-      ref="iframeRef"
-      src=""
+      :key="videoId"
+      :src="audioUnlocked ? embedSrc : preloadSrc"
       title="Stage 1 theme"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
