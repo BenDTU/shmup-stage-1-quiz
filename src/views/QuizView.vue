@@ -7,7 +7,7 @@ import { useQuiz } from '../composables/useQuiz'
 import { games } from '../data/games'
 
 const router = useRouter()
-const { state, isFinished, usedGameIds, submitGuess, nextQuestion } = useQuiz()
+const { state, isFinished, usedGameIds, franchiseLimitedGameIds, submitGuess, nextQuestion } = useQuiz()
 
 const guess = ref('')
 const nextBtn = ref<HTMLButtonElement | null>(null)
@@ -64,7 +64,7 @@ const isValidGuess = computed(() => {
       return true
     }
 
-    return !isGameUsed(gameId)
+    return !isGameUsed(gameId) && !franchiseLimitedGameIds.value.has(gameId)
   })
 })
 async function handleSubmit(viaKeyboard = false) {
@@ -140,6 +140,7 @@ async function handleNextClick(event: MouseEvent) {
                 ref="autocompleteRef"
                 v-model="guess"
                 :disabled-game-ids="usedGameIds"
+                :franchise-limited-game-ids="franchiseLimitedGameIds"
                 class="mb-3"
                 @submit="handleSubmit(true)"
               />
