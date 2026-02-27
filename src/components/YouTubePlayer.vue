@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 const props = defineProps<{
   videoId: string
@@ -9,53 +9,67 @@ const props = defineProps<{
 
 const iframeRef = ref<HTMLIFrameElement | null>(null)
 
+// Whether the user has performed the one-time audio-unlock interaction.
+// Component-level: persists while the quiz view is mounted; automatically
+// resets when the user navigates away (component is destroyed).
+const audioUnlocked = ref(false)
+
 const embedSrc = computed(() => {
   const start = props.startTime ?? 0
-  // mute=1 guarantees autoplay on every browser — muted autoplay is universally
-  // permitted (Chrome, Firefox, Safari, iOS Safari).  enablejsapi=1 lets the
-  // YouTube player send us an onReady postMessage so we can unmute immediately.
-  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&mute=1&start=${start}&rel=0&modestbranding=1&enablejsapi=1`
+  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&start=${start}&rel=0&modestbranding=1`
 })
 
-function handleMessage(event: MessageEvent) {
-  if (event.origin !== 'https://www.youtube-nocookie.com') return
-  if (event.source !== iframeRef.value?.contentWindow) return
-  try {
-    const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data
-    if (data.event === 'onReady') {
-      // The video is now playing (muted). Unmute it so the user can hear it.
-      const win = iframeRef.value?.contentWindow
-      if (win) {
-        win.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), 'https://www.youtube-nocookie.com')
-        win.postMessage(JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }), 'https://www.youtube-nocookie.com')
-      }
-    }
-  } catch {
-    // ignore malformed messages
+// After the session is unlocked, load each new question's video automatically.
+// flush:'post' ensures iframeRef.value already points to the newly-mounted
+// iframe (the :key on the iframe causes it to be recreated per question).
+watch(() => props.videoId, () => {
+  if (audioUnlocked.value && iframeRef.value) {
+    iframeRef.value.src = embedSrc.value
   }
-}
+}, { flush: 'post' })
 
-onMounted(() => window.addEventListener('message', handleMessage))
-onUnmounted(() => window.removeEventListener('message', handleMessage))
+function startAudio() {
+  // Set the iframe src synchronously inside the click handler.
+  // This is the one required user gesture that unlocks audio autoplay
+  // for the rest of the session.
+  // embedSrc always reflects the current videoId, so this is safe even
+  // if the question somehow changed before the user pressed Play.
+  if (iframeRef.value) {
+    iframeRef.value.src = embedSrc.value
+  }
+  audioUnlocked.value = true
+}
 </script>
 
 <template>
-  <!-- The iframe is always rendered at full 16:9 size so that browsers honour
-       autoplay (browsers block autoplay on invisible/zero-size iframes).
-       When the answer is hidden, an overlay sits on top to prevent spoilers
-       while the audio keeps playing underneath. -->
   <div class="ratio ratio-16x9">
-    <div v-if="hidden" class="audio-overlay audio-placeholder rounded-3 text-center">
+    <!-- One-time Start overlay — only shown before the user's first
+         audio interaction. Clicking it initiates playback synchronously
+         inside the gesture, which is required for audio autoplay. -->
+    <div v-if="!audioUnlocked" class="audio-overlay audio-placeholder rounded-3 text-center">
+      <button
+        class="btn btn-outline-light btn-lg"
+        type="button"
+        @click="startAudio"
+      >
+        ▶ Play
+      </button>
+    </div>
+    <!-- Spoiler overlay — shown while the answer is still hidden -->
+    <div v-else-if="hidden" class="audio-overlay audio-placeholder rounded-3 text-center">
       <div class="bars mb-3" aria-hidden="true">
         <span></span><span></span><span></span><span></span><span></span>
       </div>
       <p class="mb-0 fw-semibold fs-5">🎵 Now Playing…</p>
       <p class="mb-0 text-muted small">Listen carefully and enter your guess below!</p>
     </div>
+    <!-- The iframe src is managed entirely by JS (startAudio / the watcher)
+         so Vue never re-renders it and causes an unwanted reload.
+         The :key forces a fresh iframe element for every new question. -->
     <iframe
       ref="iframeRef"
       :key="videoId"
-      :src="embedSrc"
+      src=""
       title="Stage 1 theme"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
