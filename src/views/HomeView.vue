@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { useQuiz } from '../composables/useQuiz'
+import { useQuiz } from '@/composables/useQuiz'
 import { games } from '@/data/games'
 
 const router = useRouter()

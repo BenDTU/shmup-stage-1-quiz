@@ -5,7 +5,8 @@ export interface GameEntry {
   startTime?: number // seconds into the video where the stage 1 theme begins (defaults to 0)
 }
 
-export interface Game extends GameEntry {
+export type Game = Omit<GameEntry, 'startTime'> & {
+  startTime: number
   id: number
 }
 
@@ -198,7 +199,7 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Super R-Type',
     songName: 'Super Sortie',
-    videoId: '0MIqgHu3tsg'
+    videoId: 'YuGRrVMLkxk'
   },
   {
     name: 'Thunder Force IV',
