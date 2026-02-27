@@ -97,6 +97,9 @@ function onKeydown(event: KeyboardEvent) {
   } else if (event.key === 'Escape') {
     isOpen.value = false
     highlightedIndex.value = -1
+  } else if (event.key === 'Tab') {
+    isOpen.value = false
+    highlightedIndex.value = -1
   }
 }
 </script>
@@ -126,6 +129,7 @@ function onKeydown(event: KeyboardEvent) {
       v-if="isOpen && filteredGames.length > 0"
       id="autocomplete-listbox"
       role="listbox"
+      tabindex="-1"
       class="list-group position-absolute w-100 autocomplete-dropdown shadow"
     >
       <li
