@@ -51,9 +51,13 @@ watch(() => props.videoId, () => {
 }, { flush: 'post' })
 
 function startAudio() {
-  // Unmute the already-playing video. Calling postMessage inside the
-  // click handler transfers user activation into the iframe — the
-  // mechanism Safari requires to permit audio on a muted embed.
+  // Seek back to the configured start time before unmuting, so the
+  // listener always hears the track from the beginning regardless of
+  // how long the silent pre-roll has been running.
+  // Calling postMessage inside the click handler transfers user
+  // activation into the iframe — the mechanism Safari requires to
+  // permit audio on a muted embed.
+  sendCommand('seekTo', [props.startTime ?? 0, true])
   sendCommand('unMute')
   audioUnlocked.value = true
 }
