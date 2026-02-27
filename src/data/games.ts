@@ -36,6 +36,7 @@ const gameEntries: GameEntry[] = [
   { name: 'Radiant Silvergun',                    videoId: 'BJnkpw2dyAs', startTime: 0   },
   { name: 'Raiden',                               videoId: 'vaGenJ5GXxE', startTime: 0   },
   { name: 'RefleX',                               videoId: 'HmAJEvPLmVs', startTime: 0   },
+  { name: 'Space Invaders Extreme 2',             videoId: 'hAOBf-JY1kU', startTime: 0   },
   { name: 'Strikers 1945 II',                     videoId: '1RXtMBfJ1PY', startTime: 0   },
   { name: 'Thunder Force IV',                     videoId: 'IJE-iAE1Mt8', startTime: 0   },
   { name: 'Touhou: Embodiment of Scarlet Devil',  videoId: 'nazi6JmAV_c', startTime: 0   },
@@ -43,6 +44,7 @@ const gameEntries: GameEntry[] = [
   { name: 'Touhou: Mountain of Faith',            videoId: '-NJWjmBT1qo', startTime: 0   },
   { name: 'Touhou: Perfect Cherry Blossom',       videoId: 'hzTtdlTAapw', startTime: 0   },
   { name: 'Touhou: Subterranean Animism',         videoId: 'MFCAB3KfBcI', startTime: 0   },
+  { name: 'Tyrian',                               videoId: 'wNnTGbbDJfo', startTime: 0   },
 ]
 
 export const games: Game[] = gameEntries.map((entry, index) => ({ ...entry, id: index + 1 }))
