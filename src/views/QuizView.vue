@@ -76,9 +76,15 @@ async function handleSubmit(viaKeyboard = false) {
   }
 }
 
-function handleSkip() {
+async function handleSkipClick(event: MouseEvent) {
   if (state.isAnswered) return
+  // event.detail is 0 for keyboard-triggered clicks (Enter/Space) and ≥1 for mouse clicks
+  const isKeyboard = event.detail === 0
   submitGuess('Song skipped')
+  if (isKeyboard) {
+    await nextTick()
+    nextBtn.value?.focus()
+  }
 }
 
 function handleNext() {
@@ -145,7 +151,7 @@ async function handleNextClick(event: MouseEvent) {
                 >
                   Submit Guess
                 </button>
-                <button class="btn btn-outline-secondary" @click="handleSkip">
+                <button class="btn btn-outline-secondary" @click="handleSkipClick">
                   Skip ⏭
                 </button>
               </div>
