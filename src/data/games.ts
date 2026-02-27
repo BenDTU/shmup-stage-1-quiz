@@ -111,7 +111,7 @@ const gameEntries: GameEntry[] = [
     videoId: 'z472pIce5CY', 
   },
   {
-    name: 'M.U.S.H.A.',
+    name: 'MUSHA',
     songName: 'Fullmetal Fighter', 
     videoId: '0MIqgHu3tsg',
   },
