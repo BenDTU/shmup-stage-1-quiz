@@ -10,6 +10,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   'update:modelValue': [value: string]
+  submit: []
 }>()
 
 const isOpen = ref(false)
@@ -49,6 +50,9 @@ function onKeydown(event: KeyboardEvent) {
   if (!isOpen.value) {
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       isOpen.value = true
+    } else if (event.key === 'Enter') {
+      event.preventDefault()
+      emit('submit')
     }
     return
   }
@@ -84,6 +88,8 @@ function onKeydown(event: KeyboardEvent) {
       }
     } else if (enabledGames.length === 1 && enabledGames[0]) {
       selectGame(enabledGames[0])
+    } else {
+      emit('submit')
     }
   } else if (event.key === 'Escape') {
     isOpen.value = false

@@ -117,6 +117,7 @@ function handleNext() {
                 v-model="guess"
                 :disabled-game-ids="usedGameIds"
                 class="mb-3"
+                @submit="handleSubmit"
               />
               <div class="d-flex gap-2">
                 <button
