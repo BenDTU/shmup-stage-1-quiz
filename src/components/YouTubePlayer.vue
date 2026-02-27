@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, watch, onMounted } from 'vue'
 
 const props = defineProps<{
   videoId: string
@@ -7,31 +7,104 @@ const props = defineProps<{
   hidden?: boolean
 }>()
 
+const emit = defineEmits<{
+  (e: 'audioUnlocked'): void
+}>()
+
+const iframeRef = ref<HTMLIFrameElement | null>(null)
+
+// Whether the user has performed the one-time audio-unlock interaction.
+// Component-level: persists while the quiz view is mounted; automatically
+// resets when the user navigates away (component is destroyed).
+const audioUnlocked = ref(false)
+
+// Muted autoplay is permitted by every browser including Safari.
+// enablejsapi=1 lets us send postMessage commands (unMute, loadVideoById)
+// to the running player without ever changing the iframe's src again.
+// origin= is required by the IFrame Player API so postMessage commands
+// (seekTo, unMute, loadVideoById) are accepted when deployed.
 const embedSrc = computed(() => {
   const start = props.startTime ?? 0
-  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&start=${start}&rel=0&modestbranding=1`
+  const origin =
+    typeof window !== 'undefined'
+      ? `&origin=${encodeURIComponent(window.location.origin)}`
+      : ''
+  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&mute=1&enablejsapi=1&start=${start}&rel=0&modestbranding=1${origin}`
 })
+
+// Send a postMessage command to the YouTube player.
+function sendCommand(func: string, args: unknown[] = []) {
+  iframeRef.value?.contentWindow?.postMessage(
+    JSON.stringify({ event: 'command', func, args }),
+    'https://www.youtube-nocookie.com',
+  )
+}
+
+// Start the first video playing silently so the player is active
+// by the time the user clicks Play.
+onMounted(() => {
+  if (iframeRef.value) {
+    iframeRef.value.src = embedSrc.value
+  }
+})
+
+// When the question changes:
+// • If audio is already unlocked, use loadVideoById so the same player
+//   instance (and its user-activation state) is reused — no src reload.
+// • Otherwise reload the iframe for a fresh muted-autoplay start.
+watch(() => props.videoId, () => {
+  if (audioUnlocked.value) {
+    sendCommand('loadVideoById', [props.videoId, props.startTime ?? 0])
+  } else if (iframeRef.value) {
+    iframeRef.value.src = embedSrc.value
+  }
+}, { flush: 'post' })
+
+function startAudio() {
+  // Seek back to the configured start time before unmuting, so the
+  // listener always hears the track from the beginning regardless of
+  // how long the silent pre-roll has been running.
+  // Calling postMessage inside the click handler transfers user
+  // activation into the iframe — the mechanism Safari requires to
+  // permit audio on a muted embed.
+  sendCommand('seekTo', [props.startTime ?? 0, true])
+  sendCommand('unMute')
+  audioUnlocked.value = true
+  emit('audioUnlocked')
+}
 </script>
 
 <template>
-  <!-- Audio-only placeholder shown while the answer is hidden; wrapped in ratio-16x9 to
-       match the size of the YouTube iframe that appears after the user submits. -->
-  <div v-if="hidden" class="ratio ratio-16x9">
-    <div class="audio-placeholder rounded-3 text-center">
+  <div class="ratio ratio-16x9">
+    <!-- One-time Start overlay — only shown before the user's first
+         audio interaction. The iframe behind it is already playing the
+         video muted (muted autoplay is permitted by every browser).
+         Clicking Play sends an unMute command via postMessage inside the
+         gesture, which transfers user activation into the iframe and
+         allows Safari (and all other browsers) to enable audio. -->
+    <div v-if="!audioUnlocked" class="audio-overlay audio-placeholder rounded-3 text-center">
+      <button
+        class="btn btn-outline-light btn-lg"
+        type="button"
+        @click="startAudio"
+      >
+        ▶ Play
+      </button>
+    </div>
+    <!-- Spoiler overlay — shown while the answer is still hidden -->
+    <div v-else-if="hidden" class="audio-overlay audio-placeholder rounded-3 text-center">
       <div class="bars mb-3" aria-hidden="true">
         <span></span><span></span><span></span><span></span><span></span>
       </div>
       <p class="mb-0 fw-semibold fs-5">🎵 Now Playing…</p>
       <p class="mb-0 text-muted small">Listen carefully and enter your guess below!</p>
     </div>
-  </div>
-
-  <!-- Always keep the iframe in the DOM so audio keeps playing.
-       When hidden, it is visually clipped to 1 px so it remains loaded. -->
-  <div :class="hidden ? 'player-offscreen' : 'ratio ratio-16x9'" :aria-hidden="hidden ? 'true' : undefined">
+    <!-- src is managed imperatively (onMounted + watcher + startAudio).
+         No :key so the same element — and its user-activation state —
+         persists for every question without a src reload. -->
     <iframe
-      :key="videoId"
-      :src="embedSrc"
+      ref="iframeRef"
+      src=""
       title="Stage 1 theme"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
@@ -40,19 +113,10 @@ const embedSrc = computed(() => {
 </template>
 
 <style scoped>
-/* Keeps the iframe loaded & audio playing without being visible.
-   Uses the standard screen-reader-only visually-hidden pattern so the element
-   occupies no layout space and is invisible without removing it from the DOM. */
-.player-offscreen {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+/* The overlay sits on top of the iframe, covering the video while
+   keeping the iframe fully active so autoplay=1 is honoured. */
+.audio-overlay {
+  z-index: 1;
 }
 
 .audio-placeholder {
