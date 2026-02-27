@@ -21,7 +21,7 @@ const sortedGamesRule = {
   },
   create(context) {
     return {
-      'VariableDeclarator[id.name="games"] > ArrayExpression'(node) {
+      'VariableDeclarator[id.name="gameEntries"] > ArrayExpression'(node) {
         const elements = node.elements
         const names = elements
           .map((el) => {

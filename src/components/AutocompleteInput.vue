@@ -121,6 +121,7 @@ function onKeydown(event: KeyboardEvent) {
   z-index: 1000;
   max-height: 280px;
   overflow-y: auto;
+  background: white;
 }
 
 .list-group-item.disabled {
