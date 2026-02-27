@@ -99,11 +99,11 @@ function handleNext() {
                 :class="state.answers[state.currentIndex]?.isCorrect ? 'alert-success' : 'alert-danger'"
               >
                 <span v-if="state.answers[state.currentIndex]?.isCorrect">
-                  ✅ <strong>Correct!</strong>
+                  ✅ <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }}</em>.
                 </span>
                 <span v-else>
                   ❌ <strong>Incorrect.</strong> The answer was
-                  <em>{{ currentQuestion.name }}</em>.
+                  <em>{{ currentQuestion.name }}</em> — <em>{{ currentQuestion.songName }}</em>.
                   <span v-if="state.answers[state.currentIndex]?.userGuess">
                     You guessed: <em>{{ state.answers[state.currentIndex]?.userGuess }}</em>.
                   </span>
