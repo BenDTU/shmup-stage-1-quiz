@@ -222,6 +222,11 @@ const gameEntries: GameEntry[] = [
     videoId: 'buarznoa7ms',
   },
   {
+    name: 'Touhou 9: Phantasmagoria of Flower View',
+    songName: 'Spring Lane ~ Colorful Path',
+    videoId: 'LfqQa6JDlS8',
+  },  
+  {
     name: 'Touhou 10: Mountain of Faith',
     songName: 'A God That Misses People ~ Romantic Fall',
     videoId: '-NJWjmBT1qo',
@@ -230,6 +235,51 @@ const gameEntries: GameEntry[] = [
     name: 'Touhou 11: Subterranean Animism',
     songName: 'The Dark Blowhole',
     videoId: 'MFCAB3KfBcI',
+  },
+  {
+    name: 'Touhou 12: Undefined Fantastic Object',
+    songName: 'At the End of Spring',
+    videoId: 'nn2BUBM-hQ4',
+  },
+  {
+    name: 'Touhou 13: Ten Desires',
+    songName: 'Night Sakura of Dead Spirits',
+    videoId: 'S_s2InH_pFk',
+  },
+  {
+    name: 'Touhou 14: Double Dealing Character',
+    songName: 'Mist Lake',
+    videoId: 'mo1glRtlyTg',
+  },
+  {
+    name: 'Touhou 15: Legacy of Lunatic Kingdom',
+    songName: 'Unforgettable, the Nostalgic Greenery',
+    videoId: 'ucuIXF4YwNY',
+  },
+  {
+    name: 'Touhou 16: Hidden Star in Four Seasons',
+    songName: 'A Star of Hope Rises in the Blue Sky',
+    videoId: 'PVva0VzDAR8',
+  },
+  {
+    name: 'Touhou 17: Wily Beast and Weakest Creature',
+    songName: 'The Lamentations Known Only by Jizo',
+    videoId: 'uJ6VscWKMzA',
+  },
+  {
+    name: 'Touhou 18: Unconnected Marketeers',
+    songName: 'A Shower of Strange Occurrences',
+    videoId: 'W3HOWV3aY_s',
+  },
+  {
+    name: 'Touhou 19: Unfinished Dream of All Living Ghost',
+    songName: 'The World is Made in an Adorable Way',
+    videoId: 'RpvCTe2FN1E',
+  },
+  {
+    name: 'Touhou 20: Fossilized Wonders',
+    songName: 'Beloved Dwelling of Dust',
+    videoId: 'SSZT4pV3RFA',
   },
   {
     name: 'Tyrian',
