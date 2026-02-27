@@ -1555,7 +1555,7 @@ npm-normalize-package-bin@^4.0.0:
 
 npm-run-all2@^8.0.4:
   version "8.0.4"
-  resolved "https://registry.yarnpkg.com/npm-run-all2/-/npm-run-all2-8.0.4.tgz#bcc070fd0cdb8d45496ec875d99a659a112e3f74"
+  resolved "https://registry.npmjs.org/npm-run-all2/-/npm-run-all2-8.0.4.tgz"
   integrity sha512-wdbB5My48XKp2ZfJUlhnLVihzeuA1hgBnqB2J9ahV77wLS+/YAJAlN8I+X3DIFIPZ3m5L7nplmlbhNiFDmXRDA==
   dependencies:
     ansi-styles "^6.2.1"
