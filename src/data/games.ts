@@ -43,7 +43,7 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'DoDonPachi',
-    songName: '',
+    songName: '1 & 4 Scene BGM',
     videoId: 'nDMjMv6COIU',
   },
   {
