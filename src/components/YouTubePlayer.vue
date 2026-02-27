@@ -7,6 +7,10 @@ const props = defineProps<{
   hidden?: boolean
 }>()
 
+const emit = defineEmits<{
+  (e: 'audioUnlocked'): void
+}>()
+
 const iframeRef = ref<HTMLIFrameElement | null>(null)
 
 // Whether the user has performed the one-time audio-unlock interaction.
@@ -60,6 +64,7 @@ function startAudio() {
   sendCommand('seekTo', [props.startTime ?? 0, true])
   sendCommand('unMute')
   audioUnlocked.value = true
+  emit('audioUnlocked')
 }
 </script>
 

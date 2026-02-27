@@ -10,6 +10,7 @@ const router = useRouter()
 const { state, isFinished, usedGameIds, submitGuess, nextQuestion } = useQuiz()
 
 const guess = ref('')
+const audioUnlocked = ref(false)
 const nextBtn = ref<HTMLButtonElement | null>(null)
 const autocompleteRef = ref<{ focus: () => void } | null>(null)
 
@@ -127,12 +128,12 @@ async function handleNextClick(event: MouseEvent) {
 
         <!-- YouTube player -->
         <div class="mb-4">
-          <YouTubePlayer :video-id="currentQuestion.videoId" :start-time="currentQuestion.startTime" :hidden="!state.isAnswered" />
+          <YouTubePlayer :video-id="currentQuestion.videoId" :start-time="currentQuestion.startTime" :hidden="!state.isAnswered" @audio-unlocked="audioUnlocked = true" />
         </div>
 
         <!-- Guess form -->
         <div class="card">
-          <div class="card-body">
+          <div class="card-body" v-show="audioUnlocked">
             <h5 class="card-title mb-3">Which game is this stage 1 theme from?</h5>
 
             <div v-if="!state.isAnswered">
