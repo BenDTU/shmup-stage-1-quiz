@@ -165,7 +165,7 @@ async function handleNextClick(event: MouseEvent) {
                 <button
                   class="btn btn-primary flex-grow-1"
                   :disabled="!isValidGuess"
-                  @click="() => handleSubmit()"
+                  @click="handleSubmit()"
                 >
                   Submit Guess
                 </button>
