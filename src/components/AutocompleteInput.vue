@@ -5,6 +5,7 @@ import { games, type Game } from '../data/games'
 const props = defineProps<{
   modelValue: string
   disabledGameIds: Set<number>
+  franchiseLimitedGameIds?: Set<number>
   disabled?: boolean
 }>()
 
@@ -27,6 +28,7 @@ const filteredGames = computed<Game[]>(() => {
 
 function selectGame(game: Game) {
   if (props.disabledGameIds.has(game.id)) return
+  if (props.franchiseLimitedGameIds?.has(game.id)) return
   emit('update:modelValue', game.name)
   isOpen.value = false
   highlightedIndex.value = -1
@@ -60,14 +62,16 @@ function onKeydown(event: KeyboardEvent) {
     return
   }
 
-  const enabledGames = filteredGames.value.filter((g) => !props.disabledGameIds.has(g.id))
+  const enabledGames = filteredGames.value.filter(
+    (g) => !props.disabledGameIds.has(g.id) && !props.franchiseLimitedGameIds?.has(g.id),
+  )
 
   if (event.key === 'ArrowDown') {
     event.preventDefault()
     let next = highlightedIndex.value + 1
     while (next < filteredGames.value.length) {
       const game = filteredGames.value[next]
-      if (!game || !props.disabledGameIds.has(game.id)) break
+      if (!game || (!props.disabledGameIds.has(game.id) && !props.franchiseLimitedGameIds?.has(game.id))) break
       next++
     }
     if (next < filteredGames.value.length) {
@@ -78,7 +82,7 @@ function onKeydown(event: KeyboardEvent) {
     let prev = highlightedIndex.value - 1
     while (prev >= 0) {
       const game = filteredGames.value[prev]
-      if (!game || !props.disabledGameIds.has(game.id)) break
+      if (!game || (!props.disabledGameIds.has(game.id) && !props.franchiseLimitedGameIds?.has(game.id))) break
       prev--
     }
     highlightedIndex.value = prev
@@ -86,7 +90,7 @@ function onKeydown(event: KeyboardEvent) {
     event.preventDefault()
     if (highlightedIndex.value >= 0) {
       const game = filteredGames.value[highlightedIndex.value]
-      if (game && !props.disabledGameIds.has(game.id)) {
+      if (game && !props.disabledGameIds.has(game.id) && !props.franchiseLimitedGameIds?.has(game.id)) {
         selectGame(game)
       }
     } else if (enabledGames.length === 1 && enabledGames[0]) {
@@ -139,16 +143,19 @@ function onKeydown(event: KeyboardEvent) {
         role="option"
         class="list-group-item list-group-item-action"
         :class="{
-          disabled: disabledGameIds.has(game.id),
-          active: index === highlightedIndex && !disabledGameIds.has(game.id),
+          disabled: disabledGameIds.has(game.id) || franchiseLimitedGameIds?.has(game.id),
+          active: index === highlightedIndex && !disabledGameIds.has(game.id) && !franchiseLimitedGameIds?.has(game.id),
         }"
-        :aria-selected="index === highlightedIndex && !disabledGameIds.has(game.id)"
-        :aria-disabled="disabledGameIds.has(game.id) || undefined"
+        :aria-selected="index === highlightedIndex && !disabledGameIds.has(game.id) && !franchiseLimitedGameIds?.has(game.id)"
+        :aria-disabled="disabledGameIds.has(game.id) || franchiseLimitedGameIds?.has(game.id) || undefined"
         @mousedown.prevent="selectGame(game)"
       >
         {{ game.name }}
         <span v-if="disabledGameIds.has(game.id)" class="ms-2 badge text-bg-secondary">
           Already played
+        </span>
+        <span v-else-if="franchiseLimitedGameIds?.has(game.id)" class="ms-2 badge text-bg-secondary">
+          Franchise limit reached
         </span>
       </li>
     </ul>
