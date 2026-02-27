@@ -17,123 +17,123 @@ export interface Game extends GameEntry {
 const gameEntries: GameEntry[] = [
   {
     name: 'Armed Police Batrider',
-    songName: 'Easy to Go', 
-    videoId: 'UFc72Qz3S34', 
+    songName: 'Easy to Go',
+    videoId: 'UFc72Qz3S34',
   },
-  { 
-    name: 'Battle Garegga', 
-    songName: 'Fly to the Leaden Sky', 
+  {
+    name: 'Battle Garegga',
+    songName: 'Fly to the Leaden Sky',
     videoId: 'Szr0TSXcWok',
   },
-  { 
-    name: 'Blazing Star', 
-    songName: 'Apocalypse ~ Stage 1A', 
-    videoId: 'WIeUpFJ4LY4', 
+  {
+    name: 'Blazing Star',
+    songName: 'Apocalypse ~ Stage 1A',
+    videoId: 'WIeUpFJ4LY4',
   },
-  { 
-    name: 'Crimzon Clover', 
-    songName: 'UL-stage1', 
+  {
+    name: 'Crimzon Clover',
+    songName: 'UL-stage1',
     videoId: 'yYF3x1hACIU',
   },
-  { 
-    name: 'Deathsmiles', 
-    songName: 'Burning Halloween Town - Stage A-1', 
-    videoId: 'LI3Z5UqqlrQ', 
+  {
+    name: 'Deathsmiles',
+    songName: 'Burning Halloween Town - Stage A-1',
+    videoId: 'LI3Z5UqqlrQ',
   },
-  { 
-    name: 'DoDonPachi', 
-    songName: '', 
-    videoId: 'nDMjMv6COIU', 
+  {
+    name: 'DoDonPachi',
+    songName: '',
+    videoId: 'nDMjMv6COIU',
   },
-  { 
-    name: 'DoDonPachi DaiFukkatsu', 
-    songName: 'The Year 2008, Tokyo', 
+  {
+    name: 'DoDonPachi DaiFukkatsu',
+    songName: 'The Year 2008, Tokyo',
     videoId: 'ZCaPtpNyjf4',
   },
   {
     name: 'DoDonPachi DaiOuJou',
     songName: 'East Asia',
-    videoId: 'muuApOJSP9E', 
+    videoId: 'muuApOJSP9E',
   },
-  { 
-    name: 'ESP Ra.De.', 
-    songName: 'DESPERATE SCHOOL (STAGE-A)', 
-    videoId: 'P3_U1wyESiA', 
+  {
+    name: 'ESP Ra.De.',
+    songName: 'DESPERATE SCHOOL (STAGE-A)',
+    videoId: 'P3_U1wyESiA',
   },
-  { 
-    name: 'Espgaluda', 
-    songName: 'Bloody Separation ~ Bloody Arrival (Stage 1/Stage 5.2)', 
-    videoId: '5A6oJRZSFBg', 
+  {
+    name: 'Espgaluda',
+    songName: 'Bloody Separation ~ Bloody Arrival (Stage 1/Stage 5.2)',
+    videoId: '5A6oJRZSFBg',
   },
-  { 
-    name: 'Gradius', 
-    songName: 'Challenger 1985', 
-    videoId: 'nYES6OmvQFQ', 
+  {
+    name: 'Gradius',
+    songName: 'Challenger 1985',
+    videoId: 'nYES6OmvQFQ',
   },
   {
     name: 'Gradius II',
     songName: 'Burning Heat',
     videoId: 'FLc1msji0_w',
   },
-  { 
-    name: 'Gradius III', 
-    songName: 'Sand Storm', 
-    videoId: 'NyQzfqNIKTI', 
+  {
+    name: 'Gradius III',
+    songName: 'Sand Storm',
+    videoId: 'NyQzfqNIKTI',
   },
-  { 
-    name: 'Guwange', 
-    songName: 'Falling Cherry Blossoms', 
-    videoId: 'EWYuTxCV11U', 
+  {
+    name: 'Guwange',
+    songName: 'Falling Cherry Blossoms',
+    videoId: 'EWYuTxCV11U',
   },
   {
     name: 'Hellfire',
     songName: 'Captain Lancer',
     videoId: '1VUMGMKTnKs',
   },
-  { 
-    name: 'Hellsinker', 
-    songName: 'Segment 1 BEHIND', 
-    videoId: 'M7vl9LzMAa8', 
+  {
+    name: 'Hellsinker',
+    songName: 'Segment 1 BEHIND',
+    videoId: 'M7vl9LzMAa8',
   },
-  { 
-    name: 'Ikaruga', 
-    songName: 'Ideal', 
-    videoId: 'fAn6XxsDDTI', 
+  {
+    name: 'Ikaruga',
+    songName: 'Ideal',
+    videoId: 'fAn6XxsDDTI',
   },
-  { 
-    name: 'Jamestown', 
-    songName: 'War Upon the East Frontier', 
-    videoId: 'zhgBx6vSApM', 
+  {
+    name: 'Jamestown',
+    songName: 'War Upon the East Frontier',
+    videoId: 'zhgBx6vSApM',
   },
-  { 
-    name: 'Ketsui', 
-    songName: "INTERCEPTION - Noisy Town", 
-    videoId: 'z472pIce5CY', 
+  {
+    name: 'Ketsui',
+    songName: "INTERCEPTION - Noisy Town",
+    videoId: 'z472pIce5CY',
   },
   {
     name: 'MUSHA',
-    songName: 'Fullmetal Fighter', 
+    songName: 'Fullmetal Fighter',
     videoId: '0MIqgHu3tsg',
   },
-  { 
-    name: 'Mushihimesama', 
-    songName: 'To Shinju Forest', 
-    videoId: 'F9D-NmXX_h4', 
+  {
+    name: 'Mushihimesama',
+    songName: 'To Shinju Forest',
+    videoId: 'F9D-NmXX_h4',
   },
-  { 
-    name: 'Progear no Arashi', 
-    songName: 'To the Blue Sky –Stage 1–', 
-    videoId: 'h-lt6fiIqvM', 
+  {
+    name: 'Progear no Arashi',
+    songName: 'To the Blue Sky –Stage 1–',
+    videoId: 'h-lt6fiIqvM',
   },
-  { 
-    name: 'Psyvariar 2', 
-    songName: 'Weakboson - Gorge City', 
-    videoId: 'wZrKXcoHkKw', 
+  {
+    name: 'Psyvariar 2',
+    songName: 'Weakboson - Gorge City',
+    videoId: 'wZrKXcoHkKw',
   },
-  { 
-    name: 'R-Type', 
-    songName: 'START ~ BATTLE THEME (Start ~ Stage1)', 
-    videoId: 'tXrxov_0oj0', 
+  {
+    name: 'R-Type',
+    songName: 'START ~ BATTLE THEME (Start ~ Stage1)',
+    videoId: 'tXrxov_0oj0',
   },
   {
     name: 'R-Type II',
@@ -145,75 +145,95 @@ const gameEntries: GameEntry[] = [
     songName: 'Paradise Planet',
     videoId: 'yu7_I3CnDP8',
   },
-  { 
-    name: 'Radiant Silvergun', 
-    songName: 'Arrival', 
-    videoId: 'BJnkpw2dyAs', 
+  {
+    name: 'Radiant Silvergun',
+    songName: 'Arrival',
+    videoId: 'BJnkpw2dyAs',
   },
-  { 
-    name: 'Raiden', 
-    songName: 'Gallantry', 
-    videoId: 'vaGenJ5GXxE', 
+  {
+    name: 'Raiden',
+    songName: 'Gallantry',
+    videoId: 'vaGenJ5GXxE',
   },
   {
     name: 'Raiden II',
     songName: 'Repeated Tragedy',
     videoId: 'zDS4EMmETsE',
   },
-  { 
-    name: 'RefleX', 
-    songName: 'An Unavoidable Choice', 
-    videoId: 'HmAJEvPLmVs', 
+  {
+    name: 'RefleX',
+    songName: 'An Unavoidable Choice',
+    videoId: 'HmAJEvPLmVs',
   },
-  { 
-    name: 'Space Invaders Extreme 2', 
-    songName: 'Invader Disco', 
-    videoId: 'hAOBf-JY1kU', 
+  {
+    name: 'Space Invaders (Game Boy Advance)',
+    songName: 'Track 1',
+    videoId: 'XUXYxZjt2VI',
   },
-  { 
-    name: 'Strikers 1945 II', 
+  {
+    name: 'Space Invaders (Game Boy Color)',
+    songName: 'Mercury',
+    videoId: 'DPQlZDOJPSw',
+  },
+  {
+    name: 'Space Invaders Extreme',
+    songName: 'invAde yOu',
+    videoId: 'qpZdqEgRNYA'
+  },
+  {
+    name: 'Space Invaders Extreme 2',
+    songName: 'Invader Disco',
+    videoId: 'hAOBf-JY1kU',
+  },
+  {
+    name: 'Space Invaders Infinity Gene',
+    songName: 'Selection (Genetic)',
+    videoId: 'N3EJltfL7ok',
+  },
+  {
+    name: 'Strikers 1945 II',
     songName: "Devil's Tower",
-    videoId: 'siwfJgcFYKI', 
+    videoId: 'siwfJgcFYKI',
   },
   {
     name: 'Super R-Type',
     songName: 'Super Sortie',
     videoId: '0MIqgHu3tsg'
   },
-  { 
-    name: 'Thunder Force IV', 
-    songName: 'Fighting Back', 
-    videoId: 'IJE-iAE1Mt8', 
+  {
+    name: 'Thunder Force IV',
+    songName: 'Fighting Back',
+    videoId: 'IJE-iAE1Mt8',
   },
-  { 
-    name: 'Touhou 6: Embodiment of Scarlet Devil', 
-    songName: 'A Soul as Red as a Ground Cherry', 
-    videoId: 'nazi6JmAV_c', 
+  {
+    name: 'Touhou 6: Embodiment of Scarlet Devil',
+    songName: 'A Soul as Red as a Ground Cherry',
+    videoId: 'nazi6JmAV_c',
   },
-  { 
-    name: 'Touhou 7: Perfect Cherry Blossom', 
-    songName: 'Paradise ~ Deep Mountain', 
-    videoId: 'hzTtdlTAapw', 
+  {
+    name: 'Touhou 7: Perfect Cherry Blossom',
+    songName: 'Paradise ~ Deep Mountain',
+    videoId: 'hzTtdlTAapw',
   },
-  { 
-    name: 'Touhou 8: Imperishable Night', 
-    songName: 'Illusionary Night ~ Ghostly Eyes', 
-    videoId: 'buarznoa7ms', 
-  },    
-  { 
-    name: 'Touhou 10: Mountain of Faith', 
-    songName: 'A God That Misses People ~ Romantic Fall', 
-    videoId: '-NJWjmBT1qo', 
-  },  
-  { 
-    name: 'Touhou 11: Subterranean Animism', 
-    songName: 'The Dark Blowhole', 
-    videoId: 'MFCAB3KfBcI', 
-  },  
-  { 
-    name: 'Tyrian', 
-    songName: 'Tyrian , the level', 
-    videoId: 'wNnTGbbDJfo', 
+  {
+    name: 'Touhou 8: Imperishable Night',
+    songName: 'Illusionary Night ~ Ghostly Eyes',
+    videoId: 'buarznoa7ms',
+  },
+  {
+    name: 'Touhou 10: Mountain of Faith',
+    songName: 'A God That Misses People ~ Romantic Fall',
+    videoId: '-NJWjmBT1qo',
+  },
+  {
+    name: 'Touhou 11: Subterranean Animism',
+    songName: 'The Dark Blowhole',
+    videoId: 'MFCAB3KfBcI',
+  },
+  {
+    name: 'Tyrian',
+    songName: 'Tyrian , the level',
+    videoId: 'wNnTGbbDJfo',
   },
 ]
 
