@@ -15,6 +15,9 @@ const emit = defineEmits<{
 
 const isOpen = ref(false)
 const highlightedIndex = ref(-1)
+const inputRef = ref<HTMLInputElement | null>(null)
+
+defineExpose({ focus: () => inputRef.value?.focus() })
 
 const filteredGames = computed<Game[]>(() => {
   const query = props.modelValue.toLowerCase().trim()
@@ -101,6 +104,7 @@ function onKeydown(event: KeyboardEvent) {
 <template>
   <div class="position-relative">
     <input
+      ref="inputRef"
       type="text"
       class="form-control"
       placeholder="Type to search for a game…"
