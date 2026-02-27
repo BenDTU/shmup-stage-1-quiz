@@ -32,8 +32,8 @@ const gameEntries: GameEntry[] = [
   },
   { 
     name: 'Crimzon Clover', 
-    songName: 'BOOST!', 
-    videoId: 'UL-stage1',
+    songName: 'UL-stage1', 
+    videoId: 'yYF3x1hACIU',
   },
   { 
     name: 'Deathsmiles', 
@@ -50,6 +50,11 @@ const gameEntries: GameEntry[] = [
     songName: 'The Year 2008, Tokyo', 
     videoId: 'ZCaPtpNyjf4',
   },
+  {
+    name: 'DoDonPachi DaiOuJou',
+    songName: 'East Asia',
+    videoId: 'muuApOJSP9E', 
+  },
   { 
     name: 'ESP Ra.De.', 
     songName: 'DESPERATE SCHOOL (STAGE-A)', 
@@ -65,6 +70,11 @@ const gameEntries: GameEntry[] = [
     songName: 'Challenger 1985', 
     videoId: 'nYES6OmvQFQ', 
   },
+  {
+    name: 'Gradius II',
+    songName: 'Burning Heat',
+    videoId: 'FLc1msji0_w',
+  },
   { 
     name: 'Gradius III', 
     songName: 'Sand Storm', 
@@ -74,6 +84,11 @@ const gameEntries: GameEntry[] = [
     name: 'Guwange', 
     songName: 'Falling Cherry Blossoms', 
     videoId: 'EWYuTxCV11U', 
+  },
+  {
+    name: 'Hellfire',
+    songName: 'Captain Lancer',
+    videoId: '1VUMGMKTnKs',
   },
   { 
     name: 'Hellsinker', 
@@ -95,6 +110,11 @@ const gameEntries: GameEntry[] = [
     songName: "INTERCEPTION - Noisy Town", 
     videoId: 'z472pIce5CY', 
   },
+  {
+    name: 'M.U.S.H.A.',
+    songName: 'Fullmetal Fighter', 
+    videoId: '0MIqgHu3tsg',
+  },
   { 
     name: 'Mushihimesama', 
     songName: 'To Shinju Forest', 
@@ -115,6 +135,16 @@ const gameEntries: GameEntry[] = [
     songName: 'START ~ BATTLE THEME (Start ~ Stage1)', 
     videoId: 'tXrxov_0oj0', 
   },
+  {
+    name: 'R-Type II',
+    songName: 'Counter Attack',
+    videoId: 'idU8lvOP9qA',
+  },
+  {
+    name: 'R-Type Leo',
+    songName: 'Paradise Planet',
+    videoId: 'yu7_I3CnDP8',
+  },
   { 
     name: 'Radiant Silvergun', 
     songName: 'Arrival', 
@@ -124,6 +154,11 @@ const gameEntries: GameEntry[] = [
     name: 'Raiden', 
     songName: 'Gallantry', 
     videoId: 'vaGenJ5GXxE', 
+  },
+  {
+    name: 'Raiden II',
+    songName: 'Repeated Tragedy',
+    videoId: 'zDS4EMmETsE',
   },
   { 
     name: 'RefleX', 
@@ -139,6 +174,11 @@ const gameEntries: GameEntry[] = [
     name: 'Strikers 1945 II', 
     songName: "Devil's Tower",
     videoId: 'siwfJgcFYKI', 
+  },
+  {
+    name: 'Super R-Type',
+    songName: 'Super Sortie',
+    videoId: '0MIqgHu3tsg'
   },
   { 
     name: 'Thunder Force IV', 

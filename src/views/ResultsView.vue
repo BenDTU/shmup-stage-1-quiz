@@ -65,7 +65,7 @@ function playAgain() {
               </div>
             </div>
             <div v-if="!answer.isCorrect" class="text-muted small mt-1">
-              Your guess:
+              You guessed:
               <em>{{ answer.userGuess || '(no answer)' }}</em>
             </div>
           </div>

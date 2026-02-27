@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useQuiz } from '../composables/useQuiz'
+import { games } from '@/data/games'
 
 const router = useRouter()
 const { startQuiz } = useQuiz()
+
+const totalGames = games.length
 
 function begin() {
   startQuiz()
@@ -26,6 +29,7 @@ function begin() {
           <li class="list-group-item">☝️ You only get <strong>one guess</strong> per song.</li>
           <li class="list-group-item">🚫 Games already shown are disabled in later questions.</li>
           <li class="list-group-item">📊 See your full score and all answers at the end.</li>
+          <li class="list-group-item">🎮 There are currently <strong>{{ totalGames }}</strong> shmups loaded in!</li>
         </ul>
         <button class="btn btn-primary btn-lg px-5" @click="begin">Start Quiz</button>
       </div>
