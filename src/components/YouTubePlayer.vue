@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch, onMounted } from 'vue'
 
 const props = defineProps<{
   videoId: string
@@ -7,29 +7,54 @@ const props = defineProps<{
   hidden?: boolean
 }>()
 
+const iframeRef = ref<HTMLIFrameElement | null>(null)
+
 // Whether the user has performed the one-time audio-unlock interaction.
 // Component-level: persists while the quiz view is mounted; automatically
 // resets when the user navigates away (component is destroyed).
 const audioUnlocked = ref(false)
 
-// Loads the video paused so the player is already initialised before Play.
-// enablejsapi=1 is included so the YouTube Player API is available if needed.
-const preloadSrc = computed(() => {
-  const start = props.startTime ?? 0
-  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=0&mute=1&enablejsapi=1&start=${start}&rel=0&modestbranding=1`
-})
-
-// Used once audio is unlocked. mute=0 explicitly overrides any muted state.
+// Muted autoplay is permitted by every browser including Safari.
+// enablejsapi=1 lets us send postMessage commands (unMute, loadVideoById)
+// to the running player without ever changing the iframe's src again.
 const embedSrc = computed(() => {
   const start = props.startTime ?? 0
-  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&mute=0&enablejsapi=1&start=${start}&rel=0&modestbranding=1`
+  return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&mute=1&enablejsapi=1&start=${start}&rel=0&modestbranding=1`
 })
 
+// Send a postMessage command to the YouTube player.
+function sendCommand(func: string, args: unknown[] = []) {
+  iframeRef.value?.contentWindow?.postMessage(
+    JSON.stringify({ event: 'command', func, args }),
+    'https://www.youtube-nocookie.com',
+  )
+}
+
+// Start the first video playing silently so the player is active
+// by the time the user clicks Play.
+onMounted(() => {
+  if (iframeRef.value) {
+    iframeRef.value.src = embedSrc.value
+  }
+})
+
+// When the question changes:
+// • If audio is already unlocked, use loadVideoById so the same player
+//   instance (and its user-activation state) is reused — no src reload.
+// • Otherwise reload the iframe for a fresh muted-autoplay start.
+watch(() => props.videoId, () => {
+  if (audioUnlocked.value) {
+    sendCommand('loadVideoById', [props.videoId, props.startTime ?? 0])
+  } else if (iframeRef.value) {
+    iframeRef.value.src = embedSrc.value
+  }
+}, { flush: 'post' })
+
 function startAudio() {
-  // Setting audioUnlocked causes Vue's reactive :src binding to switch from
-  // preloadSrc → embedSrc in the same user-gesture microtask flush.
-  // This is a YouTube→YouTube navigation within the gesture context, which
-  // browsers permit for audio autoplay.
+  // Unmute the already-playing video. Calling postMessage inside the
+  // click handler transfers user activation into the iframe — the
+  // mechanism Safari requires to permit audio on a muted embed.
+  sendCommand('unMute')
   audioUnlocked.value = true
 }
 </script>
@@ -37,9 +62,11 @@ function startAudio() {
 <template>
   <div class="ratio ratio-16x9">
     <!-- One-time Start overlay — only shown before the user's first
-         audio interaction. The iframe behind it silently pre-loads the
-         video (paused), so that clicking Play is a YouTube→YouTube src
-         switch rather than a cold load — enabling audio autoplay. -->
+         audio interaction. The iframe behind it is already playing the
+         video muted (muted autoplay is permitted by every browser).
+         Clicking Play sends an unMute command via postMessage inside the
+         gesture, which transfers user activation into the iframe and
+         allows Safari (and all other browsers) to enable audio. -->
     <div v-if="!audioUnlocked" class="audio-overlay audio-placeholder rounded-3 text-center">
       <button
         class="btn btn-outline-light btn-lg"
@@ -57,15 +84,12 @@ function startAudio() {
       <p class="mb-0 fw-semibold fs-5">🎵 Now Playing…</p>
       <p class="mb-0 text-muted small">Listen carefully and enter your guess below!</p>
     </div>
-    <!-- :key="videoId" gives each question a fresh iframe element.
-         :src binding: shows the video paused (preloadSrc) until the user
-         clicks Play, then switches to autoplay (embedSrc).
-         For Q1 this reactive switch happens within the click gesture's
-         microtask. For Q2+ the fresh iframe is created with embedSrc
-         directly, within the gesture context of the question navigation. -->
+    <!-- src is managed imperatively (onMounted + watcher + startAudio).
+         No :key so the same element — and its user-activation state —
+         persists for every question without a src reload. -->
     <iframe
-      :key="videoId"
-      :src="audioUnlocked ? embedSrc : preloadSrc"
+      ref="iframeRef"
+      src=""
       title="Stage 1 theme"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
