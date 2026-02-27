@@ -92,7 +92,7 @@ function onKeydown(event: KeyboardEvent) {
       aria-controls="autocomplete-listbox"
       aria-autocomplete="list"
       :aria-expanded="isOpen && filteredGames.length > 0"
-      :aria-activedescendant="highlightedIndex >= 0 && filteredGames[highlightedIndex] ? `autocomplete-option-${filteredGames[highlightedIndex].id}` : undefined"
+      :aria-activedescendant="isOpen && highlightedIndex >= 0 && filteredGames[highlightedIndex] ? `autocomplete-option-${filteredGames[highlightedIndex].id}` : undefined"
       @input="onInput"
       @focus="onFocus"
       @blur="onBlur"
