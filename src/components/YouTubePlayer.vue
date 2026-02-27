@@ -14,17 +14,20 @@ const embedSrc = computed(() => {
 </script>
 
 <template>
-  <!-- Audio-only placeholder shown while the answer is hidden -->
-  <div v-if="hidden" class="audio-placeholder d-flex flex-column align-items-center justify-content-center rounded-3 p-4 text-center">
-    <div class="bars mb-3" aria-hidden="true">
-      <span></span><span></span><span></span><span></span><span></span>
+  <!-- Audio-only placeholder shown while the answer is hidden; wrapped in ratio-16x9 to
+       match the size of the YouTube iframe that appears after the user submits. -->
+  <div v-if="hidden" class="ratio ratio-16x9">
+    <div class="audio-placeholder rounded-3 text-center">
+      <div class="bars mb-3" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <p class="mb-0 fw-semibold fs-5">🎵 Now Playing…</p>
+      <p class="mb-0 text-muted small">Listen carefully and enter your guess below!</p>
     </div>
-    <p class="mb-0 fw-semibold fs-5">🎵 Now Playing…</p>
-    <p class="mb-0 text-muted small">Listen carefully and enter your guess below!</p>
   </div>
 
   <!-- Always keep the iframe in the DOM so audio keeps playing.
-       When hidden, it is positioned off-screen and clipped to 1 px. -->
+       When hidden, it is visually clipped to 1 px so it remains loaded. -->
   <div :class="hidden ? 'player-offscreen' : 'ratio ratio-16x9'" :aria-hidden="hidden ? 'true' : undefined">
     <iframe
       :key="videoId"
@@ -37,20 +40,28 @@ const embedSrc = computed(() => {
 </template>
 
 <style scoped>
-/* Keeps the iframe loaded & audio playing without being visible */
+/* Keeps the iframe loaded & audio playing without being visible.
+   Uses the standard screen-reader-only visually-hidden pattern so the element
+   occupies no layout space and is invisible without removing it from the DOM. */
 .player-offscreen {
   position: absolute;
   width: 1px;
   height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
-  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+  border: 0;
 }
 
 .audio-placeholder {
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   color: #e0e0e0;
-  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Animated sound bars */

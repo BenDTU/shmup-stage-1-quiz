@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
 import AutocompleteInput from '../components/AutocompleteInput.vue'
 import { useQuiz } from '../composables/useQuiz'
+import { games } from '../data/games'
 
 const router = useRouter()
 const { state, isFinished, usedGameIds, submitGuess, nextQuestion } = useQuiz()
@@ -19,9 +20,19 @@ onMounted(() => {
 const currentQuestion = computed(() => state.questions[state.currentIndex])
 const questionNumber = computed(() => state.currentIndex + 1)
 
+// Only allow submitting a guess that exactly matches a game in the pool
+const isValidGuess = computed(() =>
+  games.some((g) => g.name.toLowerCase() === guess.value.trim().toLowerCase()),
+)
+
 function handleSubmit() {
-  if (!guess.value.trim() || state.isAnswered) return
+  if (!isValidGuess.value || state.isAnswered) return
   submitGuess(guess.value)
+}
+
+function handleSkip() {
+  if (state.isAnswered) return
+  submitGuess('Song skipped')
 }
 
 function handleNext() {
@@ -67,13 +78,18 @@ function handleNext() {
                 :disabled-game-ids="usedGameIds"
                 class="mb-3"
               />
-              <button
-                class="btn btn-primary w-100"
-                :disabled="!guess.trim()"
-                @click="handleSubmit"
-              >
-                Submit Guess
-              </button>
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-primary flex-grow-1"
+                  :disabled="!isValidGuess"
+                  @click="handleSubmit"
+                >
+                  Submit Guess
+                </button>
+                <button class="btn btn-outline-secondary" @click="handleSkip">
+                  Skip ⏭
+                </button>
+              </div>
             </div>
 
             <!-- Result -->
