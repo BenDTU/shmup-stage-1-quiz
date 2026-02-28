@@ -14,8 +14,18 @@ export interface SongSource {
 }
 
 export type GameEntry =
-  | { name: string; franchise?: Franchise; singleSongSource: SongSource }
-  | { name: string; franchise?: Franchise; multipleSongSource: SongSource[] }
+  | {
+      name: string
+      franchise?: Franchise
+      singleSongSource: SongSource
+      multipleSongSource?: never
+    }
+  | {
+      name: string
+      franchise?: Franchise
+      singleSongSource?: never
+      multipleSongSource: [SongSource, ...SongSource[]]
+    }
 
 export type GameEntryWithId = GameEntry & { id: number }
 
