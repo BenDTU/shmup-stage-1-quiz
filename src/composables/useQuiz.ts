@@ -1,5 +1,19 @@
 import { reactive, computed } from 'vue'
-import { games, type Game, Franchise } from '../data/games'
+import { games } from '../data/games'
+import { type Game, type GameEntryWithId, Franchise } from '../types'
+
+function resolveGame(entry: GameEntryWithId): Game {
+  const { name, franchise, id } = entry
+  if (entry.singleSongSource) {
+    const { songName, videoId, startTime = 0 } = entry.singleSongSource
+    return { name, franchise, id, songName, videoId, startTime }
+  } else {
+    const sources = entry.multipleSongSource
+    const source = sources[Math.floor(Math.random() * sources.length)]!
+    const { songName, videoId, startTime = 0 } = source
+    return { name, franchise, id, songName, videoId, startTime }
+  }
+}
 
 export interface QuizAnswer {
   game: Game
@@ -68,7 +82,7 @@ function startQuiz() {
       if (count >= FRANCHISE_LIMIT) continue
       franchiseCounts[game.franchise] = count + 1
     }
-    selected.push(game)
+    selected.push(resolveGame(game))
   }
   state.questions = selected
   state.currentIndex = 0
