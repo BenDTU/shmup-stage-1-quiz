@@ -46,7 +46,11 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'ESP Ra.De.',
-    singleSongSource: { songName: 'DESPERATE SCHOOL (STAGE-A)', videoId: 'P3_U1wyESiA' },
+    multipleSongSource: [
+      { songName: 'DESPERATE SCHOOL (STAGE-A)', videoId: 'P3_U1wyESiA' },
+      { songName: 'NIGHTMARE (STAGE-B)', videoId: 'ZoxoMoDZ-0A' },
+      { songName: 'ACT IN JUDGE (STAGE-C)', videoId: 'q8s0A1R_c6k' },
+    ]
   },
   {
     name: 'Espgaluda',
