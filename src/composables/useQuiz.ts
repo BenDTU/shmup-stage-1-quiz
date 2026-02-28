@@ -23,7 +23,7 @@ function resolveGame(entry: GameEntryWithId): Game {
       id,
       songName,
       videoId,
-      startTime, 
+      startTime,
       endTime,
       source: arrangement.source,
     }
