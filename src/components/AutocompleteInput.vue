@@ -20,10 +20,14 @@ const inputRef = ref<HTMLInputElement | null>(null)
 
 defineExpose({ focus: () => inputRef.value?.focus() })
 
+const allGames = computed<GameListEntry[]>(() =>
+  games.map(({ id, name, franchise }) => ({ id, name, franchise })),
+)
+
 const filteredGames = computed(() => {
   const query = props.modelValue.toLowerCase().trim()
-  if (!query) return games
-  return games.filter((g) => g.name.toLowerCase().includes(query))
+  if (!query) return allGames.value
+  return allGames.value.filter((g) => g.name.toLowerCase().includes(query))
 })
 
 function selectGame(game: GameListEntry) {
