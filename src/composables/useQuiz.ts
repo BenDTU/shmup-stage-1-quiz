@@ -1,8 +1,8 @@
 import { reactive, computed } from 'vue'
 import { games } from '../data/games'
-import { type Game, Franchise } from '../types'
+import { type Game, type GameEntryWithId, Franchise } from '../types'
 
-function resolveGame(entry: (typeof games)[number]): Game {
+function resolveGame(entry: GameEntryWithId): Game {
   const { name, franchise, id } = entry
   if ('singleSongSource' in entry) {
     const { songName, videoId, startTime = 0 } = entry.singleSongSource

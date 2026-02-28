@@ -1,4 +1,4 @@
-import { Franchise, type GameEntry } from '../types'
+import { Franchise, type GameEntry, type GameEntryWithId } from '../types'
 
 export { Franchise } from '../types'
 export type { SongSource, GameEntry, GameListEntry, Game } from '../types'
@@ -281,4 +281,4 @@ const gameEntries: GameEntry[] = [
   },
 ]
 
-export const games = gameEntries.map((entry, index) => ({ ...entry, id: index + 1 }))
+export const games: GameEntryWithId[] = gameEntries.map((entry, index) => ({ ...entry, id: index + 1 }))
