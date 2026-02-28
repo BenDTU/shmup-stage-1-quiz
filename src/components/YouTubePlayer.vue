@@ -63,6 +63,15 @@ function scheduleLoop() {
   }, duration)
 }
 
+// Perform the listener handshake required by the YouTube IFrame API.
+// Without this, the player will not send onStateChange postMessages back.
+function registerPlayerListener() {
+  iframeRef.value?.contentWindow?.postMessage(
+    JSON.stringify({ event: 'listening', id: 1 }),
+    'https://www.youtube-nocookie.com',
+  )
+}
+
 // Listen for the YouTube player's onStateChange event (state 0 = video ended).
 // When no endTime is set, seek back to startTime to loop the video naturally.
 function handleMessage(event: MessageEvent) {
@@ -109,6 +118,7 @@ watch(() => props.videoId, () => {
   if (audioUnlocked.value) {
     sendCommand('loadVideoById', [props.videoId, props.startTime ?? 0])
     scheduleLoop()
+    registerPlayerListener()
   } else if (iframeRef.value) {
     iframeRef.value.src = embedSrc.value
   }
@@ -126,6 +136,7 @@ function startAudio() {
   audioUnlocked.value = true
   emit('audioUnlocked')
   scheduleLoop()
+  registerPlayerListener()
 }
 </script>
 
@@ -163,6 +174,7 @@ function startAudio() {
       title="Stage 1 theme"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
+      @load="registerPlayerListener"
     ></iframe>
   </div>
 </template>
