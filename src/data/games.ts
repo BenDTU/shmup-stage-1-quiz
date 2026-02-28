@@ -1,32 +1,7 @@
-export enum Franchise {
-  Dodonpachi = 'Dodonpachi',
-  Gradius = 'Gradius',
-  RType = 'R-Type',
-  Raiden = 'Raiden',
-  SpaceInvaders = 'Space Invaders',
-  Touhou = 'Touhou',
-}
+import { Franchise, type GameEntry } from '../types'
 
-export interface SongSource {
-  songName: string
-  videoId: string
-  startTime?: number // seconds into the video where the stage 1 theme begins (defaults to 0)
-}
-
-export type GameEntry =
-  | { name: string; franchise?: Franchise; singleSongSource: SongSource }
-  | { name: string; franchise?: Franchise; multipleSongSource: SongSource[] }
-
-export type GameListEntry = { id: number; name: string; franchise?: Franchise }
-
-export type Game = {
-  name: string
-  songName: string
-  videoId: string
-  startTime: number
-  id: number
-  franchise?: Franchise
-}
+export { Franchise } from '../types'
+export type { SongSource, GameEntry, GameListEntry, Game } from '../types'
 
 // Update videoId and startTime values with the correct YouTube video IDs and
 // timestamps for each game's stage 1 theme.

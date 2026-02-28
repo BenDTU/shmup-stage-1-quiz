@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { games, type GameListEntry } from '../data/games'
+import { games } from '../data/games'
+import { type GameListEntry } from '../types'
 
 const props = defineProps<{
   modelValue: string

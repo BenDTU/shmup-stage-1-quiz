@@ -1,5 +1,6 @@
 import { reactive, computed } from 'vue'
-import { games, type Game, Franchise } from '../data/games'
+import { games } from '../data/games'
+import { type Game, Franchise } from '../types'
 
 function resolveGame(entry: (typeof games)[number]): Game {
   const { name, franchise, id } = entry
