@@ -56,7 +56,7 @@ function playAgain() {
             :key="answer.game.id"
             class="list-group-item"
           >
-            <div class="d-flex justify-content-between align-items-start">
+            <div class="d-flex justify-content-between align-items-center">
               <div class="d-flex">
                 <span class="fw-semibold me-1 text-nowrap">#{{ index + 1 }}</span>
                 <span class="me-2 text-nowrap">{{ answer.isCorrect ? '✅' : '❌' }}</span>
