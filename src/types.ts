@@ -33,6 +33,7 @@ export type GameEntry =
       forceFirst?: boolean // if true, this game will always be the first question in the quiz
       singleSongSource: SongSource
       multipleSongSource?: never
+      arrangedSongSource?: never
     }
   | {
       name: string
@@ -40,6 +41,7 @@ export type GameEntry =
       forceFirst?: boolean // if true, this game will always be the first question in the quiz
       singleSongSource?: never
       multipleSongSource: [SongSource, ...SongSource[]]
+      arrangedSongSource?: never
     }
   | {
       name: string
