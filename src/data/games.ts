@@ -283,6 +283,27 @@ const gameEntries: GameEntry[] = [
     name: 'Tyrian',
     singleSongSource: { songName: 'Tyrian , the level', videoId: 'wNnTGbbDJfo' },
   },
+  {
+    name: 'Zero Wing',
+    arrangedSongSource: {
+      songName: 'Open Your Eyes',
+      arrangements: [
+        {
+          source: 'Mega Drive',
+          videoId: 'heMdH4ne0JQ',
+        },
+        {
+          source: 'Arcade',
+          videoId: 'u9GfzfjAFNo',
+        },
+        {
+          source: 'PC Engine',
+          videoId: 'jYqboWg4KOc',
+        }
+      ]
+    },
+    forceFirst: true,
+  }
 ]
 
 export const games: GameEntryWithId[] = gameEntries.map((entry, index) => ({ ...entry, id: index + 1 }))
