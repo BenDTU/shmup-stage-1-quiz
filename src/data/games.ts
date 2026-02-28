@@ -182,6 +182,10 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Super Sortie', videoId: 'YuGRrVMLkxk' },
   },
   {
+    name: 'Super Spacefortress Macross',
+    singleSongSource: { songName: 'Stage 1 & 4', videoId: 'yVBI2GA_mg', startTime: 220, endTime: 322 },
+  },
+  {
     name: 'Thunder Force IV',
     singleSongSource: { songName: 'Fighting Back', videoId: 'IJE-iAE1Mt8' },
   },
