@@ -11,6 +11,7 @@ export interface SongSource {
   songName: string
   videoId: string
   startTime?: number // seconds into the video where the stage 1 theme begins (defaults to 0)
+  endTime?: number // seconds into the video where playback loops back to startTime
 }
 
 export type GameEntry =
@@ -36,6 +37,7 @@ export type Game = {
   songName: string
   videoId: string
   startTime: number
+  endTime?: number
   id: number
   franchise?: Franchise
 }
