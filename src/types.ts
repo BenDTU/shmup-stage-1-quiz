@@ -17,7 +17,7 @@ export type GameEntry =
   | { name: string; franchise?: Franchise; singleSongSource: SongSource }
   | { name: string; franchise?: Franchise; multipleSongSource: SongSource[] }
 
-  export type GameEntryWithId = GameEntry & { id: number }
+export type GameEntryWithId = GameEntry & { id: number }
 
 export type GameListEntry = { id: number; name: string; franchise?: Franchise }
 
