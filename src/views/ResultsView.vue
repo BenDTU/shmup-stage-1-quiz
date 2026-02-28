@@ -61,7 +61,7 @@ function playAgain() {
                 <span class="fw-semibold me-2">#{{ index + 1 }}</span>
                 <span class="me-2">{{ answer.isCorrect ? '✅' : '❌' }}</span>
                 <span class="fw-semibold">{{ answer.game.name }}</span>
-                <span class="text-muted small d-block ms-4">{{ answer.game.songName }}</span>
+                <span class="text-muted small d-block ms-4">{{ answer.game.songName }}<template v-if="answer.game.source"> ({{ answer.game.source }})</template></span>
               </div>
             </div>
             <div v-if="!answer.isCorrect" class="text-muted small mt-1">

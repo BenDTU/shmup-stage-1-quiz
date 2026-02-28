@@ -7,11 +7,26 @@ function resolveGame(entry: GameEntryWithId): Game {
   if (entry.singleSongSource) {
     const { songName, videoId, startTime = 0, endTime } = entry.singleSongSource
     return { name, franchise, id, songName, videoId, startTime, endTime }
-  } else {
+  } else if (entry.multipleSongSource) {
     const sources = entry.multipleSongSource
     const source = sources[Math.floor(Math.random() * sources.length)]!
     const { songName, videoId, startTime = 0, endTime } = source
     return { name, franchise, id, songName, videoId, startTime, endTime }
+  } else {
+    const arrangements = entry.arrangedSongSource.arrangements
+    const arrangement = arrangements[Math.floor(Math.random() * arrangements.length)]!
+    const { songName } = entry.arrangedSongSource
+    const { videoId, startTime = 0, endTime } = arrangement
+    return {
+      name,
+      franchise,
+      id,
+      songName,
+      videoId,
+      startTime,
+      endTime,
+      source: arrangement.source,
+    }
   }
 }
 
