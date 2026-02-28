@@ -62,7 +62,7 @@ function playAgain() {
                 <span class="me-2 text-nowrap">{{ answer.isCorrect ? '✅' : '❌' }}</span>
                 <div>
                   <div class="fw-semibold">{{ answer.game.name }}</div>
-                  <div class="text-muted small">{{ answer.game.songName }}</div>
+                  <div class="text-muted small">{{ answer.game.songName }}<template v-if="answer.game.source"> ({{ answer.game.source }})</template></div>
                   <div v-if="!answer.isCorrect" class="text-muted small">
                     You guessed: <em>{{ answer.userGuess || '(no answer)' }}</em>
                   </div>
