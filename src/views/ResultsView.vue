@@ -57,16 +57,23 @@ function playAgain() {
             class="list-group-item"
           >
             <div class="d-flex justify-content-between align-items-start">
-              <div>
-                <span class="fw-semibold me-2">#{{ index + 1 }}</span>
-                <span class="me-2">{{ answer.isCorrect ? '✅' : '❌' }}</span>
-                <span class="fw-semibold">{{ answer.game.name }}</span>
-                <span class="text-muted small d-block ms-4">{{ answer.game.songName }}</span>
+              <div class="d-flex">
+                <span class="fw-semibold me-1 text-nowrap">#{{ index + 1 }}</span>
+                <span class="me-2 text-nowrap">{{ answer.isCorrect ? '✅' : '❌' }}</span>
+                <div>
+                  <div class="fw-semibold">{{ answer.game.name }}</div>
+                  <div class="text-muted small">{{ answer.game.songName }}</div>
+                  <div v-if="!answer.isCorrect" class="text-muted small">
+                    You guessed: <em>{{ answer.userGuess || '(no answer)' }}</em>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div v-if="!answer.isCorrect" class="text-muted small mt-1">
-              You guessed:
-              <em>{{ answer.userGuess || '(no answer)' }}</em>
+              <a
+                :href="`https://www.youtube.com/watch?v=${encodeURIComponent(answer.game.videoId)}`"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ms-3 text-nowrap small"
+              >▶ YouTube</a>
             </div>
           </div>
         </div>
