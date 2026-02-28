@@ -4,7 +4,7 @@ import { type Game, type GameEntryWithId, Franchise } from '../types'
 
 function resolveGame(entry: GameEntryWithId): Game {
   const { name, franchise, id } = entry
-  if ('singleSongSource' in entry) {
+  if (entry.singleSongSource) {
     const { songName, videoId, startTime = 0 } = entry.singleSongSource
     return { name, franchise, id, songName, videoId, startTime }
   } else {
