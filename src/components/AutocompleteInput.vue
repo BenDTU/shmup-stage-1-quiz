@@ -124,6 +124,8 @@ function onKeydown(event: KeyboardEvent) {
       :disabled="disabled"
       role="combobox"
       autocomplete="off"
+      autocorrect="off"
+      spellcheck="false"
       aria-haspopup="listbox"
       aria-controls="autocomplete-listbox"
       aria-autocomplete="list"
