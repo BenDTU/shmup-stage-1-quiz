@@ -6,6 +6,7 @@ const props = defineProps<{
   startTime?: number
   endTime?: number
   hidden?: boolean
+  loopEnabled?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -53,7 +54,7 @@ function clearLoopTimer() {
 
 function scheduleLoop() {
   clearLoopTimer()
-  if (!props.endTime || !audioUnlocked.value) return
+  if (!props.endTime || !audioUnlocked.value || props.loopEnabled === false) return
   const duration = (props.endTime - (props.startTime ?? 0)) * 1000
   if (duration <= 0) return
   loopTimer = setTimeout(() => {
@@ -62,13 +63,38 @@ function scheduleLoop() {
   }, duration)
 }
 
+// Listen for the YouTube player's onStateChange event (state 0 = video ended).
+// When no endTime is set, seek back to startTime to loop the video naturally.
+function handleMessage(event: MessageEvent) {
+  if (event.origin !== 'https://www.youtube-nocookie.com') return
+  if (props.loopEnabled === false || props.endTime) return
+  if (!audioUnlocked.value) return
+  try {
+    const data = JSON.parse(typeof event.data === 'string' ? event.data : JSON.stringify(event.data))
+    if (data?.event === 'onStateChange' && data?.info === 0) {
+      sendCommand('seekTo', [props.startTime ?? 0, true])
+      sendCommand('playVideo')
+    }
+  } catch {
+    // ignore non-JSON messages
+  }
+}
+
+watch(() => props.loopEnabled, (enabled) => {
+  if (enabled === false) {
+    clearLoopTimer()
+  }
+})
+
 onUnmounted(() => {
   clearLoopTimer()
+  window.removeEventListener('message', handleMessage)
 })
 
 // Start the first video playing silently so the player is active
 // by the time the user clicks Play.
 onMounted(() => {
+  window.addEventListener('message', handleMessage)
   if (iframeRef.value) {
     iframeRef.value.src = embedSrc.value
   }
