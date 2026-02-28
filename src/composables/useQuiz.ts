@@ -72,10 +72,11 @@ const franchiseLimitedGameIds = computed<Set<number>>(() => {
 })
 
 function startQuiz() {
-  const shuffled = [...games].sort(() => Math.random() - 0.5)
+  const forceFirstGames = games.filter((g) => g.forceFirst)
+  const shuffled = [...games].filter((g) => !g.forceFirst).sort(() => Math.random() - 0.5)
   const franchiseCounts: Partial<Record<Franchise, number>> = {}
   const selected: Game[] = []
-  for (const game of shuffled) {
+  for (const game of [...forceFirstGames, ...shuffled]) {
     if (selected.length >= QUIZ_SIZE) break
     if (game.franchise) {
       const count = franchiseCounts[game.franchise] ?? 0

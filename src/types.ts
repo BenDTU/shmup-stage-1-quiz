@@ -18,12 +18,14 @@ export type GameEntry =
   | {
       name: string
       franchise?: Franchise
+      forceFirst?: boolean // if true, this game will always be the first question in the quiz
       singleSongSource: SongSource
       multipleSongSource?: never
     }
   | {
       name: string
       franchise?: Franchise
+      forceFirst?: boolean // if true, this game will always be the first question in the quiz
       singleSongSource?: never
       multipleSongSource: [SongSource, ...SongSource[]]
     }
