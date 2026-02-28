@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
+import { computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue'
 
 const props = defineProps<{
   videoId: string
@@ -101,10 +101,19 @@ function startAudio() {
   scheduleStop()
 }
 
+const restartSpinning = ref(false)
+
 function restartAudio() {
   sendCommand('seekTo', [props.startTime ?? 0, true])
   sendCommand('playVideo')
   scheduleStop()
+  // Retrigger the spin animation: remove then re-add the class via a tick
+  restartSpinning.value = false
+  nextTick(() => { restartSpinning.value = true })
+}
+
+function onRestartAnimationEnd() {
+  restartSpinning.value = false
 }
 </script>
 
@@ -137,7 +146,7 @@ function restartAudio() {
         type="button"
         @click="restartAudio"
       >
-        ↺ Restart
+        <span :class="{ 'spin-once': restartSpinning }" @animationend="onRestartAnimationEnd">↺</span> Restart
       </button>
     </div>
     <!-- src is managed imperatively (onMounted + watcher + startAudio).
@@ -194,5 +203,16 @@ function restartAudio() {
 @keyframes bounce {
   0%, 100% { transform: scaleY(0.4); }
   50%       { transform: scaleY(1); }
+}
+
+/* One-shot anticlockwise spin for the restart icon */
+.spin-once {
+  display: inline-block;
+  animation: spin-ccw 0.5s ease-in-out;
+}
+
+@keyframes spin-ccw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
 }
 </style>
