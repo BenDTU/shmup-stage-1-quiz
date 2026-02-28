@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { games, type Game } from '../data/games'
+import { games } from '../data/games'
 
 const props = defineProps<{
   modelValue: string
@@ -20,13 +20,13 @@ const inputRef = ref<HTMLInputElement | null>(null)
 
 defineExpose({ focus: () => inputRef.value?.focus() })
 
-const filteredGames = computed<Game[]>(() => {
+const filteredGames = computed(() => {
   const query = props.modelValue.toLowerCase().trim()
   if (!query) return games
   return games.filter((g) => g.name.toLowerCase().includes(query))
 })
 
-function selectGame(game: Game) {
+function selectGame(game: (typeof games)[number]) {
   if (props.disabledGameIds.has(game.id)) return
   if (props.franchiseLimitedGameIds?.has(game.id)) return
   emit('update:modelValue', game.name)
