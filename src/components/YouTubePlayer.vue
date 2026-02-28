@@ -6,7 +6,6 @@ const props = defineProps<{
   startTime?: number
   endTime?: number
   hidden?: boolean
-  loopEnabled?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -42,68 +41,33 @@ function sendCommand(func: string, args: unknown[] = []) {
   )
 }
 
-// Loop timer: when endTime is set, seek back to startTime when it is reached.
-let loopTimer: ReturnType<typeof setTimeout> | null = null
+// Stop timer: when endTime is set, pause the video when it is reached.
+let stopTimer: ReturnType<typeof setTimeout> | null = null
 
-function clearLoopTimer() {
-  if (loopTimer !== null) {
-    clearTimeout(loopTimer)
-    loopTimer = null
+function clearStopTimer() {
+  if (stopTimer !== null) {
+    clearTimeout(stopTimer)
+    stopTimer = null
   }
 }
 
-function scheduleLoop() {
-  clearLoopTimer()
-  if (!props.endTime || !audioUnlocked.value || props.loopEnabled === false) return
+function scheduleStop() {
+  clearStopTimer()
+  if (!props.endTime || !audioUnlocked.value) return
   const duration = (props.endTime - (props.startTime ?? 0)) * 1000
   if (duration <= 0) return
-  loopTimer = setTimeout(() => {
-    sendCommand('seekTo', [props.startTime ?? 0, true])
-    scheduleLoop()
+  stopTimer = setTimeout(() => {
+    sendCommand('pauseVideo')
   }, duration)
 }
 
-// Perform the listener handshake required by the YouTube IFrame API.
-// Without this, the player will not send onStateChange postMessages back.
-function registerPlayerListener() {
-  iframeRef.value?.contentWindow?.postMessage(
-    JSON.stringify({ event: 'listening', id: 1 }),
-    'https://www.youtube-nocookie.com',
-  )
-}
-
-// Listen for the YouTube player's onStateChange event (state 0 = video ended).
-// When no endTime is set, seek back to startTime to loop the video naturally.
-function handleMessage(event: MessageEvent) {
-  if (event.origin !== 'https://www.youtube-nocookie.com') return
-  if (props.loopEnabled === false || props.endTime) return
-  if (!audioUnlocked.value) return
-  try {
-    const data = JSON.parse(typeof event.data === 'string' ? event.data : JSON.stringify(event.data))
-    if (data?.event === 'onStateChange' && data?.info === 0) {
-      sendCommand('seekTo', [props.startTime ?? 0, true])
-      sendCommand('playVideo')
-    }
-  } catch {
-    // ignore non-JSON messages
-  }
-}
-
-watch(() => props.loopEnabled, (enabled) => {
-  if (enabled === false) {
-    clearLoopTimer()
-  }
-})
-
 onUnmounted(() => {
-  clearLoopTimer()
-  window.removeEventListener('message', handleMessage)
+  clearStopTimer()
 })
 
 // Start the first video playing silently so the player is active
 // by the time the user clicks Play.
 onMounted(() => {
-  window.addEventListener('message', handleMessage)
   if (iframeRef.value) {
     iframeRef.value.src = embedSrc.value
   }
@@ -114,11 +78,10 @@ onMounted(() => {
 //   instance (and its user-activation state) is reused — no src reload.
 // • Otherwise reload the iframe for a fresh muted-autoplay start.
 watch(() => props.videoId, () => {
-  clearLoopTimer()
+  clearStopTimer()
   if (audioUnlocked.value) {
     sendCommand('loadVideoById', [props.videoId, props.startTime ?? 0])
-    scheduleLoop()
-    registerPlayerListener()
+    scheduleStop()
   } else if (iframeRef.value) {
     iframeRef.value.src = embedSrc.value
   }
@@ -135,8 +98,13 @@ function startAudio() {
   sendCommand('unMute')
   audioUnlocked.value = true
   emit('audioUnlocked')
-  scheduleLoop()
-  registerPlayerListener()
+  scheduleStop()
+}
+
+function restartAudio() {
+  sendCommand('seekTo', [props.startTime ?? 0, true])
+  sendCommand('playVideo')
+  scheduleStop()
 }
 </script>
 
@@ -163,7 +131,14 @@ function startAudio() {
         <span></span><span></span><span></span><span></span><span></span>
       </div>
       <p class="mb-0 fw-semibold fs-5">🎵 Now Playing…</p>
-      <p class="mb-0 text-muted small">Listen carefully and enter your guess below!</p>
+      <p class="mb-2 text-muted small">Listen carefully and enter your guess below!</p>
+      <button
+        class="btn btn-outline-light btn-sm"
+        type="button"
+        @click="restartAudio"
+      >
+        ↺ Restart
+      </button>
     </div>
     <!-- src is managed imperatively (onMounted + watcher + startAudio).
          No :key so the same element — and its user-activation state —
@@ -174,7 +149,6 @@ function startAudio() {
       title="Stage 1 theme"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
-      @load="registerPlayerListener"
     ></iframe>
   </div>
 </template>

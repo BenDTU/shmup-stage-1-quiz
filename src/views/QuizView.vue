@@ -106,7 +106,6 @@ async function handleNextClick(event: MouseEvent) {
             :start-time="currentQuestion.startTime"
             :end-time="currentQuestion.endTime"
             :hidden="!state.isAnswered"
-            :loop-enabled="!state.isAnswered"
             @audio-unlocked="audioUnlocked = true"
           />
         </div>
