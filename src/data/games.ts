@@ -6,7 +6,7 @@ export type { SongSource, GameEntry, GameListEntry, Game } from '../types'
 // Update videoId and startTime values with the correct YouTube video IDs and
 // timestamps for each game's stage 1 theme.
 // Keep this array sorted alphabetically by name (enforced by ESLint local/sorted-games rule).
-// IDs are auto-assigned from the array position — just add entries with singleSongSource or multipleSongSource.
+// IDs are auto-assigned from the array position — just add entries with singleSongSource, multipleSongSource, or arrangedSongSource.
 // startTime (seconds) is optional; omit it to start from the beginning of the video.
 const gameEntries: GameEntry[] = [
   {
