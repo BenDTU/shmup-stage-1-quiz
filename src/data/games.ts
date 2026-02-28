@@ -299,7 +299,7 @@ const gameEntries: GameEntry[] = [
         {
           source: 'PC Engine',
           videoId: 'jYqboWg4KOc',
-        }
+        },
       ]
     },
     forceFirst: true,
