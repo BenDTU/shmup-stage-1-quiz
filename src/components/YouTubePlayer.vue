@@ -208,7 +208,7 @@ function onRestartAnimationEnd() {
 /* One-shot anticlockwise spin for the restart icon */
 .spin-once {
   display: inline-block;
-  transform-origin: calc(50% + 1px) calc(50% + 1px);
+  transform-origin: 50% calc(50% + 1px);
   animation: spin-ccw 0.5s ease-in-out;
 }
 
