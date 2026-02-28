@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { games } from '../data/games'
+import { games, type GameListEntry } from '../data/games'
 
 const props = defineProps<{
   modelValue: string
@@ -26,7 +26,7 @@ const filteredGames = computed(() => {
   return games.filter((g) => g.name.toLowerCase().includes(query))
 })
 
-function selectGame(game: (typeof games)[number]) {
+function selectGame(game: GameListEntry) {
   if (props.disabledGameIds.has(game.id)) return
   if (props.franchiseLimitedGameIds?.has(game.id)) return
   emit('update:modelValue', game.name)
