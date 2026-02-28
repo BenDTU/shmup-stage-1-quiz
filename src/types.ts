@@ -63,4 +63,5 @@ export type Game = {
   endTime?: number
   id: number
   franchise?: Franchise
+  source?: string // for arrangedSongSource, indicates the specific arrangement used
 }

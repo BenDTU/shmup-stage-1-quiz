@@ -21,10 +21,11 @@ function resolveGame(entry: GameEntryWithId): Game {
       name,
       franchise,
       id,
-      songName: `${songName} (${arrangement.source} arrangement)`,
+      songName,
       videoId,
       startTime, 
-      endTime
+      endTime,
+      source: arrangement.source,
     }
   }
 }
