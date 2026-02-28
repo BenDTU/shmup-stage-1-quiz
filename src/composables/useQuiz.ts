@@ -5,13 +5,13 @@ import { type Game, type GameEntryWithId, Franchise } from '../types'
 function resolveGame(entry: GameEntryWithId): Game {
   const { name, franchise, id } = entry
   if (entry.singleSongSource) {
-    const { songName, videoId, startTime = 0 } = entry.singleSongSource
-    return { name, franchise, id, songName, videoId, startTime }
+    const { songName, videoId, startTime = 0, endTime } = entry.singleSongSource
+    return { name, franchise, id, songName, videoId, startTime, endTime }
   } else {
     const sources = entry.multipleSongSource
     const source = sources[Math.floor(Math.random() * sources.length)]!
-    const { songName, videoId, startTime = 0 } = source
-    return { name, franchise, id, songName, videoId, startTime }
+    const { songName, videoId, startTime = 0, endTime } = source
+    return { name, franchise, id, songName, videoId, startTime, endTime }
   }
 }
 
@@ -72,10 +72,11 @@ const franchiseLimitedGameIds = computed<Set<number>>(() => {
 })
 
 function startQuiz() {
-  const shuffled = [...games].sort(() => Math.random() - 0.5)
+  const forceFirstGames = games.filter((g) => g.forceFirst)
+  const shuffled = [...games].filter((g) => !g.forceFirst).sort(() => Math.random() - 0.5)
   const franchiseCounts: Partial<Record<Franchise, number>> = {}
   const selected: Game[] = []
-  for (const game of shuffled) {
+  for (const game of [...forceFirstGames, ...shuffled]) {
     if (selected.length >= QUIZ_SIZE) break
     if (game.franchise) {
       const count = franchiseCounts[game.franchise] ?? 0

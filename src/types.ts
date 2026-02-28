@@ -11,18 +11,21 @@ export interface SongSource {
   songName: string
   videoId: string
   startTime?: number // seconds into the video where the stage 1 theme begins (defaults to 0)
+  endTime?: number // seconds into the video where playback should stop (video will be paused)
 }
 
 export type GameEntry =
   | {
       name: string
       franchise?: Franchise
+      forceFirst?: boolean // if true, this game will always be the first question in the quiz
       singleSongSource: SongSource
       multipleSongSource?: never
     }
   | {
       name: string
       franchise?: Franchise
+      forceFirst?: boolean // if true, this game will always be the first question in the quiz
       singleSongSource?: never
       multipleSongSource: [SongSource, ...SongSource[]]
     }
@@ -36,6 +39,7 @@ export type Game = {
   songName: string
   videoId: string
   startTime: number
+  endTime?: number
   id: number
   franchise?: Franchise
 }

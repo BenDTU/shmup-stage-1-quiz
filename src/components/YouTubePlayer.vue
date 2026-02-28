@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted } from 'vue'
+import { computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue'
 
 const props = defineProps<{
   videoId: string
   startTime?: number
+  endTime?: number
   hidden?: boolean
 }>()
 
@@ -40,6 +41,30 @@ function sendCommand(func: string, args: unknown[] = []) {
   )
 }
 
+// Stop timer: when endTime is set, pause the video when it is reached.
+let stopTimer: ReturnType<typeof setTimeout> | null = null
+
+function clearStopTimer() {
+  if (stopTimer !== null) {
+    clearTimeout(stopTimer)
+    stopTimer = null
+  }
+}
+
+function scheduleStop() {
+  clearStopTimer()
+  if (!props.endTime || !audioUnlocked.value) return
+  const duration = (props.endTime - (props.startTime ?? 0)) * 1000
+  if (duration <= 0) return
+  stopTimer = setTimeout(() => {
+    sendCommand('pauseVideo')
+  }, duration)
+}
+
+onUnmounted(() => {
+  clearStopTimer()
+})
+
 // Start the first video playing silently so the player is active
 // by the time the user clicks Play.
 onMounted(() => {
@@ -53,8 +78,10 @@ onMounted(() => {
 //   instance (and its user-activation state) is reused — no src reload.
 // • Otherwise reload the iframe for a fresh muted-autoplay start.
 watch(() => props.videoId, () => {
+  clearStopTimer()
   if (audioUnlocked.value) {
     sendCommand('loadVideoById', [props.videoId, props.startTime ?? 0])
+    scheduleStop()
   } else if (iframeRef.value) {
     iframeRef.value.src = embedSrc.value
   }
@@ -71,6 +98,22 @@ function startAudio() {
   sendCommand('unMute')
   audioUnlocked.value = true
   emit('audioUnlocked')
+  scheduleStop()
+}
+
+const restartSpinning = ref(false)
+
+function restartAudio() {
+  sendCommand('seekTo', [props.startTime ?? 0, true])
+  sendCommand('playVideo')
+  scheduleStop()
+  // Retrigger the spin animation: remove then re-add the class via a tick
+  restartSpinning.value = false
+  nextTick(() => { restartSpinning.value = true })
+}
+
+function onRestartAnimationEnd() {
+  restartSpinning.value = false
 }
 </script>
 
@@ -97,7 +140,14 @@ function startAudio() {
         <span></span><span></span><span></span><span></span><span></span>
       </div>
       <p class="mb-0 fw-semibold fs-5">🎵 Now Playing…</p>
-      <p class="mb-0 text-muted small">Listen carefully and enter your guess below!</p>
+      <p class="mb-2 text-muted small">Listen carefully and enter your guess below!</p>
+      <button
+        class="btn btn-outline-light btn-sm"
+        type="button"
+        @click="restartAudio"
+      >
+        <span :class="{ 'spin-once': restartSpinning }" @animationend="onRestartAnimationEnd">↺</span> Restart
+      </button>
     </div>
     <!-- src is managed imperatively (onMounted + watcher + startAudio).
          No :key so the same element — and its user-activation state —
@@ -153,5 +203,17 @@ function startAudio() {
 @keyframes bounce {
   0%, 100% { transform: scaleY(0.4); }
   50%       { transform: scaleY(1); }
+}
+
+/* One-shot anticlockwise spin for the restart icon */
+.spin-once {
+  display: inline-block;
+  transform-origin: 50% calc(50% + 1px);
+  animation: spin-ccw 0.5s ease-in-out;
+}
+
+@keyframes spin-ccw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
 }
 </style>

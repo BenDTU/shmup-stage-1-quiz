@@ -104,6 +104,7 @@ async function handleNextClick(event: MouseEvent) {
           <YouTubePlayer
             :video-id="currentQuestion.videoId"
             :start-time="currentQuestion.startTime"
+            :end-time="currentQuestion.endTime"
             :hidden="!state.isAnswered"
             @audio-unlocked="audioUnlocked = true"
           />
