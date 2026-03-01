@@ -18,6 +18,8 @@ const sortedGamesRule = {
     messages: {
       unsorted:
         'Game "{{current}}" should come before "{{previous}}". Keep the games array sorted alphabetically by name (use sortName to override the sort key if needed).',
+      unsortedWithKeys:
+        'Game "{{current}}" (sort key: "{{currentKey}}") should come before "{{previous}}" (sort key: "{{previousKey}}"). Keep the games array sorted alphabetically by name (use sortName to override the sort key if needed).',
     },
   },
   create(context) {
@@ -48,10 +50,19 @@ const sortedGamesRule = {
           const prev = entries[i - 1].sortKey
           const curr = entries[i].sortKey
           if (prev.localeCompare(curr, undefined, { sensitivity: 'base', numeric: true }) > 0) {
+            const useSortKeys =
+              entries[i].sortKey !== entries[i].name || entries[i - 1].sortKey !== entries[i - 1].name
             context.report({
               node: entries[i].node,
-              messageId: 'unsorted',
-              data: { current: entries[i].name, previous: entries[i - 1].name },
+              messageId: useSortKeys ? 'unsortedWithKeys' : 'unsorted',
+              data: useSortKeys
+                ? {
+                    current: entries[i].name,
+                    currentKey: entries[i].sortKey,
+                    previous: entries[i - 1].name,
+                    previousKey: entries[i - 1].sortKey,
+                  }
+                : { current: entries[i].name, previous: entries[i - 1].name },
             })
           }
         }
