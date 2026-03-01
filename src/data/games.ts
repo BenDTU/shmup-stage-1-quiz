@@ -458,8 +458,40 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Selection (Genetic)', videoId: 'N3EJltfL7ok' },
   },
   {
+    name: 'Strikers 1945',
+    multipleSongSource: [
+      { songName: 'Rising Sun', videoId: 'TDPkOiNPqQA' },
+      { songName: 'Shadow of Reich', videoId: 'pCVV3uTgqrE' },
+      { songName: 'Flying Wing', videoId: 'lnHOTuI5jHU' },
+      { songName: 'White Hell', videoId: 'VoPpcldi1Qc' },
+    ]
+  },
+  {
     name: 'Strikers 1945 II',
-    singleSongSource: { songName: "Devil's Tower", videoId: 'siwfJgcFYKI' },
+    multipleSongSource: [
+      { songName: "Devil's Tower", videoId: 'siwfJgcFYKI' },
+      { songName: 'Far from Cloud City', videoId: 'qOuf82IRzH0' },
+      { songName: 'Battle of Extreme North', videoId: 'jQRQlpPJwE0' },
+      { songName: 'Infinity Orbit', videoId: 'BhPYYhzPcSE' },
+    ]
+  },
+  {
+    name: 'Strikers 1945 III',
+    multipleSongSource: [
+      { songName: 'Interval of a Huge Gorge', videoId: 'I1qn96QAQXA' },
+      { songName: 'Sea of Battle', videoId: 'tvw-jInWc_o' },
+      { songName: 'Turn Red', videoId: '-xGu9BfDTnE' },
+      { songName: 'Rest of a Bomb', videoId: 'A8dyebZ-Thk' },
+    ]
+  },
+  {
+    name: 'Strikers 1945 Plus',
+    multipleSongSource: [
+      { songName: 'Sky Stage', videoId: 'Hwm6PLQ3X6s' },
+      { songName: 'Sea Stage', videoId: 'skJr2TO7u3E' },
+      { songName: 'Colliery Stage', videoId: '1valAlFDLRI' },
+      { songName: 'Street Stage', videoId: 'NcSIHrnG5lA' },
+    ]
   },
   {
     name: 'Super R-Type',
