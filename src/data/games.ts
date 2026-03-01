@@ -327,7 +327,6 @@ const gameEntries: GameEntry[] = [
     name: 'Raiden III',
     sortName: 'Raiden 3',
     franchise: Franchise.Raiden,
-    // singleSongSource: { songName: 'Lightning Strikes', videoId: 'eZ3GNGBZ3Z4' },
     arrangedSongSource: {
       songName: 'Lightning Strikes',
       arrangements: [
