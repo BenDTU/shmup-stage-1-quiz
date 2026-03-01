@@ -1,0 +1,53 @@
+name: Validate YouTube Video IDs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/data/games.ts'
+      - 'src/data/__tests__/games.test.ts'
+  pull_request:
+
+jobs:
+  validate-video-ids:
+    name: Validate YouTube video IDs are embeddable
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect relevant file changes
+        id: changes
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+            CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA")
+            if echo "$CHANGED" | grep -qE '^src/data/(games\.ts|__tests__/games\.test\.ts)$'; then
+              echo "relevant=true" >> $GITHUB_OUTPUT
+            else
+              echo "relevant=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            # push events already have a paths: filter, so relevant files always changed
+            echo "relevant=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set up Node.js
+        if: steps.changes.outputs.relevant == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        if: steps.changes.outputs.relevant == 'true'
+        run: npm ci --legacy-peer-deps
+
+      - name: Run YouTube video ID validation tests
+        if: steps.changes.outputs.relevant == 'true'
+        run: npm test
