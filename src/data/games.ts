@@ -15,7 +15,7 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'Battle Bakraid',
-    singleSongSource: { songName: 'Sky Gunner', videoId: 'b39c-VlJkA' },
+    singleSongSource: { songName: 'Sky Gunner', videoId: 'gb39c-VlJkA' },
   },
   {
     name: 'Battle Garegga',
