@@ -14,6 +14,10 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Easy to Go', videoId: 'UFc72Qz3S34' },
   },
   {
+    name: 'Battle Bakraid',
+    singleSongSource: { songName: 'Sky Gunner', videoId: 'b39c-VlJkA' },
+  },
+  {
     name: 'Battle Garegga',
     singleSongSource: { songName: 'Fly to the Leaden Sky', videoId: 'Szr0TSXcWok' },
   },
@@ -24,6 +28,21 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Crimzon Clover',
     singleSongSource: { songName: 'UL-stage1', videoId: 'yYF3x1hACIU' },
+  },
+  {
+    name: 'Darius',
+    franchise: Franchise.Darius,
+    singleSongSource: { songName: 'CAPTAIN NEO', videoId: 'a_GP2FBiK2o' },
+  },
+  {
+    name: 'DariusBurst',
+    franchise: Franchise.Darius,
+    multipleSongSource: [
+      { songName: 'Good-bye My Earth', videoId: 'Hi1sF3AKPHk' },
+      { songName: 'Freedom', videoId: 'eKSsVzGkcqs' },
+      { songName: 'Mortification of the Flesh', videoId: 'Vke1mMHGjJA' },
+      { songName: 'Suite Photoconductivity ~First Tune Iron Fossil~', videoId: 'h52k2Et3AXk' },
+    ]
   },
   {
     name: 'Deathsmiles',
@@ -115,9 +134,28 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Weakboson - Gorge City', videoId: 'wZrKXcoHkKw' },
   },
   {
+    name: 'Pulstar',
+    singleSongSource: { songName: 'Front Line on the Earth', videoId: 'IexMUkiPg-M' },
+  },
+  {
     name: 'R-Type',
     franchise: Franchise.RType,
     singleSongSource: { songName: 'START ~ BATTLE THEME (Start ~ Stage1)', videoId: 'tXrxov_0oj0' },
+  },
+  {
+    name: 'R-Type Delta',
+    franchise: Franchise.RType,
+    singleSongSource: { songName: 'Crazy Machine', videoId: 'BMecwpal5GE' },
+  },
+  {
+    name: 'R-Type Final',
+    franchise: Franchise.RType,
+    singleSongSource: { songName: 'Metropolis Quietus: Anxiety', videoId: 'n-IoVZMzlAk' },
+  },
+  {
+    name: 'R-Type Final 2',
+    franchise: Franchise.RType,
+    singleSongSource: { songName: 'Investigation- Abandoned Space City', videoId: '2Gt2FHkpR4Q' },
   },
   {
     name: 'R-Type II',
@@ -137,6 +175,27 @@ const gameEntries: GameEntry[] = [
     name: 'Raiden',
     franchise: Franchise.Raiden,
     singleSongSource: { songName: 'Gallantry', videoId: 'vaGenJ5GXxE' },
+  },
+  {
+    name: 'Raiden Fighters',
+    franchise: Franchise.Raiden,
+    multipleSongSource: [
+      { songName: 'Souring Nature', videoId: '1r4xBHYos5A' },
+      { songName: 'Task Force', videoId: '7pEYtbtAKpw' },
+    ]
+  },
+  {
+    name: 'Raiden Fighters 2: Operation Hell Dive',
+    franchise: Franchise.Raiden,
+    multipleSongSource: [
+      { songName: 'Scramble Attack', videoId: 'epWWOylKxrc' },
+      { songName: 'Tight Rope', videoId: '13nezOfe6Oc' },
+    ]
+  },
+  {
+    name: 'Raiden Fighters Jet',
+    franchise: Franchise.Raiden,
+    singleSongSource: { songName: 'Simulation Level 01 (Launch Base)', videoId: 'C4DFwgSpO00' },
   },
   {
     name: 'Raiden II',
