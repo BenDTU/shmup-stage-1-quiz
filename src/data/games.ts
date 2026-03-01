@@ -14,6 +14,10 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Easy to Go', videoId: 'UFc72Qz3S34' },
   },
   {
+    name: 'Battle Bakraid',
+    singleSongSource: { songName: 'Sky Gunner', videoId: 'gb39c-VlJkA' },
+  },
+  {
     name: 'Battle Garegga',
     singleSongSource: { songName: 'Fly to the Leaden Sky', videoId: 'Szr0TSXcWok' },
   },
@@ -24,6 +28,21 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Crimzon Clover',
     singleSongSource: { songName: 'UL-stage1', videoId: 'yYF3x1hACIU' },
+  },
+  {
+    name: 'Darius',
+    franchise: Franchise.Darius,
+    singleSongSource: { songName: 'CAPTAIN NEO', videoId: 'a_GP2FBiK2o' },
+  },
+  {
+    name: 'DariusBurst',
+    franchise: Franchise.Darius,
+    multipleSongSource: [
+      { songName: 'Good-bye My Earth', videoId: 'Hi1sF3AKPHk' },
+      { songName: 'Freedom', videoId: 'eKSsVzGkcqs' },
+      { songName: 'Mortification of the Flesh', videoId: 'Vke1mMHGjJA' },
+      { songName: 'Suite Photoconductivity ~First Tune Iron Fossil~', videoId: 'h52k2Et3AXk' },
+    ]
   },
   {
     name: 'Deathsmiles',
@@ -43,6 +62,10 @@ const gameEntries: GameEntry[] = [
     name: 'DoDonPachi DaiOuJou',
     franchise: Franchise.Dodonpachi,
     singleSongSource: { songName: 'East Asia', videoId: 'muuApOJSP9E' },
+  },
+  {
+    name: 'Dogyuun',
+    singleSongSource: { songName: 'Dogyuun Magic', videoId: 'B5fpCSNNKsM' },
   },
   {
     name: 'ESP Ra.De.',
@@ -99,6 +122,14 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'INTERCEPTION - Noisy Town', videoId: 'z472pIce5CY' },
   },
   {
+    name: 'Mad Shark',
+    singleSongSource: { songName: 'Round 1, Round 2, Round 5', videoId: '4eTABytlJZY', startTime: 9, endTime: 140 },
+  },
+  {
+    name: 'Mazinger Z',
+    singleSongSource: { songName: 'Theme of Z (Part 2)', videoId: 'uHktcVQgXys' },
+  },
+  {
     name: 'MUSHA',
     singleSongSource: { songName: 'Fullmetal Fighter', videoId: '0MIqgHu3tsg' },
   },
@@ -115,14 +146,62 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Weakboson - Gorge City', videoId: 'wZrKXcoHkKw' },
   },
   {
+    name: 'Pulstar',
+    singleSongSource: { songName: 'Front Line on the Earth', videoId: 'IexMUkiPg-M' },
+  },
+  {
     name: 'R-Type',
     franchise: Franchise.RType,
-    singleSongSource: { songName: 'START ~ BATTLE THEME (Start ~ Stage1)', videoId: 'tXrxov_0oj0' },
+    arrangedSongSource: {
+      songName: 'START ~ BATTLE THEME (Start ~ Stage1)',
+      arrangements: [
+        {
+          source: 'Arcade',
+          videoId: 'tXrxov_0oj0',
+        },
+        {
+          source: 'Game Boy',
+          videoId: 'co0nkC6tKrI',
+        }
+      ]
+    },
+  },
+  {
+    name: 'R-Type Delta',
+    franchise: Franchise.RType,
+    singleSongSource: { songName: 'Crazy Machine', videoId: 'BMecwpal5GE' },
+  },
+  {
+    name: 'R-Type Final',
+    franchise: Franchise.RType,
+    singleSongSource: { songName: 'Metropolis Quietus: Anxiety', videoId: 'n-IoVZMzlAk' },
+  },
+  {
+    name: 'R-Type Final 2',
+    franchise: Franchise.RType,
+    singleSongSource: { songName: 'Investigation- Abandoned Space City', videoId: '2Gt2FHkpR4Q' },
   },
   {
     name: 'R-Type II',
     franchise: Franchise.RType,
-    singleSongSource: { songName: 'Counter Attack', videoId: 'idU8lvOP9qA' },
+    arrangedSongSource: {
+      songName: 'Counter Attack',
+      arrangements: [
+        {
+          source: 'Arcade',
+          videoId: 'idU8lvOP9qA',
+        },
+        {
+          source: 'Game Boy',
+          videoId: 'hIC-xECNR2c',
+        }
+      ]
+    }
+  },
+  {
+    name: 'R-Type III: The Third Lightning',
+    franchise: Franchise.RType,
+    singleSongSource: { songName: 'Catapult Dimension', videoId: 'EsLgLrM2CbY' },
   },
   {
     name: 'R-Type Leo',
@@ -139,6 +218,27 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Gallantry', videoId: 'vaGenJ5GXxE' },
   },
   {
+    name: 'Raiden Fighters',
+    franchise: Franchise.Raiden,
+    multipleSongSource: [
+      { songName: 'Souring Nature', videoId: '1r4xBHYos5A' },
+      { songName: 'Task Force', videoId: '7pEYtbtAKpw' },
+    ]
+  },
+  {
+    name: 'Raiden Fighters 2: Operation Hell Dive',
+    franchise: Franchise.Raiden,
+    multipleSongSource: [
+      { songName: 'Scramble Attack', videoId: 'epWWOylKxrc' },
+      { songName: 'Tight Rope', videoId: '13nezOfe6Oc' },
+    ]
+  },
+  {
+    name: 'Raiden Fighters Jet',
+    franchise: Franchise.Raiden,
+    singleSongSource: { songName: 'Simulation Level 01 (Launch Base)', videoId: 'C4DFwgSpO00' },
+  },
+  {
     name: 'Raiden II',
     franchise: Franchise.Raiden,
     singleSongSource: { songName: 'Repeated Tragedy', videoId: 'zDS4EMmETsE' },
@@ -146,6 +246,10 @@ const gameEntries: GameEntry[] = [
   {
     name: 'RefleX',
     singleSongSource: { songName: 'An Unavoidable Choice', videoId: 'HmAJEvPLmVs' },
+  },
+  {
+    name: 'REZON',
+    singleSongSource: { songName: 'Stage 1 & 4', videoId: 'ZAKUutWAdDM', startTime: 2, endTime: 31 },
   },
   {
     name: 'Space Invaders (Game Boy Advance)',
@@ -184,6 +288,10 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Super Spacefortress Macross',
     singleSongSource: { songName: 'Stage 1 & 4', videoId: 'FyVBI2GA_mg', startTime: 220, endTime: 322 },
+  },
+  {
+    name: 'Super Spacefortress Macross II',
+    singleSongSource: { songName: 'SCOOPER', videoId: 'wnlpgkfsor0' }, // NOTE: Medium and Expert course themes don't seem to be on Youtube
   },
   {
     name: 'Thunder Force IV',
@@ -278,6 +386,26 @@ const gameEntries: GameEntry[] = [
     name: 'Touhou 20: Fossilized Wonders',
     franchise: Franchise.Touhou,
     singleSongSource: { songName: 'Beloved Dwelling of Dust', videoId: 'SSZT4pV3RFA' },
+  },
+  {
+    name: 'Truxton',
+    arrangedSongSource: {
+      songName: 'Stage 1',
+      arrangements: [
+        {
+          source: 'Arcade',
+          videoId: 'HjuWpzKt5QQ',
+        },
+        {
+          source: 'Mega Drive',
+          videoId: 'rWD0BEHbl2I',
+        },
+        {
+          source: 'PC Engine',
+          videoId: 'BpT6wqbxeeM',
+        },
+      ]
+    }
   },
   {
     name: 'Tyrian',

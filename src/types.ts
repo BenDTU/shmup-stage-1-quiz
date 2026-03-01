@@ -1,4 +1,5 @@
 export enum Franchise {
+  Darius = 'Darius',
   Dodonpachi = 'Dodonpachi',
   Gradius = 'Gradius',
   RType = 'R-Type',
