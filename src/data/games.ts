@@ -37,7 +37,7 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'Daioh',
-    singleSongSource: { songName: 'Stage 1', videoId: '9n8sXo7j2l0', startTime: 62, endTime: 213 },
+    singleSongSource: { songName: 'Stage 1', videoId: 'vqi1eM9MNPw', startTime: 62, endTime: 213 },
   },
   {
     name: 'Darius',
@@ -355,7 +355,7 @@ const gameEntries: GameEntry[] = [
         },
         {
           source: 'Raiden IV x MiKADO Remix',
-          videoId: 'I3Yl2Hygww',
+          videoId: 'lI3Yl2Hygww',
         },
       ]
     }
