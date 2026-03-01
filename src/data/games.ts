@@ -64,6 +64,10 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'East Asia', videoId: 'muuApOJSP9E' },
   },
   {
+    name: 'Dogyuun',
+    singleSongSource: { songName: 'Dogyuun Magic', videoId: 'B5fpCSNNKsM' },
+  },
+  {
     name: 'ESP Ra.De.',
     multipleSongSource: [
       { songName: 'DESPERATE SCHOOL (STAGE-A)', videoId: 'P3_U1wyESiA' },
@@ -122,6 +126,10 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Round 1, Round 2, Round 5', videoId: '4eTABytlJZY', startTime: 9, endTime: 140 },
   },
   {
+    name: 'Mazinger Z',
+    singleSongSource: { songName: 'Theme of Z (Part 2)', videoId: 'uHktcVQgXys' },
+  },
+  {
     name: 'MUSHA',
     singleSongSource: { songName: 'Fullmetal Fighter', videoId: '0MIqgHu3tsg' },
   },
@@ -144,7 +152,19 @@ const gameEntries: GameEntry[] = [
   {
     name: 'R-Type',
     franchise: Franchise.RType,
-    singleSongSource: { songName: 'START ~ BATTLE THEME (Start ~ Stage1)', videoId: 'tXrxov_0oj0' },
+    arrangedSongSource: {
+      songName: 'START ~ BATTLE THEME (Start ~ Stage1)',
+      arrangements: [
+        {
+          source: 'Arcade',
+          videoId: 'tXrxov_0oj0',
+        },
+        {
+          source: 'Game Boy',
+          videoId: 'co0nkC6tKrI',
+        }
+      ]
+    },
   },
   {
     name: 'R-Type Delta',
@@ -164,7 +184,24 @@ const gameEntries: GameEntry[] = [
   {
     name: 'R-Type II',
     franchise: Franchise.RType,
-    singleSongSource: { songName: 'Counter Attack', videoId: 'idU8lvOP9qA' },
+    arrangedSongSource: {
+      songName: 'Counter Attack',
+      arrangements: [
+        {
+          source: 'Arcade',
+          videoId: 'idU8lvOP9qA',
+        },
+        {
+          source: 'Game Boy',
+          videoId: 'hIC-xECNR2c',
+        }
+      ]
+    }
+  },
+  {
+    name: 'R-Type III: The Third Lightning',
+    franchise: Franchise.RType,
+    singleSongSource: { songName: 'Catapult Dimension', videoId: 'EsLgLrM2CbY' },
   },
   {
     name: 'R-Type Leo',
@@ -251,6 +288,10 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Super Spacefortress Macross',
     singleSongSource: { songName: 'Stage 1 & 4', videoId: 'FyVBI2GA_mg', startTime: 220, endTime: 322 },
+  },
+  {
+    name: 'Super Spacefortress Macross II',
+    singleSongSource: { songName: 'SCOOPER', videoId: 'wnlpgkfsor0' }, // NOTE: Medium and Expert course themes don't seem to be on Youtube
   },
   {
     name: 'Thunder Force IV',
@@ -345,6 +386,26 @@ const gameEntries: GameEntry[] = [
     name: 'Touhou 20: Fossilized Wonders',
     franchise: Franchise.Touhou,
     singleSongSource: { songName: 'Beloved Dwelling of Dust', videoId: 'SSZT4pV3RFA' },
+  },
+  {
+    name: 'Truxton',
+    arrangedSongSource: {
+      songName: 'Stage 1',
+      arrangements: [
+        {
+          source: 'Arcade',
+          videoId: 'HjuWpzKt5QQ',
+        },
+        {
+          source: 'Mega Drive',
+          videoId: 'rWD0BEHbl2I',
+        },
+        {
+          source: 'PC Engine',
+          videoId: 'BpT6wqbxeeM',
+        },
+      ]
+    }
   },
   {
     name: 'Tyrian',
