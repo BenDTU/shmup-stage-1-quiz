@@ -10,6 +10,10 @@ export type { SongSource, GameEntry, GameListEntry, Game } from '../types'
 // startTime (seconds) is optional; omit it to start from the beginning of the video.
 const gameEntries: GameEntry[] = [
   {
+    name: 'X-Multiply',
+    singleSongSource: { songName: 'Into the Human Body', videoId: 'MwwduquIWIo' },
+  },
+  {
     name: 'Armed Police Batrider',
     singleSongSource: { songName: 'Easy to Go', videoId: 'UFc72Qz3S34' },
   },
@@ -30,9 +34,18 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'UL-stage1', videoId: 'yYF3x1hACIU' },
   },
   {
+    name: 'Cygni: All Guns Blazing',
+    singleSongSource: { songName: 'Battle Over the White Sands', videoId: 'a-9kcVAaXXQ' },
+  },
+  {
     name: 'Darius',
     franchise: Franchise.Darius,
     singleSongSource: { songName: 'CAPTAIN NEO', videoId: 'a_GP2FBiK2o' },
+  },
+  {
+    name: 'Darius Gaiden',
+    franchise: Franchise.Darius,
+    singleSongSource: { songName: 'VISIONNERZ ~HALLUCINATED PEOPLE~', videoId: 'kG30WhHCnN4' },
   },
   {
     name: 'DariusBurst',
@@ -98,6 +111,20 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Sand Storm', videoId: 'NyQzfqNIKTI' },
   },
   {
+    name: 'Gradius IV',
+    franchise: Franchise.Gradius,
+    singleSongSource: { songName: 'Apollon', videoId: 'kGc9HIKnqB8' },
+  },
+  {
+    name: 'Gradius V',
+    franchise: Franchise.Gradius,
+    singleSongSource: { songName: 'Universe', videoId: 'KCDS-T2E_Lg' },
+  },
+  {
+    name: 'Gun Frontier',
+    singleSongSource: { songName: 'Gale in the Desert', videoId: 'JjsSvAsxTxY' },
+  },
+  {
     name: 'Guwange',
     singleSongSource: { songName: 'Falling Cherry Blossoms', videoId: 'EWYuTxCV11U' },
   },
@@ -112,6 +139,22 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Ikaruga',
     singleSongSource: { songName: 'Ideal', videoId: 'fAn6XxsDDTI' },
+  },
+  {
+    name: 'Image Fight',
+    singleSongSource: { songName: 'Introduction', videoId: 'IiT-60Y3J70' },
+  },
+  {
+    name: 'Image Fight II: Operation Deep Striker',
+    singleSongSource: { songName: 'Front Line', videoId: '9cN-9MU5-4s' },
+  },
+  {
+    name: 'In the Hunt',
+    singleSongSource: { songName: 'THE SOUTH POLE', videoId: '9F8SiVzU1QI' },
+  },
+  {
+    name: 'In the Hunt (PlayStation)',
+    singleSongSource: { songName: 'Stage 1', videoId: '7fI0-TLbPkY' },
   },
   {
     name: 'Jamestown',
@@ -242,6 +285,18 @@ const gameEntries: GameEntry[] = [
     name: 'Raiden Fighters Jet',
     franchise: Franchise.Raiden,
     singleSongSource: { songName: 'Simulation Level 01 (Launch Base)', videoId: 'C4DFwgSpO00' },
+  },
+  {
+    name: 'RayCrisis',
+    singleSongSource: { songName: 'Lavande Bleu', videoId: 'bCBXUBBZVDU' },
+  },
+  {
+    name: 'RayForce',
+    singleSongSource: { songName: 'Geometric City', videoId: 'kP5huZQRAY4' },
+  },
+  {
+    name: 'RayStorm',
+    singleSongSource: { songName: 'Lethal Solitude', videoId: '9n7s8l3Xo5E' },
   },
   {
     name: 'RefleX',
