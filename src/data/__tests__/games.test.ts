@@ -25,17 +25,40 @@ function getVideoIds(game: GameEntryWithId): string[] {
  */
 async function isEmbeddable(videoId: string): Promise<boolean> {
   const url = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`
-  const response = await fetch(url)
-  return response.ok
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), 10_000)
+  try {
+    const response = await fetch(url, { signal: controller.signal })
+    return response.ok
+  } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') {
+      return false
+    }
+    throw error
+  } finally {
+    clearTimeout(timeoutId)
+  }
 }
 
-const allVideoIds: { gameName: string; videoId: string }[] = games.flatMap((game) =>
-  getVideoIds(game).map((videoId) => ({ gameName: game.name, videoId })),
-)
+// Build a map from videoId -> list of game names that reference it, then
+// de-duplicate so each videoId is only checked once regardless of how many
+// games share it.
+const videoIdToGames = new Map<string, string[]>()
+for (const game of games) {
+  for (const videoId of getVideoIds(game)) {
+    const names = videoIdToGames.get(videoId) ?? []
+    names.push(game.name)
+    videoIdToGames.set(videoId, names)
+  }
+}
+
+const uniqueVideoIds: { videoId: string; gameNames: string }[] = Array.from(
+  videoIdToGames.entries(),
+).map(([videoId, names]) => ({ videoId, gameNames: names.join(', ') }))
 
 describe('YouTube video IDs in games.ts', () => {
-  it.each(allVideoIds)(
-    'video "$videoId" for "$gameName" must be publicly embeddable',
+  it.each(uniqueVideoIds)(
+    'video "$videoId" (used by: $gameNames) must be publicly embeddable',
     async ({ videoId }) => {
       const embeddable = await isEmbeddable(videoId)
       expect(embeddable, `Video ID "${videoId}" is not embeddable (private, premium-only, or embedding disabled)`).toBe(true)

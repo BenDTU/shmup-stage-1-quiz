@@ -7,14 +7,12 @@ on:
       - 'src/data/games.ts'
       - 'src/data/__tests__/games.test.ts'
   pull_request:
-    paths:
-      - 'src/data/games.ts'
-      - 'src/data/__tests__/games.test.ts'
 
 jobs:
   validate-video-ids:
     name: Validate YouTube video IDs are embeddable
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
     steps:
@@ -27,7 +25,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Run YouTube video ID validation tests
         run: npm test
