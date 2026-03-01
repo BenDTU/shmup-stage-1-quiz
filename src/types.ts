@@ -30,6 +30,7 @@ export interface SongArrangement {
 export type GameEntry =
   | {
       name: string
+      sortName?: string // optional override used for alphabetical sorting (e.g. 'Gradius 2' for 'Gradius II')
       franchise?: Franchise
       forceFirst?: boolean // if true, this game will always be the first question in the quiz
       singleSongSource: SongSource
@@ -38,6 +39,7 @@ export type GameEntry =
     }
   | {
       name: string
+      sortName?: string // optional override used for alphabetical sorting (e.g. 'Gradius 2' for 'Gradius II')
       franchise?: Franchise
       forceFirst?: boolean // if true, this game will always be the first question in the quiz
       singleSongSource?: never
@@ -46,6 +48,7 @@ export type GameEntry =
     }
   | {
       name: string
+      sortName?: string // optional override used for alphabetical sorting (e.g. 'Gradius 2' for 'Gradius II')
       franchise?: Franchise
       forceFirst?: boolean // if true, this game will always be the first question in the quiz
       singleSongSource?: never
