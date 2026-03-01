@@ -5,7 +5,7 @@ export type { SongSource, GameEntry, GameListEntry, Game } from '../types'
 
 // Update videoId and startTime values with the correct YouTube video IDs and
 // timestamps for each game's stage 1 theme.
-// Keep this array sorted alphabetically by name (enforced by ESLint local/sorted-games rule).
+// Keep this array sorted alphabetically by name, with roman numerals treated as numbers (enforced by ESLint local/sorted-games rule).
 // IDs are auto-assigned from the array position — just add entries with singleSongSource, multipleSongSource, or arrangedSongSource.
 // startTime (seconds) is optional; omit it to start from the beginning of the video.
 const gameEntries: GameEntry[] = [
@@ -167,21 +167,6 @@ const gameEntries: GameEntry[] = [
     },
   },
   {
-    name: 'R-Type Delta',
-    franchise: Franchise.RType,
-    singleSongSource: { songName: 'Crazy Machine', videoId: 'BMecwpal5GE' },
-  },
-  {
-    name: 'R-Type Final',
-    franchise: Franchise.RType,
-    singleSongSource: { songName: 'Metropolis Quietus: Anxiety', videoId: 'n-IoVZMzlAk' },
-  },
-  {
-    name: 'R-Type Final 2',
-    franchise: Franchise.RType,
-    singleSongSource: { songName: 'Investigation- Abandoned Space City', videoId: '2Gt2FHkpR4Q' },
-  },
-  {
     name: 'R-Type II',
     franchise: Franchise.RType,
     arrangedSongSource: {
@@ -204,6 +189,21 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Catapult Dimension', videoId: 'EsLgLrM2CbY' },
   },
   {
+    name: 'R-Type Delta',
+    franchise: Franchise.RType,
+    singleSongSource: { songName: 'Crazy Machine', videoId: 'BMecwpal5GE' },
+  },
+  {
+    name: 'R-Type Final',
+    franchise: Franchise.RType,
+    singleSongSource: { songName: 'Metropolis Quietus: Anxiety', videoId: 'n-IoVZMzlAk' },
+  },
+  {
+    name: 'R-Type Final 2',
+    franchise: Franchise.RType,
+    singleSongSource: { songName: 'Investigation- Abandoned Space City', videoId: '2Gt2FHkpR4Q' },
+  },
+  {
     name: 'R-Type Leo',
     franchise: Franchise.RType,
     singleSongSource: { songName: 'Paradise Planet', videoId: 'yu7_I3CnDP8' },
@@ -216,6 +216,11 @@ const gameEntries: GameEntry[] = [
     name: 'Raiden',
     franchise: Franchise.Raiden,
     singleSongSource: { songName: 'Gallantry', videoId: 'vaGenJ5GXxE' },
+  },
+  {
+    name: 'Raiden II',
+    franchise: Franchise.Raiden,
+    singleSongSource: { songName: 'Repeated Tragedy', videoId: 'zDS4EMmETsE' },
   },
   {
     name: 'Raiden Fighters',
@@ -237,11 +242,6 @@ const gameEntries: GameEntry[] = [
     name: 'Raiden Fighters Jet',
     franchise: Franchise.Raiden,
     singleSongSource: { songName: 'Simulation Level 01 (Launch Base)', videoId: 'C4DFwgSpO00' },
-  },
-  {
-    name: 'Raiden II',
-    franchise: Franchise.Raiden,
-    singleSongSource: { songName: 'Repeated Tragedy', videoId: 'zDS4EMmETsE' },
   },
   {
     name: 'RefleX',

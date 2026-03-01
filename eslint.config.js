@@ -3,8 +3,42 @@ import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
 
 /**
+ * Converts a roman numeral string to its integer value.
+ * @param {string} roman
+ * @returns {number}
+ */
+function romanToInt(roman) {
+  const val = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 }
+  let result = 0
+  for (let i = 0; i < roman.length; i++) {
+    const curr = val[roman[i]]
+    const next = val[roman[i + 1]]
+    if (next && curr < next) {
+      result -= curr
+    } else {
+      result += curr
+    }
+  }
+  return result
+}
+
+/**
+ * Replaces standalone roman numerals in a string with their decimal equivalents
+ * so that titles like "R-Type II" sort as "R-Type 2".
+ * @param {string} name
+ * @returns {string}
+ */
+function normalizeRomanNumerals(name) {
+  return name.replace(
+    /\b(M{1,3}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})|CM|CD|D?C{1,3}(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})|XC|XL|L?X{1,3}(?:IX|IV|V?I{0,3})|IX|IV|V?I{1,3})\b/g,
+    (match) => String(romanToInt(match)),
+  )
+}
+
+/**
  * Custom ESLint rule that enforces the `games` array in games.ts is sorted
- * alphabetically (case-insensitive) by each entry's `name` property.
+ * alphabetically (case-insensitive) by each entry's `name` property,
+ * treating roman numerals as numbers.
  * @type {import('eslint').Rule.RuleModule}
  */
 const sortedGamesRule = {
@@ -16,7 +50,7 @@ const sortedGamesRule = {
     schema: [],
     messages: {
       unsorted:
-        'Game "{{current}}" should come before "{{previous}}". Keep the games array sorted alphabetically by name.',
+        'Game "{{current}}" should come before "{{previous}}". Keep the games array sorted alphabetically by name (roman numerals treated as numbers).',
     },
   },
   create(context) {
@@ -36,7 +70,9 @@ const sortedGamesRule = {
           .filter(Boolean)
 
         for (let i = 1; i < names.length; i++) {
-          if (names[i - 1].localeCompare(names[i], undefined, { sensitivity: 'base', numeric: true }) > 0) {
+          const prev = normalizeRomanNumerals(names[i - 1])
+          const curr = normalizeRomanNumerals(names[i])
+          if (prev.localeCompare(curr, undefined, { sensitivity: 'base', numeric: true }) > 0) {
             context.report({
               node: elements[i],
               messageId: 'unsorted',
