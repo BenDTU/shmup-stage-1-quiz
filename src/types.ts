@@ -1,4 +1,4 @@
-export enum Franchise {
+export enum Series {
   Darius = 'Darius',
   Dodonpachi = 'Dodonpachi',
   Gradius = 'Gradius',
@@ -30,7 +30,7 @@ export interface SongArrangement {
 interface GameEntryBase {
   name: string
   sortName?: string // optional override used for alphabetical sorting (e.g. 'Gradius 2' for 'Gradius II')
-  franchise?: Franchise
+  series?: Series
   forceFirst?: boolean // if true, this game will always be the first question in the quiz
 }
 
@@ -53,7 +53,7 @@ export type GameEntry =
 
 export type GameEntryWithId = GameEntry & { id: number }
 
-export type GameListEntry = { id: number; name: string; franchise?: Franchise }
+export type GameListEntry = { id: number; name: string; series?: Series }
 
 export type Game = {
   name: string
@@ -62,6 +62,6 @@ export type Game = {
   startTime: number
   endTime?: number
   id: number
-  franchise?: Franchise
+  series?: Series
   source?: string // for arrangedSongSource, indicates the specific arrangement used
 }

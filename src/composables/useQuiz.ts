@@ -1,17 +1,17 @@
 import { reactive, computed } from 'vue'
 import { games } from '../data/games'
-import { type Game, type GameEntryWithId, Franchise } from '../types'
+import { type Game, type GameEntryWithId, Series } from '../types'
 
 function resolveGame(entry: GameEntryWithId): Game {
-  const { name, franchise, id } = entry
+  const { name, series, id } = entry
   if (entry.singleSongSource) {
     const { songName, videoId, startTime = 0, endTime } = entry.singleSongSource
-    return { name, franchise, id, songName, videoId, startTime, endTime }
+    return { name, series, id, songName, videoId, startTime, endTime }
   } else if (entry.multipleSongSource) {
     const sources = entry.multipleSongSource
     const source = sources[Math.floor(Math.random() * sources.length)]!
     const { songName, videoId, startTime = 0, endTime } = source
-    return { name, franchise, id, songName, videoId, startTime, endTime }
+    return { name, series, id, songName, videoId, startTime, endTime }
   } else {
     const arrangements = entry.arrangedSongSource.arrangements
     const arrangement = arrangements[Math.floor(Math.random() * arrangements.length)]!
@@ -19,7 +19,7 @@ function resolveGame(entry: GameEntryWithId): Game {
     const { videoId, startTime = 0, endTime } = arrangement
     return {
       name,
-      franchise,
+      series,
       id,
       songName,
       videoId,
@@ -45,7 +45,7 @@ interface QuizState {
 }
 
 const QUIZ_SIZE = 20
-const FRANCHISE_LIMIT = 3
+const SERIES_LIMIT = 3
 
 const state = reactive<QuizState>({
   questions: [],
@@ -67,36 +67,36 @@ const usedGameIds = computed<Set<number>>(
   () => new Set(state.questions.slice(0, state.currentIndex).map((g) => g.id)),
 )
 
-// IDs of games belonging to franchises that have reached the 3-game limit in the current quiz
-const franchiseLimitedGameIds = computed<Set<number>>(() => {
-  const shownFranchiseCounts: Partial<Record<Franchise, number>> = {}
+// IDs of games belonging to series that have reached the 3-game limit in the current quiz
+const seriesLimitedGameIds = computed<Set<number>>(() => {
+  const shownSeriesCounts: Partial<Record<Series, number>> = {}
   for (const game of state.questions.slice(0, state.currentIndex)) {
-    if (game.franchise) {
-      shownFranchiseCounts[game.franchise] = (shownFranchiseCounts[game.franchise] ?? 0) + 1
+    if (game.series) {
+      shownSeriesCounts[game.series] = (shownSeriesCounts[game.series] ?? 0) + 1
     }
   }
-  const limitedFranchises = new Set<Franchise>(
-    (Object.entries(shownFranchiseCounts) as [Franchise, number][])
-      .filter(([, count]) => count >= FRANCHISE_LIMIT)
-      .map(([franchise]) => franchise),
+  const limitedSeries = new Set<Series>(
+    (Object.entries(shownSeriesCounts) as [Series, number][])
+      .filter(([, count]) => count >= SERIES_LIMIT)
+      .map(([series]) => series),
   )
-  if (limitedFranchises.size === 0) return new Set<number>()
+  if (limitedSeries.size === 0) return new Set<number>()
   return new Set(
-    games.filter((g) => g.franchise && limitedFranchises.has(g.franchise)).map((g) => g.id),
+    games.filter((g) => g.series && limitedSeries.has(g.series)).map((g) => g.id),
   )
 })
 
 function startQuiz() {
   const forceFirstGames = games.filter((g) => g.forceFirst)
   const shuffled = [...games].filter((g) => !g.forceFirst).sort(() => Math.random() - 0.5)
-  const franchiseCounts: Partial<Record<Franchise, number>> = {}
+  const seriesCounts: Partial<Record<Series, number>> = {}
   const selected: Game[] = []
   for (const game of [...forceFirstGames, ...shuffled]) {
     if (selected.length >= QUIZ_SIZE) break
-    if (game.franchise) {
-      const count = franchiseCounts[game.franchise] ?? 0
-      if (count >= FRANCHISE_LIMIT) continue
-      franchiseCounts[game.franchise] = count + 1
+    if (game.series) {
+      const count = seriesCounts[game.series] ?? 0
+      if (count >= SERIES_LIMIT) continue
+      seriesCounts[game.series] = count + 1
     }
     selected.push(resolveGame(game))
   }
@@ -132,5 +132,5 @@ function resetQuiz() {
 }
 
 export function useQuiz() {
-  return { state, isFinished, usedGameIds, franchiseLimitedGameIds, startQuiz, submitGuess, nextQuestion, resetQuiz }
+  return { state, isFinished, usedGameIds, seriesLimitedGameIds, startQuiz, submitGuess, nextQuestion, resetQuiz }
 }
