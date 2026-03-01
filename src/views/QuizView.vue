@@ -157,7 +157,7 @@ async function handleNextClick(event: MouseEvent) {
                 </span>
                 <span v-else>
                   ❌ <strong>Incorrect.</strong> The song was
-                  <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }})</template>.
+                  <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
                   <span v-if="state.answers[state.currentIndex]?.userGuess">
                     You guessed: <em>{{ state.answers[state.currentIndex]?.userGuess }}</em>.
                   </span>

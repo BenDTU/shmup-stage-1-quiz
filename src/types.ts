@@ -4,6 +4,7 @@ export enum Series {
   Gradius = 'Gradius',
   RType = 'R-Type',
   Raiden = 'Raiden',
+  Strikers1945 = 'Strikers 1945',
   SpaceInvaders = 'Space Invaders',
   Touhou = 'Touhou',
 }
