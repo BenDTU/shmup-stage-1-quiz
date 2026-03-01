@@ -153,7 +153,7 @@ async function handleNextClick(event: MouseEvent) {
                 :class="state.answers[state.currentIndex]?.isCorrect ? 'alert-success' : 'alert-danger'"
               >
                 <span v-if="state.answers[state.currentIndex]?.isCorrect">
-                  ✅ <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }})</template>.
+                  ✅ <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
                 </span>
                 <span v-else>
                   ❌ <strong>Incorrect.</strong> The song was
