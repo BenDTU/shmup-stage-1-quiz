@@ -27,4 +27,11 @@ const { isDark, toggleDark } = useDarkMode()
   line-height: 1;
   padding: 0.25rem 0.5rem;
 }
+
+@media (max-width: 575.98px) {
+  .dark-mode-toggle {
+    top: auto;
+    bottom: 1rem;
+  }
+}
 </style>
