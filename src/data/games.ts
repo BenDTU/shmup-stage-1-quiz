@@ -118,6 +118,10 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'INTERCEPTION - Noisy Town', videoId: 'z472pIce5CY' },
   },
   {
+    name: 'Mad Shark',
+    singleSongSource: { songName: 'Round 1, Round 2, Round 5', videoId: '4eTABytlJZY', startTime: 9, endTime: 140 },
+  },
+  {
     name: 'MUSHA',
     singleSongSource: { songName: 'Fullmetal Fighter', videoId: '0MIqgHu3tsg' },
   },
@@ -205,6 +209,10 @@ const gameEntries: GameEntry[] = [
   {
     name: 'RefleX',
     singleSongSource: { songName: 'An Unavoidable Choice', videoId: 'HmAJEvPLmVs' },
+  },
+  {
+    name: 'REZON',
+    singleSongSource: { songName: 'Stage 1 & 4', videoId: 'ZAKUutWAdDM', startTime: 2, endTime: 31 },
   },
   {
     name: 'Space Invaders (Game Boy Advance)',
