@@ -5,7 +5,9 @@ export type { SongSource, GameEntry, GameListEntry, Game } from '../types'
 
 // Update videoId and startTime values with the correct YouTube video IDs and
 // timestamps for each game's stage 1 theme.
-// Keep this array sorted alphabetically by name, with roman numerals treated as numbers (enforced by ESLint local/sorted-games rule).
+// Keep this array sorted alphabetically by name (enforced by ESLint local/sorted-games rule).
+// Use the optional sortName property to override the sort key if the alphabetical order of the
+// name alone would be misleading (e.g. sortName: 'Gradius 2' for 'Gradius II').
 // IDs are auto-assigned from the array position — just add entries with singleSongSource, multipleSongSource, or arrangedSongSource.
 // startTime (seconds) is optional; omit it to start from the beginning of the video.
 const gameEntries: GameEntry[] = [
@@ -30,9 +32,18 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'UL-stage1', videoId: 'yYF3x1hACIU' },
   },
   {
+    name: 'Cygni: All Guns Blazing',
+    singleSongSource: { songName: 'Battle Over the White Sands', videoId: 'a-9kcVAaXXQ' },
+  },
+  {
     name: 'Darius',
     franchise: Franchise.Darius,
     singleSongSource: { songName: 'CAPTAIN NEO', videoId: 'a_GP2FBiK2o' },
+  },
+  {
+    name: 'Darius Gaiden',
+    franchise: Franchise.Darius,
+    singleSongSource: { songName: 'VISIONNERZ ~HALLUCINATED PEOPLE~', videoId: 'kG30WhHCnN4' },
   },
   {
     name: 'DariusBurst',
@@ -89,6 +100,7 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'Gradius II',
+    sortName: 'Gradius 2',
     franchise: Franchise.Gradius,
     singleSongSource: { songName: 'Burning Heat', videoId: 'FLc1msji0_w' },
   },
@@ -96,6 +108,20 @@ const gameEntries: GameEntry[] = [
     name: 'Gradius III',
     franchise: Franchise.Gradius,
     singleSongSource: { songName: 'Sand Storm', videoId: 'NyQzfqNIKTI' },
+  },
+  {
+    name: 'Gradius IV',
+    franchise: Franchise.Gradius,
+    singleSongSource: { songName: 'Apollon', videoId: 'kGc9HIKnqB8' },
+  },
+  {
+    name: 'Gradius V',
+    franchise: Franchise.Gradius,
+    singleSongSource: { songName: 'Universe', videoId: 'KCDS-T2E_Lg' },
+  },
+  {
+    name: 'Gun Frontier',
+    singleSongSource: { songName: 'Gale in the Desert', videoId: 'JjsSvAsxTxY' },
   },
   {
     name: 'Guwange',
@@ -112,6 +138,22 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Ikaruga',
     singleSongSource: { songName: 'Ideal', videoId: 'fAn6XxsDDTI' },
+  },
+  {
+    name: 'Image Fight',
+    singleSongSource: { songName: 'Introduction', videoId: 'IiT-60Y3J70' },
+  },
+  {
+    name: 'Image Fight II: Operation Deep Striker',
+    singleSongSource: { songName: 'Front Line', videoId: '9cN-9MU5-4s' },
+  },
+  {
+    name: 'In the Hunt',
+    singleSongSource: { songName: 'THE SOUTH POLE', videoId: '9F8SiVzU1QI' },
+  },
+  {
+    name: 'In the Hunt (PlayStation)',
+    singleSongSource: { songName: 'Stage 1', videoId: '7fI0-TLbPkY' },
   },
   {
     name: 'Jamestown',
@@ -168,6 +210,7 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'R-Type II',
+    sortName: 'R-Type 2',
     franchise: Franchise.RType,
     arrangedSongSource: {
       songName: 'Counter Attack',
@@ -185,6 +228,7 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'R-Type III: The Third Lightning',
+    sortName: 'R-Type 3: The Third Lightning',
     franchise: Franchise.RType,
     singleSongSource: { songName: 'Catapult Dimension', videoId: 'EsLgLrM2CbY' },
   },
@@ -219,6 +263,7 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'Raiden II',
+    sortName: 'Raiden 2',
     franchise: Franchise.Raiden,
     singleSongSource: { songName: 'Repeated Tragedy', videoId: 'zDS4EMmETsE' },
   },
@@ -242,6 +287,18 @@ const gameEntries: GameEntry[] = [
     name: 'Raiden Fighters Jet',
     franchise: Franchise.Raiden,
     singleSongSource: { songName: 'Simulation Level 01 (Launch Base)', videoId: 'C4DFwgSpO00' },
+  },
+  {
+    name: 'RayCrisis',
+    singleSongSource: { songName: 'Lavande Bleu', videoId: 'bCBXUBBZVDU' },
+  },
+  {
+    name: 'RayForce',
+    singleSongSource: { songName: 'Penetration', videoId: '234tjx8yO1I' },
+  },
+  {
+    name: 'RayStorm',
+    singleSongSource: { songName: 'Geometric City', videoId: 'kP5huZQRAY4' },
   },
   {
     name: 'RefleX',
@@ -410,6 +467,10 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Tyrian',
     singleSongSource: { songName: 'Tyrian , the level', videoId: 'wNnTGbbDJfo' },
+  },
+  {
+    name: 'X-Multiply',
+    singleSongSource: { songName: 'Into the Human Body', videoId: 'MwwduquIWIo' },
   },
   {
     name: 'Zero Wing',
