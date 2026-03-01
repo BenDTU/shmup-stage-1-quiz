@@ -105,6 +105,7 @@ const restartSpinning = ref(false)
 
 function restartAudio() {
   sendCommand('seekTo', [props.startTime ?? 0, true])
+  sendCommand('unMute');
   sendCommand('playVideo')
   scheduleStop()
   // Retrigger the spin animation: remove then re-add the class via a tick
