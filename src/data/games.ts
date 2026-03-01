@@ -459,6 +459,7 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'Strikers 1945',
+    franchise: Franchise.Strikers1945,
     multipleSongSource: [
       { songName: 'Rising Sun', videoId: 'TDPkOiNPqQA' },
       { songName: 'Shadow of Reich', videoId: 'pCVV3uTgqrE' },
@@ -468,6 +469,7 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'Strikers 1945 II',
+    franchise: Franchise.Strikers1945,
     multipleSongSource: [
       { songName: "Devil's Tower", videoId: 'siwfJgcFYKI' },
       { songName: 'Far from Cloud City', videoId: 'qOuf82IRzH0' },
@@ -477,6 +479,7 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'Strikers 1945 III',
+    franchise: Franchise.Strikers1945,
     multipleSongSource: [
       { songName: 'Interval of a Huge Gorge', videoId: 'I1qn96QAQXA' },
       { songName: 'Sea of Battle', videoId: 'tvw-jInWc_o' },
@@ -486,6 +489,7 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'Strikers 1945 Plus',
+    franchise: Franchise.Strikers1945,
     multipleSongSource: [
       { songName: 'Sky Stage', videoId: 'Hwm6PLQ3X6s' },
       { songName: 'Sea Stage', videoId: 'skJr2TO7u3E' },
