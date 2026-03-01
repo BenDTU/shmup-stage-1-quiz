@@ -126,28 +126,44 @@ function onRestartAnimationEnd() {
          Clicking Play sends an unMute command via postMessage inside the
          gesture, which transfers user activation into the iframe and
          allows Safari (and all other browsers) to enable audio. -->
-    <div v-if="!audioUnlocked" class="audio-overlay audio-placeholder rounded-3 text-center">
+    <div
+      v-if="!audioUnlocked"
+      class="audio-overlay audio-placeholder rounded-3 text-center"
+    >
       <button
         class="btn btn-outline-light btn-lg"
         type="button"
         @click="startAudio"
       >
-        ▶ Play
+        Start!
       </button>
     </div>
     <!-- Spoiler overlay — shown while the answer is still hidden -->
-    <div v-else-if="hidden" class="audio-overlay audio-placeholder rounded-3 text-center">
-      <div class="bars mb-3" aria-hidden="true">
-        <span></span><span></span><span></span><span></span><span></span>
+    <div
+      v-else-if="hidden"
+      class="audio-overlay audio-placeholder rounded-3 text-center"
+    >
+      <div
+        class="bars mb-3"
+        aria-hidden="true"
+      >
+        <span /><span /><span /><span /><span />
       </div>
-      <p class="mb-0 fw-semibold fs-5">🎵 Now Playing…</p>
-      <p class="mb-2 text-muted small">Listen carefully and enter your guess below!</p>
+      <p class="mb-0 fw-semibold fs-5">
+        🎵 Now Playing…
+      </p>
+      <p class="mb-2 text-muted small">
+        Listen carefully and enter your guess below!
+      </p>
       <button
         class="btn btn-outline-light btn-sm"
         type="button"
         @click="restartAudio"
       >
-        <span :class="{ 'spin-once': restartSpinning }" @animationend="onRestartAnimationEnd">↺</span> Restart
+        <span
+          :class="{ 'spin-once': restartSpinning }"
+          @animationend="onRestartAnimationEnd"
+        >↺</span> Restart
       </button>
     </div>
     <!-- src is managed imperatively (onMounted + watcher + startAudio).
@@ -159,7 +175,7 @@ function onRestartAnimationEnd() {
       title="Stage 1 theme"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
-    ></iframe>
+    />
   </div>
 </template>
 

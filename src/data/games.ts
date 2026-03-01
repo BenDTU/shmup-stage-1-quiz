@@ -36,6 +36,10 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Battle Over the White Sands', videoId: 'a-9kcVAaXXQ' },
   },
   {
+    name: 'Daioh',
+    singleSongSource: { songName: 'Stage 1', videoId: 'vqi1eM9MNPw', startTime: 62, endTime: 213 },
+  },
+  {
     name: 'Darius',
     franchise: Franchise.Darius,
     singleSongSource: { songName: 'CAPTAIN NEO', videoId: 'a_GP2FBiK2o' },
@@ -72,7 +76,19 @@ const gameEntries: GameEntry[] = [
   {
     name: 'DoDonPachi DaiOuJou',
     franchise: Franchise.Dodonpachi,
-    singleSongSource: { songName: 'East Asia', videoId: 'muuApOJSP9E' },
+    arrangedSongSource: {
+      songName: 'East Asia',
+      arrangements: [
+        {
+          source: 'White Label',
+          videoId: 'muuApOJSP9E',
+        },
+        {
+          source: 'Black Label',
+          videoId: '4nzbL7kvhBk',
+        },
+      ]
+    }
   },
   {
     name: 'Dogyuun',
@@ -124,6 +140,10 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Gale in the Desert', videoId: 'JjsSvAsxTxY' },
   },
   {
+    name: 'Gunnail',
+    singleSongSource: { songName: 'Stage 1 & 2', videoId: 'hpzlZb-z7Kc', startTime: 97, endTime: 524 },
+  },
+  {
     name: 'Guwange',
     singleSongSource: { songName: 'Falling Cherry Blossoms', videoId: 'EWYuTxCV11U' },
   },
@@ -156,6 +176,10 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Stage 1', videoId: '7fI0-TLbPkY' },
   },
   {
+    name: 'Ironclad',
+    singleSongSource: { songName: 'Theme of Super Iron Brikinger', videoId: 'an9E8DuCAg8' },
+  },
+  {
     name: 'Jamestown',
     singleSongSource: { songName: 'War Upon the East Frontier', videoId: 'zhgBx6vSApM' },
   },
@@ -177,7 +201,31 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'Mushihimesama',
-    singleSongSource: { songName: 'To Shinju Forest', videoId: 'F9D-NmXX_h4' },
+    arrangedSongSource: {
+      songName: 'To Shinju Forest',
+      arrangements: [
+        {
+          source: '1.0',
+          videoId: 'F9D-NmXX_h4',
+        },
+        {
+          source: '1.5',
+          videoId: '-NQDwvJqu6w',
+        },
+        {
+          source: 'Arrange',
+          videoId: 'y9n4Z_baho0',
+        }
+      ]
+    }
+  },
+  {
+    name: 'Mushihimesama Futari',
+    singleSongSource: { songName: 'Setting Off Together', videoId: '2qoyJbieTOc' },
+  },
+  {
+    name: 'Plus Alpha',
+    singleSongSource: { songName: 'Wind Dancer', videoId: 'SdHAikpTE2w', startTime: 120, endTime: 207 },
   },
   {
     name: 'Progear no Arashi',
@@ -195,7 +243,7 @@ const gameEntries: GameEntry[] = [
     name: 'R-Type',
     franchise: Franchise.RType,
     arrangedSongSource: {
-      songName: 'START ~ BATTLE THEME (Start ~ Stage1)',
+      songName: 'Battle Theme',
       arrangements: [
         {
           source: 'Arcade',
@@ -204,6 +252,10 @@ const gameEntries: GameEntry[] = [
         {
           source: 'Game Boy',
           videoId: 'co0nkC6tKrI',
+        },
+        {
+          source: 'Dimensions',
+          videoId: 'q5CBa69BhLo',
         }
       ]
     },
@@ -222,6 +274,10 @@ const gameEntries: GameEntry[] = [
         {
           source: 'Game Boy',
           videoId: 'hIC-xECNR2c',
+        },
+        {
+          source: 'Dimensions',
+          videoId: 'KtzwUQgMuZ8',
         }
       ]
     }
@@ -268,6 +324,48 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Repeated Tragedy', videoId: 'zDS4EMmETsE' },
   },
   {
+    name: 'Raiden III',
+    sortName: 'Raiden 3',
+    franchise: Franchise.Raiden,
+    arrangedSongSource: {
+      songName: 'Lightning Strikes',
+      arrangements: [
+        {
+          source: 'Original',
+          videoId: 'eZ3GNGBZ3Z4',
+        },
+        {
+          source: 'Raiden III x MIKADO MANIAX',
+          videoId: 'uk0J0hEHJmU',
+        },
+      ]
+    }
+  },
+  {
+    name: 'Raiden IV',
+    sortName: 'Raiden 4',
+    franchise: Franchise.Raiden,
+    arrangedSongSource: {
+      songName: 'A stormy front',
+      arrangements: [
+        {
+          source: 'Original',
+          videoId: 'Yp1GUIUWyK8',
+        },
+        {
+          source: 'Raiden IV x MiKADO Remix',
+          videoId: 'lI3Yl2Hygww',
+        },
+      ]
+    }
+  },
+  {
+    name: 'Raiden V',
+    sortName: 'Raiden 5',
+    franchise: Franchise.Raiden,
+    singleSongSource: { songName: 'Unknown Pollution', videoId: 'PX3vEQ-KQvs' },
+  },
+  {
     name: 'Raiden Fighters',
     franchise: Franchise.Raiden,
     multipleSongSource: [
@@ -309,6 +407,15 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Stage 1 & 4', videoId: 'ZAKUutWAdDM', startTime: 2, endTime: 31 },
   },
   {
+    name: 'Shienryu',
+    singleSongSource: { songName: 'Stage 1', videoId: '4tk9RUiRplw' },
+  },
+  {
+    name: 'Space Invaders (1999)',
+    franchise: Franchise.SpaceInvaders,
+    singleSongSource: { songName: 'Pluto', videoId: 'ufKFko1q5XM' },
+  },
+  {
     name: 'Space Invaders (Game Boy Advance)',
     franchise: Franchise.SpaceInvaders,
     singleSongSource: { songName: 'Track 1', videoId: 'XUXYxZjt2VI' },
@@ -321,12 +428,29 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Space Invaders Extreme',
     franchise: Franchise.SpaceInvaders,
-    singleSongSource: { songName: 'invAde yOu', videoId: 'qpZdqEgRNYA' },
+    arrangedSongSource: {
+      songName: 'invAde yOu',
+      arrangements: [
+        {
+          source: 'DS',
+          videoId: 'qpZdqEgRNYA',
+        },
+        {
+          source: 'Steam',
+          videoId: 'hY93BSMTU4A',
+        },
+      ]
+    }
   },
   {
     name: 'Space Invaders Extreme 2',
     franchise: Franchise.SpaceInvaders,
     singleSongSource: { songName: 'Invader Disco', videoId: 'hAOBf-JY1kU' },
+  },
+  {
+    name: 'Space Invaders Extreme HD',
+    franchise: Franchise.SpaceInvaders,
+    singleSongSource: { songName: 'Digging My Scene', videoId: 'HVI6UPyqPuk' },
   },
   {
     name: 'Space Invaders Infinity Gene',
@@ -349,6 +473,14 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Super Spacefortress Macross II',
     singleSongSource: { songName: 'SCOOPER', videoId: 'wnlpgkfsor0' }, // NOTE: Medium and Expert course themes don't seem to be on Youtube
+  },
+  {
+    name: 'Thunder Dragon',
+    singleSongSource: { songName: 'Wild Thunder', videoId: 'W6GrFBQUVKE', startTime: 72, endTime: 538 },
+  },
+  {
+    name: 'Thunder Dragon II',
+    singleSongSource: { songName: 'Fly to Live I', videoId: 'Gtz9ZfaG2m8' },
   },
   {
     name: 'Thunder Force IV',
@@ -405,26 +537,17 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Touhou 15: Legacy of Lunatic Kingdom',
     franchise: Franchise.Touhou,
-    singleSongSource: {
-      songName: 'Unforgettable, the Nostalgic Greenery',
-      videoId: 'ucuIXF4YwNY',
-    },
+    singleSongSource: { songName: 'Unforgettable, the Nostalgic Greenery', videoId: 'ucuIXF4YwNY' },
   },
   {
     name: 'Touhou 16: Hidden Star in Four Seasons',
     franchise: Franchise.Touhou,
-    singleSongSource: {
-      songName: 'A Star of Hope Rises in the Blue Sky',
-      videoId: 'PVva0VzDAR8',
-    },
+    singleSongSource: { songName: 'A Star of Hope Rises in the Blue Sky', videoId: 'PVva0VzDAR8' },
   },
   {
     name: 'Touhou 17: Wily Beast and Weakest Creature',
     franchise: Franchise.Touhou,
-    singleSongSource: {
-      songName: 'The Lamentations Known Only by Jizo',
-      videoId: 'uJ6VscWKMzA',
-    },
+    singleSongSource: { songName: 'The Lamentations Known Only by Jizo', videoId: 'uJ6VscWKMzA' },
   },
   {
     name: 'Touhou 18: Unconnected Marketeers',
@@ -434,10 +557,7 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Touhou 19: Unfinished Dream of All Living Ghost',
     franchise: Franchise.Touhou,
-    singleSongSource: {
-      songName: 'The World is Made in an Adorable Way',
-      videoId: 'RpvCTe2FN1E',
-    },
+    singleSongSource: { songName: 'The World is Made in an Adorable Way', videoId: 'RpvCTe2FN1E' },
   },
   {
     name: 'Touhou 20: Fossilized Wonders',
@@ -447,7 +567,7 @@ const gameEntries: GameEntry[] = [
   {
     name: 'Truxton',
     arrangedSongSource: {
-      songName: 'Stage 1',
+      songName: 'Brave Man, Far Away',
       arrangements: [
         {
           source: 'Arcade',
@@ -465,8 +585,20 @@ const gameEntries: GameEntry[] = [
     }
   },
   {
+    name: 'Truxton II',
+    singleSongSource: { songName: 'Live in Future', videoId: 'xgxFHJZrAfc' },
+  },
+  {
+    name: 'Turbo Force',
+    singleSongSource: { songName: 'Stage 1 & 6', videoId: 'QB4vsrMuWNM' },
+  },
+  {
     name: 'Tyrian',
     singleSongSource: { songName: 'Tyrian , the level', videoId: 'wNnTGbbDJfo' },
+  },
+  {
+    name: 'Viper Phase 1',
+    singleSongSource: { songName: 'Go Straight Ahead', videoId: 'GUILDdRfmxw' },
   },
   {
     name: 'X-Multiply',

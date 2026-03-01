@@ -26,11 +26,16 @@ function playAgain() {
     <div class="row justify-content-center">
       <div class="col-lg-7">
         <div class="text-center mb-5">
-          <h1 class="display-5 fw-bold">Quiz Complete! 🏆</h1>
+          <h1 class="display-5 fw-bold">
+            Quiz Complete! 🏆
+          </h1>
           <p class="lead">
             You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
           </p>
-          <div class="progress mb-3 mx-auto" style="height: 20px; max-width: 360px">
+          <div
+            class="progress mb-3 mx-auto"
+            style="height: 20px; max-width: 360px"
+          >
             <div
               class="progress-bar"
               :class="score / total >= 0.7 ? 'bg-success' : score / total >= 0.4 ? 'bg-warning' : 'bg-danger'"
@@ -49,7 +54,9 @@ function playAgain() {
         </div>
 
         <!-- Answer breakdown -->
-        <h5 class="mb-3">All Answers</h5>
+        <h5 class="mb-3">
+          All Answers
+        </h5>
         <div class="list-group mb-5">
           <div
             v-for="(answer, index) in state.answers"
@@ -61,9 +68,18 @@ function playAgain() {
                 <span class="fw-semibold me-1 text-nowrap">#{{ index + 1 }}</span>
                 <span class="me-2 text-nowrap">{{ answer.isCorrect ? '✅' : '❌' }}</span>
                 <div>
-                  <div class="fw-semibold">{{ answer.game.name }}</div>
-                  <div class="text-muted small">{{ answer.game.songName }}<template v-if="answer.game.source"> ({{ answer.game.source }})</template></div>
-                  <div v-if="!answer.isCorrect" class="text-muted small">
+                  <div class="fw-semibold">
+                    {{ answer.game.name }}
+                  </div>
+                  <div class="text-muted small">
+                    {{ answer.game.songName }}<template v-if="answer.game.source">
+                      ({{ answer.game.source }} version)
+                    </template>
+                  </div>
+                  <div
+                    v-if="!answer.isCorrect"
+                    class="text-muted small"
+                  >
                     You guessed: <em>{{ answer.userGuess || '(no answer)' }}</em>
                   </div>
                 </div>
@@ -79,7 +95,12 @@ function playAgain() {
         </div>
 
         <div class="text-center">
-          <button class="btn btn-primary btn-lg px-5" @click="playAgain">Play Again</button>
+          <button
+            class="btn btn-primary btn-lg px-5"
+            @click="playAgain"
+          >
+            Play Again
+          </button>
         </div>
       </div>
     </div>
