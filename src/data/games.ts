@@ -292,11 +292,11 @@ const gameEntries: GameEntry[] = [
   },
   {
     name: 'RayForce',
-    singleSongSource: { songName: 'Geometric City', videoId: 'kP5huZQRAY4' },
+    singleSongSource: { songName: 'Penetration', videoId: '234tjx8yO1I' },
   },
   {
     name: 'RayStorm',
-    singleSongSource: { songName: 'Lethal Solitude', videoId: '9n7s8l3Xo5E' },
+    singleSongSource: { songName: 'Geometric City', videoId: 'kP5huZQRAY4' },
   },
   {
     name: 'RefleX',
