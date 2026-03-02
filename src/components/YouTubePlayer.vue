@@ -128,8 +128,7 @@ function onRestartAnimationEnd() {
          allows Safari (and all other browsers) to enable audio. -->
     <div
       v-if="!audioUnlocked"
-      class="absolute inset-0 audio-placeholder rounded-xl text-center flex flex-col items-center justify-center"
-      style="z-index: 1"
+      class="absolute inset-0 z-[1] audio-placeholder rounded-xl text-center flex flex-col items-center justify-center"
     >
       <button
         class="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-3 px-6 rounded-lg text-lg transition"
@@ -142,8 +141,7 @@ function onRestartAnimationEnd() {
     <!-- Spoiler overlay — shown while the answer is still hidden -->
     <div
       v-else-if="hidden"
-      class="absolute inset-0 audio-placeholder rounded-xl text-center flex flex-col items-center justify-center"
-      style="z-index: 1"
+      class="absolute inset-0 z-[1] audio-placeholder rounded-xl text-center flex flex-col items-center justify-center"
     >
       <div
         class="bars mb-3"
@@ -183,8 +181,6 @@ function onRestartAnimationEnd() {
 </template>
 
 <style scoped>
-/* The overlays sit on top of the iframe via absolute inset-0 + z-index */
-
 .audio-placeholder {
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   color: #e0e0e0;
