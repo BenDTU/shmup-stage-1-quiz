@@ -6,7 +6,7 @@ const { isDark, toggleDark } = useDarkMode()
 </script>
 
 <template>
-  <nav class="navbar sticky-top border-bottom py-2">
+  <nav class="navbar sticky-top border-bottom py-2 bg-body">
     <div class="container">
       <button
         class="btn btn-sm ms-auto"
