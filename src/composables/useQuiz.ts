@@ -67,7 +67,7 @@ const usedGameIds = computed<Set<number>>(
   () => new Set(state.questions.slice(0, state.currentIndex).map((g) => g.id)),
 )
 
-// IDs of games belonging to series that have reached the 3-game limit in the current quiz
+// IDs of games belonging to series that have reached the per-series limit (SERIES_LIMIT) in the current quiz
 const seriesLimitedGameIds = computed<Set<number>>(() => {
   const shownSeriesCounts: Partial<Record<Series, number>> = {}
   for (const game of state.questions.slice(0, state.currentIndex)) {
