@@ -14,7 +14,7 @@ const { isDark, toggleDark } = useDarkMode()
         :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
         @click="toggleDark"
       >
-        {{ isDark ? '☀️' : '🌙' }}
+        <i :class="isDark ? 'bi bi-sun' : 'bi bi-moon'"></i>
       </button>
     </div>
   </nav>
