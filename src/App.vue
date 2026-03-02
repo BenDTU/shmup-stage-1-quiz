@@ -9,7 +9,7 @@ const { isDark, toggleDark } = useDarkMode()
   <nav class="navbar sticky-top border-bottom py-2 bg-body">
     <div class="container">
       <button
-        class="btn btn-sm ms-auto"
+        class="btn btn-outline-secondary btn-sm ms-auto"
         :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
         :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
         @click="toggleDark"
