@@ -22,87 +22,68 @@ function playAgain() {
 </script>
 
 <template>
-  <main class="container py-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-7">
-        <div class="text-center mb-5">
-          <h1 class="display-5 fw-bold">
-            Quiz Complete! 🏆
-          </h1>
-          <p class="lead">
-            You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
-          </p>
-          <div
-            class="progress mb-3 mx-auto"
-            style="height: 20px; max-width: 360px"
-          >
-            <div
-              class="progress-bar"
-              :class="score / total >= 0.7 ? 'bg-success' : score / total >= 0.4 ? 'bg-warning' : 'bg-danger'"
-              role="progressbar"
-              :style="{ width: `${(score / total) * 100}%` }"
-            >
-              {{ Math.round((score / total) * 100) }}%
-            </div>
-          </div>
-          <p class="text-muted">
-            <span v-if="score === total">Perfect score! You're a true shmup fan. 🎖️</span>
-            <span v-else-if="score / total >= 0.7">Great job! You clearly know your shmups.</span>
-            <span v-else-if="score / total >= 0.4">Not bad! Keep practicing.</span>
-            <span v-else>Time to play more shmups! 😄</span>
-          </p>
-        </div>
-
-        <!-- Answer breakdown -->
-        <h5 class="mb-3">
-          All Answers
-        </h5>
-        <div class="list-group mb-5">
-          <div
-            v-for="(answer, index) in state.answers"
-            :key="answer.game.id"
-            class="list-group-item"
-          >
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="d-flex">
-                <span class="fw-semibold me-1 text-nowrap">#{{ index + 1 }}</span>
-                <span class="me-2 text-nowrap">{{ answer.isCorrect ? '✅' : '❌' }}</span>
-                <div>
-                  <div class="fw-semibold">
-                    {{ answer.game.name }}
-                  </div>
-                  <div class="text-muted small">
-                    {{ answer.game.songName }}<template v-if="answer.game.source">
-                      ({{ answer.game.source }} version)
-                    </template>
-                  </div>
-                  <div
-                    v-if="!answer.isCorrect"
-                    class="text-muted small"
-                  >
-                    You guessed: <em>{{ answer.userGuess || '(no answer)' }}</em>
-                  </div>
-                </div>
-              </div>
-              <a
-                :href="`https://www.youtube.com/watch?v=${encodeURIComponent(answer.game.videoId)}`"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="ms-3 text-nowrap small"
-              >▶ YouTube</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="text-center">
-          <button
-            class="btn btn-primary btn-lg px-5"
-            @click="playAgain"
-          >
-            Play Again
-          </button>
-        </div>
+  <main class="container mx-auto max-w-xl py-10 px-4">
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-extrabold mb-2">
+        Quiz Complete! 🏆
+      </h1>
+      <p class="text-lg">
+        You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
+      </p>
+      <div class="flex justify-center my-4">
+        <progress
+          class="progress w-80 h-5"
+          :class="score / total >= 0.7 ? 'progress-success' : score / total >= 0.4 ? 'progress-warning' : 'progress-error'"
+          :value="score"
+          :max="total"
+        />
       </div>
+      <p class="text-sm opacity-60">
+        <span v-if="score === total">Perfect score! You're a true shmup fan. 🎖️</span>
+        <span v-else-if="score / total >= 0.7">Great job! You clearly know your shmups.</span>
+        <span v-else-if="score / total >= 0.4">Not bad! Keep practicing.</span>
+        <span v-else>Time to play more shmups! 😄</span>
+      </p>
+    </div>
+
+    <!-- Answer breakdown -->
+    <h2 class="text-xl font-bold mb-3">All Answers</h2>
+    <ul class="list-none mb-8 space-y-2">
+      <li
+        v-for="(answer, index) in state.answers"
+        :key="answer.game.id"
+        class="card bg-base-200"
+      >
+        <div class="card-body py-3 px-4 flex-row items-center justify-between gap-2">
+          <div class="flex items-start gap-2">
+            <span class="font-semibold whitespace-nowrap">#{{ index + 1 }}</span>
+            <span class="whitespace-nowrap">{{ answer.isCorrect ? '✅' : '❌' }}</span>
+            <div>
+              <div class="font-semibold">{{ answer.game.name }}</div>
+              <div class="text-sm opacity-60">
+                {{ answer.game.songName }}<template v-if="answer.game.source">
+                  ({{ answer.game.source }} version)
+                </template>
+              </div>
+              <div v-if="!answer.isCorrect" class="text-sm opacity-60">
+                You guessed: <em>{{ answer.userGuess || '(no answer)' }}</em>
+              </div>
+            </div>
+          </div>
+          <a
+            :href="`https://www.youtube.com/watch?v=${encodeURIComponent(answer.game.videoId)}`"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-xs btn-outline whitespace-nowrap"
+          >▶ YouTube</a>
+        </div>
+      </li>
+    </ul>
+
+    <div class="text-center">
+      <button class="btn btn-primary btn-lg px-10" @click="playAgain">
+        Play Again
+      </button>
     </div>
   </main>
 </template>

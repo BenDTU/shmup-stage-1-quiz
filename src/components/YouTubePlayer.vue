@@ -119,7 +119,7 @@ function onRestartAnimationEnd() {
 </script>
 
 <template>
-  <div class="ratio ratio-16x9">
+  <div class="aspect-video relative">
     <!-- One-time Start overlay — only shown before the user's first
          audio interaction. The iframe behind it is already playing the
          video muted (muted autoplay is permitted by every browser).
@@ -128,10 +128,10 @@ function onRestartAnimationEnd() {
          allows Safari (and all other browsers) to enable audio. -->
     <div
       v-if="!audioUnlocked"
-      class="audio-overlay audio-placeholder rounded-3 text-center"
+      class="audio-overlay audio-placeholder rounded-lg text-center"
     >
       <button
-        class="btn btn-outline-light btn-lg"
+        class="btn btn-outline btn-lg"
         type="button"
         @click="startAudio"
       >
@@ -141,7 +141,7 @@ function onRestartAnimationEnd() {
     <!-- Spoiler overlay — shown while the answer is still hidden -->
     <div
       v-else-if="hidden"
-      class="audio-overlay audio-placeholder rounded-3 text-center"
+      class="audio-overlay audio-placeholder rounded-lg text-center"
     >
       <div
         class="bars mb-3"
@@ -149,14 +149,14 @@ function onRestartAnimationEnd() {
       >
         <span /><span /><span /><span /><span />
       </div>
-      <p class="mb-0 fw-semibold fs-5">
+      <p class="mb-0 font-semibold text-xl">
         🎵 Now Playing…
       </p>
-      <p class="mb-2 text-muted small">
+      <p class="mb-2 opacity-60 text-sm">
         Listen carefully and enter your guess below!
       </p>
       <button
-        class="btn btn-outline-light btn-sm"
+        class="btn btn-outline btn-sm"
         type="button"
         @click="restartAudio"
       >
@@ -173,6 +173,7 @@ function onRestartAnimationEnd() {
       ref="iframeRef"
       src=""
       title="Stage 1 theme"
+      class="w-full h-full"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
     />

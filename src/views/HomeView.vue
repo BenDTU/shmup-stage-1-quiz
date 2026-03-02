@@ -15,24 +15,22 @@ function begin() {
 </script>
 
 <template>
-  <main class="container py-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-7 text-center">
-        <h1 class="display-4 fw-bold mb-3">🎮 Shmup Stage 1 Quiz</h1>
-        <p class="lead mb-4">
-          Think you know your shmup stage&nbsp;1 themes? Listen to the music and guess which game
-          it's from! A random set of <strong>20 tracks</strong> will be selected for you.
-        </p>
-        <ul class="list-group list-group-flush text-start mb-5 mx-auto" style="max-width: 440px">
-          <li class="list-group-item">🎵 Each track plays automatically — listen carefully!</li>
-          <li class="list-group-item">🔍 Use the autocomplete box to find your answer.</li>
-          <li class="list-group-item">☝️ You only get <strong>one guess</strong> per song.</li>
-          <li class="list-group-item">🚫 Games already shown are disabled in later questions.</li>
-          <li class="list-group-item">📊 See your full score and all answers at the end.</li>
-          <li class="list-group-item">🎮 There are currently <strong>{{ totalGames }}</strong> shmups loaded in!</li>
-        </ul>
-        <button class="btn btn-primary btn-lg px-5" @click="begin">Start Quiz</button>
-      </div>
+  <main class="min-h-screen flex items-center justify-center p-6">
+    <div class="max-w-xl w-full text-center">
+      <h1 class="text-5xl font-extrabold mb-4">🎮 Shmup Stage 1 Quiz</h1>
+      <p class="text-lg mb-6">
+        Think you know your shmup stage&nbsp;1 themes? Listen to the music and guess which game
+        it's from! A random set of <strong>20 tracks</strong> will be selected for you.
+      </p>
+      <ul class="menu bg-base-200 rounded-box text-left mb-8 mx-auto w-full max-w-sm">
+        <li><span>🎵 Each track plays automatically — listen carefully!</span></li>
+        <li><span>🔍 Use the autocomplete box to find your answer.</span></li>
+        <li><span>☝️ You only get <strong>one guess</strong> per song.</span></li>
+        <li><span>🚫 Games already shown are disabled in later questions.</span></li>
+        <li><span>📊 See your full score and all answers at the end.</span></li>
+        <li><span>🎮 There are currently <strong>{{ totalGames }}</strong> shmups loaded in!</span></li>
+      </ul>
+      <button class="btn btn-primary btn-lg px-10" @click="begin">Start Quiz</button>
     </div>
   </main>
 </template>
