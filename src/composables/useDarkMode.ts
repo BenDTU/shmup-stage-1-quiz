@@ -1,4 +1,4 @@
-import { ref, watchEffect } from 'vue'
+import { readonly, ref, watchEffect } from 'vue'
 
 const STORAGE_KEY = 'shmup-quiz-dark-mode'
 
@@ -20,5 +20,5 @@ export function useDarkMode() {
     localStorage.setItem(STORAGE_KEY, String(isDark.value))
   }
 
-  return { isDark, toggleDark }
+  return { isDark: readonly(isDark), toggleDark }
 }
