@@ -119,7 +119,7 @@ function onRestartAnimationEnd() {
 </script>
 
 <template>
-  <div class="ratio ratio-16x9">
+  <div class="relative w-full aspect-video">
     <!-- One-time Start overlay — only shown before the user's first
          audio interaction. The iframe behind it is already playing the
          video muted (muted autoplay is permitted by every browser).
@@ -128,10 +128,11 @@ function onRestartAnimationEnd() {
          allows Safari (and all other browsers) to enable audio. -->
     <div
       v-if="!audioUnlocked"
-      class="audio-overlay audio-placeholder rounded-3 text-center"
+      class="absolute inset-0 audio-placeholder rounded-xl text-center flex flex-col items-center justify-center"
+      style="z-index: 1"
     >
       <button
-        class="btn btn-outline-light btn-lg"
+        class="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-3 px-6 rounded-lg text-lg transition"
         type="button"
         @click="startAudio"
       >
@@ -141,7 +142,8 @@ function onRestartAnimationEnd() {
     <!-- Spoiler overlay — shown while the answer is still hidden -->
     <div
       v-else-if="hidden"
-      class="audio-overlay audio-placeholder rounded-3 text-center"
+      class="absolute inset-0 audio-placeholder rounded-xl text-center flex flex-col items-center justify-center"
+      style="z-index: 1"
     >
       <div
         class="bars mb-3"
@@ -149,14 +151,14 @@ function onRestartAnimationEnd() {
       >
         <span /><span /><span /><span /><span />
       </div>
-      <p class="mb-0 fw-semibold fs-5">
+      <p class="mb-0 font-semibold text-xl">
         🎵 Now Playing…
       </p>
-      <p class="mb-2 text-muted small">
+      <p class="mb-2 text-gray-400 text-sm">
         Listen carefully and enter your guess below!
       </p>
       <button
-        class="btn btn-outline-light btn-sm"
+        class="border border-white text-white hover:bg-white hover:text-gray-900 py-1 px-3 rounded text-sm transition"
         type="button"
         @click="restartAudio"
       >
@@ -173,6 +175,7 @@ function onRestartAnimationEnd() {
       ref="iframeRef"
       src=""
       title="Stage 1 theme"
+      class="absolute inset-0 w-full h-full"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
     />
@@ -180,11 +183,7 @@ function onRestartAnimationEnd() {
 </template>
 
 <style scoped>
-/* The overlay sits on top of the iframe, covering the video while
-   keeping the iframe fully active so autoplay=1 is honoured. */
-.audio-overlay {
-  z-index: 1;
-}
+/* The overlays sit on top of the iframe via absolute inset-0 + z-index */
 
 .audio-placeholder {
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);

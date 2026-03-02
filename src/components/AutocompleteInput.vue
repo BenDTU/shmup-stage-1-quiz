@@ -114,11 +114,11 @@ function onKeydown(event: KeyboardEvent) {
 </script>
 
 <template>
-  <div class="position-relative">
+  <div class="relative">
     <input
       ref="inputRef"
       type="text"
-      class="form-control"
+      class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
       placeholder="Type to search for a game…"
       :value="modelValue"
       :disabled="disabled"
@@ -135,33 +135,40 @@ function onKeydown(event: KeyboardEvent) {
       @focus="onFocus"
       @blur="onBlur"
       @keydown="onKeydown"
-    />
+    >
     <ul
       v-if="isOpen && filteredGames.length > 0"
       id="autocomplete-listbox"
       role="listbox"
       tabindex="-1"
-      class="list-group position-absolute w-100 autocomplete-dropdown shadow"
+      class="absolute w-full bg-white border border-gray-200 rounded-md shadow-lg z-[1000] max-h-72 overflow-y-auto"
+      style="top: 100%"
     >
       <li
         v-for="(game, index) in filteredGames"
         :id="`autocomplete-option-${game.id}`"
         :key="game.id"
         role="option"
-        class="list-group-item list-group-item-action"
+        class="px-4 py-2 cursor-pointer hover:bg-gray-100"
         :class="{
-          disabled: disabledGameIds.has(game.id) || franchiseLimitedGameIds?.has(game.id),
-          active: index === highlightedIndex && !disabledGameIds.has(game.id) && !franchiseLimitedGameIds?.has(game.id),
+          'opacity-50 cursor-not-allowed pointer-events-none': disabledGameIds.has(game.id) || franchiseLimitedGameIds?.has(game.id),
+          'bg-blue-100': index === highlightedIndex && !disabledGameIds.has(game.id) && !franchiseLimitedGameIds?.has(game.id),
         }"
         :aria-selected="index === highlightedIndex && !disabledGameIds.has(game.id) && !franchiseLimitedGameIds?.has(game.id)"
         :aria-disabled="disabledGameIds.has(game.id) || franchiseLimitedGameIds?.has(game.id) || undefined"
         @mousedown.prevent="selectGame(game)"
       >
         {{ game.name }}
-        <span v-if="disabledGameIds.has(game.id)" class="ms-2 badge text-bg-secondary">
+        <span
+          v-if="disabledGameIds.has(game.id)"
+          class="ml-2 text-xs bg-gray-200 text-gray-600 rounded px-1 py-0.5"
+        >
           Already played
         </span>
-        <span v-else-if="franchiseLimitedGameIds?.has(game.id)" class="ms-2 badge text-bg-secondary">
+        <span
+          v-else-if="franchiseLimitedGameIds?.has(game.id)"
+          class="ml-2 text-xs bg-gray-200 text-gray-600 rounded px-1 py-0.5"
+        >
           Franchise limit reached
         </span>
       </li>
@@ -170,16 +177,4 @@ function onKeydown(event: KeyboardEvent) {
 </template>
 
 <style scoped>
-.autocomplete-dropdown {
-  top: 100%;
-  z-index: 1000;
-  max-height: 280px;
-  overflow-y: auto;
-  background: white;
-}
-
-.list-group-item.disabled {
-  pointer-events: none;
-  opacity: 0.5;
-}
 </style>
