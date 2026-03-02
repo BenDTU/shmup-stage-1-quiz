@@ -458,6 +458,22 @@ const gameEntries: GameEntry[] = [
     singleSongSource: { songName: 'Selection (Genetic)', videoId: 'N3EJltfL7ok' },
   },
   {
+    name: 'Strike Gunner S.T.G.',
+    arrangedSongSource: {
+      songName: 'Stage 1',
+      arrangements: [
+        {
+          source: 'Arcade',
+          videoId: 'Zi0fezKPdH0',
+        },
+        {
+          source: 'Super Nintendo',
+          videoId: 'g3L79GW6T7s',
+        },
+      ]
+    }
+  },
+  {
     name: 'Strikers 1945',
     series: Series.Strikers1945,
     multipleSongSource: [
