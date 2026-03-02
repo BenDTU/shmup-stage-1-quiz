@@ -12,12 +12,12 @@ const isDark = ref(getInitialDark())
 
 watchEffect(() => {
   document.documentElement.setAttribute('data-bs-theme', isDark.value ? 'dark' : 'light')
-  localStorage.setItem(STORAGE_KEY, String(isDark.value))
 })
 
 export function useDarkMode() {
   function toggleDark() {
     isDark.value = !isDark.value
+    localStorage.setItem(STORAGE_KEY, String(isDark.value))
   }
 
   return { isDark, toggleDark }
