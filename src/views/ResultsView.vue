@@ -22,63 +22,59 @@ function playAgain() {
 </script>
 
 <template>
-  <main class="container py-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-7">
-        <div class="text-center mb-5">
-          <h1 class="display-5 fw-bold">
+  <main class="container mx-auto px-4 py-10">
+    <div class="flex justify-center">
+      <div class="w-full max-w-lg">
+        <div class="text-center mb-8">
+          <h1 class="text-4xl font-bold mb-3">
             Quiz Complete! 🏆
           </h1>
-          <p class="lead">
+          <p class="text-lg mb-4">
             You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
           </p>
-          <div
-            class="progress mb-3 mx-auto"
-            style="height: 20px; max-width: 360px"
-          >
-            <div
-              class="progress-bar"
-              :class="score / total >= 0.7 ? 'bg-success' : score / total >= 0.4 ? 'bg-warning' : 'bg-danger'"
-              role="progressbar"
-              :style="{ width: `${(score / total) * 100}%` }"
-            >
-              {{ Math.round((score / total) * 100) }}%
-            </div>
-          </div>
-          <p class="text-muted">
+          <progress
+            class="progress w-full max-w-xs mx-auto mb-3"
+            :class="score / total >= 0.7 ? 'progress-success' : score / total >= 0.4 ? 'progress-warning' : 'progress-error'"
+            :value="score"
+            :max="total"
+          />
+          <p class="text-sm opacity-60 mb-1">
+            {{ Math.round((score / total) * 100) }}%
+          </p>
+          <p class="opacity-70">
             <span v-if="score === total">Perfect score! You're a true shmup fan. 🎖️</span>
             <span v-else-if="score / total >= 0.7">Great job! You clearly know your shmups.</span>
             <span v-else-if="score / total >= 0.4">Not bad! Keep practicing.</span>
-            <span v-else>Time to play more shmups! 😄</span>
+            <span v-else>Time to play more shmups! ��</span>
           </p>
         </div>
 
         <!-- Answer breakdown -->
-        <h5 class="mb-3">
+        <h2 class="text-lg font-semibold mb-3">
           All Answers
-        </h5>
-        <div class="list-group mb-5">
+        </h2>
+        <div class="join join-vertical w-full mb-8">
           <div
             v-for="(answer, index) in state.answers"
             :key="answer.game.id"
-            class="list-group-item"
+            class="join-item border border-base-300 px-4 py-3"
           >
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="d-flex">
-                <span class="fw-semibold me-1 text-nowrap">#{{ index + 1 }}</span>
-                <span class="me-2 text-nowrap">{{ answer.isCorrect ? '✅' : '❌' }}</span>
+            <div class="flex justify-between items-center">
+              <div class="flex items-start gap-2">
+                <span class="font-semibold text-nowrap">#{{ index + 1 }}</span>
+                <span class="text-nowrap">{{ answer.isCorrect ? '✅' : '❌' }}</span>
                 <div>
-                  <div class="fw-semibold">
+                  <div class="font-semibold">
                     {{ answer.game.name }}
                   </div>
-                  <div class="text-muted small">
+                  <div class="text-sm opacity-60">
                     {{ answer.game.songName }}<template v-if="answer.game.source">
                       ({{ answer.game.source }} version)
                     </template>
                   </div>
                   <div
                     v-if="!answer.isCorrect"
-                    class="text-muted small"
+                    class="text-sm opacity-60"
                   >
                     You guessed: <em>{{ answer.userGuess || '(no answer)' }}</em>
                   </div>
@@ -88,7 +84,7 @@ function playAgain() {
                 :href="`https://www.youtube.com/watch?v=${encodeURIComponent(answer.game.videoId)}`"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="ms-3 text-nowrap small"
+                class="link link-primary text-sm text-nowrap ml-3"
               >▶ YouTube</a>
             </div>
           </div>
@@ -96,7 +92,7 @@ function playAgain() {
 
         <div class="text-center">
           <button
-            class="btn btn-primary btn-lg px-5"
+            class="btn btn-primary btn-lg px-10"
             @click="playAgain"
           >
             Play Again

@@ -6,17 +6,17 @@ const { isDark, toggleDark } = useDarkMode()
 </script>
 
 <template>
-  <nav class="navbar sticky-top border-bottom py-2 bg-body">
-    <div class="container">
+  <div class="navbar bg-base-100 shadow-sm sticky top-0 z-50">
+    <div class="navbar-end w-full">
       <button
-        class="btn btn-outline-secondary btn-sm ms-auto"
+        class="btn btn-ghost btn-sm"
         :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
         :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
         @click="toggleDark"
       >
-        <i :class="isDark ? 'bi bi-sun' : 'bi bi-moon'"></i>
+        {{ isDark ? '☀️' : '🌙' }}
       </button>
     </div>
-  </nav>
+  </div>
   <RouterView />
 </template>

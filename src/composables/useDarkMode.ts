@@ -11,7 +11,7 @@ function getInitialDark(): boolean {
 const isDark = ref(getInitialDark())
 
 watchEffect(() => {
-  document.documentElement.setAttribute('data-bs-theme', isDark.value ? 'dark' : 'light')
+  document.documentElement.setAttribute('data-theme', isDark.value ? 'night' : 'retro')
 })
 
 export function useDarkMode() {
