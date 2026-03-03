@@ -14,7 +14,7 @@ onMounted(() => {
     }
 })
 
-const score = state.answers.filter((a) => a.game.id === a.userGuessId).length
+const score = state.answers.filter((id, i) => state.questions[i]?.id === id).length
 const total = state.answers.length
 
 function playAgain() {
@@ -61,33 +61,34 @@ function playAgain() {
                 </h5>
                 <div class="list-group mb-5">
                     <div
-                        v-for="(answer, index) in state.answers"
-                        :key="answer.game.id"
+                        v-for="(guessId, index) in state.answers"
+                        :key="index"
                         class="list-group-item"
                     >
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex">
                                 <span class="fw-semibold me-1 text-nowrap">#{{ index + 1 }}</span>
-                                <span class="me-2 text-nowrap">{{ answer.game.id === answer.userGuessId ? '✅' : '❌' }}</span>
+                                <span class="me-2 text-nowrap">{{ state.questions[index]?.id === guessId ? '✅' : '❌' }}</span>
                                 <div>
                                     <div class="fw-semibold">
-                                        {{ answer.game.name }}
+                                        {{ state.questions[index]?.name }}
                                     </div>
                                     <div class="text-muted small">
-                                        {{ answer.game.songName }}<template v-if="answer.game.source">
-                                            ({{ answer.game.source }} version)
+                                        {{ state.questions[index]?.songName }}<template v-if="state.questions[index]?.source">
+                                            ({{ state.questions[index]?.source }} version)
                                         </template>
                                     </div>
                                     <div
-                                        v-if="answer.game.id !== answer.userGuessId"
+                                        v-if="state.questions[index]?.id !== guessId"
                                         class="text-muted small"
                                     >
-                                        You guessed: <em>{{ answer.userGuessId === -1 ? '(skipped)' : (games.find((g) => g.id === answer.userGuessId)?.name ?? '(no answer)') }}</em>
+                                        You guessed: <em>{{ guessId === -1 ? '(skipped)' : (games.find((g) => g.id === guessId)?.name ?? '(no answer)') }}</em>
                                     </div>
                                 </div>
                             </div>
                             <a
-                                :href="`https://www.youtube.com/watch?v=${encodeURIComponent(answer.game.videoId)}`"
+                                v-if="state.questions[index]?.videoId"
+                                :href="`https://www.youtube.com/watch?v=${encodeURIComponent(state.questions[index]!.videoId)}`"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="ms-3 text-nowrap small"

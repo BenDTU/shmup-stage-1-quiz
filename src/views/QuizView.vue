@@ -80,7 +80,7 @@ async function handleNextClick(event: MouseEvent) {
                 <!-- Progress bar -->
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="fw-semibold">Question {{ questionNumber }} of {{ state.questions.length }}</span>
-                    <span class="text-muted small">Score: {{ state.answers.filter((a) => a.game.id === a.userGuessId).length }} / {{ state.answers.length }}</span>
+                    <span class="text-muted small">Score: {{ state.answers.filter((id, i) => state.questions[i]?.id === id).length }} / {{ state.answers.length }}</span>
                 </div>
                 <div
                     class="progress mb-4"
@@ -144,16 +144,16 @@ async function handleNextClick(event: MouseEvent) {
                         <div v-else>
                             <div
                                 class="alert mb-3"
-                                :class="state.answers[state.currentIndex]?.game.id === state.answers[state.currentIndex]?.userGuessId ? 'alert-success' : 'alert-danger'"
+                                :class="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex] ? 'alert-success' : 'alert-danger'"
                             >
-                                <span v-if="state.answers[state.currentIndex]?.game.id === state.answers[state.currentIndex]?.userGuessId">
+                                <span v-if="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]">
                                     ✅ <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
                                 </span>
                                 <span v-else>
                                     ❌ <strong>Incorrect.</strong> The song was
                                     <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
-                                    <span v-if="state.answers[state.currentIndex]?.userGuessId !== -1">
-                                        You guessed: <em>{{ games.find((g) => g.id === state.answers[state.currentIndex]?.userGuessId)?.name }}</em>.
+                                    <span v-if="state.answers[state.currentIndex] !== -1">
+                                        You guessed: <em>{{ games.find((g) => g.id === state.answers[state.currentIndex])?.name }}</em>.
                                     </span>
                                 </span>
                             </div>
