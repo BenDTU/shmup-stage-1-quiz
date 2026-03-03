@@ -4,16 +4,14 @@ import { useRouter } from 'vue-router'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
 import AutocompleteInput from '../components/AutocompleteInput.vue'
 import { useQuiz } from '../composables/useQuiz'
-import { games } from '../data/games'
-import { gameMatchesGuess } from '../types'
 
 const router = useRouter()
 const { state, isFinished, usedGameIds, seriesLimitedGameIds, submitGuess, nextQuestion } = useQuiz()
 
-const guess = ref('')
+const selectedGameId = ref(-1)
 const audioUnlocked = ref(false)
 const nextBtn = ref<HTMLButtonElement | null>(null)
-const autocompleteRef = ref<{ focus: () => void } | null>(null)
+const autocompleteRef = ref<{ focus: () => void; reset: () => void } | null>(null)
 
 onMounted(() => {
     if (!state.isStarted || state.questions.length === 0) {
@@ -24,20 +22,14 @@ onMounted(() => {
 const currentQuestion = computed(() => state.questions[state.currentIndex])
 const questionNumber = computed(() => state.currentIndex + 1)
 
-// Only allow submitting a guess that exactly matches an available game in the pool
+// Only allow submitting a guess that corresponds to an available game in the pool
 const isValidGuess = computed(() => {
-    if (!guess.value.trim()) return false
-
-    return games.some(
-        (g) =>
-            gameMatchesGuess(g.name, g.alias, guess.value) &&
-            !usedGameIds.value.has(g.id) &&
-            !seriesLimitedGameIds.value.has(g.id),
-    )
+    if (selectedGameId.value === -1) return false
+    return !usedGameIds.value.has(selectedGameId.value) && !seriesLimitedGameIds.value.has(selectedGameId.value)
 })
 async function handleSubmit(viaKeyboard = false) {
     if (!isValidGuess.value || state.isAnswered) return
-    submitGuess(guess.value)
+    submitGuess(selectedGameId.value)
     if (viaKeyboard) {
         await nextTick()
         nextBtn.value?.focus()
@@ -48,7 +40,7 @@ async function handleSkipClick(event: MouseEvent) {
     if (state.isAnswered) return
     // event.detail is 0 for keyboard-triggered clicks (Enter/Space) and ≥1 for mouse clicks
     const isKeyboard = event.detail === 0
-    submitGuess('Song skipped')
+    submitGuess(-1)
     if (isKeyboard) {
         await nextTick()
         nextBtn.value?.focus()
@@ -59,7 +51,8 @@ function handleNext() {
     if (isFinished.value) {
         router.push('/results')
     } else {
-        guess.value = ''
+        selectedGameId.value = -1
+        autocompleteRef.value?.reset()
         nextQuestion()
     }
 }
@@ -123,7 +116,7 @@ async function handleNextClick(event: MouseEvent) {
                         <div v-if="!state.isAnswered">
                             <AutocompleteInput
                                 ref="autocompleteRef"
-                                v-model="guess"
+                                v-model="selectedGameId"
                                 :disabled-game-ids="usedGameIds"
                                 :series-limited-game-ids="seriesLimitedGameIds"
                                 class="mb-3"

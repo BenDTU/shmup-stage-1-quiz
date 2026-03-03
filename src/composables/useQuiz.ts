@@ -1,6 +1,6 @@
 import { reactive, computed } from 'vue'
 import { games } from '../data/games'
-import { type Game, type GameEntryWithId, Series, gameMatchesGuess } from '../types'
+import { type Game, type GameEntryWithId, Series } from '../types'
 
 function resolveGame(entry: GameEntryWithId): Game {
     const { name, alias, series, id } = entry
@@ -107,12 +107,14 @@ function startQuiz() {
     state.isAnswered = false
 }
 
-function submitGuess(guess: string) {
+function submitGuess(gameId: number) {
     if (state.isAnswered) return
     const currentGame = state.questions[state.currentIndex]
     if (!currentGame) return
-    const isCorrect = gameMatchesGuess(currentGame.name, currentGame.alias, guess)
-    state.answers.push({ game: currentGame, userGuess: guess.trim(), isCorrect })
+    const isSkip = gameId === -1
+    const isCorrect = !isSkip && gameId === currentGame.id
+    const userGuess = isSkip ? 'Song skipped' : (games.find((g) => g.id === gameId)?.name ?? '')
+    state.answers.push({ game: currentGame, userGuess, isCorrect })
     state.isAnswered = true
 }
 

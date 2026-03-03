@@ -28,22 +28,6 @@ interface GameEntryBase {
     forceFirst?: boolean // if true, this game will always be the first question in the quiz
 }
 
-export function gameDisplayName(name: string, alias?: string | string[]): string {
-    if (!alias) return name
-    const aliases = Array.isArray(alias) ? alias : [alias]
-    if (aliases.length === 0) return name
-    return `${name} (${aliases.join(', ')})`
-}
-
-export function gameMatchesGuess(name: string, alias: string | string[] | undefined, guess: string): boolean {
-    const lower = guess.trim().toLowerCase()
-    if (name.toLowerCase() === lower) return true
-    if (!alias) return false
-    const aliases = Array.isArray(alias) ? alias : [alias]
-    if (gameDisplayName(name, alias).toLowerCase() === lower) return true
-    return aliases.some((a) => `${name} (${a})`.toLowerCase() === lower)
-}
-
 export type GameEntry = GameEntryBase & {
     songSource: SongEntry | [SongEntry, ...SongEntry[]]
 }

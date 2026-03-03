@@ -4,22 +4,26 @@ import { games } from '../data/games'
 import { type GameListEntry } from '../types'
 
 const props = defineProps<{
-    modelValue: string
+    modelValue: number   // selected game id, or -1 for no selection
     disabledGameIds: Set<number>
     seriesLimitedGameIds?: Set<number>
     disabled?: boolean
 }>()
 
 const emit = defineEmits<{
-    'update:modelValue': [value: string]
+    'update:modelValue': [value: number]
     submit: []
 }>()
 
 const isOpen = ref(false)
 const highlightedIndex = ref(-1)
 const inputRef = ref<HTMLInputElement | null>(null)
+const inputText = ref('')
 
-defineExpose({ focus: () => inputRef.value?.focus() })
+defineExpose({
+    focus: () => inputRef.value?.focus(),
+    reset: () => { inputText.value = '' },
+})
 
 type AutocompleteItem = GameListEntry & { displayName: string }
 
@@ -28,7 +32,7 @@ const allGames = computed<GameListEntry[]>(() =>
 )
 
 const filteredGames = computed<AutocompleteItem[]>(() => {
-    const query = props.modelValue.toLowerCase().trim()
+    const query = inputText.value.toLowerCase().trim()
     if (!query) return allGames.value.map((g) => ({ ...g, displayName: g.name }))
     return allGames.value
         .filter((g) => {
@@ -55,13 +59,15 @@ const filteredGames = computed<AutocompleteItem[]>(() => {
 function selectGame(game: AutocompleteItem) {
     if (props.disabledGameIds.has(game.id)) return
     if (props.seriesLimitedGameIds?.has(game.id)) return
-    emit('update:modelValue', game.displayName)
+    inputText.value = game.displayName
+    emit('update:modelValue', game.id)
     isOpen.value = false
     highlightedIndex.value = -1
 }
 
 function onInput(event: Event) {
-    emit('update:modelValue', (event.target as HTMLInputElement).value)
+    inputText.value = (event.target as HTMLInputElement).value
+    emit('update:modelValue', -1)
     isOpen.value = true
     highlightedIndex.value = -1
 }
@@ -141,7 +147,7 @@ function onKeydown(event: KeyboardEvent) {
             type="text"
             class="form-control"
             placeholder="Type to search for a game…"
-            :value="modelValue"
+            :value="inputText"
             :disabled="disabled"
             role="combobox"
             autocomplete="off"
