@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
 import AutocompleteInput from '../components/AutocompleteInput.vue'
 import { useQuiz } from '../composables/useQuiz'
+import { games } from '../data/games'
 
 const router = useRouter()
 const { state, isFinished, usedGameIds, seriesLimitedGameIds, submitGuess, nextQuestion } = useQuiz()
@@ -79,7 +80,7 @@ async function handleNextClick(event: MouseEvent) {
                 <!-- Progress bar -->
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="fw-semibold">Question {{ questionNumber }} of {{ state.questions.length }}</span>
-                    <span class="text-muted small">Score: {{ state.answers.filter((a) => a.isCorrect).length }} / {{ state.answers.length }}</span>
+                    <span class="text-muted small">Score: {{ state.answers.filter((a) => a.game.id === a.userGuessId).length }} / {{ state.answers.length }}</span>
                 </div>
                 <div
                     class="progress mb-4"
@@ -143,16 +144,16 @@ async function handleNextClick(event: MouseEvent) {
                         <div v-else>
                             <div
                                 class="alert mb-3"
-                                :class="state.answers[state.currentIndex]?.isCorrect ? 'alert-success' : 'alert-danger'"
+                                :class="state.answers[state.currentIndex]?.game.id === state.answers[state.currentIndex]?.userGuessId ? 'alert-success' : 'alert-danger'"
                             >
-                                <span v-if="state.answers[state.currentIndex]?.isCorrect">
+                                <span v-if="state.answers[state.currentIndex]?.game.id === state.answers[state.currentIndex]?.userGuessId">
                                     ✅ <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
                                 </span>
                                 <span v-else>
                                     ❌ <strong>Incorrect.</strong> The song was
                                     <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
-                                    <span v-if="state.answers[state.currentIndex]?.userGuess">
-                                        You guessed: <em>{{ state.answers[state.currentIndex]?.userGuess }}</em>.
+                                    <span v-if="state.answers[state.currentIndex]?.userGuessId !== -1">
+                                        You guessed: <em>{{ games.find((g) => g.id === state.answers[state.currentIndex]?.userGuessId)?.name }}</em>.
                                     </span>
                                 </span>
                             </div>

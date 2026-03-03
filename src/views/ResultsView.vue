@@ -2,6 +2,7 @@
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuiz } from '../composables/useQuiz'
+import { games } from '../data/games'
 
 
 const router = useRouter()
@@ -13,7 +14,7 @@ onMounted(() => {
     }
 })
 
-const score = state.answers.filter((a) => a.isCorrect).length
+const score = state.answers.filter((a) => a.game.id === a.userGuessId).length
 const total = state.answers.length
 
 function playAgain() {
@@ -67,7 +68,7 @@ function playAgain() {
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex">
                                 <span class="fw-semibold me-1 text-nowrap">#{{ index + 1 }}</span>
-                                <span class="me-2 text-nowrap">{{ answer.isCorrect ? '✅' : '❌' }}</span>
+                                <span class="me-2 text-nowrap">{{ answer.game.id === answer.userGuessId ? '✅' : '❌' }}</span>
                                 <div>
                                     <div class="fw-semibold">
                                         {{ answer.game.name }}
@@ -78,10 +79,10 @@ function playAgain() {
                                         </template>
                                     </div>
                                     <div
-                                        v-if="!answer.isCorrect"
+                                        v-if="answer.game.id !== answer.userGuessId"
                                         class="text-muted small"
                                     >
-                                        You guessed: <em>{{ answer.userGuess || '(no answer)' }}</em>
+                                        You guessed: <em>{{ answer.userGuessId === -1 ? '(skipped)' : (games.find((g) => g.id === answer.userGuessId)?.name ?? '(no answer)') }}</em>
                                     </div>
                                 </div>
                             </div>

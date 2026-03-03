@@ -32,8 +32,7 @@ function resolveGame(entry: GameEntryWithId): Game {
 
 export interface QuizAnswer {
     game: Game
-    userGuess: string
-    isCorrect: boolean
+    userGuessId: number // game id, or -1 for a skip
 }
 
 interface QuizState {
@@ -112,9 +111,8 @@ function submitGuess(gameId: number) {
     const currentGame = state.questions[state.currentIndex]
     if (!currentGame) return
     const isSkip = gameId === -1
-    const isCorrect = !isSkip && gameId === currentGame.id
-    const userGuess = isSkip ? 'Song skipped' : (games.find((g) => g.id === gameId)?.name ?? '')
-    state.answers.push({ game: currentGame, userGuess, isCorrect })
+    if (!isSkip && !games.find((g) => g.id === gameId)) return
+    state.answers.push({ game: currentGame, userGuessId: gameId })
     state.isAnswered = true
 }
 
