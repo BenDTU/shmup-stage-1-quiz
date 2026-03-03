@@ -2,14 +2,14 @@
 import { computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue'
 
 const props = defineProps<{
-  videoId: string
-  startTime?: number
-  endTime?: number
-  hidden?: boolean
+    videoId: string
+    startTime?: number
+    endTime?: number
+    hidden?: boolean
 }>()
 
 const emit = defineEmits<{
-  (e: 'audioUnlocked'): void
+    (e: 'audioUnlocked'): void
 }>()
 
 const iframeRef = ref<HTMLIFrameElement | null>(null)
@@ -27,9 +27,9 @@ const audioUnlocked = ref(false)
 const embedSrc = computed(() => {
     const start = props.startTime ?? 0
     const origin =
-    typeof window !== 'undefined'
-        ? `&origin=${encodeURIComponent(window.location.origin)}`
-        : ''
+        typeof window !== 'undefined'
+            ? `&origin=${encodeURIComponent(window.location.origin)}`
+            : ''
     return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&mute=1&enablejsapi=1&start=${start}&rel=0&modestbranding=1${origin}`
 })
 

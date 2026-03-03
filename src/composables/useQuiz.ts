@@ -30,17 +30,17 @@ function resolveGame(entry: GameEntryWithId): Game {
 }
 
 export interface QuizAnswer {
-  game: Game
-  userGuess: string
-  isCorrect: boolean
+    game: Game
+    userGuess: string
+    isCorrect: boolean
 }
 
 interface QuizState {
-  questions: Game[]
-  currentIndex: number
-  answers: QuizAnswer[]
-  isStarted: boolean
-  isAnswered: boolean
+    questions: Game[]
+    currentIndex: number
+    answers: QuizAnswer[]
+    isStarted: boolean
+    isAnswered: boolean
 }
 
 const QUIZ_SIZE = 20

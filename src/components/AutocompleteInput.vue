@@ -4,15 +4,15 @@ import { games } from '../data/games'
 import { type GameListEntry } from '../types'
 
 const props = defineProps<{
-  modelValue: string
-  disabledGameIds: Set<number>
-  seriesLimitedGameIds?: Set<number>
-  disabled?: boolean
+    modelValue: string
+    disabledGameIds: Set<number>
+    seriesLimitedGameIds?: Set<number>
+    disabled?: boolean
 }>()
 
 const emit = defineEmits<{
-  'update:modelValue': [value: string]
-  submit: []
+    'update:modelValue': [value: string]
+    submit: []
 }>()
 
 const isOpen = ref(false)

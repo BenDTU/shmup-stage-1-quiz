@@ -1,6 +1,7 @@
 import eslint from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
+import stylistic from '@stylistic/eslint-plugin'
 
 /**
  * Custom ESLint rule that enforces the `games` array in games.ts is sorted
@@ -40,9 +41,9 @@ const sortedGamesRule = {
                         (p) => p.type === 'Property' && p.key && p.key.name === 'sortName',
                     )
                     const sortKey =
-            sortNameProp && sortNameProp.value && sortNameProp.value.type === 'Literal'
-                ? String(sortNameProp.value.value)
-                : name
+                        sortNameProp && sortNameProp.value && sortNameProp.value.type === 'Literal'
+                            ? String(sortNameProp.value.value)
+                            : name
                     entries.push({ name, sortKey, node: el })
                 }
 
@@ -51,7 +52,7 @@ const sortedGamesRule = {
                     const curr = entries[i].sortKey
                     if (prev.localeCompare(curr, undefined, { sensitivity: 'base', numeric: true }) > 0) {
                         const useSortKeys =
-              entries[i].sortKey !== entries[i].name || entries[i - 1].sortKey !== entries[i - 1].name
+                            entries[i].sortKey !== entries[i].name || entries[i - 1].sortKey !== entries[i - 1].name
                         context.report({
                             node: entries[i].node,
                             messageId: useSortKeys ? 'unsortedWithKeys' : 'unsorted',
@@ -76,20 +77,24 @@ export default tseslint.config(
     ...tseslint.configs.recommended,
     ...pluginVue.configs['flat/recommended'],
     {
-        files: ['**/*.js', '**/*.ts', '**/*.vue'],
+        files: ['**/*.js', '**/*.ts'],
+        plugins: { '@stylistic': stylistic },
         rules: {
-            indent: ['error', 4],
+            '@stylistic/indent': ['error', 4],
         },
     },
     {
         files: ['**/*.vue'],
+        plugins: { '@stylistic': stylistic },
         languageOptions: {
             parserOptions: {
                 parser: tseslint.parser,
             },
         },
         rules: {
+            '@stylistic/indent': 'off',
             'vue/html-indent': ['error', 4],
+            'vue/script-indent': ['error', 4],
         },
     },
     {

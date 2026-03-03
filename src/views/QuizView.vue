@@ -31,8 +31,8 @@ const isValidGuess = computed(() => {
     return games.some(
         (g) =>
             g.name.toLowerCase() === normalizedGuess &&
-      !usedGameIds.value.has(g.id) &&
-      !seriesLimitedGameIds.value.has(g.id),
+            !usedGameIds.value.has(g.id) &&
+            !seriesLimitedGameIds.value.has(g.id),
     )
 })
 async function handleSubmit(viaKeyboard = false) {
