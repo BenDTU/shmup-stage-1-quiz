@@ -3,42 +3,9 @@ import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
 
 /**
- * Converts a roman numeral string to its integer value.
- * @param {string} roman
- * @returns {number}
- */
-function romanToInt(roman) {
-  const val = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 }
-  let result = 0
-  for (let i = 0; i < roman.length; i++) {
-    const curr = val[roman[i]]
-    const next = val[roman[i + 1]]
-    if (next && curr < next) {
-      result -= curr
-    } else {
-      result += curr
-    }
-  }
-  return result
-}
-
-/**
- * Replaces standalone roman numerals in a string with their decimal equivalents
- * so that titles like "R-Type II" sort as "R-Type 2".
- * @param {string} name
- * @returns {string}
- */
-function normalizeRomanNumerals(name) {
-  return name.replace(
-    /\b(M{1,3}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})|CM|CD|D?C{1,3}(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})|XC|XL|L?X{1,3}(?:IX|IV|V?I{0,3})|IX|IV|V?I{1,3}|V|L|D)\b/g,
-    (match) => String(romanToInt(match)),
-  )
-}
-
-/**
  * Custom ESLint rule that enforces the `games` array in games.ts is sorted
- * alphabetically (case-insensitive) by each entry's `name` property,
- * treating roman numerals as numbers.
+ * alphabetically (case-insensitive) by each entry's `name` property.
+ * If a `sortName` property is present on an entry, it is used for sorting instead.
  * @type {import('eslint').Rule.RuleModule}
  */
 const sortedGamesRule = {
@@ -50,7 +17,9 @@ const sortedGamesRule = {
     schema: [],
     messages: {
       unsorted:
-        'Game "{{current}}" should come before "{{previous}}". Keep the games array sorted alphabetically by name (roman numerals treated as numbers).',
+        'Game "{{current}}" should come before "{{previous}}". Keep the games array sorted alphabetically by name (use sortName to override the sort key if needed).',
+      unsortedWithKeys:
+        'Game "{{current}}" (sort key: "{{currentKey}}") should come before "{{previous}}" (sort key: "{{previousKey}}"). Keep the games array sorted alphabetically by name (use sortName to override the sort key if needed).',
     },
   },
   create(context) {
@@ -58,26 +27,42 @@ const sortedGamesRule = {
       'VariableDeclarator[id.name="gameEntries"] > ArrayExpression'(node) {
         const elements = node.elements
 
-        /** @type {{ name: string; node: import('eslint').Rule.Node }[]} */
+        /** @type {{ name: string; sortKey: string; node: import('eslint').Rule.Node }[]} */
         const entries = []
         for (const el of elements) {
           if (!el || el.type !== 'ObjectExpression') continue
           const nameProp = el.properties.find(
             (p) => p.type === 'Property' && p.key && p.key.name === 'name',
           )
-          if (nameProp && nameProp.value && nameProp.value.type === 'Literal') {
-            entries.push({ name: String(nameProp.value.value), node: el })
-          }
+          if (!nameProp || !nameProp.value || nameProp.value.type !== 'Literal') continue
+          const name = String(nameProp.value.value)
+          const sortNameProp = el.properties.find(
+            (p) => p.type === 'Property' && p.key && p.key.name === 'sortName',
+          )
+          const sortKey =
+            sortNameProp && sortNameProp.value && sortNameProp.value.type === 'Literal'
+              ? String(sortNameProp.value.value)
+              : name
+          entries.push({ name, sortKey, node: el })
         }
 
         for (let i = 1; i < entries.length; i++) {
-          const prev = normalizeRomanNumerals(entries[i - 1].name)
-          const curr = normalizeRomanNumerals(entries[i].name)
+          const prev = entries[i - 1].sortKey
+          const curr = entries[i].sortKey
           if (prev.localeCompare(curr, undefined, { sensitivity: 'base', numeric: true }) > 0) {
+            const useSortKeys =
+              entries[i].sortKey !== entries[i].name || entries[i - 1].sortKey !== entries[i - 1].name
             context.report({
               node: entries[i].node,
-              messageId: 'unsorted',
-              data: { current: entries[i].name, previous: entries[i - 1].name },
+              messageId: useSortKeys ? 'unsortedWithKeys' : 'unsorted',
+              data: useSortKeys
+                ? {
+                    current: entries[i].name,
+                    currentKey: entries[i].sortKey,
+                    previous: entries[i - 1].name,
+                    previousKey: entries[i - 1].sortKey,
+                  }
+                : { current: entries[i].name, previous: entries[i - 1].name },
             })
           }
         }

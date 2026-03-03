@@ -7,7 +7,7 @@ import { useQuiz } from '../composables/useQuiz'
 import { games } from '../data/games'
 
 const router = useRouter()
-const { state, isFinished, usedGameIds, franchiseLimitedGameIds, submitGuess, nextQuestion } = useQuiz()
+const { state, isFinished, usedGameIds, seriesLimitedGameIds, submitGuess, nextQuestion } = useQuiz()
 
 const guess = ref('')
 const audioUnlocked = ref(false)
@@ -32,7 +32,7 @@ const isValidGuess = computed(() => {
     (g) =>
       g.name.toLowerCase() === normalizedGuess &&
       !usedGameIds.value.has(g.id) &&
-      !franchiseLimitedGameIds.value.has(g.id),
+      !seriesLimitedGameIds.value.has(g.id),
   )
 })
 async function handleSubmit(viaKeyboard = false) {
@@ -125,7 +125,7 @@ async function handleNextClick(event: MouseEvent) {
                 ref="autocompleteRef"
                 v-model="guess"
                 :disabled-game-ids="usedGameIds"
-                :franchise-limited-game-ids="franchiseLimitedGameIds"
+                :series-limited-game-ids="seriesLimitedGameIds"
                 class="mb-3"
                 @submit="handleSubmit(true)"
               />
@@ -153,11 +153,11 @@ async function handleNextClick(event: MouseEvent) {
                 :class="state.answers[state.currentIndex]?.isCorrect ? 'alert-success' : 'alert-danger'"
               >
                 <span v-if="state.answers[state.currentIndex]?.isCorrect">
-                  ✅ <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }})</template>.
+                  ✅ <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
                 </span>
                 <span v-else>
                   ❌ <strong>Incorrect.</strong> The song was
-                  <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }})</template>.
+                  <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
                   <span v-if="state.answers[state.currentIndex]?.userGuess">
                     You guessed: <em>{{ state.answers[state.currentIndex]?.userGuess }}</em>.
                   </span>

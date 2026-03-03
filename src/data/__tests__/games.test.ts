@@ -6,16 +6,10 @@ import type { GameEntryWithId } from '../../types'
  * Extracts all YouTube video IDs from a game entry.
  */
 function getVideoIds(game: GameEntryWithId): string[] {
-  if ('singleSongSource' in game && game.singleSongSource) {
-    return [game.singleSongSource.videoId]
-  }
-  if ('multipleSongSource' in game && game.multipleSongSource) {
-    return game.multipleSongSource.map((s) => s.videoId)
-  }
-  if ('arrangedSongSource' in game && game.arrangedSongSource) {
-    return game.arrangedSongSource.arrangements.map((a) => a.videoId)
-  }
-  return []
+  const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource]
+  return sources.flatMap((entry) =>
+    'arrangements' in entry ? entry.arrangements.map((a) => a.videoId) : [entry.videoId],
+  )
 }
 
 /**
