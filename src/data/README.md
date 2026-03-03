@@ -138,9 +138,9 @@ To add a new series, add a new entry to the `Series` enum in `src/types.ts`.
 
 When a port has a substantially different soundtrack — not just a different mix or arrangement of the same tracks — it is listed as a separate game entry rather than grouped with `arrangements`.
 
-- **In the Hunt (PlayStation)** has a completely different soundtrack from the arcade original, so it is its own entry rather than an arrangement of the arcade entry.
-- **Space Invaders Extreme** groups the DS and Steam releases under `arrangements` because they share the same songs. The PSP and Xbox 360 releases use a different soundtrack, so those would be their own entries if included.
-- **Space Invaders (Game Boy Advance)** has its own unique soundtrack separate from other Space Invaders releases, so it is listed independently from *Space Invaders (1999)* and *Space Invaders (Game Boy Color)*.
+- **In the Hunt (PlayStation)** includes a completely different soundtrack from the arcade original, so it is its own entry rather than an arrangement of the arcade entry.
+- **Space Invaders Extreme** on the PSP and Xbox 360 features a different soundtrack from the DS / Steam / Switch releases, so they have been included under their own entry using the not quite official name 'Space Invaders Extreme HD'
+- **Space Invaders (Game Boy Advance)** is a shrunk down version of Space Invaders (1999), with its own unique soundtrack, so it is listed independently.
 
 ```ts
 // Arcade original
@@ -174,7 +174,7 @@ If a game has very few tracks and the song has no name, numbering it by position
 
 ### Many versions rolled into one entry
 
-When a game has been released across many versions and sequels with different stage 1 songs, they can be grouped into a single `songSource` array to avoid quiz questions that amount to "which sub-release of *DariusBurst* are you hearing?":
+When a game has been released across many versions with different stage 1 songs, but can reasonably be considered the same game, they can be grouped into a single `songSource` array to avoid quiz questions that amount to "which sub-release of *DariusBurst* are you hearing?":
 
 ```ts
 {
@@ -187,15 +187,4 @@ When a game has been released across many versions and sequels with different st
     { songName: 'Suite Photoconductivity ~First Tune Iron Fossil~', videoId: 'h52k2Et3AXk' },
   ]
 },
-```
-
-### Same unnamed song across multiple platforms
-
-If a game has the same stage 1 theme across platforms but the song has no defined name, list each platform as a separate `SongEntry` and use a `songName` that reflects where in that version the track is heard:
-
-```ts
-// Strike Gunner S.T.G. — same melody on both platforms, but the song is unnamed,
-// so each platform gets its own entry with a descriptive title
-{ songName: 'Stage 1 (SNES)',  videoId: '...' },
-{ songName: 'Stage 1 (Arcade)', videoId: '...' },
 ```
