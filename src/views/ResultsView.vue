@@ -2,7 +2,6 @@
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuiz } from '../composables/useQuiz'
-import { games } from '../data/games'
 import { guessedGameName } from '../functions'
 
 
@@ -83,7 +82,7 @@ function playAgain() {
                                         v-if="state.questions[index]?.id !== guessId"
                                         class="text-muted small"
                                     >
-                                        You guessed: <em>{{ guessedGameName(guessId, games) }}</em>
+                                        You guessed: <em>{{ guessedGameName(guessId) }}</em>
                                     </div>
                                 </div>
                             </div>

@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
 import AutocompleteInput from '../components/AutocompleteInput.vue'
 import { useQuiz } from '../composables/useQuiz'
-import { games } from '../data/games'
 import { guessedGameName } from '../functions'
 
 const router = useRouter()
@@ -153,7 +152,7 @@ async function handleNextClick(event: MouseEvent) {
                                 <span v-else>
                                     ❌ <strong>Incorrect.</strong> The song was
                                     <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
-                                    You guessed: <em>{{ guessedGameName(state.answers[state.currentIndex], games) }}</em>.
+                                    You guessed: <em>{{ guessedGameName(state.answers[state.currentIndex]) }}</em>.
                                 </span>
                             </div>
                             <button
