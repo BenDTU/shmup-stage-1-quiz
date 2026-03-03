@@ -54,6 +54,11 @@ function begin() {
                 >
                     Start Quiz
                 </button>
+                <div class="mt-3">
+                    <RouterLink to="/song-list">
+                        View Full Song List
+                    </RouterLink>
+                </div>
             </div>
         </div>
     </main>
