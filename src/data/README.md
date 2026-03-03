@@ -13,7 +13,7 @@ Each entry must have a `name` and a `songSource`. IDs are auto-assigned from the
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `name` | `string` | ✅ | Display name of the game |
-| `songSource` | `SongEntry \| SongEntry[]` | ✅ | The stage 1 theme(s) — see below for the three variants |
+| `songSource` | `SongEntry \| [SongEntry, ...SongEntry[]]` | ✅ | The stage 1 theme(s) — see below for the three variants. When supplying an array it must be non-empty (TypeScript will reject an empty array). |
 | `sortName` | `string` | ❌ | Override the sort key when the display name would sort incorrectly (e.g. `'Gradius 2'` for `'Gradius II'`) |
 | `series` | `Series` | ❌ | Groups related games together so they cannot appear as wrong-answer options for each other |
 | `forceFirst` | `boolean` | ❌ | If `true`, this game will always be the first question in a quiz |
