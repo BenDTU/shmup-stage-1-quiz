@@ -78,16 +78,14 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'DoDonPachi',
+        sortName: 'Dodonpachi 1',
         series: Series.Dodonpachi,
         songSource: { songName: '1 & 4 Scene BGM', videoId: 'nDMjMv6COIU' },
     },
     {
-        name: 'DoDonPachi DaiFukkatsu',
-        series: Series.Dodonpachi,
-        songSource: { songName: 'The Year 2008, Tokyo', videoId: 'ZCaPtpNyjf4' },
-    },
-    {
-        name: 'DoDonPachi DaiOuJou',
+        name: 'Dodonpachi Blissful Death',
+        alias: 'DoDonPachi DaiOuJou',
+        sortName: 'Dodonpachi 2',
         series: Series.Dodonpachi,
         songSource: {
             songName: 'East Asia',
@@ -102,6 +100,13 @@ const gameEntries: GameEntry[] = [
                 },
             ]
         }
+    },
+    {
+        name: 'Dodonpachi Resurrection',
+        alias: 'DoDonPachi DaiFukkatsu',
+        sortName: 'Dodonpachi 3',
+        series: Series.Dodonpachi,
+        songSource: { songName: 'The Year 2008, Tokyo', videoId: 'ZCaPtpNyjf4' },
     },
     {
         name: 'Dogyuun',
