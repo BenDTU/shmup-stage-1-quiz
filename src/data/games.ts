@@ -83,7 +83,7 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: '1 & 4 Scene BGM', videoId: 'nDMjMv6COIU' },
     },
     {
-        name: 'Dodonpachi Blissful Death',
+        name: 'DoDonPachi Blissful Death',
         alias: 'DoDonPachi DaiOuJou',
         sortName: 'Dodonpachi 2',
         series: Series.Dodonpachi,
@@ -102,7 +102,7 @@ const gameEntries: GameEntry[] = [
         }
     },
     {
-        name: 'Dodonpachi Resurrection',
+        name: 'DoDonPachi Resurrection',
         alias: 'DoDonPachi DaiFukkatsu',
         sortName: 'Dodonpachi 3',
         series: Series.Dodonpachi,
@@ -146,11 +146,13 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Gradius',
+        alias: 'Nemesis',
         series: Series.Gradius,
         songSource: { songName: 'Challenger 1985', videoId: 'nYES6OmvQFQ' },
     },
     {
         name: 'Gradius II',
+        alias: 'Vulcan Venture',
         sortName: 'Gradius 2',
         series: Series.Gradius,
         songSource: { songName: 'Burning Heat', videoId: 'FLc1msji0_w' },
