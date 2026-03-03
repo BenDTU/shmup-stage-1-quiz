@@ -36,7 +36,6 @@ watch(() => props.modelValue, (newId) => {
 
 defineExpose({
     focus: () => inputRef.value?.focus(),
-    reset: () => { inputText.value = '' },
 })
 
 type AutocompleteItem = GameListEntry & { displayName: string }

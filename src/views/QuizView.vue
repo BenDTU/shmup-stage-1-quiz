@@ -12,7 +12,7 @@ const { state, isFinished, usedGameIds, seriesLimitedGameIds, submitGuess, nextQ
 const selectedGameId = ref<number | null>(null)
 const audioUnlocked = ref(false)
 const nextBtn = ref<HTMLButtonElement | null>(null)
-const autocompleteRef = ref<{ focus: () => void; reset: () => void } | null>(null)
+const autocompleteRef = ref<{ focus: () => void } | null>(null)
 
 onMounted(() => {
     if (!state.isStarted || state.questions.length === 0) {
@@ -53,7 +53,6 @@ function handleNext() {
         router.push('/results')
     } else {
         selectedGameId.value = null
-        autocompleteRef.value?.reset()
         nextQuestion()
     }
 }
