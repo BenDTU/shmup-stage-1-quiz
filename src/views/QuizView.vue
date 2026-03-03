@@ -5,7 +5,7 @@ import YouTubePlayer from '../components/YouTubePlayer.vue'
 import AutocompleteInput from '../components/AutocompleteInput.vue'
 import { useQuiz } from '../composables/useQuiz'
 import { games } from '../data/games'
-import { gameDisplayName, gameMatchesGuess } from '../types'
+import { gameMatchesGuess } from '../types'
 
 const router = useRouter()
 const { state, isFinished, usedGameIds, seriesLimitedGameIds, submitGuess, nextQuestion } = useQuiz()
@@ -153,11 +153,11 @@ async function handleNextClick(event: MouseEvent) {
                                 :class="state.answers[state.currentIndex]?.isCorrect ? 'alert-success' : 'alert-danger'"
                             >
                                 <span v-if="state.answers[state.currentIndex]?.isCorrect">
-                                    ✅ <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ gameDisplayName(currentQuestion.name, currentQuestion.alias) }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
+                                    ✅ <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
                                 </span>
                                 <span v-else>
                                     ❌ <strong>Incorrect.</strong> The song was
-                                    <em>{{ currentQuestion.songName }} from {{ gameDisplayName(currentQuestion.name, currentQuestion.alias) }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
+                                    <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
                                     <span v-if="state.answers[state.currentIndex]?.userGuess">
                                         You guessed: <em>{{ state.answers[state.currentIndex]?.userGuess }}</em>.
                                     </span>
