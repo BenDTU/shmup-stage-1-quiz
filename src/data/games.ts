@@ -23,6 +23,15 @@ const gameEntries: GameEntry[] = [
         name: 'Battle Garegga',
         songSource: { songName: 'Fly to the Leaden Sky', videoId: 'Szr0TSXcWok' },
     },
+    // Note: BioMetal (JP) and BioMetal (US) share the same song name ("Dark Clouds") but these tracks are completely different from one another.
+    {
+        name: 'BioMetal (JP)',
+        songSource: { songName: 'Dark Clouds', videoId: 'DMhmwXbPcYg' },
+    },
+    {
+        name: 'BioMetal (US)',
+        songSource: { songName: 'Dark Clouds', videoId: '6N3Bfm057xM' },
+    },
     {
         name: 'Blazing Star',
         songSource: { songName: 'Apocalypse ~ Stage 1A', videoId: 'WIeUpFJ4LY4' },
@@ -110,6 +119,15 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'G-Darius',
+        series: Series.Darius,
+        songSource: { songName: 'G-Zero', videoId: 'yratOaX9qhY' },
+    },
+    {
+        name: 'Gekirindan',
+        songSource: { songName: 'Pure Spirit', videoId: 'OijiF6r1Xfc' },
+    },
+    {
         name: 'Gradius',
         series: Series.Gradius,
         songSource: { songName: 'Challenger 1985', videoId: 'nYES6OmvQFQ' },
@@ -186,6 +204,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Ketsui',
         songSource: { songName: 'INTERCEPTION - Noisy Town', videoId: 'z472pIce5CY' },
+    },
+    {
+        name: 'Last Resort',
+        songSource: { songName: 'Jack to the Metro', videoId: 'HAGArKEC_M8' },
     },
     {
         name: 'Mad Shark',
@@ -647,6 +669,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'X-Multiply',
         songSource: { songName: 'Into the Human Body', videoId: 'MwwduquIWIo' },
+    },
+    {
+        name: 'Zed Blade',
+        songSource: { songName: 'Shootaholic [Shockout MIX]', videoId: 'h35vxyOrmrA' },
     },
     {
         name: 'Zero Wing',
