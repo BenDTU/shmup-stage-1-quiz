@@ -4,7 +4,7 @@ This folder contains `games.ts`, the list of games and their stage 1 themes used
 
 ## Adding a new game
 
-Add a new object to the `gameEntries` array in `games.ts`. The array **must stay sorted alphabetically** by `name`. Run `npm run lint` to verify ordering — the custom `local/sorted-games` ESLint rule will report an error if any entry is out of order.
+Add a new object to the `gameEntries` array in `games.ts`. The array **must stay sorted alphabetically** by `name`, in a case-insensitive and numeric-aware way (matching the `local/sorted-games` ESLint rule). Run `npm run lint` to verify ordering — the custom `local/sorted-games` ESLint rule will report an error if any entry is out of order.
 
 Each entry must have a `name` and a `songSource`. IDs are auto-assigned from the array position, so you don't need to set one.
 
