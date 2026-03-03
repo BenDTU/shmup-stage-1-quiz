@@ -21,18 +21,22 @@ const inputRef = ref<HTMLInputElement | null>(null)
 const inputText = ref('')
 const internalUpdate = ref(false)
 
-watch(() => props.modelValue, (newId) => {
-    if (internalUpdate.value) {
-        internalUpdate.value = false
-        return
-    }
-    if (newId === null) {
-        inputText.value = ''
-    } else {
-        const game = games.find((g) => g.id === newId)
-        if (game) inputText.value = game.name
-    }
-})
+watch(
+    () => props.modelValue,
+    (newId) => {
+        if (internalUpdate.value) {
+            internalUpdate.value = false
+            return
+        }
+        if (newId === null) {
+            inputText.value = ''
+        } else {
+            const game = games.find((g) => g.id === newId)
+            if (game) inputText.value = game.name
+        }
+    },
+    { immediate: true },
+)
 
 defineExpose({
     focus: () => inputRef.value?.focus(),
