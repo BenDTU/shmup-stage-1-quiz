@@ -1,136 +1,135 @@
 import { reactive, computed } from 'vue'
 import { games } from '../data/games'
-import { type Game, type GameEntryWithId, Franchise } from '../types'
+import { type Game, type GameEntryWithId, Series } from '../types'
 
 function resolveGame(entry: GameEntryWithId): Game {
-  const { name, franchise, id } = entry
-  if (entry.singleSongSource) {
-    const { songName, videoId, startTime = 0, endTime } = entry.singleSongSource
-    return { name, franchise, id, songName, videoId, startTime, endTime }
-  } else if (entry.multipleSongSource) {
-    const sources = entry.multipleSongSource
-    const source = sources[Math.floor(Math.random() * sources.length)]!
-    const { songName, videoId, startTime = 0, endTime } = source
-    return { name, franchise, id, songName, videoId, startTime, endTime }
-  } else {
-    const arrangements = entry.arrangedSongSource.arrangements
-    const arrangement = arrangements[Math.floor(Math.random() * arrangements.length)]!
-    const { songName } = entry.arrangedSongSource
-    const { videoId, startTime = 0, endTime } = arrangement
-    return {
-      name,
-      franchise,
-      id,
-      songName,
-      videoId,
-      startTime,
-      endTime,
-      source: arrangement.source,
+    const { name, series, id } = entry
+    const sources = Array.isArray(entry.songSource) ? entry.songSource : [entry.songSource]
+    const songEntry = sources[Math.floor(Math.random() * sources.length)]!
+
+    if (!('arrangements' in songEntry)) {
+        const { songName, videoId, startTime = 0, endTime } = songEntry
+        return { name, series, id, songName, videoId, startTime, endTime }
     }
-  }
+  
+    const arrangements = songEntry.arrangements
+    const arrangement = arrangements[Math.floor(Math.random() * arrangements.length)]!
+    const { songName } = songEntry;
+    const { videoId, startTime = 0, endTime, source } = arrangement
+
+    return {
+        name,
+        series,
+        id,
+        songName,
+        videoId,
+        startTime,
+        endTime,
+        source,
+    }
 }
 
 export interface QuizAnswer {
-  game: Game
-  userGuess: string
-  isCorrect: boolean
+    game: Game
+    userGuess: string
+    isCorrect: boolean
 }
 
 interface QuizState {
-  questions: Game[]
-  currentIndex: number
-  answers: QuizAnswer[]
-  isStarted: boolean
-  isAnswered: boolean
+    questions: Game[]
+    currentIndex: number
+    answers: QuizAnswer[]
+    isStarted: boolean
+    isAnswered: boolean
 }
 
 const QUIZ_SIZE = 20
-const FRANCHISE_LIMIT = 3
+const SERIES_LIMIT = 3
 
 const state = reactive<QuizState>({
-  questions: [],
-  currentIndex: 0,
-  answers: [],
-  isStarted: false,
-  isAnswered: false,
+    questions: [],
+    currentIndex: 0,
+    answers: [],
+    isStarted: false,
+    isAnswered: false,
 })
 
 const isFinished = computed(
-  () =>
-    state.isAnswered &&
-    state.questions.length > 0 &&
-    state.currentIndex === state.questions.length - 1,
+    () =>
+        state.isAnswered &&
+        state.questions.length > 0 &&
+        state.currentIndex === state.questions.length - 1,
 )
 
 // IDs of games already shown as questions (excluding the current question)
 const usedGameIds = computed<Set<number>>(
-  () => new Set(state.questions.slice(0, state.currentIndex).map((g) => g.id)),
+    () => new Set(state.questions.slice(0, state.currentIndex).map((g) => g.id)),
 )
 
-// IDs of games belonging to franchises that have reached the 3-game limit in the current quiz
-const franchiseLimitedGameIds = computed<Set<number>>(() => {
-  const shownFranchiseCounts: Partial<Record<Franchise, number>> = {}
-  for (const game of state.questions.slice(0, state.currentIndex)) {
-    if (game.franchise) {
-      shownFranchiseCounts[game.franchise] = (shownFranchiseCounts[game.franchise] ?? 0) + 1
+// IDs of games belonging to series that have reached the per-series limit (SERIES_LIMIT) in the current quiz
+const seriesLimitedGameIds = computed<Set<number>>(() => {
+    const shownSeriesCounts: Partial<Record<Series, number>> = {}
+    for (const game of state.questions.slice(0, state.currentIndex)) {
+        if (game.series) {
+            shownSeriesCounts[game.series] = (shownSeriesCounts[game.series] ?? 0) + 1
+        }
     }
-  }
-  const limitedFranchises = new Set<Franchise>(
-    (Object.entries(shownFranchiseCounts) as [Franchise, number][])
-      .filter(([, count]) => count >= FRANCHISE_LIMIT)
-      .map(([franchise]) => franchise),
-  )
-  if (limitedFranchises.size === 0) return new Set<number>()
-  return new Set(
-    games.filter((g) => g.franchise && limitedFranchises.has(g.franchise)).map((g) => g.id),
-  )
+    const limitedSeries = new Set<Series>(
+        (Object.entries(shownSeriesCounts) as [Series, number][])
+            .filter(([, count]) => count >= SERIES_LIMIT)
+            .map(([series]) => series),
+    )
+    if (limitedSeries.size === 0) return new Set<number>()
+    return new Set(
+        games.filter((g) => g.series && limitedSeries.has(g.series)).map((g) => g.id),
+    )
 })
 
 function startQuiz() {
-  const forceFirstGames = games.filter((g) => g.forceFirst)
-  const shuffled = [...games].filter((g) => !g.forceFirst).sort(() => Math.random() - 0.5)
-  const franchiseCounts: Partial<Record<Franchise, number>> = {}
-  const selected: Game[] = []
-  for (const game of [...forceFirstGames, ...shuffled]) {
-    if (selected.length >= QUIZ_SIZE) break
-    if (game.franchise) {
-      const count = franchiseCounts[game.franchise] ?? 0
-      if (count >= FRANCHISE_LIMIT) continue
-      franchiseCounts[game.franchise] = count + 1
+    const forceFirstGames = games.filter((g) => g.forceFirst)
+    const shuffled = [...games].filter((g) => !g.forceFirst).sort(() => Math.random() - 0.5)
+    const seriesCounts: Partial<Record<Series, number>> = {}
+    const selected: Game[] = []
+    for (const game of [...forceFirstGames, ...shuffled]) {
+        if (selected.length >= QUIZ_SIZE) break
+        if (game.series) {
+            const count = seriesCounts[game.series] ?? 0
+            if (count >= SERIES_LIMIT) continue
+            seriesCounts[game.series] = count + 1
+        }
+        selected.push(resolveGame(game))
     }
-    selected.push(resolveGame(game))
-  }
-  state.questions = selected
-  state.currentIndex = 0
-  state.answers = []
-  state.isStarted = true
-  state.isAnswered = false
+    state.questions = selected
+    state.currentIndex = 0
+    state.answers = []
+    state.isStarted = true
+    state.isAnswered = false
 }
 
 function submitGuess(guess: string) {
-  if (state.isAnswered) return
-  const currentGame = state.questions[state.currentIndex]
-  if (!currentGame) return
-  const isCorrect = guess.trim().toLowerCase() === currentGame.name.toLowerCase()
-  state.answers.push({ game: currentGame, userGuess: guess.trim(), isCorrect })
-  state.isAnswered = true
+    if (state.isAnswered) return
+    const currentGame = state.questions[state.currentIndex]
+    if (!currentGame) return
+    const isCorrect = guess.trim().toLowerCase() === currentGame.name.toLowerCase()
+    state.answers.push({ game: currentGame, userGuess: guess.trim(), isCorrect })
+    state.isAnswered = true
 }
 
 function nextQuestion() {
-  if (state.currentIndex < state.questions.length - 1) {
-    state.currentIndex++
-    state.isAnswered = false
-  }
+    if (state.currentIndex < state.questions.length - 1) {
+        state.currentIndex++
+        state.isAnswered = false
+    }
 }
 
 function resetQuiz() {
-  state.questions = []
-  state.currentIndex = 0
-  state.answers = []
-  state.isStarted = false
-  state.isAnswered = false
+    state.questions = []
+    state.currentIndex = 0
+    state.answers = []
+    state.isStarted = false
+    state.isAnswered = false
 }
 
 export function useQuiz() {
-  return { state, isFinished, usedGameIds, franchiseLimitedGameIds, startQuiz, submitGuess, nextQuestion, resetQuiz }
+    return { state, isFinished, usedGameIds, seriesLimitedGameIds, startQuiz, submitGuess, nextQuestion, resetQuiz }
 }

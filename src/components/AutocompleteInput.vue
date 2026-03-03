@@ -4,15 +4,15 @@ import { games } from '../data/games'
 import { type GameListEntry } from '../types'
 
 const props = defineProps<{
-  modelValue: string
-  disabledGameIds: Set<number>
-  franchiseLimitedGameIds?: Set<number>
-  disabled?: boolean
+    modelValue: string
+    disabledGameIds: Set<number>
+    seriesLimitedGameIds?: Set<number>
+    disabled?: boolean
 }>()
 
 const emit = defineEmits<{
-  'update:modelValue': [value: string]
-  submit: []
+    'update:modelValue': [value: string]
+    submit: []
 }>()
 
 const isOpen = ref(false)
@@ -22,151 +22,157 @@ const inputRef = ref<HTMLInputElement | null>(null)
 defineExpose({ focus: () => inputRef.value?.focus() })
 
 const allGames = computed<GameListEntry[]>(() =>
-  games.map(({ id, name, franchise }) => ({ id, name, franchise })),
+    games.map(({ id, name, series }) => ({ id, name, series })),
 )
 
 const filteredGames = computed(() => {
-  const query = props.modelValue.toLowerCase().trim()
-  if (!query) return allGames.value
-  return allGames.value.filter((g) => g.name.toLowerCase().includes(query))
+    const query = props.modelValue.toLowerCase().trim()
+    if (!query) return allGames.value
+    return allGames.value.filter((g) => g.name.toLowerCase().includes(query))
 })
 
 function selectGame(game: GameListEntry) {
-  if (props.disabledGameIds.has(game.id)) return
-  if (props.franchiseLimitedGameIds?.has(game.id)) return
-  emit('update:modelValue', game.name)
-  isOpen.value = false
-  highlightedIndex.value = -1
+    if (props.disabledGameIds.has(game.id)) return
+    if (props.seriesLimitedGameIds?.has(game.id)) return
+    emit('update:modelValue', game.name)
+    isOpen.value = false
+    highlightedIndex.value = -1
 }
 
 function onInput(event: Event) {
-  emit('update:modelValue', (event.target as HTMLInputElement).value)
-  isOpen.value = true
-  highlightedIndex.value = -1
+    emit('update:modelValue', (event.target as HTMLInputElement).value)
+    isOpen.value = true
+    highlightedIndex.value = -1
 }
 
 function onFocus() {
-  isOpen.value = true
+    isOpen.value = true
 }
 
 function onBlur() {
-  setTimeout(() => {
-    isOpen.value = false
-    highlightedIndex.value = -1
-  }, 150)
+    setTimeout(() => {
+        isOpen.value = false
+        highlightedIndex.value = -1
+    }, 150)
 }
 
 function onKeydown(event: KeyboardEvent) {
-  if (!isOpen.value) {
-    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-      isOpen.value = true
+    if (!isOpen.value) {
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+            isOpen.value = true
+        } else if (event.key === 'Enter') {
+            event.preventDefault()
+            emit('submit')
+        }
+        return
+    }
+
+    const enabledGames = filteredGames.value.filter(
+        (g) => !props.disabledGameIds.has(g.id) && !props.seriesLimitedGameIds?.has(g.id),
+    )
+
+    if (event.key === 'ArrowDown') {
+        event.preventDefault()
+        let next = highlightedIndex.value + 1
+        while (next < filteredGames.value.length) {
+            const game = filteredGames.value[next]
+            if (!game || (!props.disabledGameIds.has(game.id) && !props.seriesLimitedGameIds?.has(game.id))) break
+            next++
+        }
+        if (next < filteredGames.value.length) {
+            highlightedIndex.value = next
+        }
+    } else if (event.key === 'ArrowUp') {
+        event.preventDefault()
+        let prev = highlightedIndex.value - 1
+        while (prev >= 0) {
+            const game = filteredGames.value[prev]
+            if (!game || (!props.disabledGameIds.has(game.id) && !props.seriesLimitedGameIds?.has(game.id))) break
+            prev--
+        }
+        highlightedIndex.value = prev
     } else if (event.key === 'Enter') {
-      event.preventDefault()
-      emit('submit')
+        event.preventDefault()
+        if (highlightedIndex.value >= 0) {
+            const game = filteredGames.value[highlightedIndex.value]
+            if (game && !props.disabledGameIds.has(game.id) && !props.seriesLimitedGameIds?.has(game.id)) {
+                selectGame(game)
+            }
+        } else if (enabledGames.length === 1 && enabledGames[0]) {
+            selectGame(enabledGames[0])
+        } else {
+            emit('submit')
+        }
+    } else if (event.key === 'Escape') {
+        isOpen.value = false
+        highlightedIndex.value = -1
+    } else if (event.key === 'Tab') {
+        isOpen.value = false
+        highlightedIndex.value = -1
     }
-    return
-  }
-
-  const enabledGames = filteredGames.value.filter(
-    (g) => !props.disabledGameIds.has(g.id) && !props.franchiseLimitedGameIds?.has(g.id),
-  )
-
-  if (event.key === 'ArrowDown') {
-    event.preventDefault()
-    let next = highlightedIndex.value + 1
-    while (next < filteredGames.value.length) {
-      const game = filteredGames.value[next]
-      if (!game || (!props.disabledGameIds.has(game.id) && !props.franchiseLimitedGameIds?.has(game.id))) break
-      next++
-    }
-    if (next < filteredGames.value.length) {
-      highlightedIndex.value = next
-    }
-  } else if (event.key === 'ArrowUp') {
-    event.preventDefault()
-    let prev = highlightedIndex.value - 1
-    while (prev >= 0) {
-      const game = filteredGames.value[prev]
-      if (!game || (!props.disabledGameIds.has(game.id) && !props.franchiseLimitedGameIds?.has(game.id))) break
-      prev--
-    }
-    highlightedIndex.value = prev
-  } else if (event.key === 'Enter') {
-    event.preventDefault()
-    if (highlightedIndex.value >= 0) {
-      const game = filteredGames.value[highlightedIndex.value]
-      if (game && !props.disabledGameIds.has(game.id) && !props.franchiseLimitedGameIds?.has(game.id)) {
-        selectGame(game)
-      }
-    } else if (enabledGames.length === 1 && enabledGames[0]) {
-      selectGame(enabledGames[0])
-    } else {
-      emit('submit')
-    }
-  } else if (event.key === 'Escape') {
-    isOpen.value = false
-    highlightedIndex.value = -1
-  } else if (event.key === 'Tab') {
-    isOpen.value = false
-    highlightedIndex.value = -1
-  }
 }
 </script>
 
 <template>
-  <div class="position-relative">
-    <input
-      ref="inputRef"
-      type="text"
-      class="form-control"
-      placeholder="Type to search for a game…"
-      :value="modelValue"
-      :disabled="disabled"
-      role="combobox"
-      autocomplete="off"
-      autocorrect="off"
-      spellcheck="false"
-      aria-haspopup="listbox"
-      aria-controls="autocomplete-listbox"
-      aria-autocomplete="list"
-      :aria-expanded="isOpen && filteredGames.length > 0"
-      :aria-activedescendant="isOpen && highlightedIndex >= 0 && filteredGames[highlightedIndex] ? `autocomplete-option-${filteredGames[highlightedIndex]!.id}` : undefined"
-      @input="onInput"
-      @focus="onFocus"
-      @blur="onBlur"
-      @keydown="onKeydown"
-    />
-    <ul
-      v-if="isOpen && filteredGames.length > 0"
-      id="autocomplete-listbox"
-      role="listbox"
-      tabindex="-1"
-      class="list-group position-absolute w-100 autocomplete-dropdown shadow"
-    >
-      <li
-        v-for="(game, index) in filteredGames"
-        :id="`autocomplete-option-${game.id}`"
-        :key="game.id"
-        role="option"
-        class="list-group-item list-group-item-action"
-        :class="{
-          disabled: disabledGameIds.has(game.id) || franchiseLimitedGameIds?.has(game.id),
-          active: index === highlightedIndex && !disabledGameIds.has(game.id) && !franchiseLimitedGameIds?.has(game.id),
-        }"
-        :aria-selected="index === highlightedIndex && !disabledGameIds.has(game.id) && !franchiseLimitedGameIds?.has(game.id)"
-        :aria-disabled="disabledGameIds.has(game.id) || franchiseLimitedGameIds?.has(game.id) || undefined"
-        @mousedown.prevent="selectGame(game)"
-      >
-        {{ game.name }}
-        <span v-if="disabledGameIds.has(game.id)" class="ms-2 badge text-bg-secondary">
-          Already played
-        </span>
-        <span v-else-if="franchiseLimitedGameIds?.has(game.id)" class="ms-2 badge text-bg-secondary">
-          Franchise limit reached
-        </span>
-      </li>
-    </ul>
-  </div>
+    <div class="position-relative">
+        <input
+            ref="inputRef"
+            type="text"
+            class="form-control"
+            placeholder="Type to search for a game…"
+            :value="modelValue"
+            :disabled="disabled"
+            role="combobox"
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+            aria-haspopup="listbox"
+            aria-controls="autocomplete-listbox"
+            aria-autocomplete="list"
+            :aria-expanded="isOpen && filteredGames.length > 0"
+            :aria-activedescendant="isOpen && highlightedIndex >= 0 && filteredGames[highlightedIndex] ? `autocomplete-option-${filteredGames[highlightedIndex]!.id}` : undefined"
+            @input="onInput"
+            @focus="onFocus"
+            @blur="onBlur"
+            @keydown="onKeydown"
+        >
+        <ul
+            v-if="isOpen && filteredGames.length > 0"
+            id="autocomplete-listbox"
+            role="listbox"
+            tabindex="-1"
+            class="list-group position-absolute w-100 autocomplete-dropdown shadow"
+        >
+            <li
+                v-for="(game, index) in filteredGames"
+                :id="`autocomplete-option-${game.id}`"
+                :key="game.id"
+                role="option"
+                class="list-group-item list-group-item-action"
+                :class="{
+                    disabled: disabledGameIds.has(game.id) || seriesLimitedGameIds?.has(game.id),
+                    active: index === highlightedIndex && !disabledGameIds.has(game.id) && !seriesLimitedGameIds?.has(game.id),
+                }"
+                :aria-selected="index === highlightedIndex && !disabledGameIds.has(game.id) && !seriesLimitedGameIds?.has(game.id)"
+                :aria-disabled="disabledGameIds.has(game.id) || seriesLimitedGameIds?.has(game.id) || undefined"
+                @mousedown.prevent="selectGame(game)"
+            >
+                {{ game.name }}
+                <span
+                    v-if="disabledGameIds.has(game.id)"
+                    class="ms-2 badge text-bg-secondary"
+                >
+                    Already played
+                </span>
+                <span
+                    v-else-if="seriesLimitedGameIds?.has(game.id)"
+                    class="ms-2 badge text-bg-secondary"
+                >
+                    Series limit reached
+                </span>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <style scoped>
@@ -175,7 +181,7 @@ function onKeydown(event: KeyboardEvent) {
   z-index: 1000;
   max-height: 280px;
   overflow-y: auto;
-  background: white;
+  background-color: var(--bs-body-bg);
 }
 
 .list-group-item.disabled {

@@ -1,5 +1,5 @@
 body {
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background-color: var(--bs-body-bg);
   font-family: 'Nunito Sans', sans-serif;
 }
