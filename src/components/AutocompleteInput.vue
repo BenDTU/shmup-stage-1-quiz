@@ -70,16 +70,6 @@ const filteredGames = computed<AutocompleteItem[]>(() => {
         })
 })
 
-function selectGame(game: AutocompleteItem) {
-    if (props.disabledGameIds.has(game.id)) return
-    if (props.seriesLimitedGameIds?.has(game.id)) return
-    internalUpdate.value = true
-    inputText.value = game.displayName
-    emit('update:modelValue', game.id)
-    isOpen.value = false
-    highlightedIndex.value = -1
-}
-
 function matchGameToText(text: string): number | null {
     const lower = text.toLowerCase().trim()
     for (const g of allGames.value) {
@@ -90,14 +80,25 @@ function matchGameToText(text: string): number | null {
     return null
 }
 
-function onInput(event: Event) {
-    inputText.value = (event.target as HTMLInputElement).value
-    internalUpdate.value = true
-    const matchedId = matchGameToText(inputText.value)
+watch(inputText, (text) => {
+    const matchedId = matchGameToText(text)
     const isSelectable = matchedId !== null
         && !props.disabledGameIds.has(matchedId)
         && !props.seriesLimitedGameIds?.has(matchedId)
+    internalUpdate.value = true
     emit('update:modelValue', isSelectable ? matchedId : null)
+}, { flush: 'sync' })
+
+function selectGame(game: AutocompleteItem) {
+    if (props.disabledGameIds.has(game.id)) return
+    if (props.seriesLimitedGameIds?.has(game.id)) return
+    inputText.value = game.displayName
+    isOpen.value = false
+    highlightedIndex.value = -1
+}
+
+function onInput(event: Event) {
+    inputText.value = (event.target as HTMLInputElement).value
     isOpen.value = true
     highlightedIndex.value = -1
 }
