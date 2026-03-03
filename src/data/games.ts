@@ -458,6 +458,14 @@ const gameEntries: GameEntry[] = [
     songSource: { songName: 'Selection (Genetic)', videoId: 'N3EJltfL7ok' },
   },
   {
+    name: 'Strike Gunner S.T.G.',
+    // The theme has no official name; songName describes where it appears. The same melody is used in different stages across the Arcade and Super Nintendo versions.
+    songSource: [
+      { songName: 'Stages 1, 4 & Ending', arrangements: [ { source: 'Arcade', videoId: 'Zi0fezKPdH0' } ] },
+      { songName: 'Stages 1, 3 & 5', arrangements: [ { source: 'Super Nintendo', videoId: 'g3L79GW6T7s' } ] },
+    ]
+  },
+  {
     name: 'Strikers 1945',
     series: Series.Strikers1945,
     songSource: [
