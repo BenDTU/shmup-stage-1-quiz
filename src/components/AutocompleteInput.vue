@@ -19,8 +19,13 @@ const isOpen = ref(false)
 const highlightedIndex = ref(-1)
 const inputRef = ref<HTMLInputElement | null>(null)
 const inputText = ref('')
+const internalUpdate = ref(false)
 
 watch(() => props.modelValue, (newId) => {
+    if (internalUpdate.value) {
+        internalUpdate.value = false
+        return
+    }
     if (newId === -1) {
         inputText.value = ''
     } else {
@@ -68,6 +73,7 @@ const filteredGames = computed<AutocompleteItem[]>(() => {
 function selectGame(game: AutocompleteItem) {
     if (props.disabledGameIds.has(game.id)) return
     if (props.seriesLimitedGameIds?.has(game.id)) return
+    internalUpdate.value = true
     inputText.value = game.displayName
     emit('update:modelValue', game.id)
     isOpen.value = false
@@ -76,6 +82,7 @@ function selectGame(game: AutocompleteItem) {
 
 function onInput(event: Event) {
     inputText.value = (event.target as HTMLInputElement).value
+    internalUpdate.value = true
     emit('update:modelValue', -1)
     isOpen.value = true
     highlightedIndex.value = -1
