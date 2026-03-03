@@ -461,7 +461,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Shienryu',
-        alias: ['Steel Dragon', 'Gekioh Shooting King'],
+        alias: ['Gekioh Shooting King', 'Steel Dragon'],
         songSource: {
             songName: 'Stage 1',
             arrangements: [

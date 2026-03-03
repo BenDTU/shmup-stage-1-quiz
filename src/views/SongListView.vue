@@ -35,11 +35,18 @@ function songEntryToRow(entry: SongEntry): SongRow {
     }
 }
 
+function normalizeAlias(alias: string | string[]): string[] {
+    if (Array.isArray(alias)) {
+        return alias
+    }
+    return [alias]
+}
+
 const gameGroups: GameGroup[] = games.map((game) => {
     const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource]
     return {
         gameName: game.name,
-        aliases: game.alias ? (Array.isArray(game.alias) ? game.alias : [game.alias]) : [],
+        aliases: game.alias ? normalizeAlias(game.alias) : [],
         songs: sources.map(songEntryToRow),
     }
 })
@@ -91,10 +98,11 @@ const hoveredGame = ref<string | null>(null)
                                     >
                                         <div>{{ group.gameName }}</div>
                                         <div
-                                            v-if="group.aliases.length"
+                                            v-for="alias in group.aliases"         
+                                            :key="alias"                                   
                                             class="text-muted small"
                                         >
-                                            {{ group.aliases.join(', ') }}
+                                            {{ alias }}
                                         </div>
                                     </td>
                                     <td>{{ song.songName }}</td>
