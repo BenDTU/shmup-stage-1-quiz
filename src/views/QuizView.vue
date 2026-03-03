@@ -5,6 +5,7 @@ import YouTubePlayer from '../components/YouTubePlayer.vue'
 import AutocompleteInput from '../components/AutocompleteInput.vue'
 import { useQuiz } from '../composables/useQuiz'
 import { games } from '../data/games'
+import { guessedGameName } from '../types'
 
 const router = useRouter()
 const { state, isFinished, usedGameIds, seriesLimitedGameIds, submitGuess, nextQuestion } = useQuiz()
@@ -152,9 +153,7 @@ async function handleNextClick(event: MouseEvent) {
                                 <span v-else>
                                     ❌ <strong>Incorrect.</strong> The song was
                                     <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
-                                    <span v-if="state.answers[state.currentIndex] !== -1">
-                                        You guessed: <em>{{ games.find((g) => g.id === state.answers[state.currentIndex])?.name }}</em>.
-                                    </span>
+                                    You guessed: <em>{{ guessedGameName(state.answers[state.currentIndex], games) }}</em>.
                                 </span>
                             </div>
                             <button
