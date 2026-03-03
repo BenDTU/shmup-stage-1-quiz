@@ -16,6 +16,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Easy to Go', videoId: 'UFc72Qz3S34' },
     },
     {
+        name: 'Assault Shell',
+        songSource: { songName: 'Assault Launch', videoId: 'ypFovFbi0dw' },
+    },
+    {
         name: 'Battle Bakraid',
         songSource: { songName: 'Sky Gunner', videoId: 'gb39c-VlJkA' },
     },
