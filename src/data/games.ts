@@ -460,7 +460,19 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Shienryu',
         alias: ['Steel Dragon', 'Gekioh Shooting King'],
-        songSource: { songName: 'Stage 1', videoId: '4tk9RUiRplw' },
+        songSource: {
+            songName: 'Stage 1',
+            arrangements: [
+                {
+                    source: 'Original',
+                    videoId: '4tk9RUiRplw',
+                },
+                {
+                    source: 'Playstation',
+                    videoId: 'ycQgBx7gfFQ',
+                },
+            ]
+        },
     },
     {
         name: 'Space Invaders (1999)',
