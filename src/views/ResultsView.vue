@@ -27,6 +27,7 @@ function playAgain() {
     <main class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-7">
+                <template v-if="total > 0">
                 <div class="text-center mb-5">
                     <h1 class="display-5 fw-bold">
                         Quiz Complete! 🏆
@@ -105,6 +106,7 @@ function playAgain() {
                         Play Again
                     </button>
                 </div>
+                </template>
             </div>
         </div>
     </main>
