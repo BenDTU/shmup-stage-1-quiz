@@ -9,7 +9,7 @@ import { guessedGameName } from '../functions'
 const router = useRouter()
 const { state, isFinished, usedGameIds, seriesLimitedGameIds, submitGuess, nextQuestion } = useQuiz()
 
-const selectedGameId = ref(-1)
+const selectedGameId = ref<number | null>(null)
 const audioUnlocked = ref(false)
 const nextBtn = ref<HTMLButtonElement | null>(null)
 const autocompleteRef = ref<{ focus: () => void; reset: () => void } | null>(null)
@@ -25,12 +25,12 @@ const questionNumber = computed(() => state.currentIndex + 1)
 
 // Only allow submitting a guess that corresponds to an available game in the pool
 const isValidGuess = computed(() => {
-    if (selectedGameId.value === -1) return false
+    if (selectedGameId.value === null) return false
     return !usedGameIds.value.has(selectedGameId.value) && !seriesLimitedGameIds.value.has(selectedGameId.value)
 })
 async function handleSubmit(viaKeyboard = false) {
     if (!isValidGuess.value || state.isAnswered) return
-    submitGuess(selectedGameId.value)
+    submitGuess(selectedGameId.value!)
     if (viaKeyboard) {
         await nextTick()
         nextBtn.value?.focus()
@@ -52,7 +52,7 @@ function handleNext() {
     if (isFinished.value) {
         router.push('/results')
     } else {
-        selectedGameId.value = -1
+        selectedGameId.value = null
         autocompleteRef.value?.reset()
         nextQuestion()
     }

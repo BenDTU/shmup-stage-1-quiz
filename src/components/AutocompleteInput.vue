@@ -4,14 +4,14 @@ import { games } from '../data/games'
 import { type GameListEntry } from '../types'
 
 const props = defineProps<{
-    modelValue: number   // selected game id, or -1 for no selection
+    modelValue: number | null   // selected game id, or null for no selection
     disabledGameIds: Set<number>
     seriesLimitedGameIds?: Set<number>
     disabled?: boolean
 }>()
 
 const emit = defineEmits<{
-    'update:modelValue': [value: number]
+    'update:modelValue': [value: number | null]
     submit: []
 }>()
 
@@ -26,7 +26,7 @@ watch(() => props.modelValue, (newId) => {
         internalUpdate.value = false
         return
     }
-    if (newId === -1) {
+    if (newId === null) {
         inputText.value = ''
     } else {
         const game = games.find((g) => g.id === newId)
@@ -80,24 +80,24 @@ function selectGame(game: AutocompleteItem) {
     highlightedIndex.value = -1
 }
 
-function matchGameToText(text: string): number {
+function matchGameToText(text: string): number | null {
     const lower = text.toLowerCase().trim()
     for (const g of allGames.value) {
         if (g.name.toLowerCase() === lower) return g.id
         const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : []
         if (aliases.some((a) => `${g.name} (${a})`.toLowerCase() === lower)) return g.id
     }
-    return -1
+    return null
 }
 
 function onInput(event: Event) {
     inputText.value = (event.target as HTMLInputElement).value
     internalUpdate.value = true
     const matchedId = matchGameToText(inputText.value)
-    const isSelectable = matchedId !== -1
+    const isSelectable = matchedId !== null
         && !props.disabledGameIds.has(matchedId)
         && !props.seriesLimitedGameIds?.has(matchedId)
-    emit('update:modelValue', isSelectable ? matchedId : -1)
+    emit('update:modelValue', isSelectable ? matchedId : null)
     isOpen.value = true
     highlightedIndex.value = -1
 }
