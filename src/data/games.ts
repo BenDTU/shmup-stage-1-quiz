@@ -463,7 +463,7 @@ const gameEntries: GameEntry[] = [
     songSource: [
       { songName: 'Stages 1, 4 & Ending', arrangements: [ { source: 'Arcade', videoId: 'Zi0fezKPdH0' } ] },
       { songName: 'Stages 1, 3 & 5', arrangements: [ { source: 'Super Nintendo', videoId: 'g3L79GW6T7s' } ] },
-    ]    
+    ]
   },
   {
     name: 'Strikers 1945',
