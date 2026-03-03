@@ -48,7 +48,7 @@ Instead of `videoId`, supply an `arrangements` array:
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `songName` | `string` | ✅ | Track name shown on the results screen |
-| `arrangements` | `SongArrangement[]` | ✅ | At least one arrangement; one is chosen at random per quiz session |
+| `arrangements` | `[SongArrangement, ...SongArrangement[]]` | ✅ | At least one arrangement; one is chosen at random per quiz session. When supplying an array it must be non-empty (TypeScript will reject an empty array). |
 
 Each `SongArrangement` has:
 
