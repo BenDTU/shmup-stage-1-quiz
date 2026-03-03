@@ -175,7 +175,7 @@ function onKeydown(event: KeyboardEvent) {
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .autocomplete-dropdown {
   top: 100%;
   z-index: 1000;
