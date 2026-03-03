@@ -9,90 +9,99 @@ import pluginVue from 'eslint-plugin-vue'
  * @type {import('eslint').Rule.RuleModule}
  */
 const sortedGamesRule = {
-  meta: {
-    type: 'suggestion',
-    docs: {
-      description: 'Enforce that the games array in games.ts is sorted alphabetically by name',
-    },
-    schema: [],
-    messages: {
-      unsorted:
+    meta: {
+        type: 'suggestion',
+        docs: {
+            description: 'Enforce that the games array in games.ts is sorted alphabetically by name',
+        },
+        schema: [],
+        messages: {
+            unsorted:
         'Game "{{current}}" should come before "{{previous}}". Keep the games array sorted alphabetically by name (use sortName to override the sort key if needed).',
-      unsortedWithKeys:
+            unsortedWithKeys:
         'Game "{{current}}" (sort key: "{{currentKey}}") should come before "{{previous}}" (sort key: "{{previousKey}}"). Keep the games array sorted alphabetically by name (use sortName to override the sort key if needed).',
+        },
     },
-  },
-  create(context) {
-    return {
-      'VariableDeclarator[id.name="gameEntries"] > ArrayExpression'(node) {
-        const elements = node.elements
+    create(context) {
+        return {
+            'VariableDeclarator[id.name="gameEntries"] > ArrayExpression'(node) {
+                const elements = node.elements
 
-        /** @type {{ name: string; sortKey: string; node: import('eslint').Rule.Node }[]} */
-        const entries = []
-        for (const el of elements) {
-          if (!el || el.type !== 'ObjectExpression') continue
-          const nameProp = el.properties.find(
-            (p) => p.type === 'Property' && p.key && p.key.name === 'name',
-          )
-          if (!nameProp || !nameProp.value || nameProp.value.type !== 'Literal') continue
-          const name = String(nameProp.value.value)
-          const sortNameProp = el.properties.find(
-            (p) => p.type === 'Property' && p.key && p.key.name === 'sortName',
-          )
-          const sortKey =
+                /** @type {{ name: string; sortKey: string; node: import('eslint').Rule.Node }[]} */
+                const entries = []
+                for (const el of elements) {
+                    if (!el || el.type !== 'ObjectExpression') continue
+                    const nameProp = el.properties.find(
+                        (p) => p.type === 'Property' && p.key && p.key.name === 'name',
+                    )
+                    if (!nameProp || !nameProp.value || nameProp.value.type !== 'Literal') continue
+                    const name = String(nameProp.value.value)
+                    const sortNameProp = el.properties.find(
+                        (p) => p.type === 'Property' && p.key && p.key.name === 'sortName',
+                    )
+                    const sortKey =
             sortNameProp && sortNameProp.value && sortNameProp.value.type === 'Literal'
-              ? String(sortNameProp.value.value)
-              : name
-          entries.push({ name, sortKey, node: el })
-        }
+                ? String(sortNameProp.value.value)
+                : name
+                    entries.push({ name, sortKey, node: el })
+                }
 
-        for (let i = 1; i < entries.length; i++) {
-          const prev = entries[i - 1].sortKey
-          const curr = entries[i].sortKey
-          if (prev.localeCompare(curr, undefined, { sensitivity: 'base', numeric: true }) > 0) {
-            const useSortKeys =
+                for (let i = 1; i < entries.length; i++) {
+                    const prev = entries[i - 1].sortKey
+                    const curr = entries[i].sortKey
+                    if (prev.localeCompare(curr, undefined, { sensitivity: 'base', numeric: true }) > 0) {
+                        const useSortKeys =
               entries[i].sortKey !== entries[i].name || entries[i - 1].sortKey !== entries[i - 1].name
-            context.report({
-              node: entries[i].node,
-              messageId: useSortKeys ? 'unsortedWithKeys' : 'unsorted',
-              data: useSortKeys
-                ? {
-                    current: entries[i].name,
-                    currentKey: entries[i].sortKey,
-                    previous: entries[i - 1].name,
-                    previousKey: entries[i - 1].sortKey,
-                  }
-                : { current: entries[i].name, previous: entries[i - 1].name },
-            })
-          }
+                        context.report({
+                            node: entries[i].node,
+                            messageId: useSortKeys ? 'unsortedWithKeys' : 'unsorted',
+                            data: useSortKeys
+                                ? {
+                                    current: entries[i].name,
+                                    currentKey: entries[i].sortKey,
+                                    previous: entries[i - 1].name,
+                                    previousKey: entries[i - 1].sortKey,
+                                }
+                                : { current: entries[i].name, previous: entries[i - 1].name },
+                        })
+                    }
+                }
+            },
         }
-      },
-    }
-  },
+    },
 }
 
 export default tseslint.config(
-  eslint.configs.recommended,
-  ...tseslint.configs.recommended,
-  ...pluginVue.configs['flat/recommended'],
-  {
-    files: ['**/*.vue'],
-    languageOptions: {
-      parserOptions: {
-        parser: tseslint.parser,
-      },
+    eslint.configs.recommended,
+    ...tseslint.configs.recommended,
+    ...pluginVue.configs['flat/recommended'],
+    {
+        files: ['**/*.js', '**/*.ts', '**/*.vue'],
+        rules: {
+            indent: ['error', 4],
+        },
     },
-  },
-  {
-    files: ['src/data/games.ts'],
-    plugins: {
-      local: { rules: { 'sorted-games': sortedGamesRule } },
+    {
+        files: ['**/*.vue'],
+        languageOptions: {
+            parserOptions: {
+                parser: tseslint.parser,
+            },
+        },
+        rules: {
+            'vue/html-indent': ['error', 4],
+        },
     },
-    rules: {
-      'local/sorted-games': 'error',
+    {
+        files: ['src/data/games.ts'],
+        plugins: {
+            local: { rules: { 'sorted-games': sortedGamesRule } },
+        },
+        rules: {
+            'local/sorted-games': 'error',
+        },
     },
-  },
-  {
-    ignores: ['dist/**', 'node_modules/**'],
-  },
+    {
+        ignores: ['dist/**', 'node_modules/**'],
+    },
 )
