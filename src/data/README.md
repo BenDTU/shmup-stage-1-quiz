@@ -133,3 +133,69 @@ To add a new series, add a new entry to the `Series` enum in `src/types.ts`.
   songSource: { songName: 'Burning Heat', videoId: 'FLc1msji0_w' },
 },
 ```
+
+### Platform releases with entirely different soundtracks
+
+When a port has a substantially different soundtrack — not just a different mix or arrangement of the same tracks — it is listed as a separate game entry rather than grouped with `arrangements`.
+
+- **In the Hunt (PlayStation)** has a completely different soundtrack from the arcade original, so it is its own entry rather than an arrangement of the arcade entry.
+- **Space Invaders Extreme** groups the DS and Steam releases under `arrangements` because they share the same songs. The PSP and Xbox 360 releases use a different soundtrack, so those would be their own entries if included.
+- **Space Invaders (Game Boy Advance)** has its own unique soundtrack separate from other Space Invaders releases, so it is listed independently from *Space Invaders (1999)* and *Space Invaders (Game Boy Color)*.
+
+```ts
+// Arcade original
+{
+  name: 'In the Hunt',
+  songSource: { songName: 'THE SOUTH POLE', videoId: '9F8SiVzU1QI' },
+},
+// PlayStation port — different soundtrack, separate entry
+{
+  name: 'In the Hunt (PlayStation)',
+  songSource: { songName: 'Stage 1', videoId: '7fI0-TLbPkY' },
+},
+```
+
+## Other edge cases
+
+### Tracks with no official name
+
+If a soundtrack has no known tracklisting, use the in-game context where the song is heard as the `songName`. In most cases this will be `'Stage 1'`, but it can be more specific if the track is shared across multiple stages (e.g. `'Stage 1 & 4'`).
+
+If a game has very few tracks and the song has no name, numbering it by position is acceptable:
+
+```ts
+// Space Invaders (GBA) only has three tracks used throughout the game
+{
+  name: 'Space Invaders (Game Boy Advance)',
+  series: Series.SpaceInvaders,
+  songSource: { songName: 'Track 1', videoId: 'XUXYxZjt2VI' },
+},
+```
+
+### Many versions rolled into one entry
+
+When a game has been released across many versions and sequels with different stage 1 songs, they can be grouped into a single `songSource` array to avoid quiz questions that amount to "which sub-release of *DariusBurst* are you hearing?":
+
+```ts
+{
+  name: 'DariusBurst',
+  series: Series.Darius,
+  songSource: [
+    { songName: 'Good-bye My Earth', videoId: 'Hi1sF3AKPHk' },
+    { songName: 'Freedom', videoId: 'eKSsVzGkcqs' },
+    { songName: 'Mortification of the Flesh', videoId: 'Vke1mMHGjJA' },
+    { songName: 'Suite Photoconductivity ~First Tune Iron Fossil~', videoId: 'h52k2Et3AXk' },
+  ]
+},
+```
+
+### Same unnamed song across multiple platforms
+
+If a game has the same stage 1 theme across platforms but the song has no defined name, list each platform as a separate `SongEntry` and use a `songName` that reflects where in that version the track is heard:
+
+```ts
+// Strike Gunner S.T.G. — same melody on both platforms, but the song is unnamed,
+// so each platform gets its own entry with a descriptive title
+{ songName: 'Stage 1 (SNES)',  videoId: '...' },
+{ songName: 'Stage 1 (Arcade)', videoId: '...' },
+```
