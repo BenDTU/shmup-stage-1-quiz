@@ -3,15 +3,18 @@ import { games } from '@/data/games'
 import type { SongEntry } from '@/data/games'
 
 interface SongRow {
-    gameName: string
     songName: string
     links: { label: string; url: string }[]
 }
 
-function songEntryToRows(gameName: string, entry: SongEntry): SongRow {
+interface GameGroup {
+    gameName: string
+    songs: SongRow[]
+}
+
+function songEntryToRow(entry: SongEntry): SongRow {
     if ('arrangements' in entry) {
         return {
-            gameName,
             songName: entry.songName,
             links: entry.arrangements.map((a) => ({
                 label: a.source,
@@ -20,7 +23,6 @@ function songEntryToRows(gameName: string, entry: SongEntry): SongRow {
         }
     }
     return {
-        gameName,
         songName: entry.songName,
         links: [
             {
@@ -31,9 +33,12 @@ function songEntryToRows(gameName: string, entry: SongEntry): SongRow {
     }
 }
 
-const rows: SongRow[] = games.flatMap((game) => {
+const gameGroups: GameGroup[] = games.map((game) => {
     const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource]
-    return sources.map((entry) => songEntryToRows(game.name, entry))
+    return {
+        gameName: game.name,
+        songs: sources.map(songEntryToRow),
+    }
 })
 </script>
 
@@ -63,23 +68,34 @@ const rows: SongRow[] = games.flatMap((game) => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                v-for="(row, index) in rows"
-                                :key="`${row.gameName}|${row.songName}|${index}`"
+                            <template
+                                v-for="group in gameGroups"
+                                :key="group.gameName"
                             >
-                                <td>{{ row.gameName }}</td>
-                                <td>{{ row.songName }}</td>
-                                <td class="text-nowrap">
-                                    <a
-                                        v-for="link in row.links"
-                                        :key="link.url"
-                                        :href="link.url"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="me-2"
-                                    >▶ {{ link.label }}</a>
-                                </td>
-                            </tr>
+                                <tr
+                                    v-for="(song, songIndex) in group.songs"
+                                    :key="`${group.gameName}|${songIndex}|${song.songName}`"
+                                >
+                                    <td
+                                        v-if="songIndex === 0"
+                                        :rowspan="group.songs.length"
+                                        class="align-middle"
+                                    >
+                                        {{ group.gameName }}
+                                    </td>
+                                    <td>{{ song.songName }}</td>
+                                    <td class="text-nowrap">
+                                        <a
+                                            v-for="link in song.links"
+                                            :key="link.url"
+                                            :href="link.url"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="me-2"
+                                        >▶ {{ link.label }}</a>
+                                    </td>
+                                </tr>
+                            </template>
                         </tbody>
                     </table>
                 </div>
