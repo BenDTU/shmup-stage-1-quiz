@@ -3,7 +3,7 @@ import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuiz } from '../composables/useQuiz'
 import { games } from '../data/games'
-import { guessedGameName } from '../types'
+import { guessedGameName } from '../functions'
 
 
 const router = useRouter()

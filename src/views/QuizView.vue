@@ -5,7 +5,7 @@ import YouTubePlayer from '../components/YouTubePlayer.vue'
 import AutocompleteInput from '../components/AutocompleteInput.vue'
 import { useQuiz } from '../composables/useQuiz'
 import { games } from '../data/games'
-import { guessedGameName } from '../types'
+import { guessedGameName } from '../functions'
 
 const router = useRouter()
 const { state, isFinished, usedGameIds, seriesLimitedGameIds, submitGuess, nextQuestion } = useQuiz()

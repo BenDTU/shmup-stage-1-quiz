@@ -36,11 +36,6 @@ export type GameEntryWithId = GameEntry & { id: number }
 
 export type GameListEntry = { id: number; name: string; alias?: string | string[]; series?: Series }
 
-export function guessedGameName(guessId: number | undefined, games: { id: number; name: string }[]): string {
-    if (guessId === undefined || guessId === -1) return 'Song Skipped'
-    return games.find((g) => g.id === guessId)?.name ?? '(no answer)'
-}
-
 export type Game = {
     name: string
     alias?: string | string[] // optional alternative name(s) carried through from the game entry
