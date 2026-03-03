@@ -104,6 +104,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Dogyuun Magic', videoId: 'B5fpCSNNKsM' },
     },
     {
+        name: 'Drainus',
+        songSource: { songName: 'Determination -STAGE 1-', videoId: 'ppgo1QkNNxk' },
+    },
+    {
         name: 'ESP Ra.De.',
         songSource: [
             { songName: 'DESPERATE SCHOOL (STAGE-A)', videoId: 'P3_U1wyESiA' },
@@ -117,6 +121,10 @@ const gameEntries: GameEntry[] = [
             songName: 'Bloody Separation ~ Bloody Arrival (Stage 1/Stage 5.2)',
             videoId: '5A6oJRZSFBg',
         },
+    },
+    {
+        name: 'Ex-Calibre',
+        songSource: { songName: "Cruisin'", videoId: 'ddJJ_geDcYU' },
     },
     {
         name: 'G-Darius',
@@ -160,6 +168,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Gunnail',
         songSource: { songName: 'Stage 1 & 2', videoId: 'hpzlZb-z7Kc', startTime: 97, endTime: 524 },
+    },
+    {
+        name: 'Gunvein',
+        songSource: { songName: 'Highway Chaos', videoId: 'vpYeipFZ0kQ' },
     },
     {
         name: 'Guwange',
@@ -252,6 +264,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Progear no Arashi',
         songSource: { songName: 'To the Blue Sky –Stage 1–', videoId: 'h-lt6fiIqvM' },
+    },
+    {
+        name: 'Protocorgi',
+        songSource: { songName: 'Leviathan 1', videoId: 'UzpRYgSCwds' },
     },
     {
         name: 'Psyvariar 2',
@@ -427,6 +443,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'REZON',
         songSource: { songName: 'Stage 1 & 4', videoId: 'ZAKUutWAdDM', startTime: 2, endTime: 31 },
+    },
+    {
+        name: 'Rolling Gunner',
+        songSource: { songName: 'The Last Shining Star', videoId: 'iklxp3EUUi4' },
     },
     {
         name: 'Shienryu',
@@ -693,7 +713,11 @@ const gameEntries: GameEntry[] = [
                 },
             ]
         },
-    }
+    },
+    {
+        name: 'ZeroRanger',
+        songSource: { songName: 'It May Be Greenish', videoId: 'U0MXZ_WXtsM' },
+    },
 ]
 
 export const games: GameEntryWithId[] = gameEntries.map((entry, index) => ({ ...entry, id: index + 1 }))
