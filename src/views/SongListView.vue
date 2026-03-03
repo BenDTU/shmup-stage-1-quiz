@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { games } from '@/data/games'
 import type { SongEntry } from '@/data/games'
 
@@ -40,6 +41,8 @@ const gameGroups: GameGroup[] = games.map((game) => {
         songs: sources.map(songEntryToRow),
     }
 })
+
+const hoveredGame = ref<string | null>(null)
 </script>
 
 <template>
@@ -53,7 +56,7 @@ const gameGroups: GameGroup[] = games.map((game) => {
                     All <strong>{{ games.length }}</strong> games and their stage&nbsp;1 themes in the quiz.
                 </p>
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle">
+                    <table class="table align-middle">
                         <thead>
                             <tr>
                                 <th scope="col">
@@ -75,6 +78,9 @@ const gameGroups: GameGroup[] = games.map((game) => {
                                 <tr
                                     v-for="(song, songIndex) in group.songs"
                                     :key="`${group.gameName}|${songIndex}|${song.songName}`"
+                                    :class="{ 'row-hovered': hoveredGame === group.gameName }"
+                                    @mouseenter="hoveredGame = group.gameName"
+                                    @mouseleave="hoveredGame = null"
                                 >
                                     <td
                                         v-if="songIndex === 0"
@@ -111,3 +117,9 @@ const gameGroups: GameGroup[] = games.map((game) => {
         </div>
     </main>
 </template>
+
+<style scoped>
+tr.row-hovered > td {
+    background-color: var(--bs-table-hover-bg, rgba(0, 0, 0, 0.075));
+}
+</style>
