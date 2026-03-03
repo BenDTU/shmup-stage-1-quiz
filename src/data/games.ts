@@ -266,7 +266,7 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'To the Blue Sky –Stage 1–', videoId: 'h-lt6fiIqvM' },
     },
     {
-        name: 'Protocorgi',
+        name: 'ProtoCorgi',
         songSource: { songName: 'Leviathan 1', videoId: 'UzpRYgSCwds' },
     },
     {
