@@ -2,6 +2,7 @@
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuiz } from '../composables/useQuiz'
+import { gameDisplayName } from '../types'
 
 const router = useRouter()
 const { state, resetQuiz } = useQuiz()
@@ -69,7 +70,7 @@ function playAgain() {
                                 <span class="me-2 text-nowrap">{{ answer.isCorrect ? '✅' : '❌' }}</span>
                                 <div>
                                     <div class="fw-semibold">
-                                        {{ answer.game.name }}
+                                        {{ gameDisplayName(answer.game.name, answer.game.alias) }}
                                     </div>
                                     <div class="text-muted small">
                                         {{ answer.game.songName }}<template v-if="answer.game.source">

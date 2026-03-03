@@ -21,20 +21,33 @@ const inputRef = ref<HTMLInputElement | null>(null)
 
 defineExpose({ focus: () => inputRef.value?.focus() })
 
+type AutocompleteItem = GameListEntry & { displayName: string }
+
 const allGames = computed<GameListEntry[]>(() =>
-    games.map(({ id, name, series }) => ({ id, name, series })),
+    games.map(({ id, name, alias, series }) => ({ id, name, alias, series })),
 )
 
-const filteredGames = computed(() => {
+const filteredGames = computed<AutocompleteItem[]>(() => {
     const query = props.modelValue.toLowerCase().trim()
-    if (!query) return allGames.value
-    return allGames.value.filter((g) => g.name.toLowerCase().includes(query))
+    if (!query) return allGames.value.map((g) => ({ ...g, displayName: g.name }))
+    return allGames.value
+        .filter((g) => {
+            if (g.name.toLowerCase().includes(query)) return true
+            const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : []
+            return aliases.some((a) => a.toLowerCase().includes(query))
+        })
+        .map((g) => {
+            if (g.name.toLowerCase().includes(query)) return { ...g, displayName: g.name }
+            const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : []
+            const matchedAlias = aliases.find((a) => a.toLowerCase().includes(query))
+            return { ...g, displayName: matchedAlias ? `${g.name} (${matchedAlias})` : g.name }
+        })
 })
 
-function selectGame(game: GameListEntry) {
+function selectGame(game: AutocompleteItem) {
     if (props.disabledGameIds.has(game.id)) return
     if (props.seriesLimitedGameIds?.has(game.id)) return
-    emit('update:modelValue', game.name)
+    emit('update:modelValue', game.displayName)
     isOpen.value = false
     highlightedIndex.value = -1
 }
@@ -157,7 +170,7 @@ function onKeydown(event: KeyboardEvent) {
                 :aria-disabled="disabledGameIds.has(game.id) || seriesLimitedGameIds?.has(game.id) || undefined"
                 @mousedown.prevent="selectGame(game)"
             >
-                {{ game.name }}
+                {{ game.displayName }}
                 <span
                     v-if="disabledGameIds.has(game.id)"
                     class="ms-2 badge text-bg-secondary"
