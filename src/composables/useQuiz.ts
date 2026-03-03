@@ -6,22 +6,21 @@ function resolveGame(entry: GameEntryWithId): Game {
   const { name, series, id } = entry
   const sources = Array.isArray(entry.songSource) ? entry.songSource : [entry.songSource]
   const songEntry = sources[Math.floor(Math.random() * sources.length)]!
-  if ('arrangements' in songEntry) {
-    const arrangements = songEntry.arrangements
-    const arrangement = arrangements[Math.floor(Math.random() * arrangements.length)]!
-    return {
-      name,
-      series,
-      id,
-      songName: songEntry.songName,
-      videoId: arrangement.videoId,
-      startTime: arrangement.startTime ?? 0,
-      endTime: arrangement.endTime,
-      source: arrangement.source,
-    }
-  } else {
+  if (!('arrangements' in songEntry)) {
     const { songName, videoId, startTime = 0, endTime } = songEntry
     return { name, series, id, songName, videoId, startTime, endTime }
+  }
+  const arrangements = songEntry.arrangements
+  const arrangement = arrangements[Math.floor(Math.random() * arrangements.length)]!
+  return {
+    name,
+    series,
+    id,
+    songName: songEntry.songName,
+    videoId: arrangement.videoId,
+    startTime: arrangement.startTime ?? 0,
+    endTime: arrangement.endTime,
+    source: arrangement.source,
   }
 }
 
