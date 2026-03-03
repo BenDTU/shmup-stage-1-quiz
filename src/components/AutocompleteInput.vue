@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { games } from '../data/games'
 import { type GameListEntry } from '../types'
 
@@ -19,6 +19,15 @@ const isOpen = ref(false)
 const highlightedIndex = ref(-1)
 const inputRef = ref<HTMLInputElement | null>(null)
 const inputText = ref('')
+
+watch(() => props.modelValue, (newId) => {
+    if (newId === -1) {
+        inputText.value = ''
+    } else {
+        const game = games.find((g) => g.id === newId)
+        if (game) inputText.value = game.name
+    }
+})
 
 defineExpose({
     focus: () => inputRef.value?.focus(),
