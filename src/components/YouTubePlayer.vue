@@ -179,7 +179,7 @@ function onRestartAnimationEnd() {
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 /* The overlay sits on top of the iframe, covering the video while
    keeping the iframe fully active so autoplay=1 is honoured. */
 .audio-overlay {
@@ -201,21 +201,21 @@ function onRestartAnimationEnd() {
   align-items: flex-end;
   gap: 5px;
   height: 48px;
-}
 
-.bars span {
-  display: block;
-  width: 8px;
-  border-radius: 4px;
-  background: #53d8fb;
-  animation: bounce 1.2s ease-in-out infinite;
-}
+  span {
+    display: block;
+    width: 8px;
+    border-radius: 4px;
+    background: #53d8fb;
+    animation: bounce 1.2s ease-in-out infinite;
 
-.bars span:nth-child(1) { height: 24px; animation-delay: 0s; }
-.bars span:nth-child(2) { height: 40px; animation-delay: 0.15s; }
-.bars span:nth-child(3) { height: 32px; animation-delay: 0.3s; }
-.bars span:nth-child(4) { height: 48px; animation-delay: 0.1s; }
-.bars span:nth-child(5) { height: 20px; animation-delay: 0.25s; }
+    &:nth-child(1) { height: 24px; animation-delay: 0s; }
+    &:nth-child(2) { height: 40px; animation-delay: 0.15s; }
+    &:nth-child(3) { height: 32px; animation-delay: 0.3s; }
+    &:nth-child(4) { height: 48px; animation-delay: 0.1s; }
+    &:nth-child(5) { height: 20px; animation-delay: 0.25s; }
+  }
+}
 
 @keyframes bounce {
   0%, 100% { transform: scaleY(0.4); }

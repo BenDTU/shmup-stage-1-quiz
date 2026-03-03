@@ -118,7 +118,7 @@ const hoveredGame = ref<string | null>(null)
     </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 tr.row-hovered > td {
     background-color: var(--bs-table-hover-bg, rgba(0, 0, 0, 0.075));
 }
