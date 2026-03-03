@@ -5,7 +5,7 @@ import YouTubePlayer from '../components/YouTubePlayer.vue'
 import AutocompleteInput from '../components/AutocompleteInput.vue'
 import { useQuiz } from '../composables/useQuiz'
 import { games } from '../data/games'
-import { gameDisplayName } from '../types'
+import { gameDisplayName, gameMatchesGuess } from '../types'
 
 const router = useRouter()
 const { state, isFinished, usedGameIds, seriesLimitedGameIds, submitGuess, nextQuestion } = useQuiz()
@@ -26,13 +26,11 @@ const questionNumber = computed(() => state.currentIndex + 1)
 
 // Only allow submitting a guess that exactly matches an available game in the pool
 const isValidGuess = computed(() => {
-    const normalizedGuess = guess.value.trim().toLowerCase()
-    if (!normalizedGuess) return false
+    if (!guess.value.trim()) return false
 
     return games.some(
         (g) =>
-            (g.name.toLowerCase() === normalizedGuess ||
-                gameDisplayName(g.name, g.alias).toLowerCase() === normalizedGuess) &&
+            gameMatchesGuess(g.name, g.alias, guess.value) &&
             !usedGameIds.value.has(g.id) &&
             !seriesLimitedGameIds.value.has(g.id),
     )

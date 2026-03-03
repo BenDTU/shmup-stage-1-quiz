@@ -1,6 +1,6 @@
 import { reactive, computed } from 'vue'
 import { games } from '../data/games'
-import { type Game, type GameEntryWithId, Series, gameDisplayName } from '../types'
+import { type Game, type GameEntryWithId, Series, gameMatchesGuess } from '../types'
 
 function resolveGame(entry: GameEntryWithId): Game {
     const { name, alias, series, id } = entry
@@ -111,10 +111,7 @@ function submitGuess(guess: string) {
     if (state.isAnswered) return
     const currentGame = state.questions[state.currentIndex]
     if (!currentGame) return
-    const normalizedGuess = guess.trim().toLowerCase()
-    const isCorrect =
-        normalizedGuess === currentGame.name.toLowerCase() ||
-        normalizedGuess === gameDisplayName(currentGame.name, currentGame.alias).toLowerCase()
+    const isCorrect = gameMatchesGuess(currentGame.name, currentGame.alias, guess)
     state.answers.push({ game: currentGame, userGuess: guess.trim(), isCorrect })
     state.isAnswered = true
 }
