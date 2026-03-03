@@ -87,6 +87,11 @@ watch(inputText, (text) => {
         && !props.seriesLimitedGameIds?.has(matchedId)
     internalUpdate.value = true
     emit('update:modelValue', isSelectable ? matchedId : null)
+    queueMicrotask(() => {
+        if (internalUpdate.value) {
+            internalUpdate.value = false
+        }
+    })
 }, { flush: 'sync' })
 
 function selectGame(game: AutocompleteItem) {
