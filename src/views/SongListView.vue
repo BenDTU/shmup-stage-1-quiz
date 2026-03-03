@@ -98,8 +98,8 @@ const hoveredGame = ref<string | null>(null)
                                     >
                                         <div>{{ group.gameName }}</div>
                                         <div
-                                            v-for="alias in group.aliases"         
-                                            :key="alias"                                   
+                                            v-for="(alias, aliasIndex) in group.aliases"
+                                            :key="aliasIndex"
                                             class="text-muted small"
                                         >
                                             {{ alias }}
