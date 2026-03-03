@@ -80,10 +80,24 @@ function selectGame(game: AutocompleteItem) {
     highlightedIndex.value = -1
 }
 
+function matchGameToText(text: string): number {
+    const lower = text.toLowerCase().trim()
+    for (const g of allGames.value) {
+        if (g.name.toLowerCase() === lower) return g.id
+        const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : []
+        if (aliases.some((a) => `${g.name} (${a})`.toLowerCase() === lower)) return g.id
+    }
+    return -1
+}
+
 function onInput(event: Event) {
     inputText.value = (event.target as HTMLInputElement).value
     internalUpdate.value = true
-    emit('update:modelValue', -1)
+    const matchedId = matchGameToText(inputText.value)
+    const isSelectable = matchedId !== -1
+        && !props.disabledGameIds.has(matchedId)
+        && !props.seriesLimitedGameIds?.has(matchedId)
+    emit('update:modelValue', isSelectable ? matchedId : -1)
     isOpen.value = true
     highlightedIndex.value = -1
 }
