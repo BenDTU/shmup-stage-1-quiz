@@ -34,12 +34,20 @@ const filteredGames = computed<AutocompleteItem[]>(() => {
         .filter((g) => {
             if (g.name.toLowerCase().includes(query)) return true
             const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : []
-            return aliases.some((a) => a.toLowerCase().includes(query))
+            return aliases.some(
+                (a) =>
+                    a.toLowerCase().includes(query) ||
+                    `${g.name} (${a})`.toLowerCase().includes(query),
+            )
         })
         .map((g) => {
             if (g.name.toLowerCase().includes(query)) return { ...g, displayName: g.name }
             const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : []
-            const matchedAlias = aliases.find((a) => a.toLowerCase().includes(query))
+            const matchedAlias = aliases.find(
+                (a) =>
+                    a.toLowerCase().includes(query) ||
+                    `${g.name} (${a})`.toLowerCase().includes(query),
+            )
             return { ...g, displayName: matchedAlias ? `${g.name} (${matchedAlias})` : g.name }
         })
 })
