@@ -9,24 +9,16 @@ export enum Series {
   Touhou = 'Touhou',
 }
 
-export interface SongSource {
-  songName: string
-  videoId: string
-  startTime?: number // seconds into the video where the stage 1 theme begins (defaults to 0)
-  endTime?: number // seconds into the video where playback should stop (video will be paused)
-}
-
-export interface ArrangedSongSource {
-  songName: string
-  arrangements: [SongArrangement, ...SongArrangement[]]
-}
-
 export interface SongArrangement {
   source: string
   videoId: string
   startTime?: number // seconds into the video where the stage 1 theme begins (defaults to 0)
   endTime?: number // seconds into the video where playback should stop (video will be paused)
 }
+
+export type SongEntry =
+  | { songName: string; videoId: string; startTime?: number; endTime?: number }
+  | { songName: string; arrangements: [SongArrangement, ...SongArrangement[]] }
 
 interface GameEntryBase {
   name: string
@@ -35,22 +27,9 @@ interface GameEntryBase {
   forceFirst?: boolean // if true, this game will always be the first question in the quiz
 }
 
-export type GameEntry =
-  | (GameEntryBase & {
-      singleSongSource: SongSource
-      multipleSongSource?: never
-      arrangedSongSource?: never
-    })
-  | (GameEntryBase & {
-      singleSongSource?: never
-      multipleSongSource: [SongSource, ...SongSource[]]
-      arrangedSongSource?: never
-    })
-  | (GameEntryBase & {
-      singleSongSource?: never
-      multipleSongSource?: never
-      arrangedSongSource: ArrangedSongSource
-    })
+export type GameEntry = GameEntryBase & {
+  songSource: SongEntry | [SongEntry, ...SongEntry[]]
+}
 
 export type GameEntryWithId = GameEntry & { id: number }
 
@@ -64,5 +43,5 @@ export type Game = {
   endTime?: number
   id: number
   series?: Series
-  source?: string // for arrangedSongSource, indicates the specific arrangement used
+  source?: string // for songs with arrangements, indicates the specific arrangement used
 }
