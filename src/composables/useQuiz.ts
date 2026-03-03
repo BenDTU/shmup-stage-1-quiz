@@ -57,8 +57,8 @@ const state = reactive<QuizState>({
 const isFinished = computed(
     () =>
         state.isAnswered &&
-    state.questions.length > 0 &&
-    state.currentIndex === state.questions.length - 1,
+        state.questions.length > 0 &&
+        state.currentIndex === state.questions.length - 1,
 )
 
 // IDs of games already shown as questions (excluding the current question)

@@ -17,10 +17,8 @@ const sortedGamesRule = {
         },
         schema: [],
         messages: {
-            unsorted:
-        'Game "{{current}}" should come before "{{previous}}". Keep the games array sorted alphabetically by name (use sortName to override the sort key if needed).',
-            unsortedWithKeys:
-        'Game "{{current}}" (sort key: "{{currentKey}}") should come before "{{previous}}" (sort key: "{{previousKey}}"). Keep the games array sorted alphabetically by name (use sortName to override the sort key if needed).',
+            unsorted: 'Game "{{current}}" should come before "{{previous}}". Keep the games array sorted alphabetically by name (use sortName to override the sort key if needed).',
+            unsortedWithKeys: 'Game "{{current}}" (sort key: "{{currentKey}}") should come before "{{previous}}" (sort key: "{{previousKey}}"). Keep the games array sorted alphabetically by name (use sortName to override the sort key if needed).',
         },
     },
     create(context) {
