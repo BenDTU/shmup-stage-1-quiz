@@ -42,19 +42,19 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Castle of Shikigami',
-        alias: ['Shikigami no Shiro', 'Mobile Light Force 2'],
+        alias: ['Mobile Light Force 2'],
         series: Series.CastleOfShikigami,
-        songSource: { songName: 'Stage 1', videoId: '5IjDEcQpCpw', startTime: 12 },
+        songSource: { songName: 'July 23rd - 00:12', videoId: '5IjDEcQpCpw' },
     },
     {
         name: 'Castle of Shikigami 2',
-        alias: ['Shikigami no Shiro II', 'Castle Shikigami 2', 'Castle Shikigami 2: War of the Worlds'],
+        alias: ['Castle Shikigami 2', 'Castle Shikigami II: War of the Worlds'],
         series: Series.CastleOfShikigami,
         songSource: { songName: 'Flying', videoId: 'XTHF0LHUOo8' },
     },
     {
         name: 'Castle of Shikigami 3',
-        alias: ['Castle of Shikigami III', 'Shikigami no Shiro III'],
+        alias: ['Castle of Shikigami III'],
         series: Series.CastleOfShikigami,
         songSource: { songName: 'In the Heavens', videoId: 'dKjPet2iESs' },
     },
