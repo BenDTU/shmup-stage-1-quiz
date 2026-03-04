@@ -7,6 +7,7 @@ export enum Series {
     Strikers1945 = 'Strikers 1945',
     SpaceInvaders = 'Space Invaders',
     Touhou = 'Touhou',
+    Zeal = 'Zeal',
 }
 
 export interface SongArrangement {

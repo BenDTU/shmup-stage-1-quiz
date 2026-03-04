@@ -77,6 +77,12 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Burning Halloween Town - Stage A-1', videoId: 'LI3Z5UqqlrQ' },
     },
     {
+        name: 'Deltazeal',
+        alias: 'G-Stream G2020',
+        series: Series.Zeal,
+        songSource: { songName: 'Stage 1 & 4', videoId: '6xG4t2wE0rM' },
+    },
+    {
         name: 'DoDonPachi',
         sortName: 'Dodonpachi 1',
         series: Series.Dodonpachi,
@@ -675,6 +681,11 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Beloved Dwelling of Dust', videoId: 'SSZT4pV3RFA' },
     },
     {
+        name: 'Trizeal',
+        series: Series.Zeal,
+        songSource: { songName: 'Cloudy Today, Again!', videoId: '1BiLJgH3hCM', startTime: 41, endTime: 162 },
+    },
+    {
         name: 'Truxton',
         songSource: {
             songName: 'Brave Man, Far Away',
@@ -713,6 +724,12 @@ const gameEntries: GameEntry[] = [
     {
         name: 'X-Multiply',
         songSource: { songName: 'Into the Human Body', videoId: 'MwwduquIWIo' },
+    },
+    {
+        name: 'Xiizeal',
+        alias: 'XII Stag',
+        series: Series.Zeal,
+        songSource: { songName: 'Stage 1', videoId: 'CbFsLpKZcUA' },
     },
     {
         name: 'Zed Blade',
