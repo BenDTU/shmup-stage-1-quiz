@@ -223,7 +223,7 @@ function onKeydown(event: KeyboardEvent) {
             <li
                 v-for="(game, index) in filteredGames"
                 :id="`autocomplete-option-${game.id}`"
-                :ref="(el) => { if (el) optionRefs[index] = el as HTMLElement }"
+                :ref="(el) => { if (el) { optionRefs[index] = el as HTMLElement } else { delete optionRefs[index] } }"
                 :key="game.id"
                 role="option"
                 class="list-group-item list-group-item-action"
