@@ -132,6 +132,12 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'The Year 2008, Tokyo', videoId: 'ZCaPtpNyjf4' },
     },
     {
+        name: 'Dodonpachi SaiDaiOuJou',
+        sortName: 'Dodonpachi 4',
+        series: Series.Dodonpachi,
+        songSource: { songName: 'Ran', videoId: 'GFlCCYlXcE8' },
+    },
+    {
         name: 'Dogyuun',
         songSource: { songName: 'Dogyuun Magic', videoId: 'B5fpCSNNKsM' },
     },
@@ -256,6 +262,16 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Jack to the Metro', videoId: 'HAGArKEC_M8' },
     },
     {
+        name: 'Macross Plus',
+        series: Series.Macross,
+        songSource: { songName: 'Area 1', videoId: 'h-VuFFy7LRA' },
+    },
+    {
+        name: 'Macross: Scrambled Valkyrie',
+        series: Series.Macross,
+        songSource: { songName: 'Space', videoId: 'FZQhG8E6sQ8' },
+    },
+    {
         name: 'Mad Shark',
         songSource: { songName: 'Round 1, Round 2, Round 5', videoId: '4eTABytlJZY', startTime: 9, endTime: 140 },
     },
@@ -290,6 +306,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Mushihimesama Futari',
         songSource: { songName: 'Setting Off Together', videoId: '2qoyJbieTOc' },
+    },
+    {
+        name: 'PD Ultraman Invader',
+        songSource: { songName: 'Ultraman', videoId: 'UD8ILryBKPY' },
     },
     {
         name: 'Plus Alpha',
@@ -601,11 +621,18 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Super Spacefortress Macross',
+        series: Series.Macross,
         songSource: { songName: 'Stage 1 & 4', videoId: 'FyVBI2GA_mg', startTime: 220, endTime: 322 },
     },
     {
         name: 'Super Spacefortress Macross II',
+        series: Series.Macross,
         songSource: { songName: 'SCOOPER', videoId: 'wnlpgkfsor0' }, // NOTE: Medium and Expert course themes don't seem to be on Youtube
+    },
+    {
+        name: 'Super SWIV',
+        alias: ['Firepower 2000', 'Mega SWIV'],
+        songSource: { songName: 'Stage 1', videoId: 't5IEOuoVOYo' },
     },
     {
         name: 'Thunder Dragon',
