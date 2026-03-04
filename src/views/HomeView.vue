@@ -44,8 +44,8 @@ function begin() {
                     style="max-width: 440px"
                 >
                     <li
-                        v-for="(tip, index) in tips"
-                        :key="index"
+                        v-for="tip in tips"
+                        :key="tip.icon"
                         class="list-group-item"
                     >
                         <!-- eslint-disable-next-line vue/no-v-html -->
