@@ -761,13 +761,13 @@ const gameEntries: GameEntry[] = [
     },
 ]
 
-// Games we'd like to add but don't have YouTube links available to use with.
+// Games without relevant YouTube links to use with.
 // Replace '---' with a real videoId when one becomes available and move the entry into gameEntries above.
 export const noSoundTrackGameEntries: GameEntry[] = [
     {
         name: 'Exzeal',
         series: Series.Zeal,
-        songSource: { songName: 'Stage 1', videoId: '---' },
+        songSource: { songName: 'Typhoon #12', videoId: '---' },
     },
 ]
 
