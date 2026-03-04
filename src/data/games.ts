@@ -630,9 +630,12 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'SCOOPER', videoId: 'wnlpgkfsor0' }, // NOTE: Medium and Expert course themes don't seem to be on Youtube
     },
     {
-        name: 'Super SWIV',
+        name: 'Super SWIV', // Super SWIV is SNES title, Firepower 2000 is US SNES title, Mega SWIV is Genesis / Mega Drive title
         alias: ['Firepower 2000', 'Mega SWIV'],
-        songSource: { songName: 'Stage 1', videoId: 't5IEOuoVOYo' },
+        songSource: [
+            { songName: 'Stage 1', arrangements: [ { source: 'Super Nintendo', videoId: 't5IEOuoVOYo' } ] },
+            { songName: 'Stage 1 & 6', arrangements: [ { source: 'Genesis', videoId: 't5IEOuoVOYo' } ] },
+        ],
     },
     {
         name: 'Thunder Dragon',
