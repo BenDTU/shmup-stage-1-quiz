@@ -150,7 +150,7 @@ function onRestartAnimationEnd() {
                 <span /><span /><span /><span /><span />
             </div>
             <p class="mb-0 fw-semibold fs-5">
-                🎵 Now Playing…
+                <i class="bi bi-music-note-beamed" /> Now Playing…
             </p>
             <p class="mb-2 text-muted small">
                 Listen carefully and enter your guess below!
@@ -160,10 +160,11 @@ function onRestartAnimationEnd() {
                 type="button"
                 @click="restartAudio"
             >
-                <span
+                <i
+                    class="bi bi-arrow-counterclockwise"
                     :class="{ 'spin-once': restartSpinning }"
                     @animationend="onRestartAnimationEnd"
-                >↺</span> Restart
+                /> Restart
             </button>
         </div>
         <!-- src is managed imperatively (onMounted + watcher + startAudio).
@@ -225,7 +226,6 @@ function onRestartAnimationEnd() {
 /* One-shot anticlockwise spin for the restart icon */
 .spin-once {
   display: inline-block;
-  transform-origin: 50% calc(50% + 1px);
   animation: spin-ccw 0.5s ease-in-out;
 }
 
