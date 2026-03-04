@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { h } from 'vue'
-import type { VNode } from 'vue'
+import type { FunctionalComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuiz } from '@/composables/useQuiz'
 import { games } from '@/data/games'
@@ -12,7 +12,7 @@ const totalGames = games.length
 
 interface Tip {
     icon: string
-    label: () => VNode
+    label: FunctionalComponent
 }
 
 const tips: Tip[] = [
