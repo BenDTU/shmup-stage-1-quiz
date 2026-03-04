@@ -761,11 +761,14 @@ const gameEntries: GameEntry[] = [
     },
 ]
 
-// Games with no available soundtrack — uncomment and add a videoId when one becomes available:
-// {
-//     name: 'Exzeal',
-//     series: Series.Zeal,
-//     songSource: { songName: '', videoId: '' },
-// },
+// Games we'd like to add but don't have YouTube links available to use with.
+// Replace '---' with a real videoId when one becomes available and move the entry into gameEntries above.
+export const noSoundTrackGameEntries: GameEntry[] = [
+    {
+        name: 'Exzeal',
+        series: Series.Zeal,
+        songSource: { songName: 'Stage 1', videoId: '---' },
+    },
+]
 
 export const games: GameEntryWithId[] = gameEntries.map((entry, index) => ({ ...entry, id: index + 1 }))
