@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, nextTick } from 'vue'
+import { ref, computed, watch, nextTick, useId } from 'vue'
 import { games } from '../data/games'
 import { type GameListEntry } from '../types'
 
@@ -15,6 +15,7 @@ const emit = defineEmits<{
     submit: []
 }>()
 
+const instanceId = useId()
 const isOpen = ref(false)
 const highlightedIndex = ref(-1)
 const inputRef = ref<HTMLInputElement | null>(null)
@@ -204,10 +205,10 @@ function onKeydown(event: KeyboardEvent) {
             autocorrect="off"
             spellcheck="false"
             aria-haspopup="listbox"
-            aria-controls="autocomplete-listbox"
+            :aria-controls="`autocomplete-listbox-${instanceId}`"
             aria-autocomplete="list"
             :aria-expanded="isOpen && filteredGames.length > 0"
-            :aria-activedescendant="isOpen && highlightedIndex >= 0 && filteredGames[highlightedIndex] ? `autocomplete-option-${filteredGames[highlightedIndex]!.id}` : undefined"
+            :aria-activedescendant="isOpen && highlightedIndex >= 0 && filteredGames[highlightedIndex] ? `autocomplete-option-${instanceId}-${filteredGames[highlightedIndex]!.id}` : undefined"
             @input="onInput"
             @focus="onFocus"
             @blur="onBlur"
@@ -215,14 +216,14 @@ function onKeydown(event: KeyboardEvent) {
         >
         <ul
             v-if="isOpen && filteredGames.length > 0"
-            id="autocomplete-listbox"
+            :id="`autocomplete-listbox-${instanceId}`"
             role="listbox"
             tabindex="-1"
             class="list-group position-absolute w-100 autocomplete-dropdown shadow"
         >
             <li
                 v-for="(game, index) in filteredGames"
-                :id="`autocomplete-option-${game.id}`"
+                :id="`autocomplete-option-${instanceId}-${game.id}`"
                 :ref="(el) => { if (el) { optionRefs[index] = el as HTMLElement } else { delete optionRefs[index] } }"
                 :key="game.id"
                 role="option"
