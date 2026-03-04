@@ -1,7 +1,7 @@
-import { Series, type GameEntry, type GameEntryWithId } from '../types'
+import { Series, type GameEntry, type GameEntryWithId, type NoSoundTrackGameEntry } from '../types'
 
 export { Series } from '../types'
-export type { SongEntry, GameEntry, GameListEntry, Game } from '../types'
+export type { SongEntry, GameEntry, GameListEntry, Game, NoSoundTrackGameEntry } from '../types'
 
 // Update videoId and startTime values with the correct YouTube video IDs and
 // timestamps for each game's stage 1 theme.
@@ -75,6 +75,12 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Deathsmiles',
         songSource: { songName: 'Burning Halloween Town - Stage A-1', videoId: 'LI3Z5UqqlrQ' },
+    },
+    {
+        name: 'Deltazeal',
+        alias: 'G-Stream G2020',
+        series: Series.Zeal,
+        songSource: { songName: 'Stage 1 & 4', videoId: '6xG4t2wE0rM' },
     },
     {
         name: 'DoDonPachi',
@@ -675,6 +681,11 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Beloved Dwelling of Dust', videoId: 'SSZT4pV3RFA' },
     },
     {
+        name: 'Trizeal',
+        series: Series.Zeal,
+        songSource: { songName: 'Cloudy Today, Again!', videoId: '1BiLJgH3hCM', startTime: 41, endTime: 162 },
+    },
+    {
         name: 'Truxton',
         songSource: {
             songName: 'Brave Man, Far Away',
@@ -715,6 +726,12 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Into the Human Body', videoId: 'MwwduquIWIo' },
     },
     {
+        name: 'Xiizeal',
+        alias: 'XII Stag',
+        series: Series.Zeal,
+        songSource: { songName: 'Stage 1', videoId: 'CbFsLpKZcUA' },
+    },
+    {
         name: 'Zed Blade',
         songSource: { songName: 'Shootaholic [Shockout MIX]', videoId: 'h35vxyOrmrA' },
     },
@@ -741,6 +758,16 @@ const gameEntries: GameEntry[] = [
     {
         name: 'ZeroRanger',
         songSource: { songName: 'It May Be Greenish', videoId: 'U0MXZ_WXtsM' },
+    },
+]
+
+// Games without relevant YouTube links yet.
+// When a suitable YouTube video becomes available, replace '---' with the real videoId and move the entry into gameEntries above.
+export const noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
+    {
+        name: 'Exzeal',
+        series: Series.Zeal,
+        songSource: { songName: 'Typhoon #12' },
     },
 ]
 
