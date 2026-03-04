@@ -8,6 +8,20 @@ const { startQuiz } = useQuiz()
 
 const totalGames = games.length
 
+interface Tip {
+    icon: string
+    html: string
+}
+
+const tips: Tip[] = [
+    { icon: 'bi-music-note-beamed', html: 'Each track plays automatically — listen carefully!' },
+    { icon: 'bi-search',            html: 'Use the autocomplete box to find your answer.' },
+    { icon: 'bi-hand-index-thumb',  html: 'You only get <strong>one guess</strong> per song.' },
+    { icon: 'bi-slash-circle',      html: 'Games already shown are disabled in later questions.' },
+    { icon: 'bi-bar-chart-fill',    html: 'See your full score and all answers at the end.' },
+    { icon: 'bi-controller',        html: `There are currently <strong>${totalGames}</strong> shmups loaded in!` },
+]
+
 function begin() {
     startQuiz()
     router.push('/quiz')
@@ -29,23 +43,13 @@ function begin() {
                     class="list-group list-group-flush text-start mb-5 mx-auto"
                     style="max-width: 440px"
                 >
-                    <li class="list-group-item">
-                        <i class="bi bi-music-note-beamed" /> Each track plays automatically — listen carefully!
-                    </li>
-                    <li class="list-group-item">
-                        <i class="bi bi-search" /> Use the autocomplete box to find your answer.
-                    </li>
-                    <li class="list-group-item">
-                        <i class="bi bi-hand-index-thumb" /> You only get <strong>one guess</strong> per song.
-                    </li>
-                    <li class="list-group-item">
-                        <i class="bi bi-slash-circle" /> Games already shown are disabled in later questions.
-                    </li>
-                    <li class="list-group-item">
-                        <i class="bi bi-bar-chart-fill" /> See your full score and all answers at the end.
-                    </li>
-                    <li class="list-group-item">
-                        <i class="bi bi-controller" /> There are currently <strong>{{ totalGames }}</strong> shmups loaded in!
+                    <li
+                        v-for="(tip, index) in tips"
+                        :key="index"
+                        class="list-group-item"
+                    >
+                        <!-- eslint-disable-next-line vue/no-v-html -->
+                        <i :class="['bi', tip.icon]" /> <span v-html="tip.html" />
                     </li>
                 </ul>
                 <button
