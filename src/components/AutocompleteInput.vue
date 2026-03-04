@@ -218,7 +218,7 @@ function onKeydown(event: KeyboardEvent) {
             autocorrect="off"
             spellcheck="false"
             aria-haspopup="listbox"
-            :aria-controls="`autocomplete-listbox-${instanceId}`"
+            :aria-controls="isOpen && filteredGames.length > 0 ? `autocomplete-listbox-${instanceId}` : undefined"
             aria-autocomplete="list"
             :aria-expanded="isOpen && filteredGames.length > 0"
             :aria-activedescendant="isOpen && highlightedIndex >= 0 && filteredGames[highlightedIndex] ? `autocomplete-option-${instanceId}-${filteredGames[highlightedIndex]!.id}` : undefined"
