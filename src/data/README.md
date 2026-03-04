@@ -79,7 +79,7 @@ To add a new series, add a new entry to the `Series` enum in `src/types.ts`.
 
 The `name` field should generally be the most recent official English name for the game. Aliases are for any other names the game is known by — alternate regional titles, older localisation names, or names from earlier releases. As examples:
 
-- **Shienryu** has been released as *Gekioh Shooting King* and *Steel Dragon* within the *Steel Dragon EX* release, but an upcoming Console Archives release refers to it as *ShienRyu* again. `name: 'Shienryu'` with `alias: ['Gekioh Shooting King', 'Steel Dragon EX']` is appropriate. Also literally nobody calls it any of those localised names these days.
+- **Shienryu** has been released as *Gekioh Shooting King* and *Steel Dragon* (as part of the *Steel Dragon EX* release), but an upcoming Console Archives release refers to it as *ShienRyu* again. `name: 'Shienryu'` with `alias: ['Gekioh Shooting King', 'Steel Dragon']` is appropriate. Also literally nobody calls it any of those localised names these days.
 - **Gradius II** was released as *Vulcan Venture* in North America, which is out of step with the rest of the series, so Vulcan Venture as an alias is fine.
 - **Dodonpachi Blissful Death** is the localised name from the old mobile port, even though *DaiOuJou* is generally what this game tends to be referred to as within the community.
 
