@@ -41,6 +41,24 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Apocalypse ~ Stage 1A', videoId: 'WIeUpFJ4LY4' },
     },
     {
+        name: 'Castle of Shikigami',
+        alias: ['Shikigami no Shiro', 'Mobile Light Force 2'],
+        series: Series.CastleOfShikigami,
+        songSource: { songName: 'Stage 1', videoId: '5IjDEcQpCpw', startTime: 12 },
+    },
+    {
+        name: 'Castle of Shikigami 2',
+        alias: ['Shikigami no Shiro II', 'Castle Shikigami 2', 'Castle Shikigami 2: War of the Worlds'],
+        series: Series.CastleOfShikigami,
+        songSource: { songName: 'Flying', videoId: 'XTHF0LHUOo8' },
+    },
+    {
+        name: 'Castle of Shikigami 3',
+        alias: ['Castle of Shikigami III', 'Shikigami no Shiro III'],
+        series: Series.CastleOfShikigami,
+        songSource: { songName: 'In the Heavens', videoId: 'dKjPet2iESs' },
+    },
+    {
         name: 'Crimzon Clover',
         songSource: { songName: 'UL-stage1', videoId: 'yYF3x1hACIU' },
     },

@@ -64,6 +64,7 @@ Each `SongArrangement` has:
 
 If the game belongs to a series already in the `Series` enum (defined in `src/types.ts`), set the `series` field so that games from the same series are never shown as answer options for each other. Current values:
 
+- `Series.CastleOfShikigami`
 - `Series.Darius`
 - `Series.Dodonpachi`
 - `Series.Gradius`
