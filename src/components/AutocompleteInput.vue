@@ -109,7 +109,10 @@ function selectGame(game: AutocompleteItem) {
 function onInput(event: Event) {
     inputText.value = (event.target as HTMLInputElement).value
     isOpen.value = true
-    highlightedIndex.value = -1
+    const firstEnabled = filteredGames.value.findIndex(
+        (g) => !props.disabledGameIds.has(g.id) && !props.seriesLimitedGameIds?.has(g.id),
+    )
+    highlightedIndex.value = firstEnabled >= 0 ? firstEnabled : -1
 }
 
 function onFocus() {
@@ -128,6 +131,11 @@ const optionRefs = ref<HTMLElement[]>([])
 function scrollHighlightedIntoView() {
     const el = optionRefs.value[highlightedIndex.value]
     if (el) el.scrollIntoView({ block: 'nearest' })
+}
+
+function onOptionMouseenter(index: number, game: AutocompleteItem) {
+    if (props.disabledGameIds.has(game.id) || props.seriesLimitedGameIds?.has(game.id)) return
+    highlightedIndex.value = index
 }
 
 function onKeydown(event: KeyboardEvent) {
@@ -165,8 +173,8 @@ function onKeydown(event: KeyboardEvent) {
             if (!game || (!props.disabledGameIds.has(game.id) && !props.seriesLimitedGameIds?.has(game.id))) break
             prev--
         }
-        highlightedIndex.value = Math.max(-1, prev)
-        if (highlightedIndex.value >= 0) {
+        if (prev >= 0) {
+            highlightedIndex.value = prev
             nextTick(() => scrollHighlightedIntoView())
         }
     } else if (event.key === 'Enter') {
@@ -230,10 +238,11 @@ function onKeydown(event: KeyboardEvent) {
                 class="list-group-item list-group-item-action"
                 :class="{
                     disabled: disabledGameIds.has(game.id) || seriesLimitedGameIds?.has(game.id),
-                    active: index === highlightedIndex && !disabledGameIds.has(game.id) && !seriesLimitedGameIds?.has(game.id),
+                    'keyboard-highlighted': index === highlightedIndex && !disabledGameIds.has(game.id) && !seriesLimitedGameIds?.has(game.id),
                 }"
                 :aria-selected="index === highlightedIndex && !disabledGameIds.has(game.id) && !seriesLimitedGameIds?.has(game.id)"
                 :aria-disabled="disabledGameIds.has(game.id) || seriesLimitedGameIds?.has(game.id) || undefined"
+                @mouseenter="onOptionMouseenter(index, game)"
                 @mousedown.prevent="selectGame(game)"
             >
                 {{ game.displayName }}
@@ -266,5 +275,10 @@ function onKeydown(event: KeyboardEvent) {
 .list-group-item.disabled {
   pointer-events: none;
   opacity: 0.5;
+}
+
+.list-group-item.keyboard-highlighted {
+  color: var(--bs-list-group-action-hover-color);
+  background-color: var(--bs-list-group-action-hover-bg);
 }
 </style>
