@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { h } from 'vue'
+import type { VNode } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuiz } from '@/composables/useQuiz'
 import { games } from '@/data/games'
@@ -10,16 +12,16 @@ const totalGames = games.length
 
 interface Tip {
     icon: string
-    html: string
+    label: () => VNode
 }
 
 const tips: Tip[] = [
-    { icon: 'bi-music-note-beamed', html: 'Each track plays automatically — listen carefully!' },
-    { icon: 'bi-search',            html: 'Use the autocomplete box to find your answer.' },
-    { icon: 'bi-hand-index-thumb',  html: 'You only get <strong>one guess</strong> per song.' },
-    { icon: 'bi-slash-circle',      html: 'Games already shown are disabled in later questions.' },
-    { icon: 'bi-bar-chart-fill',    html: 'See your full score and all answers at the end.' },
-    { icon: 'bi-controller',        html: `There are currently <strong>${totalGames}</strong> shmups loaded in!` },
+    { icon: 'bi-music-note-beamed', label: () => h('span', 'Each track plays automatically — listen carefully!') },
+    { icon: 'bi-search',            label: () => h('span', 'Use the autocomplete box to find your answer.') },
+    { icon: 'bi-hand-index-thumb',  label: () => h('span', ['You only get ', h('strong', 'one guess'), ' per song.']) },
+    { icon: 'bi-slash-circle',      label: () => h('span', 'Games already shown are disabled in later questions.') },
+    { icon: 'bi-bar-chart-fill',    label: () => h('span', 'See your full score and all answers at the end.') },
+    { icon: 'bi-controller',        label: () => h('span', ['There are currently ', h('strong', String(totalGames)), ' shmups loaded in!']) },
 ]
 
 function begin() {
@@ -48,10 +50,9 @@ function begin() {
                         :key="tip.icon"
                         class="list-group-item"
                     >
-                        <!-- eslint-disable-next-line vue/no-v-html -->
                         <div class="d-flex">
                             <i :class="['bi', 'me-2', tip.icon]" />
-                            <span v-html="tip.html" />
+                            <component :is="tip.label" />
                         </div>
                     </li>
                 </ul>
