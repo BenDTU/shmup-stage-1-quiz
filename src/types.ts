@@ -3,6 +3,7 @@ export enum Series {
     Darius = 'Darius',
     Dodonpachi = 'Dodonpachi',
     Gradius = 'Gradius',
+    Macross = 'Macross',
     RType = 'R-Type',
     Raiden = 'Raiden',
     Strikers1945 = 'Strikers 1945',

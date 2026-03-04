@@ -20,13 +20,17 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Assault Launch', videoId: 'ypFovFbi0dw' },
     },
     {
+        name: 'Axelay',
+        songSource: { songName: 'Unkai', videoId: 'pTQ_jezNUxE' },
+    },
+    {
         name: 'Battle Bakraid',
         songSource: { songName: 'Sky Gunner', videoId: 'gb39c-VlJkA' },
     },
     {
         name: 'Battle Garegga',
         songSource: { songName: 'Fly to the Leaden Sky', videoId: 'Szr0TSXcWok' },
-    },    
+    },
     {
         name: 'BioMetal (JP)',
         songSource: { songName: 'Dark Clouds', videoId: 'DMhmwXbPcYg' },
@@ -66,6 +70,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Battle Over the White Sands', videoId: 'a-9kcVAaXXQ' },
     },
     {
+        name: 'Cyvern: The Dragon Weapons',
+        songSource: { songName: 'Stage 1', videoId: 'RcwYz6ZLgy0' },
+    },
+    {
         name: 'Daioh',
         songSource: { songName: 'Stage 1', videoId: 'vqi1eM9MNPw', startTime: 62, endTime: 213 },
     },
@@ -80,7 +88,15 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'VISIONNERZ ~HALLUCINATED PEOPLE~', videoId: 'kG30WhHCnN4' },
     },
     {
-        name: 'DariusBurst',
+        name: 'Dariusburst',
+        alias: [
+            'Dariusburst: Another Chronicle',
+            'Dariusburst: Another Chronicle EX',
+            'Dariusburst: Second Prologue',
+            'Dariusburst: Chronicle Saviours',
+            'Dariusburst: Another Chronicle EX+',
+            'Dariusburst: CS Core + Taito/Sega Pack'
+        ],
         series: Series.Darius,
         songSource: [
             { songName: 'Good-bye My Earth', videoId: 'Hi1sF3AKPHk' },
@@ -130,6 +146,12 @@ const gameEntries: GameEntry[] = [
         sortName: 'Dodonpachi 3',
         series: Series.Dodonpachi,
         songSource: { songName: 'The Year 2008, Tokyo', videoId: 'ZCaPtpNyjf4' },
+    },
+    {
+        name: 'DoDonPachi SaiDaiOuJou',
+        sortName: 'Dodonpachi 4',
+        series: Series.Dodonpachi,
+        songSource: { songName: 'Ran', videoId: 'GFlCCYlXcE8' },
     },
     {
         name: 'Dogyuun',
@@ -182,18 +204,26 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Gradius III',
+        sortName: 'Gradius 3',
         series: Series.Gradius,
         songSource: { songName: 'Sand Storm', videoId: 'NyQzfqNIKTI' },
     },
     {
         name: 'Gradius IV',
+        sortName: 'Gradius 4',
         series: Series.Gradius,
         songSource: { songName: 'Apollon', videoId: 'kGc9HIKnqB8' },
     },
     {
         name: 'Gradius V',
+        sortName: 'Gradius 5',
         series: Series.Gradius,
         songSource: { songName: 'Universe', videoId: 'KCDS-T2E_Lg' },
+    },
+    {
+        name: 'Gradius Gaiden',
+        series: Series.Gradius,
+        songSource: { songName: 'Sky 1 & 2', videoId: '4zZXuvaq5sA' },
     },
     {
         name: 'Gun Frontier',
@@ -218,6 +248,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Hellsinker',
         songSource: { songName: 'Segment 1 BEHIND', videoId: 'M7vl9LzMAa8' },
+    },
+    {
+        name: 'Hotdog Storm',
+        songSource: { songName: 'Stage 1', videoId: 'lHGdbyX82TE' },
     },
     {
         name: 'Ikaruga',
@@ -248,12 +282,26 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'War Upon the East Frontier', videoId: 'zhgBx6vSApM' },
     },
     {
+        name: 'Judgement Silversword',
+        songSource: { songName: 'BGM 01', videoId: '-VIXuLTGoYo', startTime: 0, endTime: 123 },
+    },
+    {
         name: 'Ketsui',
         songSource: { songName: 'INTERCEPTION - Noisy Town', videoId: 'z472pIce5CY' },
     },
     {
         name: 'Last Resort',
         songSource: { songName: 'Jack to the Metro', videoId: 'HAGArKEC_M8' },
+    },
+    {
+        name: 'Macross Plus',
+        series: Series.Macross,
+        songSource: { songName: 'Area 1', videoId: 'h-VuFFy7LRA' },
+    },
+    {
+        name: 'Macross: Scrambled Valkyrie',
+        series: Series.Macross,
+        songSource: { songName: 'Space', videoId: 'FZQhG8E6sQ8' },
     },
     {
         name: 'Mad Shark',
@@ -290,6 +338,18 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Mushihimesama Futari',
         songSource: { songName: 'Setting Off Together', videoId: '2qoyJbieTOc' },
+    },
+    {
+        name: 'PD Ultraman Invader',
+        songSource: { songName: 'Ultraman', videoId: 'UD8ILryBKPY' },
+    },
+    {
+        name: 'Platypus',
+        songSource: { songName: 'Stage 1', videoId: 'UJ-9PA9bXY0' },
+    },
+    {
+        name: 'Platypus II',
+        songSource: { songName: 'Stage 1', videoId: '4gV49IcGS30' },
     },
     {
         name: 'Plus Alpha',
@@ -391,6 +451,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Raiden II',
+        alias: 'Raiden DX',
         sortName: 'Raiden 2',
         series: Series.Raiden,
         songSource: { songName: 'Repeated Tragedy', videoId: 'zDS4EMmETsE' },
@@ -500,6 +561,10 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'Silver Surfer',
+        songSource: { songName: 'Stage BGM 1', videoId: 'BGNSHNf-nlU' },
+    },
+    {
         name: 'Space Invaders (1999)',
         series: Series.SpaceInvaders,
         songSource: { songName: 'Pluto', videoId: 'ufKFko1q5XM' },
@@ -550,8 +615,8 @@ const gameEntries: GameEntry[] = [
         name: 'Strike Gunner S.T.G.',
         // The theme has no official name; songName describes where it appears. The same melody is used in different stages across the Arcade and Super Nintendo versions.
         songSource: [
-            { songName: 'Stages 1, 4 & Ending', arrangements: [ { source: 'Arcade', videoId: 'Zi0fezKPdH0' } ] },
-            { songName: 'Stages 1, 3 & 5', arrangements: [ { source: 'Super Nintendo', videoId: 'g3L79GW6T7s' } ] },
+            { songName: 'Stages 1, 4 & Ending', arrangements: [{ source: 'Arcade', videoId: 'Zi0fezKPdH0' }] },
+            { songName: 'Stages 1, 3 & 5', arrangements: [{ source: 'Super Nintendo', videoId: 'g3L79GW6T7s' }] },
         ]
     },
     {
@@ -601,11 +666,21 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Super Spacefortress Macross',
+        series: Series.Macross,
         songSource: { songName: 'Stage 1 & 4', videoId: 'FyVBI2GA_mg', startTime: 220, endTime: 322 },
     },
     {
         name: 'Super Spacefortress Macross II',
+        series: Series.Macross,
         songSource: { songName: 'SCOOPER', videoId: 'wnlpgkfsor0' }, // NOTE: Medium and Expert course themes don't seem to be on Youtube
+    },
+    {
+        name: 'Super SWIV', // Super SWIV is SNES title, Firepower 2000 is US SNES title, Mega SWIV is Genesis / Mega Drive title
+        alias: ['Firepower 2000', 'Mega SWIV'],
+        songSource: [
+            { songName: 'Stage 1', arrangements: [{ source: 'Super Nintendo', videoId: 't5IEOuoVOYo' }] },
+            { songName: 'Stage 1 & 6', arrangements: [{ source: 'Genesis', videoId: 'fSoAOxs5ZCk' }] },
+        ],
     },
     {
         name: 'Thunder Dragon',
