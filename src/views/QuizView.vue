@@ -134,7 +134,7 @@ async function handleNextClick(event: MouseEvent) {
                                     class="btn btn-outline-secondary"
                                     @click="handleSkipClick"
                                 >
-                                    Skip ⏭
+                                    Skip <i class="bi bi-skip-end-fill" />
                                 </button>
                             </div>
                         </div>
