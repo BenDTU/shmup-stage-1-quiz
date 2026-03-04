@@ -95,7 +95,7 @@ const gameEntries: GameEntry[] = [
             'Dariusburst: Second Prologue',
             'Dariusburst: Chronicle Saviours',
             'Dariusburst: Another Chronicle EX+',
-            'Dariusburst CS Core + Taito/Sega'
+            'Dariusburst: CS Core + Taito/Sega Pack'
         ],
         series: Series.Darius,
         songSource: [
