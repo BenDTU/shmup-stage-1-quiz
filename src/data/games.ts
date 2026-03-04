@@ -447,14 +447,38 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Raiden',
         series: Series.Raiden,
-        songSource: { songName: 'Gallantry', videoId: 'vaGenJ5GXxE' },
+        songSource: {
+            songName: 'Gallantry',
+            arrangements: [
+                {
+                    source: 'Original',
+                    videoId: 'vaGenJ5GXxE',
+                },
+                {
+                    source: 'The Raiden Project',
+                    videoId: 'W6DvMtQGTpY',
+                },
+            ]
+        },
     },
     {
         name: 'Raiden II',
         alias: 'Raiden DX',
         sortName: 'Raiden 2',
         series: Series.Raiden,
-        songSource: { songName: 'Repeated Tragedy', videoId: 'zDS4EMmETsE' },
+        songSource: {
+            songName: 'Repeated Tragedy',
+            arrangements: [
+                {
+                    source: 'Original',
+                    videoId: 'zDS4EMmETsE',
+                },
+                {
+                    source: 'The Raiden Project',
+                    videoId: 'dT_6ixCATBw',
+                },
+            ]
+        },
     },
     {
         name: 'Raiden III',
