@@ -160,10 +160,11 @@ function onRestartAnimationEnd() {
                 type="button"
                 @click="restartAudio"
             >
-                <span
+                <i
+                    class="bi bi-arrow-counterclockwise"
                     :class="{ 'spin-once': restartSpinning }"
                     @animationend="onRestartAnimationEnd"
-                >↺</span> Restart
+                /> Restart
             </button>
         </div>
         <!-- src is managed imperatively (onMounted + watcher + startAudio).
