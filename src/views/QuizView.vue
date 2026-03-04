@@ -159,7 +159,12 @@ async function handleNextClick(event: MouseEvent) {
                                 class="btn btn-success w-100"
                                 @click="handleNextClick"
                             >
-                                {{ isFinished ? 'See Results 🏆' : 'Next Question →' }}
+                                <template v-if="isFinished">
+                                    See Results <i class="bi bi-trophy-fill" />
+                                </template>
+                                <template v-else>
+                                    Next Question →
+                                </template>
                             </button>
                         </div>
                     </div>

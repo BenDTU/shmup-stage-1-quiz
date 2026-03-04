@@ -150,7 +150,7 @@ function onRestartAnimationEnd() {
                 <span /><span /><span /><span /><span />
             </div>
             <p class="mb-0 fw-semibold fs-5">
-                🎵 Now Playing…
+                <i class="bi bi-music-note-beamed" /> Now Playing…
             </p>
             <p class="mb-2 text-muted small">
                 Listen carefully and enter your guess below!

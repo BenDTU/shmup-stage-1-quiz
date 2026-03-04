@@ -19,7 +19,7 @@ function begin() {
         <div class="row justify-content-center">
             <div class="col-lg-7 text-center">
                 <h1 class="display-4 fw-bold mb-3">
-                    🎮 Shmup Stage 1 Quiz
+                    <i class="bi bi-controller" /> Shmup Stage 1 Quiz
                 </h1>
                 <p class="lead mb-4">
                     Think you know your shmup stage&nbsp;1 themes? Listen to the music and guess which game
@@ -30,22 +30,22 @@ function begin() {
                     style="max-width: 440px"
                 >
                     <li class="list-group-item">
-                        🎵 Each track plays automatically — listen carefully!
+                        <i class="bi bi-music-note-beamed" /> Each track plays automatically — listen carefully!
                     </li>
                     <li class="list-group-item">
-                        🔍 Use the autocomplete box to find your answer.
+                        <i class="bi bi-search" /> Use the autocomplete box to find your answer.
                     </li>
                     <li class="list-group-item">
-                        ☝️ You only get <strong>one guess</strong> per song.
+                        <i class="bi bi-hand-index-thumb" /> You only get <strong>one guess</strong> per song.
                     </li>
                     <li class="list-group-item">
-                        🚫 Games already shown are disabled in later questions.
+                        <i class="bi bi-slash-circle" /> Games already shown are disabled in later questions.
                     </li>
                     <li class="list-group-item">
-                        📊 See your full score and all answers at the end.
+                        <i class="bi bi-bar-chart-fill" /> See your full score and all answers at the end.
                     </li>
                     <li class="list-group-item">
-                        🎮 There are currently <strong>{{ totalGames }}</strong> shmups loaded in!
+                        <i class="bi bi-controller" /> There are currently <strong>{{ totalGames }}</strong> shmups loaded in!
                     </li>
                 </ul>
                 <button

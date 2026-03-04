@@ -30,7 +30,7 @@ function playAgain() {
                 <template v-if="total > 0">
                     <div class="text-center mb-5">
                         <h1 class="display-5 fw-bold">
-                            Quiz Complete! 🏆
+                            Quiz Complete! <i class="bi bi-trophy-fill" />
                         </h1>
                         <p class="lead">
                             You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
@@ -49,10 +49,10 @@ function playAgain() {
                             </div>
                         </div>
                         <p class="text-muted">
-                            <span v-if="score === total">Perfect score! You're a true shmup fan. 🎖️</span>
+                            <span v-if="score === total">Perfect score! You're a true shmup fan. <i class="bi bi-award-fill" /></span>
                             <span v-else-if="score / total >= 0.7">Great job! You clearly know your shmups.</span>
                             <span v-else-if="score / total >= 0.4">Not bad! Keep practicing.</span>
-                            <span v-else>Time to play more shmups! 😄</span>
+                            <span v-else>Time to play more shmups! <i class="bi bi-emoji-smile" /></span>
                         </p>
                     </div>
 
