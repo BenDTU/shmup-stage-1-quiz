@@ -113,6 +113,11 @@ function onInput(event: Event) {
         (g) => !props.disabledGameIds.has(g.id) && !props.seriesLimitedGameIds?.has(g.id),
     )
     highlightedIndex.value = firstEnabled >= 0 ? firstEnabled : -1
+    if (firstEnabled >= 0) {
+        nextTick(() => {
+            scrollHighlightedIntoView()
+        })
+    }
 }
 
 function onFocus() {
