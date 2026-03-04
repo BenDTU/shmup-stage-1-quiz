@@ -215,7 +215,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Gradius Gaiden',
         series: Series.Gradius,
-        songSource: { songName: 'Sky 1 & 2', videoId: '9n7s8XoQeWE' },
+        songSource: { songName: 'Sky 1 & 2', videoId: '4zZXuvaq5sA' },
     },
     {
         name: 'Gun Frontier',
