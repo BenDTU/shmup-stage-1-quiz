@@ -117,7 +117,6 @@ const hoveredGame = ref<string | null>(null)
                                                 class="icon-link me-2 small"
                                             ><i class="bi bi-youtube lh-1" /> {{ link.label }}</a>
                                         </div>
-                                        
                                     </td>
                                 </tr>
                             </template>

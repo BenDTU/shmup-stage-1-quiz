@@ -50,8 +50,8 @@ function begin() {
                     >
                         <!-- eslint-disable-next-line vue/no-v-html -->
                         <div class="d-flex">
-                          <i :class="['bi', 'me-2', tip.icon]" />
-                          <span v-html="tip.html" />
+                            <i :class="['bi', 'me-2', tip.icon]" />
+                            <span v-html="tip.html" />
                         </div>
                     </li>
                 </ul>
