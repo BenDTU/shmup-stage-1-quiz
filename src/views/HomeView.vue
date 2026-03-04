@@ -4,6 +4,7 @@ import type { FunctionalComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuiz } from '@/composables/useQuiz'
 import { games } from '@/data/games'
+import type { BootstrapIcon } from '@/types/bootstrap-icons'
 
 const router = useRouter()
 const { startQuiz } = useQuiz()
@@ -11,7 +12,7 @@ const { startQuiz } = useQuiz()
 const totalGames = games.length
 
 interface Tip {
-    icon: string
+    icon: BootstrapIcon
     label: FunctionalComponent
 }
 
