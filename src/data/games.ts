@@ -283,7 +283,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Judgement Silversword',
-        songSource: { songName: 'BGM 01', videoId: 'BGNSHNf-nlU', startTime: 0, endTime: 123 },
+        songSource: { songName: 'BGM 01', videoId: '-VIXuLTGoYo', startTime: 0, endTime: 123 },
     },
     {
         name: 'Ketsui',
