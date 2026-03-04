@@ -122,10 +122,10 @@ function onBlur() {
     }, 150)
 }
 
+const optionRefs = ref<HTMLElement[]>([])
+
 function scrollHighlightedIntoView() {
-    const game = filteredGames.value[highlightedIndex.value]
-    if (!game) return
-    const el = document.getElementById(`autocomplete-option-${game.id}`)
+    const el = optionRefs.value[highlightedIndex.value]
     if (el) el.scrollIntoView({ block: 'nearest' })
 }
 
@@ -223,6 +223,7 @@ function onKeydown(event: KeyboardEvent) {
             <li
                 v-for="(game, index) in filteredGames"
                 :id="`autocomplete-option-${game.id}`"
+                :ref="(el) => { if (el) optionRefs[index] = el as HTMLElement }"
                 :key="game.id"
                 role="option"
                 class="list-group-item list-group-item-action"
