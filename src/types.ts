@@ -1,4 +1,5 @@
 export enum Series {
+    CastleOfShikigami = 'Castle of Shikigami',
     Darius = 'Darius',
     Dodonpachi = 'Dodonpachi',
     Gradius = 'Gradius',
