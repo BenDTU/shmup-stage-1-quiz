@@ -46,9 +46,18 @@ for (const game of games) {
     }
 }
 
-const uniqueVideoIds: { videoId: string; gameNames: string }[] = Array.from(
+const uniqueVideoIds: { videoId: string; gameNames: string; count: number }[] = Array.from(
     videoIdToGames.entries(),
-).map(([videoId, names]) => ({ videoId, gameNames: names.join(', ') }))
+).map(([videoId, names]) => ({ videoId, gameNames: names.join(', '), count: names.length }))
+
+describe('video ID uniqueness in games.ts', () => {
+    it.each(uniqueVideoIds)(
+        'video "$videoId" (used by: $gameNames) must not be shared across multiple game entries',
+        ({ videoId, gameNames, count }) => {
+            expect(count, `Video ID "${videoId}" is duplicated across: ${gameNames}`).toBe(1)
+        },
+    )
+})
 
 describe('YouTube video IDs in games.ts', () => {
     it.each(uniqueVideoIds)(
