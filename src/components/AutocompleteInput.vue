@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, nextTick, useId } from 'vue'
 import { games } from '../data/games'
 import { type GameListEntry } from '../types'
 
@@ -15,6 +15,7 @@ const emit = defineEmits<{
     submit: []
 }>()
 
+const instanceId = useId()
 const isOpen = ref(false)
 const highlightedIndex = ref(-1)
 const inputRef = ref<HTMLInputElement | null>(null)
@@ -108,7 +109,15 @@ function selectGame(game: AutocompleteItem) {
 function onInput(event: Event) {
     inputText.value = (event.target as HTMLInputElement).value
     isOpen.value = true
-    highlightedIndex.value = -1
+    const firstEnabled = filteredGames.value.findIndex(
+        (g) => !props.disabledGameIds.has(g.id) && !props.seriesLimitedGameIds?.has(g.id),
+    )
+    highlightedIndex.value = firstEnabled >= 0 ? firstEnabled : -1
+    if (firstEnabled >= 0) {
+        nextTick(() => {
+            scrollHighlightedIntoView()
+        })
+    }
 }
 
 function onFocus() {
@@ -120,6 +129,18 @@ function onBlur() {
         isOpen.value = false
         highlightedIndex.value = -1
     }, 150)
+}
+
+const optionRefs = ref<(HTMLElement | undefined)[]>([])
+
+function scrollHighlightedIntoView() {
+    const el = optionRefs.value[highlightedIndex.value]
+    if (el) el.scrollIntoView({ block: 'nearest' })
+}
+
+function onOptionMouseenter(index: number, game: AutocompleteItem) {
+    if (props.disabledGameIds.has(game.id) || props.seriesLimitedGameIds?.has(game.id)) return
+    highlightedIndex.value = index
 }
 
 function onKeydown(event: KeyboardEvent) {
@@ -147,6 +168,7 @@ function onKeydown(event: KeyboardEvent) {
         }
         if (next < filteredGames.value.length) {
             highlightedIndex.value = next
+            nextTick(() => scrollHighlightedIntoView())
         }
     } else if (event.key === 'ArrowUp') {
         event.preventDefault()
@@ -156,7 +178,10 @@ function onKeydown(event: KeyboardEvent) {
             if (!game || (!props.disabledGameIds.has(game.id) && !props.seriesLimitedGameIds?.has(game.id))) break
             prev--
         }
-        highlightedIndex.value = prev
+        if (prev >= 0) {
+            highlightedIndex.value = prev
+            nextTick(() => scrollHighlightedIntoView())
+        }
     } else if (event.key === 'Enter') {
         event.preventDefault()
         if (highlightedIndex.value >= 0) {
@@ -193,10 +218,10 @@ function onKeydown(event: KeyboardEvent) {
             autocorrect="off"
             spellcheck="false"
             aria-haspopup="listbox"
-            aria-controls="autocomplete-listbox"
+            :aria-controls="isOpen && filteredGames.length > 0 ? `autocomplete-listbox-${instanceId}` : undefined"
             aria-autocomplete="list"
             :aria-expanded="isOpen && filteredGames.length > 0"
-            :aria-activedescendant="isOpen && highlightedIndex >= 0 && filteredGames[highlightedIndex] ? `autocomplete-option-${filteredGames[highlightedIndex]!.id}` : undefined"
+            :aria-activedescendant="isOpen && highlightedIndex >= 0 && filteredGames[highlightedIndex] ? `autocomplete-option-${instanceId}-${filteredGames[highlightedIndex]!.id}` : undefined"
             @input="onInput"
             @focus="onFocus"
             @blur="onBlur"
@@ -204,14 +229,15 @@ function onKeydown(event: KeyboardEvent) {
         >
         <ul
             v-if="isOpen && filteredGames.length > 0"
-            id="autocomplete-listbox"
+            :id="`autocomplete-listbox-${instanceId}`"
             role="listbox"
             tabindex="-1"
             class="list-group position-absolute w-100 autocomplete-dropdown shadow"
         >
             <li
                 v-for="(game, index) in filteredGames"
-                :id="`autocomplete-option-${game.id}`"
+                :id="`autocomplete-option-${instanceId}-${game.id}`"
+                :ref="(el) => { if (el) { optionRefs[index] = el as HTMLElement } else { optionRefs[index] = undefined } }"
                 :key="game.id"
                 role="option"
                 class="list-group-item list-group-item-action"
@@ -221,6 +247,7 @@ function onKeydown(event: KeyboardEvent) {
                 }"
                 :aria-selected="index === highlightedIndex && !disabledGameIds.has(game.id) && !seriesLimitedGameIds?.has(game.id)"
                 :aria-disabled="disabledGameIds.has(game.id) || seriesLimitedGameIds?.has(game.id) || undefined"
+                @mouseenter="onOptionMouseenter(index, game)"
                 @mousedown.prevent="selectGame(game)"
             >
                 {{ game.displayName }}

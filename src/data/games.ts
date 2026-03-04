@@ -26,15 +26,14 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Battle Garegga',
         songSource: { songName: 'Fly to the Leaden Sky', videoId: 'Szr0TSXcWok' },
-    },
-    // Note: BioMetal (JP) and BioMetal (US) share the same song name ("Dark Clouds") but these tracks are completely different from one another.
+    },    
     {
         name: 'BioMetal (JP)',
         songSource: { songName: 'Dark Clouds', videoId: 'DMhmwXbPcYg' },
     },
     {
         name: 'BioMetal (US)',
-        songSource: { songName: 'Dark Clouds', videoId: '6N3Bfm057xM' },
+        songSource: { songName: 'Twilight Zone', videoId: '6N3Bfm057xM' },
     },
     {
         name: 'Blazing Star',
