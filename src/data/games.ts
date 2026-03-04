@@ -20,13 +20,17 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Assault Launch', videoId: 'ypFovFbi0dw' },
     },
     {
+        name: 'Axelay',
+        songSource: { songName: 'Unkai', videoId: 'pTQ_jezNUxE' },
+    },
+    {
         name: 'Battle Bakraid',
         songSource: { songName: 'Sky Gunner', videoId: 'gb39c-VlJkA' },
     },
     {
         name: 'Battle Garegga',
         songSource: { songName: 'Fly to the Leaden Sky', videoId: 'Szr0TSXcWok' },
-    },    
+    },
     {
         name: 'BioMetal (JP)',
         songSource: { songName: 'Dark Clouds', videoId: 'DMhmwXbPcYg' },
@@ -64,6 +68,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Cygni: All Guns Blazing',
         songSource: { songName: 'Battle Over the White Sands', videoId: 'a-9kcVAaXXQ' },
+    },
+    {
+        name: 'Cyvern: The Dragon Weapons',
+        songSource: { songName: 'Stage 1', videoId: 'RcwYz6ZLgy0' },
     },
     {
         name: 'Daioh',
@@ -188,18 +196,26 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Gradius III',
+        sortName: 'Gradius 3',
         series: Series.Gradius,
         songSource: { songName: 'Sand Storm', videoId: 'NyQzfqNIKTI' },
     },
     {
         name: 'Gradius IV',
+        sortName: 'Gradius 4',
         series: Series.Gradius,
         songSource: { songName: 'Apollon', videoId: 'kGc9HIKnqB8' },
     },
     {
         name: 'Gradius V',
+        sortName: 'Gradius 5',
         series: Series.Gradius,
         songSource: { songName: 'Universe', videoId: 'KCDS-T2E_Lg' },
+    },
+    {
+        name: 'Gradius Gaiden',
+        series: Series.Gradius,
+        songSource: { songName: 'Sky 1 & 2', videoId: '9n7s8XoQeWE' },
     },
     {
         name: 'Gun Frontier',
@@ -224,6 +240,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Hellsinker',
         songSource: { songName: 'Segment 1 BEHIND', videoId: 'M7vl9LzMAa8' },
+    },
+    {
+        name: 'Hotdog Storm',
+        songSource: { songName: 'Stage 1', videoId: 'lHGdbyX82TE' },
     },
     {
         name: 'Ikaruga',
@@ -252,6 +272,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Jamestown',
         songSource: { songName: 'War Upon the East Frontier', videoId: 'zhgBx6vSApM' },
+    },
+    {
+        name: 'Judgement Silversword',
+        songSource: { songName: 'BGM 01', videoId: 'BGNSHNf-nlU', startTime: 0, endTime: 123 },
     },
     {
         name: 'Ketsui',
@@ -310,6 +334,14 @@ const gameEntries: GameEntry[] = [
     {
         name: 'PD Ultraman Invader',
         songSource: { songName: 'Ultraman', videoId: 'UD8ILryBKPY' },
+    },
+    {
+        name: 'Platypus',
+        songSource: { songName: 'Stage 1', videoId: 'UJ-9PA9bXY0' },
+    },
+    {
+        name: 'Platypus II',
+        songSource: { songName: 'Stage 1', videoId: '4gV49IcGS30' },
     },
     {
         name: 'Plus Alpha',
@@ -520,6 +552,10 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'Silver Surfer',
+        songSource: { songName: 'Stage BGM 1', videoId: 'BGNSHNf-nlU' },
+    },
+    {
         name: 'Space Invaders (1999)',
         series: Series.SpaceInvaders,
         songSource: { songName: 'Pluto', videoId: 'ufKFko1q5XM' },
@@ -570,8 +606,8 @@ const gameEntries: GameEntry[] = [
         name: 'Strike Gunner S.T.G.',
         // The theme has no official name; songName describes where it appears. The same melody is used in different stages across the Arcade and Super Nintendo versions.
         songSource: [
-            { songName: 'Stages 1, 4 & Ending', arrangements: [ { source: 'Arcade', videoId: 'Zi0fezKPdH0' } ] },
-            { songName: 'Stages 1, 3 & 5', arrangements: [ { source: 'Super Nintendo', videoId: 'g3L79GW6T7s' } ] },
+            { songName: 'Stages 1, 4 & Ending', arrangements: [{ source: 'Arcade', videoId: 'Zi0fezKPdH0' }] },
+            { songName: 'Stages 1, 3 & 5', arrangements: [{ source: 'Super Nintendo', videoId: 'g3L79GW6T7s' }] },
         ]
     },
     {
@@ -633,8 +669,8 @@ const gameEntries: GameEntry[] = [
         name: 'Super SWIV', // Super SWIV is SNES title, Firepower 2000 is US SNES title, Mega SWIV is Genesis / Mega Drive title
         alias: ['Firepower 2000', 'Mega SWIV'],
         songSource: [
-            { songName: 'Stage 1', arrangements: [ { source: 'Super Nintendo', videoId: 't5IEOuoVOYo' } ] },
-            { songName: 'Stage 1 & 6', arrangements: [ { source: 'Genesis', videoId: 't5IEOuoVOYo' } ] },
+            { songName: 'Stage 1', arrangements: [{ source: 'Super Nintendo', videoId: 't5IEOuoVOYo' }] },
+            { songName: 'Stage 1 & 6', arrangements: [{ source: 'Genesis', videoId: 't5IEOuoVOYo' }] },
         ],
     },
     {
