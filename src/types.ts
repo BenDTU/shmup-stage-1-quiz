@@ -35,6 +35,10 @@ export type GameEntry = GameEntryBase & {
 
 export type GameEntryWithId = GameEntry & { id: number }
 
+export type NoSoundTrackGameEntry = GameEntryBase & {
+    songSource: { songName: string }
+}
+
 export type GameListEntry = { id: number; name: string; alias?: string | string[]; series?: Series }
 
 export type Game = {

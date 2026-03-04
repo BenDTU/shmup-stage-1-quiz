@@ -1,7 +1,7 @@
-import { Series, type GameEntry, type GameEntryWithId } from '../types'
+import { Series, type GameEntry, type GameEntryWithId, type NoSoundTrackGameEntry } from '../types'
 
 export { Series } from '../types'
-export type { SongEntry, GameEntry, GameListEntry, Game } from '../types'
+export type { SongEntry, GameEntry, GameListEntry, Game, NoSoundTrackGameEntry } from '../types'
 
 // Update videoId and startTime values with the correct YouTube video IDs and
 // timestamps for each game's stage 1 theme.
@@ -763,11 +763,11 @@ const gameEntries: GameEntry[] = [
 
 // Games without relevant YouTube links yet.
 // When a suitable YouTube video becomes available, replace '---' with the real videoId and move the entry into gameEntries above.
-export const noSoundTrackGameEntries: GameEntry[] = [
+export const noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
     {
         name: 'Exzeal',
         series: Series.Zeal,
-        songSource: { songName: 'Typhoon #12', videoId: '---' },
+        songSource: { songName: 'Typhoon #12' },
     },
 ]
 
