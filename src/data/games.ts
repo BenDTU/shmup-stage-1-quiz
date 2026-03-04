@@ -761,4 +761,11 @@ const gameEntries: GameEntry[] = [
     },
 ]
 
+// Games with no available soundtrack — uncomment and add a videoId when one becomes available:
+// {
+//     name: 'Exzeal',
+//     series: Series.Zeal,
+//     songSource: { songName: '', videoId: '' },
+// },
+
 export const games: GameEntryWithId[] = gameEntries.map((entry, index) => ({ ...entry, id: index + 1 }))
