@@ -88,7 +88,7 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'VISIONNERZ ~HALLUCINATED PEOPLE~', videoId: 'kG30WhHCnN4' },
     },
     {
-        name: 'DariusBurst',
+        name: 'Dariusburst',
         alias: [
             'Dariusburst: Another Chronicle',
             'Dariusburst: Another Chronicle EX',
