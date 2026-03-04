@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
 import { games } from '../data/games'
 import { type GameListEntry } from '../types'
 
@@ -122,6 +122,13 @@ function onBlur() {
     }, 150)
 }
 
+function scrollHighlightedIntoView() {
+    const game = filteredGames.value[highlightedIndex.value]
+    if (!game) return
+    const el = document.getElementById(`autocomplete-option-${game.id}`)
+    if (el) el.scrollIntoView({ block: 'nearest' })
+}
+
 function onKeydown(event: KeyboardEvent) {
     if (!isOpen.value) {
         if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
@@ -147,6 +154,7 @@ function onKeydown(event: KeyboardEvent) {
         }
         if (next < filteredGames.value.length) {
             highlightedIndex.value = next
+            nextTick(() => scrollHighlightedIntoView())
         }
     } else if (event.key === 'ArrowUp') {
         event.preventDefault()
@@ -156,7 +164,10 @@ function onKeydown(event: KeyboardEvent) {
             if (!game || (!props.disabledGameIds.has(game.id) && !props.seriesLimitedGameIds?.has(game.id))) break
             prev--
         }
-        highlightedIndex.value = prev
+        highlightedIndex.value = Math.max(-1, prev)
+        if (highlightedIndex.value >= 0) {
+            nextTick(() => scrollHighlightedIntoView())
+        }
     } else if (event.key === 'Enter') {
         event.preventDefault()
         if (highlightedIndex.value >= 0) {
