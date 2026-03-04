@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { h, Fragment } from 'vue'
+import { h } from 'vue'
 import type { VNode } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuiz } from '@/composables/useQuiz'
