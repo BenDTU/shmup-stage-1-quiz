@@ -148,7 +148,7 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'The Year 2008, Tokyo', videoId: 'ZCaPtpNyjf4' },
     },
     {
-        name: 'Dodonpachi SaiDaiOuJou',
+        name: 'DoDonPachi SaiDaiOuJou',
         sortName: 'Dodonpachi 4',
         series: Series.Dodonpachi,
         songSource: { songName: 'Ran', videoId: 'GFlCCYlXcE8' },
