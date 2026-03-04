@@ -77,13 +77,13 @@ To add a new series, add a new entry to the `Series` enum in `src/types.ts`.
 
 ## Name vs alias
 
-The `name` field should generally be the most recent official English name for the game. Aliases are for any other names the game is known by — alternate regional titles, older localisation names, or names from earlier releases. Common sense should generally prevail here.
+The `name` field should generally be the most recent official English name for the game. Aliases are for any other names the game is known by — alternate regional titles, older localisation names, or names from earlier releases. As examples:
 
-- **Shienryu** has been released as *Gekioh Shooting King* and *Steel Dragon EX*, but an upcoming Console Archives release refers to it as *ShienRyu* again. `name: 'Shienryu'` with `alias: ['Gekioh Shooting King', 'Steel Dragon EX']` is appropriate.
-- **Gradius II** was released as *Vulcan Venture* in North America, which is an outlier as every other entry in the series is called Gradius — and frankly, nobody calls it that. `alias: 'Vulcan Venture'` is sufficient; there's no need to make it the primary name.
-- **Dodonpachi Blissful Death** (*DaiOuJou*) has its most recent official English name from a Cave/M2 localisation. If a future release reverts to *DaiOuJou*, the name and alias fields would swap accordingly.
+- **Shienryu** has been released as *Gekioh Shooting King* and *Steel Dragon* within the *Steel Dragon EX* release, but an upcoming Console Archives release refers to it as *ShienRyu* again. `name: 'Shienryu'` with `alias: ['Gekioh Shooting King', 'Steel Dragon EX']` is appropriate. Also literally nobody calls it any of those localised names these days.
+- **Gradius II** was released as *Vulcan Venture* in North America, which is out of step with the rest of the series, so Vulcan Venture as an alias is fine.
+- **Dodonpachi Blissful Death** is the localised name from the old mobile port, even though *DaiOuJou* is generally what this game tends to be referred to as within the community.
 
-As a rule of thumb: if someone typed the alias into the autocomplete to find the game, it should be there. If the name would confuse or mislead most players, reconsider which is `name` and which is `alias`.
+As a rule of thumb: if someone typed the alias into the autocomplete to find the game, it should be there. There's probably going to be a bunch of other cases that come up where the localised name isn't generally used or liked so feel free to just use common sense where appropriate.
 
 ### Example with aliases
 
