@@ -89,6 +89,14 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'DariusBurst',
+        alias: [
+            'Dariusburst: Another Chronicle',
+            'Dariusburst: Another Chronicle EX',
+            'Dariusburst: Second Prologue',
+            'Dariusburst: Chronicle Saviours',
+            'Dariusburst: Another Chronicle EX+',
+            'Dariusburst CS Core + Taito/Sega'
+        ],
         series: Series.Darius,
         songSource: [
             { songName: 'Good-bye My Earth', videoId: 'Hi1sF3AKPHk' },
@@ -443,6 +451,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Raiden II',
+        alias: 'Raiden DX',
         sortName: 'Raiden 2',
         series: Series.Raiden,
         songSource: { songName: 'Repeated Tragedy', videoId: 'zDS4EMmETsE' },
