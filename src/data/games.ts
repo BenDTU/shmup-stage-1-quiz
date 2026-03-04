@@ -761,8 +761,8 @@ const gameEntries: GameEntry[] = [
     },
 ]
 
-// Games without relevant YouTube links to use with.
-// Replace '---' with a real videoId when one becomes available and move the entry into gameEntries above.
+// Games without relevant YouTube links yet.
+// When a suitable YouTube video becomes available, replace '---' with the real videoId and move the entry into gameEntries above.
 export const noSoundTrackGameEntries: GameEntry[] = [
     {
         name: 'Exzeal',
