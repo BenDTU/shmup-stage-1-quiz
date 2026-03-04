@@ -679,7 +679,7 @@ const gameEntries: GameEntry[] = [
         alias: ['Firepower 2000', 'Mega SWIV'],
         songSource: [
             { songName: 'Stage 1', arrangements: [{ source: 'Super Nintendo', videoId: 't5IEOuoVOYo' }] },
-            { songName: 'Stage 1 & 6', arrangements: [{ source: 'Genesis', videoId: 't5IEOuoVOYo' }] },
+            { songName: 'Stage 1 & 6', arrangements: [{ source: 'Genesis', videoId: 'fSoAOxs5ZCk' }] },
         ],
     },
     {
