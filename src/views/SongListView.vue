@@ -107,14 +107,17 @@ const hoveredGame = ref<string | null>(null)
                                     </td>
                                     <td>{{ song.songName }}</td>
                                     <td class="text-nowrap">
-                                        <a
-                                            v-for="link in song.links"
-                                            :key="link.url"
-                                            :href="link.url"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="me-2"
-                                        >▶ {{ link.label }}</a>
+                                        <div class="d-flex flex-column gap-1">
+                                            <a
+                                                v-for="link in song.links"
+                                                :key="link.url"
+                                                :href="link.url"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="icon-link me-2 small"
+                                            ><i class="bi bi-youtube lh-1" /> {{ link.label }}</a>
+                                        </div>
+                                        
                                     </td>
                                 </tr>
                             </template>

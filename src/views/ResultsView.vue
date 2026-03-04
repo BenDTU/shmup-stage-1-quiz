@@ -68,7 +68,7 @@ function playAgain() {
                         >
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex">
-                                    <span class="fw-semibold me-1 text-nowrap">#{{ index + 1 }}</span>
+                                    <span class="fw-semibold me-2 text-nowrap">#{{ index + 1 }}</span>
                                     <span class="me-2 text-nowrap"><i :class="state.questions[index]?.id === guessId ? 'bi bi-check-circle-fill text-success' : 'bi bi-x-circle-fill text-danger'" /></span>
                                     <div>
                                         <div class="fw-semibold">
@@ -92,8 +92,8 @@ function playAgain() {
                                     :href="`https://www.youtube.com/watch?v=${encodeURIComponent(state.questions[index]!.videoId)}`"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="ms-3 text-nowrap small"
-                                >▶ YouTube</a>
+                                    class="icon-link ms-3 small"
+                                ><i class="bi bi-youtube lh-1" /> YouTube</a>
                             </div>
                         </div>
                     </div>

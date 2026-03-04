@@ -49,7 +49,10 @@ function begin() {
                         class="list-group-item"
                     >
                         <!-- eslint-disable-next-line vue/no-v-html -->
-                        <i :class="['bi', tip.icon]" /> <span v-html="tip.html" />
+                        <div class="d-flex">
+                          <i :class="['bi', 'me-2', tip.icon]" />
+                          <span v-html="tip.html" />
+                        </div>
                     </li>
                 </ul>
                 <button

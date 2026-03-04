@@ -134,7 +134,7 @@ async function handleNextClick(event: MouseEvent) {
                                     class="btn btn-outline-secondary"
                                     @click="handleSkipClick"
                                 >
-                                    Skip <i class="bi bi-skip-end-fill" />
+                                    Skip <i class="bi bi-skip-forward-fill ms-1" />
                                 </button>
                             </div>
                         </div>
@@ -146,10 +146,10 @@ async function handleNextClick(event: MouseEvent) {
                                 :class="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex] ? 'alert-success' : 'alert-danger'"
                             >
                                 <span v-if="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]">
-                                    <i class="bi bi-check-circle-fill text-success" /> <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
+                                    <i class="bi bi-check-circle-fill text-success me-1" /> <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
                                 </span>
                                 <span v-else>
-                                    <i class="bi bi-x-circle-fill text-danger" /> <strong>Incorrect.</strong> The song was
+                                    <i class="bi bi-x-circle-fill text-danger me-1" /> <strong>Incorrect.</strong> The song was
                                     <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
                                     You guessed: <em>{{ guessedGameName(state.answers[state.currentIndex]!) }}</em>.
                                 </span>
@@ -160,10 +160,10 @@ async function handleNextClick(event: MouseEvent) {
                                 @click="handleNextClick"
                             >
                                 <template v-if="isFinished">
-                                    See Results <i class="bi bi-trophy-fill" />
+                                    See Results <i class="bi bi-trophy-fill ms-1" />
                                 </template>
                                 <template v-else>
-                                    Next Question →
+                                    Next Question <i class="bi bi-arrow-right ms-1" />
                                 </template>
                             </button>
                         </div>
