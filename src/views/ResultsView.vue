@@ -69,7 +69,13 @@ function playAgain() {
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex">
                                     <span class="fw-semibold me-2 text-nowrap">#{{ index + 1 }}</span>
-                                    <span class="me-2 text-nowrap"><i :class="state.questions[index]?.id === guessId ? 'bi bi-check-circle-fill text-success' : 'bi bi-x-circle-fill text-danger'" /></span>
+                                    <span class="me-2 text-nowrap">
+                                        <i
+                                            :class="state.questions[index]?.id === guessId ? 'bi bi-check-circle-fill text-success' : 'bi bi-x-circle-fill text-danger'"
+                                            role="img"
+                                            :aria-label="state.questions[index]?.id === guessId ? 'Correct answer' : 'Incorrect answer'"
+                                        />
+                                    </span>
                                     <div>
                                         <div class="fw-semibold">
                                             {{ state.questions[index]?.name }}
