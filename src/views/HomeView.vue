@@ -16,12 +16,12 @@ interface Tip {
 }
 
 const tips: Tip[] = [
-    { icon: 'bi-music-note-beamed', label: () => h(Fragment, 'Each track plays automatically — listen carefully!') },
-    { icon: 'bi-search',            label: () => h(Fragment, 'Use the autocomplete box to find your answer.') },
-    { icon: 'bi-hand-index-thumb',  label: () => h(Fragment, ['You only get ', h('strong', 'one guess'), ' per song.']) },
-    { icon: 'bi-slash-circle',      label: () => h(Fragment, 'Games already shown are disabled in later questions.') },
-    { icon: 'bi-bar-chart-fill',    label: () => h(Fragment, 'See your full score and all answers at the end.') },
-    { icon: 'bi-controller',        label: () => h(Fragment, ['There are currently ', h('strong', String(totalGames)), ' shmups loaded in!']) },
+    { icon: 'bi-music-note-beamed', label: () => h('span', 'Each track plays automatically — listen carefully!') },
+    { icon: 'bi-search',            label: () => h('span', 'Use the autocomplete box to find your answer.') },
+    { icon: 'bi-hand-index-thumb',  label: () => h('span', ['You only get ', h('strong', 'one guess'), ' per song.']) },
+    { icon: 'bi-slash-circle',      label: () => h('span', 'Games already shown are disabled in later questions.') },
+    { icon: 'bi-bar-chart-fill',    label: () => h('span', 'See your full score and all answers at the end.') },
+    { icon: 'bi-controller',        label: () => h('span', ['There are currently ', h('strong', String(totalGames)), ' shmups loaded in!']) },
 ]
 
 function begin() {
