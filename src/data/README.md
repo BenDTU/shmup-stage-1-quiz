@@ -12,8 +12,9 @@ Each entry must have a `name` and a `songSource`. IDs are auto-assigned from the
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `name` | `string` | ✅ | Display name of the game |
+| `name` | `string` | ✅ | Display name of the game — see [Name vs alias](#name-vs-alias) below |
 | `songSource` | `SongEntry \| [SongEntry, ...SongEntry[]]` | ✅ | The stage 1 theme(s) — see below for the three variants. When supplying an array it must be non-empty (TypeScript will reject an empty array). |
+| `alias` | `string \| string[]` | ❌ | Alternative name(s) the game is known by — see [Name vs alias](#name-vs-alias) below |
 | `sortName` | `string` | ❌ | Override the sort key when the display name would sort incorrectly (e.g. `'Gradius 2'` for `'Gradius II'`) |
 | `series` | `Series` | ❌ | Groups related games together so they cannot appear as wrong-answer options for each other |
 | `forceFirst` | `boolean` | ❌ | If `true`, this game is moved to the start of the quiz. All games with this flag set appear first (in their existing order). **For local testing purposes only, do not commit any entries up with this enabled.** |
@@ -73,6 +74,28 @@ If the game belongs to a series already in the `Series` enum (defined in `src/ty
 - `Series.Touhou`
 
 To add a new series, add a new entry to the `Series` enum in `src/types.ts`.
+
+## Name vs alias
+
+The `name` field should generally be the most recent official English name for the game. Aliases are for any other names the game is known by — alternate regional titles, older localisation names, or names from earlier releases. As examples:
+
+- **Shienryu** has been released as *Gekioh Shooting King* and *Steel Dragon* (as part of the *Steel Dragon EX* release), but an upcoming Console Archives release refers to it as *ShienRyu* again. `name: 'Shienryu'` with `alias: ['Gekioh Shooting King', 'Steel Dragon']` is appropriate. Also literally nobody calls it any of those localised names these days.
+- **Gradius II** was released as *Vulcan Venture* in North America, which is out of step with the rest of the series, so Vulcan Venture as an alias is fine.
+- **Dodonpachi Blissful Death** is the localised name from the old mobile port, even though *DaiOuJou* is generally what this game tends to be referred to as within the community.
+
+As a rule of thumb: if someone typed the alias into the autocomplete to find the game, it should be there. There's probably going to be a bunch of other cases that come up where the localised name isn't generally used or liked so feel free to just use common sense where appropriate.
+
+### Example with aliases
+
+```ts
+{
+  name: 'Dodonpachi Blissful Death',
+  sortName: 'Dodonpachi 2',
+  alias: 'DoDonPachi DaiOuJou',
+  series: Series.Dodonpachi,
+  songSource: { songName: 'Stage 1', videoId: 'example' },
+},
+```
 
 ## Examples
 

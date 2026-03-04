@@ -3,13 +3,13 @@ import { games } from '../data/games'
 import { type Game, type GameEntryWithId, Series } from '../types'
 
 function resolveGame(entry: GameEntryWithId): Game {
-    const { name, series, id } = entry
+    const { name, alias, series, id } = entry
     const sources = Array.isArray(entry.songSource) ? entry.songSource : [entry.songSource]
     const songEntry = sources[Math.floor(Math.random() * sources.length)]!
 
     if (!('arrangements' in songEntry)) {
         const { songName, videoId, startTime = 0, endTime } = songEntry
-        return { name, series, id, songName, videoId, startTime, endTime }
+        return { name, alias, series, id, songName, videoId, startTime, endTime }
     }
   
     const arrangements = songEntry.arrangements
@@ -19,6 +19,7 @@ function resolveGame(entry: GameEntryWithId): Game {
 
     return {
         name,
+        alias,
         series,
         id,
         songName,
@@ -29,16 +30,10 @@ function resolveGame(entry: GameEntryWithId): Game {
     }
 }
 
-export interface QuizAnswer {
-    game: Game
-    userGuess: string
-    isCorrect: boolean
-}
-
 interface QuizState {
     questions: Game[]
     currentIndex: number
-    answers: QuizAnswer[]
+    answers: number[] // guessed game id per question, -1 for a skip
     isStarted: boolean
     isAnswered: boolean
 }
@@ -106,12 +101,13 @@ function startQuiz() {
     state.isAnswered = false
 }
 
-function submitGuess(guess: string) {
+function submitGuess(gameId: number) {
     if (state.isAnswered) return
     const currentGame = state.questions[state.currentIndex]
     if (!currentGame) return
-    const isCorrect = guess.trim().toLowerCase() === currentGame.name.toLowerCase()
-    state.answers.push({ game: currentGame, userGuess: guess.trim(), isCorrect })
+    const isSkip = gameId === -1
+    if (!isSkip && !games.find((g) => g.id === gameId)) return
+    state.answers.push(gameId)
     state.isAnswered = true
 }
 

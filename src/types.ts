@@ -23,6 +23,7 @@ export type SongEntry =
 interface GameEntryBase {
     name: string
     sortName?: string // optional override used for alphabetical sorting (e.g. 'Gradius 2' for 'Gradius II')
+    alias?: string | string[] // optional alternative name(s) for the game used in autocomplete search
     series?: Series
     forceFirst?: boolean // if true, this game will always be the first question in the quiz
 }
@@ -33,10 +34,11 @@ export type GameEntry = GameEntryBase & {
 
 export type GameEntryWithId = GameEntry & { id: number }
 
-export type GameListEntry = { id: number; name: string; series?: Series }
+export type GameListEntry = { id: number; name: string; alias?: string | string[]; series?: Series }
 
 export type Game = {
     name: string
+    alias?: string | string[] // optional alternative name(s) carried through from the game entry
     songName: string
     videoId: string
     startTime: number

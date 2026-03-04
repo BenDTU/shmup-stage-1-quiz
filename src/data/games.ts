@@ -78,16 +78,14 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'DoDonPachi',
+        sortName: 'Dodonpachi 1',
         series: Series.Dodonpachi,
         songSource: { songName: '1 & 4 Scene BGM', videoId: 'nDMjMv6COIU' },
     },
     {
-        name: 'DoDonPachi DaiFukkatsu',
-        series: Series.Dodonpachi,
-        songSource: { songName: 'The Year 2008, Tokyo', videoId: 'ZCaPtpNyjf4' },
-    },
-    {
-        name: 'DoDonPachi DaiOuJou',
+        name: 'DoDonPachi Blissful Death',
+        alias: 'DoDonPachi DaiOuJou',
+        sortName: 'Dodonpachi 2',
         series: Series.Dodonpachi,
         songSource: {
             songName: 'East Asia',
@@ -102,6 +100,13 @@ const gameEntries: GameEntry[] = [
                 },
             ]
         }
+    },
+    {
+        name: 'DoDonPachi Resurrection',
+        alias: 'DoDonPachi DaiFukkatsu',
+        sortName: 'Dodonpachi 3',
+        series: Series.Dodonpachi,
+        songSource: { songName: 'The Year 2008, Tokyo', videoId: 'ZCaPtpNyjf4' },
     },
     {
         name: 'Dogyuun',
@@ -141,11 +146,13 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Gradius',
+        alias: 'Nemesis',
         series: Series.Gradius,
         songSource: { songName: 'Challenger 1985', videoId: 'nYES6OmvQFQ' },
     },
     {
         name: 'Gradius II',
+        alias: 'Vulcan Venture',
         sortName: 'Gradius 2',
         series: Series.Gradius,
         songSource: { songName: 'Burning Heat', videoId: 'FLc1msji0_w' },
@@ -454,7 +461,20 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Shienryu',
-        songSource: { songName: 'Stage 1', videoId: '4tk9RUiRplw' },
+        alias: ['Gekioh Shooting King', 'Steel Dragon'],
+        songSource: {
+            songName: 'Stage 1',
+            arrangements: [
+                {
+                    source: 'Original',
+                    videoId: '4tk9RUiRplw',
+                },
+                {
+                    source: 'Playstation',
+                    videoId: 'ycQgBx7gfFQ',
+                },
+            ]
+        },
     },
     {
         name: 'Space Invaders (1999)',

@@ -4,12 +4,12 @@ import { useRouter } from 'vue-router'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
 import AutocompleteInput from '../components/AutocompleteInput.vue'
 import { useQuiz } from '../composables/useQuiz'
-import { games } from '../data/games'
+import { guessedGameName } from '../functions'
 
 const router = useRouter()
 const { state, isFinished, usedGameIds, seriesLimitedGameIds, submitGuess, nextQuestion } = useQuiz()
 
-const guess = ref('')
+const selectedGameId = ref<number | null>(null)
 const audioUnlocked = ref(false)
 const nextBtn = ref<HTMLButtonElement | null>(null)
 const autocompleteRef = ref<{ focus: () => void } | null>(null)
@@ -23,21 +23,14 @@ onMounted(() => {
 const currentQuestion = computed(() => state.questions[state.currentIndex])
 const questionNumber = computed(() => state.currentIndex + 1)
 
-// Only allow submitting a guess that exactly matches an available game in the pool
+// Only allow submitting a guess that corresponds to an available game in the pool
 const isValidGuess = computed(() => {
-    const normalizedGuess = guess.value.trim().toLowerCase()
-    if (!normalizedGuess) return false
-
-    return games.some(
-        (g) =>
-            g.name.toLowerCase() === normalizedGuess &&
-            !usedGameIds.value.has(g.id) &&
-            !seriesLimitedGameIds.value.has(g.id),
-    )
+    if (selectedGameId.value === null) return false
+    return !usedGameIds.value.has(selectedGameId.value) && !seriesLimitedGameIds.value.has(selectedGameId.value)
 })
 async function handleSubmit(viaKeyboard = false) {
     if (!isValidGuess.value || state.isAnswered) return
-    submitGuess(guess.value)
+    submitGuess(selectedGameId.value!)
     if (viaKeyboard) {
         await nextTick()
         nextBtn.value?.focus()
@@ -48,7 +41,7 @@ async function handleSkipClick(event: MouseEvent) {
     if (state.isAnswered) return
     // event.detail is 0 for keyboard-triggered clicks (Enter/Space) and ≥1 for mouse clicks
     const isKeyboard = event.detail === 0
-    submitGuess('Song skipped')
+    submitGuess(-1)
     if (isKeyboard) {
         await nextTick()
         nextBtn.value?.focus()
@@ -59,7 +52,7 @@ function handleNext() {
     if (isFinished.value) {
         router.push('/results')
     } else {
-        guess.value = ''
+        selectedGameId.value = null
         nextQuestion()
     }
 }
@@ -86,7 +79,7 @@ async function handleNextClick(event: MouseEvent) {
                 <!-- Progress bar -->
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="fw-semibold">Question {{ questionNumber }} of {{ state.questions.length }}</span>
-                    <span class="text-muted small">Score: {{ state.answers.filter((a) => a.isCorrect).length }} / {{ state.answers.length }}</span>
+                    <span class="text-muted small">Score: {{ state.answers.filter((id, i) => state.questions[i]?.id === id).length }} / {{ state.answers.length }}</span>
                 </div>
                 <div
                     class="progress mb-4"
@@ -123,7 +116,7 @@ async function handleNextClick(event: MouseEvent) {
                         <div v-if="!state.isAnswered">
                             <AutocompleteInput
                                 ref="autocompleteRef"
-                                v-model="guess"
+                                v-model="selectedGameId"
                                 :disabled-game-ids="usedGameIds"
                                 :series-limited-game-ids="seriesLimitedGameIds"
                                 class="mb-3"
@@ -150,17 +143,15 @@ async function handleNextClick(event: MouseEvent) {
                         <div v-else>
                             <div
                                 class="alert mb-3"
-                                :class="state.answers[state.currentIndex]?.isCorrect ? 'alert-success' : 'alert-danger'"
+                                :class="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex] ? 'alert-success' : 'alert-danger'"
                             >
-                                <span v-if="state.answers[state.currentIndex]?.isCorrect">
+                                <span v-if="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]">
                                     ✅ <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
                                 </span>
                                 <span v-else>
                                     ❌ <strong>Incorrect.</strong> The song was
                                     <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
-                                    <span v-if="state.answers[state.currentIndex]?.userGuess">
-                                        You guessed: <em>{{ state.answers[state.currentIndex]?.userGuess }}</em>.
-                                    </span>
+                                    You guessed: <em>{{ guessedGameName(state.answers[state.currentIndex]!) }}</em>.
                                 </span>
                             </div>
                             <button

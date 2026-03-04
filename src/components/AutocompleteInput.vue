@@ -1,46 +1,112 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { games } from '../data/games'
 import { type GameListEntry } from '../types'
 
 const props = defineProps<{
-    modelValue: string
+    modelValue: number | null   // selected game id, or null for no selection
     disabledGameIds: Set<number>
     seriesLimitedGameIds?: Set<number>
     disabled?: boolean
 }>()
 
 const emit = defineEmits<{
-    'update:modelValue': [value: string]
+    'update:modelValue': [value: number | null]
     submit: []
 }>()
 
 const isOpen = ref(false)
 const highlightedIndex = ref(-1)
 const inputRef = ref<HTMLInputElement | null>(null)
+const inputText = ref('')
+const internalUpdate = ref(false)
 
-defineExpose({ focus: () => inputRef.value?.focus() })
-
-const allGames = computed<GameListEntry[]>(() =>
-    games.map(({ id, name, series }) => ({ id, name, series })),
+watch(
+    () => props.modelValue,
+    (newId) => {
+        if (internalUpdate.value) {
+            internalUpdate.value = false
+            return
+        }
+        if (newId === null) {
+            inputText.value = ''
+        } else {
+            const game = games.find((g) => g.id === newId)
+            if (game) inputText.value = game.name
+        }
+    },
+    { immediate: true },
 )
 
-const filteredGames = computed(() => {
-    const query = props.modelValue.toLowerCase().trim()
-    if (!query) return allGames.value
-    return allGames.value.filter((g) => g.name.toLowerCase().includes(query))
+defineExpose({
+    focus: () => inputRef.value?.focus(),
 })
 
-function selectGame(game: GameListEntry) {
+type AutocompleteItem = GameListEntry & { displayName: string }
+
+const allGames = computed<GameListEntry[]>(() =>
+    games.map(({ id, name, alias, series }) => ({ id, name, alias, series })),
+)
+
+const filteredGames = computed<AutocompleteItem[]>(() => {
+    const query = inputText.value.toLowerCase().trim()
+    if (!query) return allGames.value.map((g) => ({ ...g, displayName: g.name }))
+    return allGames.value
+        .filter((g) => {
+            if (g.name.toLowerCase().includes(query)) return true
+            const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : []
+            return aliases.some(
+                (a) =>
+                    a.toLowerCase().includes(query) ||
+                    `${g.name} (${a})`.toLowerCase().includes(query),
+            )
+        })
+        .map((g) => {
+            if (g.name.toLowerCase().includes(query)) return { ...g, displayName: g.name }
+            const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : []
+            const matchedAlias = aliases.find(
+                (a) =>
+                    a.toLowerCase().includes(query) ||
+                    `${g.name} (${a})`.toLowerCase().includes(query),
+            )
+            return { ...g, displayName: matchedAlias ? `${g.name} (${matchedAlias})` : g.name }
+        })
+})
+
+function matchGameToText(text: string): number | null {
+    const lower = text.toLowerCase().trim()
+    for (const g of allGames.value) {
+        if (g.name.toLowerCase() === lower) return g.id
+        const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : []
+        if (aliases.some((a) => `${g.name} (${a})`.toLowerCase() === lower)) return g.id
+    }
+    return null
+}
+
+watch(inputText, (text) => {
+    const matchedId = matchGameToText(text)
+    const isSelectable = matchedId !== null
+        && !props.disabledGameIds.has(matchedId)
+        && !props.seriesLimitedGameIds?.has(matchedId)
+    internalUpdate.value = true
+    emit('update:modelValue', isSelectable ? matchedId : null)
+    queueMicrotask(() => {
+        if (internalUpdate.value) {
+            internalUpdate.value = false
+        }
+    })
+}, { flush: 'sync' })
+
+function selectGame(game: AutocompleteItem) {
     if (props.disabledGameIds.has(game.id)) return
     if (props.seriesLimitedGameIds?.has(game.id)) return
-    emit('update:modelValue', game.name)
+    inputText.value = game.displayName
     isOpen.value = false
     highlightedIndex.value = -1
 }
 
 function onInput(event: Event) {
-    emit('update:modelValue', (event.target as HTMLInputElement).value)
+    inputText.value = (event.target as HTMLInputElement).value
     isOpen.value = true
     highlightedIndex.value = -1
 }
@@ -120,7 +186,7 @@ function onKeydown(event: KeyboardEvent) {
             type="text"
             class="form-control"
             placeholder="Type to search for a game…"
-            :value="modelValue"
+            :value="inputText"
             :disabled="disabled"
             role="combobox"
             autocomplete="off"
@@ -157,7 +223,7 @@ function onKeydown(event: KeyboardEvent) {
                 :aria-disabled="disabledGameIds.has(game.id) || seriesLimitedGameIds?.has(game.id) || undefined"
                 @mousedown.prevent="selectGame(game)"
             >
-                {{ game.name }}
+                {{ game.displayName }}
                 <span
                     v-if="disabledGameIds.has(game.id)"
                     class="ms-2 badge text-bg-secondary"
