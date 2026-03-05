@@ -73,7 +73,7 @@ function beginQuiz() {
                                 @click="closeMenu"
                             >
                                 <i
-                                    class="bi bi-house"
+                                    class="bi bi-house lh-1"
                                 />Home
                             </RouterLink>
                         </li>
@@ -84,7 +84,7 @@ function beginQuiz() {
                                 @click.prevent="beginQuiz"
                             >
                                 <i
-                                    class="bi bi-play-circle"
+                                    class="bi bi-play-circle lh-1"
                                 />New Quiz
                             </a>
                         </li>
@@ -95,7 +95,7 @@ function beginQuiz() {
                                 @click="closeMenu"
                             >
                                 <i
-                                    class="bi bi-music-note-list"
+                                    class="bi bi-music-note-list lh-1"
                                 />Song List
                             </RouterLink>
                         </li>
