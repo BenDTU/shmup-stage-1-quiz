@@ -39,7 +39,7 @@ function beginQuiz() {
 </script>
 
 <template>
-    <nav class="navbar navbar-expand-md sticky-top border-bottom bg-body">
+    <nav class="navbar sticky-top border-bottom bg-body">
         <div class="container">
             <RouterLink
                 class="navbar-brand"
@@ -70,10 +70,8 @@ function beginQuiz() {
                 ref="offcanvasRef"
                 :class="['offcanvas', 'offcanvas-start', { show: isMenuOpen }]"
                 tabindex="-1"
-                :role="isMenuOpen ? 'dialog' : undefined"
-                :aria-modal="isMenuOpen ? 'true' : undefined"
-                :aria-hidden="!isMenuOpen || undefined"
                 aria-labelledby="navOffcanvasLabel"
+                :aria-hidden="!isMenuOpen || undefined"
                 @keydown.esc="closeMenu"
             >
                 <div class="offcanvas-header">
@@ -81,7 +79,11 @@ function beginQuiz() {
                         id="navOffcanvasLabel"
                         class="offcanvas-title"
                     >
-                        <i class="bi bi-controller me-1" />Shmup Stage 1 Quiz
+                        <i
+                            class="bi bi-controller me-1"
+                            aria-hidden="true"
+                            role="presentation"
+                        />Shmup Stage 1 Quiz
                     </h5>
                     <button
                         type="button"
@@ -100,6 +102,7 @@ function beginQuiz() {
                             >
                                 <i
                                     class="bi bi-house lh-1 d-md-none"
+                                    aria-hidden="true"
                                 />Home
                             </RouterLink>
                         </li>
@@ -111,6 +114,7 @@ function beginQuiz() {
                             >
                                 <i
                                     class="bi bi-play-circle lh-1 d-md-none"
+                                    aria-hidden="true"
                                 /><span>New Quiz</span>
                             </button>
                         </li>
@@ -122,6 +126,7 @@ function beginQuiz() {
                             >
                                 <i
                                     class="bi bi-music-note-list lh-1 d-md-none"
+                                    aria-hidden="true"
                                 />Song List
                             </RouterLink>
                         </li>
@@ -134,7 +139,10 @@ function beginQuiz() {
                             :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
                             @click="toggleDark"
                         >
-                            <i :class="['lh-1', isDark ? 'bi bi-sun' : 'bi bi-moon']" />
+                            <i
+                                :class="['lh-1', isDark ? 'bi bi-sun' : 'bi bi-moon']"
+                                aria-hidden="true"
+                            />
                             <span class="d-md-none">{{ isDark ? 'Light mode' : 'Dark mode' }}</span>
                         </button>
                     </div>
