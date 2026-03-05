@@ -80,7 +80,7 @@ function beginQuiz() {
                             >
                                 <i
                                     class="bi bi-house lh-1"
-                                />Home
+                                /><span class="d-none d-md-inline">Home</span>
                             </RouterLink>
                         </li>
                         <li class="nav-item">
@@ -91,7 +91,7 @@ function beginQuiz() {
                             >
                                 <i
                                     class="bi bi-play-circle lh-1"
-                                /><span>New Quiz</span>
+                                /><span class="d-none d-md-inline">New Quiz</span>
                             </button>
                         </li>
                         <li class="nav-item">
@@ -102,7 +102,7 @@ function beginQuiz() {
                             >
                                 <i
                                     class="bi bi-music-note-list lh-1"
-                                />Song List
+                                /><span class="d-none d-md-inline">Song List</span>
                             </RouterLink>
                         </li>
                     </ul>
