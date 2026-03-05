@@ -65,6 +65,19 @@ async function handleSkipClick(event: MouseEvent) {
     }
 }
 
+function handleNoviceSelect(gameId: number) {
+    if (state.isAnswered) return
+    submitGuess(gameId)
+    setFeedback(gameId === currentQuestion.value?.id ? 'correct' : 'wrong')
+}
+
+function noviceOptionClass(optionId: number): string {
+    if (!state.isAnswered) return 'btn-outline-secondary'
+    if (optionId === currentQuestion.value?.id) return 'btn-success'
+    if (optionId === state.answers[state.currentIndex]) return 'btn-danger'
+    return 'btn-outline-secondary'
+}
+
 function handleNext() {
     if (isFinished.value) {
         router.push('/results')
@@ -84,7 +97,7 @@ async function handleNextClick(event: MouseEvent) {
     const isKeyboard = event.detail === 0
     const wasFinished = isFinished.value
     handleNext()
-    if (isKeyboard && !wasFinished) {
+    if (isKeyboard && !wasFinished && state.mode === 'advanced') {
         await nextTick()
         autocompleteRef.value?.focus()
     }
@@ -139,7 +152,8 @@ async function handleNextClick(event: MouseEvent) {
                             Which game is this stage 1 theme from?
                         </h5>
 
-                        <div v-if="!state.isAnswered">
+                        <!-- Advanced mode: autocomplete + submit/skip buttons -->
+                        <div v-if="state.mode === 'advanced' && !state.isAnswered">
                             <AutocompleteInput
                                 ref="autocompleteRef"
                                 v-model="selectedGameId"
@@ -165,9 +179,36 @@ async function handleNextClick(event: MouseEvent) {
                             </div>
                         </div>
 
-                        <!-- Result -->
-                        <div v-else>
+                        <!-- Novice mode: 4 option buttons -->
+                        <div
+                            v-if="state.mode === 'novice'"
+                            class="d-grid gap-2"
+                            :class="state.isAnswered ? 'mb-3' : ''"
+                        >
+                            <button
+                                v-for="optionId in state.noviceOptions[state.currentIndex]"
+                                :key="optionId"
+                                class="btn text-start"
+                                :class="[noviceOptionClass(optionId), { 'novice-option-done': state.isAnswered }]"
+                                @click="handleNoviceSelect(optionId)"
+                            >
+                                <div>{{ guessedGameName(optionId) }}</div>
+                                <div
+                                    v-if="state.isAnswered && optionId === currentQuestion?.id"
+                                    class="small opacity-75"
+                                >
+                                    {{ currentQuestion.songName }}<template v-if="currentQuestion.source">
+                                        ({{ currentQuestion.source }} version)
+                                    </template>
+                                </div>
+                            </button>
+                        </div>
+
+                        <!-- Result section (answered state) -->
+                        <template v-if="state.isAnswered">
+                            <!-- Advanced mode: correct/incorrect alert -->
                             <div
+                                v-if="state.mode === 'advanced'"
                                 class="alert mb-3"
                                 :class="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex] ? 'alert-success' : 'alert-danger'"
                             >
@@ -192,7 +233,7 @@ async function handleNextClick(event: MouseEvent) {
                                     Next Question <i class="bi bi-arrow-right ms-1" />
                                 </template>
                             </button>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -240,5 +281,10 @@ async function handleNextClick(event: MouseEvent) {
 
 .feedback-correct .progress-bar {
     animation: pulse-green 0.8s ease-in-out;
+}
+
+.novice-option-done {
+    cursor: default;
+    pointer-events: none;
 }
 </style>

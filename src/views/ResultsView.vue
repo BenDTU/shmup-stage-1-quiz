@@ -35,6 +35,12 @@ function playAgain() {
                         <p class="lead">
                             You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
                         </p>
+                        <p class="text-muted small mb-3">
+                            Mode: <span
+                                class="badge"
+                                :class="state.mode === 'novice' ? 'bg-info text-dark' : 'bg-primary'"
+                            >{{ state.mode === 'novice' ? 'Novice' : 'Advanced' }}</span>
+                        </p>
                         <div
                             class="progress mb-3 mx-auto"
                             style="height: 20px; max-width: 360px"

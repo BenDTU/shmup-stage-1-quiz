@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { h } from 'vue'
+import { h, ref, computed } from 'vue'
 import type { FunctionalComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuiz } from '@/composables/useQuiz'
@@ -9,23 +9,26 @@ const router = useRouter()
 const { startQuiz } = useQuiz()
 
 const totalGames = games.length
+const selectedMode = ref<'novice' | 'advanced'>('advanced')
 
 interface Tip {
     icon: string
     label: FunctionalComponent
 }
 
-const tips: Tip[] = [
+const tips = computed<Tip[]>(() => [
     { icon: 'bi-music-note-beamed', label: () => h('span', 'Each track plays automatically — listen carefully!') },
-    { icon: 'bi-search',            label: () => h('span', 'Use the autocomplete box to find your answer.') },
-    { icon: 'bi-hand-index-thumb',  label: () => h('span', ['You only get ', h('strong', 'one guess'), ' per song.']) },
-    { icon: 'bi-slash-circle',      label: () => h('span', 'Games already shown are disabled in later questions.') },
-    { icon: 'bi-bar-chart-fill',    label: () => h('span', 'See your full score and all answers at the end.') },
-    { icon: 'bi-controller',        label: () => h('span', ['There are currently ', h('strong', String(totalGames)), ' shmups loaded in!']) },
-]
+    selectedMode.value === 'novice'
+        ? { icon: 'bi-grid-3x3-gap-fill', label: () => h('span', 'Choose from 4 options — the correct answer is one of them!') }
+        : { icon: 'bi-search', label: () => h('span', 'Use the autocomplete box to find your answer.') },
+    { icon: 'bi-hand-index-thumb', label: () => h('span', ['You only get ', h('strong', 'one guess'), ' per song.']) },
+    { icon: 'bi-slash-circle',     label: () => h('span', 'Games already shown are disabled in later questions.') },
+    { icon: 'bi-bar-chart-fill',   label: () => h('span', 'See your full score and all answers at the end.') },
+    { icon: 'bi-controller',       label: () => h('span', ['There are currently ', h('strong', String(totalGames)), ' shmups loaded in!']) },
+])
 
 function begin() {
-    startQuiz()
+    startQuiz(selectedMode.value)
     router.push('/quiz')
 }
 </script>
@@ -56,6 +59,38 @@ function begin() {
                         </div>
                     </li>
                 </ul>
+                <div class="d-flex justify-content-center gap-3 mb-4">
+                    <div class="form-check">
+                        <input
+                            id="mode-advanced"
+                            v-model="selectedMode"
+                            class="form-check-input"
+                            type="radio"
+                            value="advanced"
+                        >
+                        <label
+                            class="form-check-label"
+                            for="mode-advanced"
+                        >
+                            Advanced
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            id="mode-novice"
+                            v-model="selectedMode"
+                            class="form-check-input"
+                            type="radio"
+                            value="novice"
+                        >
+                        <label
+                            class="form-check-label"
+                            for="mode-novice"
+                        >
+                            Novice
+                        </label>
+                    </div>
+                </div>
                 <button
                     class="btn btn-primary btn-lg px-5"
                     @click="begin"
