@@ -202,17 +202,13 @@ async function handleNextClick(event: MouseEvent) {
 
 <style scoped>
 @keyframes shake {
-    0%   { transform: translate(0, 0); }
-    10%  { transform: translate(-9px, 3px); }
-    20%  { transform: translate(6px, -7px); }
-    30%  { transform: translate(8px, 5px); }
-    40%  { transform: translate(-4px, 8px); }
-    50%  { transform: translate(-7px, -5px); }
-    60%  { transform: translate(5px, -6px); }
-    70%  { transform: translate(7px, 4px); }
-    80%  { transform: translate(-3px, 7px); }
-    90%  { transform: translate(-5px, -3px); }
-    100% { transform: translate(0, 0); }
+    0%,  100% { transform: translate(0, 0); }
+    15%       { transform: translate(-8px, -4px); }
+    30%       { transform: translate(8px, -4px); }
+    45%       { transform: translate(-6px, 3px); }
+    60%       { transform: translate(6px, -3px); }
+    75%       { transform: translate(3px, 2px); }
+    90%       { transform: translate(-3px, 2px); }
 }
 
 @keyframes flash-red {
