@@ -105,6 +105,7 @@ function beginQuiz() {
                         <li class="nav-item">
                             <RouterLink
                                 class="nav-link icon-link"
+                                exact-active-class="active"
                                 to="/"
                                 @click="closeMenuViaNavigation"
                             >
@@ -129,6 +130,7 @@ function beginQuiz() {
                         <li class="nav-item">
                             <RouterLink
                                 class="nav-link icon-link"
+                                active-class="active"
                                 to="/song-list"
                                 @click="closeMenuViaNavigation"
                             >
