@@ -29,64 +29,100 @@ function beginQuiz() {
     <nav class="navbar navbar-expand-md sticky-top border-bottom bg-body">
         <div class="container">
             <RouterLink
-                class="navbar-brand fw-semibold"
+                class="navbar-brand"
                 to="/"
                 @click="closeMenu"
             >
-                <i class="bi bi-controller me-1" />Shmup Stage 1 Quiz
+                <i class="bi bi-controller" />
             </RouterLink>
 
             <button
                 class="navbar-toggler border-0"
                 type="button"
                 :aria-expanded="isMenuOpen"
+                aria-controls="navOffcanvas"
                 aria-label="Toggle navigation"
                 @click="toggleMenu"
             >
                 <span class="navbar-toggler-icon" />
             </button>
 
-            <div :class="['collapse', 'navbar-collapse', { show: isMenuOpen }]">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <RouterLink
-                            class="nav-link"
-                            to="/"
-                            @click="closeMenu"
-                        >
-                            <i class="bi bi-house me-1" />Home
-                        </RouterLink>
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            class="nav-link"
-                            href="#"
-                            @click.prevent="beginQuiz"
-                        >
-                            <i class="bi bi-play-circle me-1" />New Quiz
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <RouterLink
-                            class="nav-link"
-                            to="/song-list"
-                            @click="closeMenu"
-                        >
-                            <i class="bi bi-music-note-list me-1" />Song List
-                        </RouterLink>
-                    </li>
-                </ul>
+            <div
+                id="navOffcanvas"
+                :class="['offcanvas', 'offcanvas-end', { show: isMenuOpen }]"
+                tabindex="-1"
+                aria-label="Navigation"
+            >
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title">
+                        <i class="bi bi-controller me-1" />Shmup Stage 1 Quiz
+                    </h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        aria-label="Close"
+                        @click="closeMenu"
+                    />
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <RouterLink
+                                class="nav-link icon-link"
+                                to="/"
+                                @click="closeMenu"
+                            >
+                                <i
+                                    class="bi bi-house nav-icon"
+                                />Home
+                            </RouterLink>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link icon-link"
+                                href="#"
+                                @click.prevent="beginQuiz"
+                            >
+                                <i
+                                    class="bi bi-play-circle nav-icon"
+                                />New Quiz
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <RouterLink
+                                class="nav-link icon-link"
+                                to="/song-list"
+                                @click="closeMenu"
+                            >
+                                <i
+                                    class="bi bi-music-note-list nav-icon"
+                                />Song List
+                            </RouterLink>
+                        </li>
+                    </ul>
 
-                <button
-                    class="btn btn-outline-secondary btn-sm"
-                    :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
-                    :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
-                    @click="toggleDark"
-                >
-                    <i :class="isDark ? 'bi bi-sun' : 'bi bi-moon'" />
-                </button>
+                    <button
+                        class="btn btn-outline-secondary btn-sm"
+                        :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+                        :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+                        @click="toggleDark"
+                    >
+                        <i :class="isDark ? 'bi bi-sun' : 'bi bi-moon'" />
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
+    <div
+        v-if="isMenuOpen"
+        class="offcanvas-backdrop fade show"
+        @click="closeMenu"
+    />
     <RouterView />
 </template>
+
+<style scoped>
+.nav-icon {
+    line-height: 1;
+}
+</style>
