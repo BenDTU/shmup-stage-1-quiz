@@ -56,8 +56,8 @@ function closeMenuViaNavigation() {
                 id="navOffcanvas"
                 v-model="isMenuOpen"
                 placement="start"
+                responsive="md"
                 :body-class="['d-flex', 'flex-column', 'flex-md-row', 'align-items-md-center']"
-                teleport-disabled
                 @hidden="onHidden"
             >
                 <template #title>
