@@ -7,6 +7,8 @@ const props = defineProps<{
     isAnswered: boolean
     correctId: number
     answeredId?: number
+    songName?: string
+    source?: string
 }>()
 
 const emit = defineEmits<{
@@ -37,7 +39,15 @@ function handleSelect(optionId: number) {
             :class="[optionClass(optionId), { 'novice-option-done': isAnswered }]"
             @click="handleSelect(optionId)"
         >
-            {{ guessedGameName(optionId) }}
+            <div>{{ guessedGameName(optionId) }}</div>
+            <div
+                v-if="isAnswered && optionId === correctId && songName"
+                class="small opacity-75"
+            >
+                {{ songName }}<template v-if="source">
+                    ({{ source }} version)
+                </template>
+            </div>
         </button>
     </div>
 </template>

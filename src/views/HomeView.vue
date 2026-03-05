@@ -45,7 +45,7 @@ function begin() {
                     it's from! A random set of <strong>20 tracks</strong> will be selected for you.
                 </p>
                 <ul
-                    class="list-group list-group-flush text-start mb-5 mx-auto"
+                    class="list-group list-group-flush text-start mb-4 mx-auto"
                     style="max-width: 440px"
                 >
                     <li
@@ -59,46 +59,48 @@ function begin() {
                         </div>
                     </li>
                 </ul>
-                <div
-                    class="btn-group mb-4"
-                    role="group"
-                    aria-label="Quiz mode"
-                >
-                    <input
-                        id="mode-novice"
-                        v-model="selectedMode"
-                        class="btn-check"
-                        type="radio"
-                        value="novice"
-                        autocomplete="off"
+                <div class="d-flex flex-column align-items-center gap-2 mb-3">
+                    <div
+                        class="btn-group"
+                        role="group"
+                        aria-label="Quiz mode"
                     >
-                    <label
-                        class="btn btn-outline-primary"
-                        for="mode-novice"
+                        <input
+                            id="mode-novice"
+                            v-model="selectedMode"
+                            class="btn-check"
+                            type="radio"
+                            value="novice"
+                            autocomplete="off"
+                        >
+                        <label
+                            class="btn btn-outline-primary"
+                            for="mode-novice"
+                        >
+                            Novice
+                        </label>
+                        <input
+                            id="mode-advanced"
+                            v-model="selectedMode"
+                            class="btn-check"
+                            type="radio"
+                            value="advanced"
+                            autocomplete="off"
+                        >
+                        <label
+                            class="btn btn-outline-primary"
+                            for="mode-advanced"
+                        >
+                            Advanced
+                        </label>
+                    </div>
+                    <button
+                        class="btn btn-primary btn-lg px-5"
+                        @click="begin"
                     >
-                        Novice
-                    </label>
-                    <input
-                        id="mode-advanced"
-                        v-model="selectedMode"
-                        class="btn-check"
-                        type="radio"
-                        value="advanced"
-                        autocomplete="off"
-                    >
-                    <label
-                        class="btn btn-outline-primary"
-                        for="mode-advanced"
-                    >
-                        Advanced
-                    </label>
+                        Start Quiz
+                    </button>
                 </div>
-                <button
-                    class="btn btn-primary btn-lg px-5"
-                    @click="begin"
-                >
-                    Start Quiz
-                </button>
                 <div class="mt-3">
                     <RouterLink to="/song-list">
                         View Full Song List

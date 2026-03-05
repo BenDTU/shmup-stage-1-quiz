@@ -164,6 +164,8 @@ async function handleNextClick(event: MouseEvent) {
                             :is-answered="state.isAnswered"
                             :correct-id="currentQuestion.id"
                             :answered-id="state.answers[state.currentIndex]"
+                            :song-name="currentQuestion.songName"
+                            :source="currentQuestion.source"
                             class="mb-3"
                         />
 
