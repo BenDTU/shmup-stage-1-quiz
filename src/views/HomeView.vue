@@ -59,37 +59,39 @@ function begin() {
                         </div>
                     </li>
                 </ul>
-                <div class="d-flex justify-content-center gap-3 mb-4">
-                    <div class="form-check">
-                        <input
-                            id="mode-advanced"
-                            v-model="selectedMode"
-                            class="form-check-input"
-                            type="radio"
-                            value="advanced"
-                        >
-                        <label
-                            class="form-check-label"
-                            for="mode-advanced"
-                        >
-                            Advanced
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input
-                            id="mode-novice"
-                            v-model="selectedMode"
-                            class="form-check-input"
-                            type="radio"
-                            value="novice"
-                        >
-                        <label
-                            class="form-check-label"
-                            for="mode-novice"
-                        >
-                            Novice
-                        </label>
-                    </div>
+                <div
+                    class="btn-group mb-4"
+                    role="group"
+                    aria-label="Quiz mode"
+                >
+                    <input
+                        id="mode-novice"
+                        v-model="selectedMode"
+                        class="btn-check"
+                        type="radio"
+                        value="novice"
+                        autocomplete="off"
+                    >
+                    <label
+                        class="btn btn-outline-primary"
+                        for="mode-novice"
+                    >
+                        Novice
+                    </label>
+                    <input
+                        id="mode-advanced"
+                        v-model="selectedMode"
+                        class="btn-check"
+                        type="radio"
+                        value="advanced"
+                        autocomplete="off"
+                    >
+                    <label
+                        class="btn btn-outline-primary"
+                        for="mode-advanced"
+                    >
+                        Advanced
+                    </label>
                 </div>
                 <button
                     class="btn btn-primary btn-lg px-5"
