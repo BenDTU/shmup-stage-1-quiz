@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { BOffcanvas } from 'bootstrap-vue-next'
 import { useDarkMode } from '../composables/useDarkMode'
@@ -11,12 +11,22 @@ const isPlayActive = computed(() => !route.path.startsWith('/song-list'))
 const isMenuOpen = ref(false)
 const togglerRef = ref<HTMLButtonElement | null>(null)
 const closedByNavigation = ref(false)
+const suppressAnimation = ref(false)
 
 function onHidden() {
     if (!closedByNavigation.value) {
         togglerRef.value?.focus()
     }
     closedByNavigation.value = false
+}
+
+function onBreakpoint(_: unknown, opened: boolean) {
+    if (!opened) {
+        suppressAnimation.value = true
+        nextTick(() => {
+            suppressAnimation.value = false
+        })
+    }
 }
 
 function closeMenuViaNavigation() {
@@ -63,8 +73,10 @@ function closeMenuViaNavigation() {
                 placement="start"
                 responsive="md"
                 teleport-disabled
+                :no-animation="suppressAnimation"
                 :body-class="['d-flex', 'flex-column', 'flex-md-row', 'align-items-md-center']"
                 @hidden="onHidden"
+                @breakpoint="onBreakpoint"
             >
                 <template #title>
                     <i
