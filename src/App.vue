@@ -57,6 +57,7 @@ function closeMenuViaNavigation() {
                 v-model="isMenuOpen"
                 placement="start"
                 :body-class="['d-flex', 'flex-column', 'flex-md-row', 'align-items-md-center']"
+                teleport-disabled
                 @hidden="onHidden"
             >
                 <template #title>
