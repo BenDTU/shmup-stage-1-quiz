@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch, nextTick } from 'vue'
 import { RouterView, RouterLink, useRouter } from 'vue-router'
 import { useDarkMode } from './composables/useDarkMode'
 import { useQuiz } from './composables/useQuiz'
@@ -9,6 +9,17 @@ const { startQuiz } = useQuiz()
 const router = useRouter()
 
 const isMenuOpen = ref(false)
+const togglerRef = ref<HTMLButtonElement | null>(null)
+const offcanvasRef = ref<HTMLElement | null>(null)
+
+watch(isMenuOpen, async (open) => {
+    if (open) {
+        await nextTick()
+        offcanvasRef.value?.focus()
+    } else {
+        togglerRef.value?.focus()
+    }
+})
 
 function toggleMenu() {
     isMenuOpen.value = !isMenuOpen.value
@@ -33,11 +44,15 @@ function beginQuiz() {
                 to="/"
                 @click="closeMenu"
             >
-                <i class="bi bi-controller" />
+                <i
+                    class="bi bi-controller"
+                    aria-hidden="true"
+                />
                 <span class="visually-hidden">Home</span>
             </RouterLink>
 
             <button
+                ref="togglerRef"
                 class="navbar-toggler border-0"
                 type="button"
                 :aria-expanded="isMenuOpen"
@@ -50,11 +65,13 @@ function beginQuiz() {
 
             <div
                 id="navOffcanvas"
+                ref="offcanvasRef"
                 :class="['offcanvas', 'offcanvas-start', { show: isMenuOpen }]"
                 tabindex="-1"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="navOffcanvasLabel"
+                @keydown.esc="closeMenu"
             >
                 <div class="offcanvas-header">
                     <h5
@@ -108,6 +125,7 @@ function beginQuiz() {
                     </ul>
                     <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center mt-auto mt-md-0">
                         <button
+                            type="button"
                             class="btn btn-outline-secondary btn-sm p-2 d-inline-flex align-items-center gap-1"
                             :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
                             :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
