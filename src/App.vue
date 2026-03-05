@@ -79,8 +79,8 @@ function beginQuiz() {
                                 @click="closeMenu"
                             >
                                 <i
-                                    class="bi bi-house lh-1"
-                                /><span class="d-none d-md-inline">Home</span>
+                                    class="bi bi-house lh-1 d-md-none"
+                                />Home
                             </RouterLink>
                         </li>
                         <li class="nav-item">
@@ -90,8 +90,8 @@ function beginQuiz() {
                                 @click="beginQuiz"
                             >
                                 <i
-                                    class="bi bi-play-circle lh-1"
-                                /><span class="d-none d-md-inline">New Quiz</span>
+                                    class="bi bi-play-circle lh-1 d-md-none"
+                                /><span>New Quiz</span>
                             </button>
                         </li>
                         <li class="nav-item">
@@ -101,8 +101,8 @@ function beginQuiz() {
                                 @click="closeMenu"
                             >
                                 <i
-                                    class="bi bi-music-note-list lh-1"
-                                /><span class="d-none d-md-inline">Song List</span>
+                                    class="bi bi-music-note-list lh-1 d-md-none"
+                                />Song List
                             </RouterLink>
                         </li>
                     </ul>
