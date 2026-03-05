@@ -70,8 +70,8 @@ function beginQuiz() {
                         @click="closeMenu"
                     />
                 </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <div class="offcanvas-body d-flex flex-column flex-md-row align-items-md-center">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0 w-100">
                         <li class="nav-item">
                             <RouterLink
                                 class="nav-link icon-link"
@@ -106,7 +106,7 @@ function beginQuiz() {
                             </RouterLink>
                         </li>
                     </ul>
-                    <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center mt-2 mt-md-0">
+                    <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center mt-auto mt-md-0">
                         <button
                             class="btn btn-outline-secondary btn-sm p-2 d-inline-flex align-items-center gap-1"
                             :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
