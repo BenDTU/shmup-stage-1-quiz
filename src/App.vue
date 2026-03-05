@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { ref, watch, nextTick } from 'vue'
-import { RouterView, RouterLink, useRouter } from 'vue-router'
+import { ref, watch, nextTick, computed } from 'vue'
+import { RouterView, RouterLink, useRoute } from 'vue-router'
 import { useDarkMode } from './composables/useDarkMode'
-import { useQuiz } from './composables/useQuiz'
 
 const { isDark, toggleDark } = useDarkMode()
-const { startQuiz } = useQuiz()
-const router = useRouter()
+const route = useRoute()
+const isPlayActive = computed(() => !route.path.startsWith('/song-list'))
 
 const isMenuOpen = ref(false)
 const togglerRef = ref<HTMLButtonElement | null>(null)
@@ -37,12 +36,6 @@ function closeMenu() {
 function closeMenuViaNavigation() {
     closedByNavigation.value = true
     isMenuOpen.value = false
-}
-
-function beginQuiz() {
-    startQuiz()
-    router.push('/quiz')
-    closeMenuViaNavigation()
 }
 </script>
 
@@ -104,27 +97,15 @@ function beginQuiz() {
                         <li class="nav-item">
                             <RouterLink
                                 class="nav-link icon-link"
-                                exact-active-class="active"
+                                :class="{ active: isPlayActive }"
                                 to="/"
                                 @click="closeMenuViaNavigation"
                             >
                                 <i
-                                    class="bi bi-house lh-1 d-md-none"
+                                    class="bi bi-play-fill lh-1 d-md-none"
                                     aria-hidden="true"
-                                />Home
+                                />Play
                             </RouterLink>
-                        </li>
-                        <li class="nav-item">
-                            <button
-                                type="button"
-                                class="nav-link icon-link"
-                                @click="beginQuiz"
-                            >
-                                <i
-                                    class="bi bi-play-circle lh-1 d-md-none"
-                                    aria-hidden="true"
-                                /><span>New Quiz</span>
-                            </button>
                         </li>
                         <li class="nav-item">
                             <RouterLink
