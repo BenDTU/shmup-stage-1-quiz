@@ -11,6 +11,7 @@ const router = useRouter()
 const isMenuOpen = ref(false)
 const togglerRef = ref<HTMLButtonElement | null>(null)
 const offcanvasRef = ref<HTMLElement | null>(null)
+const closedByNavigation = ref(false)
 
 watch(isMenuOpen, async (open) => {
     if (open) {
@@ -18,9 +19,10 @@ watch(isMenuOpen, async (open) => {
         if (isMenuOpen.value) {
             offcanvasRef.value?.focus()
         }
-    } else {
+    } else if (!closedByNavigation.value) {
         togglerRef.value?.focus()
     }
+    closedByNavigation.value = false
 })
 
 function toggleMenu() {
@@ -28,13 +30,19 @@ function toggleMenu() {
 }
 
 function closeMenu() {
+    closedByNavigation.value = false
+    isMenuOpen.value = false
+}
+
+function closeMenuViaNavigation() {
+    closedByNavigation.value = true
     isMenuOpen.value = false
 }
 
 function beginQuiz() {
     startQuiz()
     router.push('/quiz')
-    closeMenu()
+    closeMenuViaNavigation()
 }
 </script>
 
@@ -44,7 +52,7 @@ function beginQuiz() {
             <RouterLink
                 class="navbar-brand"
                 to="/"
-                @click="closeMenu"
+                @click="closeMenuViaNavigation"
             >
                 <i
                     class="bi bi-controller"
@@ -98,7 +106,7 @@ function beginQuiz() {
                             <RouterLink
                                 class="nav-link icon-link"
                                 to="/"
-                                @click="closeMenu"
+                                @click="closeMenuViaNavigation"
                             >
                                 <i
                                     class="bi bi-house lh-1 d-md-none"
@@ -122,7 +130,7 @@ function beginQuiz() {
                             <RouterLink
                                 class="nav-link icon-link"
                                 to="/song-list"
-                                @click="closeMenu"
+                                @click="closeMenuViaNavigation"
                             >
                                 <i
                                     class="bi bi-music-note-list lh-1 d-md-none"
