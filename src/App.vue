@@ -15,7 +15,9 @@ const offcanvasRef = ref<HTMLElement | null>(null)
 watch(isMenuOpen, async (open) => {
     if (open) {
         await nextTick()
-        offcanvasRef.value?.focus()
+        if (isMenuOpen.value) {
+            offcanvasRef.value?.focus()
+        }
     } else {
         togglerRef.value?.focus()
     }
@@ -68,8 +70,9 @@ function beginQuiz() {
                 ref="offcanvasRef"
                 :class="['offcanvas', 'offcanvas-start', { show: isMenuOpen }]"
                 tabindex="-1"
-                role="dialog"
-                aria-modal="true"
+                :role="isMenuOpen ? 'dialog' : undefined"
+                :aria-modal="isMenuOpen ? 'true' : undefined"
+                :aria-hidden="!isMenuOpen || undefined"
                 aria-labelledby="navOffcanvasLabel"
                 @keydown.esc="closeMenu"
             >
@@ -141,6 +144,8 @@ function beginQuiz() {
         <div
             v-if="isMenuOpen"
             class="offcanvas-backdrop fade show"
+            aria-hidden="true"
+            role="presentation"
             @click="closeMenu"
         />
     </nav>
