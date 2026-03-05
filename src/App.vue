@@ -31,9 +31,11 @@ function beginQuiz() {
             <RouterLink
                 class="navbar-brand"
                 to="/"
+                aria-label="Home"
                 @click="closeMenu"
             >
                 <i class="bi bi-controller" />
+                <span class="visually-hidden">Home</span>
             </RouterLink>
 
             <button
@@ -51,10 +53,15 @@ function beginQuiz() {
                 id="navOffcanvas"
                 :class="['offcanvas', 'offcanvas-start', { show: isMenuOpen }]"
                 tabindex="-1"
-                aria-label="Navigation"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="navOffcanvasLabel"
             >
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title">
+                    <h5
+                        id="navOffcanvasLabel"
+                        class="offcanvas-title"
+                    >
                         <i class="bi bi-controller me-1" />Shmup Stage 1 Quiz
                     </h5>
                     <button
@@ -78,15 +85,15 @@ function beginQuiz() {
                             </RouterLink>
                         </li>
                         <li class="nav-item">
-                            <a
+                            <button
+                                type="button"
                                 class="nav-link icon-link"
-                                href="#"
-                                @click.prevent="beginQuiz"
+                                @click="beginQuiz"
                             >
                                 <i
                                     class="bi bi-play-circle lh-1"
                                 />New Quiz
-                            </a>
+                            </button>
                         </li>
                         <li class="nav-item">
                             <RouterLink
