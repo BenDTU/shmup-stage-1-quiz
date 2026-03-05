@@ -100,18 +100,17 @@ function beginQuiz() {
                             </RouterLink>
                         </li>
                     </ul>
-                    <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center">
+                    <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center mt-2 mt-md-0">
                         <button
                             class="btn btn-outline-secondary btn-sm p-2 d-inline-flex align-items-center gap-1"
                             :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
                             :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
                             @click="toggleDark"
                         >
-                        <i :class="['lh-1', isDark ? 'bi bi-sun' : 'bi bi-moon']" />
-                        <span class="d-md-none">{{ isDark ? 'Light mode' : 'Dark mode' }}</span>
-                    </button>
+                            <i :class="['lh-1', isDark ? 'bi bi-sun' : 'bi bi-moon']" />
+                            <span class="d-md-none">{{ isDark ? 'Light mode' : 'Dark mode' }}</span>
+                        </button>
                     </div>
-                    
                 </div>
             </div>
         </div>
