@@ -31,7 +31,6 @@ function beginQuiz() {
             <RouterLink
                 class="navbar-brand"
                 to="/"
-                aria-label="Home"
                 @click="closeMenu"
             >
                 <i class="bi bi-controller" />
@@ -92,7 +91,7 @@ function beginQuiz() {
                             >
                                 <i
                                     class="bi bi-play-circle lh-1"
-                                />New Quiz
+                                /><span>New Quiz</span>
                             </button>
                         </li>
                         <li class="nav-item">
