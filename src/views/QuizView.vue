@@ -202,13 +202,13 @@ async function handleNextClick(event: MouseEvent) {
 
 <style scoped>
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    15% { transform: translateX(-8px); }
-    30% { transform: translateX(8px); }
-    45% { transform: translateX(-6px); }
-    60% { transform: translateX(6px); }
-    75% { transform: translateX(-3px); }
-    90% { transform: translateX(3px); }
+    0%, 100% { transform: translate(0, 0); }
+    15% { transform: translate(-8px, -4px); }
+    30% { transform: translate(8px, 4px); }
+    45% { transform: translate(-6px, -3px); }
+    60% { transform: translate(6px, 3px); }
+    75% { transform: translate(-3px, -2px); }
+    90% { transform: translate(3px, 2px); }
 }
 
 @keyframes flash-red {
@@ -216,7 +216,10 @@ async function handleNextClick(event: MouseEvent) {
 }
 
 @keyframes pulse-green {
-    50% { background-color: var(--bs-success); }
+    50% {
+        background-color: var(--bs-success);
+        box-shadow: 0 0 12px 6px rgba(var(--bs-success-rgb), 0.6);
+    }
 }
 
 .feedback-wrong {
