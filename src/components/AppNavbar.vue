@@ -58,6 +58,7 @@ function closeMenuViaNavigation() {
                 class="flex-grow-1"
                 placement="start"
                 responsive="md"
+                teleport-disabled
                 :body-class="['d-flex', 'flex-column', 'flex-md-row', 'align-items-md-center']"
                 @hidden="onHidden"
             >
