@@ -2,3 +2,10 @@ body {
   min-height: 100vh;
   background-color: var(--bs-body-bg);
 }
+
+// Suppresses CSS transitions when bootstrap-vue-next adds the .no-transition class
+// (e.g. on responsive-breakpoint changes in BOffcanvas). The library defines this
+// rule in its own CSS bundle, but this project does not import that bundle.
+.no-transition {
+  transition: none !important;
+}
