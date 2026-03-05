@@ -13,6 +13,17 @@ const selectedGameId = ref<number | null>(null)
 const audioUnlocked = ref(false)
 const nextBtn = ref<HTMLButtonElement | null>(null)
 const autocompleteRef = ref<{ focus: () => void } | null>(null)
+const feedbackState = ref<'correct' | 'wrong' | null>(null)
+let feedbackTimer: ReturnType<typeof setTimeout> | null = null
+
+function setFeedback(value: 'correct' | 'wrong') {
+    if (feedbackTimer !== null) clearTimeout(feedbackTimer)
+    feedbackState.value = value
+    feedbackTimer = setTimeout(() => {
+        feedbackState.value = null
+        feedbackTimer = null
+    }, value === 'correct' ? 800 : 600)
+}
 
 onMounted(() => {
     if (!state.isStarted || state.questions.length === 0) {
@@ -31,6 +42,11 @@ const isValidGuess = computed(() => {
 async function handleSubmit(viaKeyboard = false) {
     if (!isValidGuess.value || state.isAnswered) return
     submitGuess(selectedGameId.value!)
+    setFeedback(
+        state.answers[state.currentIndex] === state.questions[state.currentIndex]?.id
+            ? 'correct'
+            : 'wrong',
+    )
     if (viaKeyboard) {
         await nextTick()
         nextBtn.value?.focus()
@@ -42,6 +58,7 @@ async function handleSkipClick(event: MouseEvent) {
     // event.detail is 0 for keyboard-triggered clicks (Enter/Space) and ≥1 for mouse clicks
     const isKeyboard = event.detail === 0
     submitGuess(-1)
+    setFeedback('wrong')
     if (isKeyboard) {
         await nextTick()
         nextBtn.value?.focus()
@@ -53,6 +70,11 @@ function handleNext() {
         router.push('/results')
     } else {
         selectedGameId.value = null
+        if (feedbackTimer !== null) {
+            clearTimeout(feedbackTimer)
+            feedbackTimer = null
+        }
+        feedbackState.value = null
         nextQuestion()
     }
 }
@@ -83,6 +105,10 @@ async function handleNextClick(event: MouseEvent) {
                 </div>
                 <div
                     class="progress mb-4"
+                    :class="{
+                        'feedback-wrong': feedbackState === 'wrong',
+                        'feedback-correct': feedbackState === 'correct',
+                    }"
                     style="height: 8px"
                 >
                     <div
@@ -173,3 +199,35 @@ async function handleNextClick(event: MouseEvent) {
         </div>
     </main>
 </template>
+
+<style scoped>
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    15% { transform: translateX(-8px); }
+    30% { transform: translateX(8px); }
+    45% { transform: translateX(-6px); }
+    60% { transform: translateX(6px); }
+    75% { transform: translateX(-3px); }
+    90% { transform: translateX(3px); }
+}
+
+@keyframes flash-red {
+    50% { background-color: var(--bs-danger); }
+}
+
+@keyframes pulse-green {
+    50% { background-color: var(--bs-success); }
+}
+
+.feedback-wrong {
+    animation: shake 0.6s ease-in-out;
+}
+
+.feedback-wrong .progress-bar {
+    animation: flash-red 0.6s ease-in-out;
+}
+
+.feedback-correct .progress-bar {
+    animation: pulse-green 0.8s ease-in-out;
+}
+</style>
