@@ -47,7 +47,7 @@ function beginQuiz() {
 </script>
 
 <template>
-    <nav class="navbar sticky-top border-bottom bg-body">
+    <nav class="navbar navbar-expand-md sticky-top border-bottom bg-body">
         <div class="container">
             <RouterLink
                 class="navbar-brand"
@@ -79,7 +79,6 @@ function beginQuiz() {
                 :class="['offcanvas', 'offcanvas-start', { show: isMenuOpen }]"
                 tabindex="-1"
                 aria-labelledby="navOffcanvasLabel"
-                :aria-hidden="!isMenuOpen || undefined"
                 @keydown.esc="closeMenu"
             >
                 <div class="offcanvas-header">
@@ -101,7 +100,7 @@ function beginQuiz() {
                     />
                 </div>
                 <div class="offcanvas-body d-flex flex-column flex-md-row align-items-md-center">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0 w-100">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
                             <RouterLink
                                 class="nav-link icon-link"
