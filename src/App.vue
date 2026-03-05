@@ -102,12 +102,13 @@ function beginQuiz() {
                     </ul>
 
                     <button
-                        class="btn btn-outline-secondary btn-sm"
+                        class="btn btn-outline-secondary btn-sm p-1 d-inline-flex align-items-center gap-1"
                         :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
                         :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
                         @click="toggleDark"
                     >
-                        <i :class="isDark ? 'bi bi-sun' : 'bi bi-moon'" />
+                        <i :class="['lh-1', isDark ? 'bi bi-sun' : 'bi bi-moon']" />
+                        <span class="d-md-none">{{ isDark ? 'Light mode' : 'Dark mode' }}</span>
                     </button>
                 </div>
             </div>
