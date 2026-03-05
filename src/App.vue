@@ -55,6 +55,7 @@ function closeMenuViaNavigation() {
             <BOffcanvas
                 id="navOffcanvas"
                 v-model="isMenuOpen"
+                class="flex-grow-1"
                 placement="start"
                 responsive="md"
                 :body-class="['d-flex', 'flex-column', 'flex-md-row', 'align-items-md-center']"
