@@ -49,7 +49,7 @@ function beginQuiz() {
 
             <div
                 id="navOffcanvas"
-                :class="['offcanvas', 'offcanvas-end', { show: isMenuOpen }]"
+                :class="['offcanvas', 'offcanvas-start', { show: isMenuOpen }]"
                 tabindex="-1"
                 aria-label="Navigation"
             >
@@ -73,7 +73,7 @@ function beginQuiz() {
                                 @click="closeMenu"
                             >
                                 <i
-                                    class="bi bi-house nav-icon"
+                                    class="bi bi-house"
                                 />Home
                             </RouterLink>
                         </li>
@@ -84,7 +84,7 @@ function beginQuiz() {
                                 @click.prevent="beginQuiz"
                             >
                                 <i
-                                    class="bi bi-play-circle nav-icon"
+                                    class="bi bi-play-circle"
                                 />New Quiz
                             </a>
                         </li>
@@ -95,7 +95,7 @@ function beginQuiz() {
                                 @click="closeMenu"
                             >
                                 <i
-                                    class="bi bi-music-note-list nav-icon"
+                                    class="bi bi-music-note-list"
                                 />Song List
                             </RouterLink>
                         </li>
@@ -112,17 +112,11 @@ function beginQuiz() {
                 </div>
             </div>
         </div>
+        <div
+            v-if="isMenuOpen"
+            class="offcanvas-backdrop fade show"
+            @click="closeMenu"
+        />
     </nav>
-    <div
-        v-if="isMenuOpen"
-        class="offcanvas-backdrop fade show"
-        @click="closeMenu"
-    />
     <RouterView />
 </template>
-
-<style scoped>
-.nav-icon {
-    line-height: 1;
-}
-</style>
