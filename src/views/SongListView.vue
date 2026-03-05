@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { BTable } from 'bootstrap-vue-next'
 import { games } from '@/data/games'
 import type { SongEntry } from '@/data/games'
 
@@ -8,10 +9,13 @@ interface SongRow {
     links: { label: string; url: string }[]
 }
 
-interface GameGroup {
-    gameName: string
+interface TableItem {
+    game: string
     aliases: string[]
-    songs: SongRow[]
+    songName: string
+    links: { label: string; url: string }[]
+    isFirstInGroup: boolean
+    isLastInGroup: boolean
 }
 
 function songEntryToRow(entry: SongEntry): SongRow {
@@ -42,16 +46,38 @@ function normalizeAlias(alias: string | string[]): string[] {
     return [alias]
 }
 
-const gameGroups: GameGroup[] = games.map((game) => {
+const fields = [
+    { key: 'game', label: 'Game' },
+    { key: 'songName', label: 'Song' },
+    { key: 'links', label: 'Link' },
+]
+
+const items: TableItem[] = games.flatMap((game) => {
     const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource]
-    return {
-        gameName: game.name,
-        aliases: game.alias ? normalizeAlias(game.alias) : [],
-        songs: sources.map(songEntryToRow),
-    }
+    const aliases = game.alias ? normalizeAlias(game.alias) : []
+    const songs = sources.map(songEntryToRow)
+    return songs.map((song, i) => ({
+        game: game.name,
+        aliases: i === 0 ? aliases : [],
+        songName: song.songName,
+        links: song.links,
+        isFirstInGroup: i === 0,
+        isLastInGroup: i === songs.length - 1,
+    }))
 })
 
 const hoveredGame = ref<string | null>(null)
+
+function rowClass(item: TableItem | null) {
+    return {
+        'row-hovered': item !== null && hoveredGame.value === item.game,
+        'no-bottom-border': item !== null && !item.isLastInGroup,
+    }
+}
+
+function handleRowHovered(item: TableItem) {
+    hoveredGame.value = item.game
+}
 </script>
 
 <template>
@@ -64,65 +90,40 @@ const hoveredGame = ref<string | null>(null)
                 <p class="text-center text-muted mb-4">
                     All <strong>{{ games.length }}</strong> games and their stage&nbsp;1 themes in the quiz.
                 </p>
-                <div class="table-responsive">
-                    <table class="table align-middle">
-                        <thead>
-                            <tr>
-                                <th scope="col">
-                                    Game
-                                </th>
-                                <th scope="col">
-                                    Song
-                                </th>
-                                <th scope="col">
-                                    Link
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template
-                                v-for="group in gameGroups"
-                                :key="group.gameName"
+                <BTable
+                    :fields="fields"
+                    :items="items"
+                    responsive
+                    align="middle"
+                    :tbody-tr-class="rowClass"
+                    @row-hovered="({ item }) => handleRowHovered(item as TableItem)"
+                    @row-unhovered="hoveredGame = null"
+                >
+                    <template #cell(game)="{ item }">
+                        <template v-if="(item as TableItem).isFirstInGroup">
+                            <div>{{ (item as TableItem).game }}</div>
+                            <div
+                                v-for="(alias, aliasIndex) in (item as TableItem).aliases"
+                                :key="aliasIndex"
+                                class="text-muted small"
                             >
-                                <tr
-                                    v-for="(song, songIndex) in group.songs"
-                                    :key="`${group.gameName}|${songIndex}|${song.songName}`"
-                                    :class="{ 'row-hovered': hoveredGame === group.gameName }"
-                                    @mouseenter="hoveredGame = group.gameName"
-                                    @mouseleave="hoveredGame = null"
-                                >
-                                    <td
-                                        v-if="songIndex === 0"
-                                        :rowspan="group.songs.length"
-                                        class="align-middle"
-                                    >
-                                        <div>{{ group.gameName }}</div>
-                                        <div
-                                            v-for="(alias, aliasIndex) in group.aliases"
-                                            :key="aliasIndex"
-                                            class="text-muted small"
-                                        >
-                                            {{ alias }}
-                                        </div>
-                                    </td>
-                                    <td>{{ song.songName }}</td>
-                                    <td class="text-nowrap">
-                                        <div class="d-flex flex-column gap-1">
-                                            <a
-                                                v-for="link in song.links"
-                                                :key="link.url"
-                                                :href="link.url"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                class="icon-link me-2 small"
-                                            ><i class="bi bi-youtube lh-1" /> {{ link.label }}</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </template>
-                        </tbody>
-                    </table>
-                </div>
+                                {{ alias }}
+                            </div>
+                        </template>
+                    </template>
+                    <template #cell(links)="{ item }">
+                        <div class="d-flex flex-column gap-1 text-nowrap">
+                            <a
+                                v-for="link in (item as TableItem).links"
+                                :key="link.url"
+                                :href="link.url"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="icon-link me-2 small"
+                            ><i class="bi bi-youtube lh-1" /> {{ link.label }}</a>
+                        </div>
+                    </template>
+                </BTable>
                 <div class="text-center mt-4">
                     <RouterLink
                         to="/"
@@ -137,7 +138,11 @@ const hoveredGame = ref<string | null>(null)
 </template>
 
 <style scoped lang="scss">
-tr.row-hovered > td {
+:deep(tr.row-hovered > td) {
     background-color: var(--bs-table-hover-bg, rgba(0, 0, 0, 0.075));
+}
+
+:deep(tr.no-bottom-border > td) {
+    border-bottom: none;
 }
 </style>
