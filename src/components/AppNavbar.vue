@@ -20,8 +20,12 @@ function onHidden() {
 }
 
 function closeMenuViaNavigation() {
-    closedByNavigation.value = true
-    isMenuOpen.value = false
+    if (isMenuOpen.value) {
+        closedByNavigation.value = true
+        isMenuOpen.value = false
+    } else {
+        closedByNavigation.value = false
+    }
 }
 </script>
 
