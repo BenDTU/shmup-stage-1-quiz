@@ -38,6 +38,23 @@ body {
   .progress {
     --bs-progress-bg: #333;
   }
+
+  // High-contrast buttons: white fill, black text
+  .btn-primary,
+  .btn-success {
+    --bs-btn-color: #000;
+    --bs-btn-bg: #fff;
+    --bs-btn-border-color: #fff;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #000;
+    --bs-btn-hover-border-color: #fff;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #000;
+    --bs-btn-active-border-color: #fff;
+    --bs-btn-disabled-color: #666;
+    --bs-btn-disabled-bg: #333;
+    --bs-btn-disabled-border-color: #333;
+  }
 }
 
 // Light mode: plain white background, strong black borders (Original Game Boy aesthetic)
@@ -55,5 +72,22 @@ body {
 
   .table {
     --bs-table-border-color: #000;
+  }
+
+  // High-contrast buttons: black fill, white text
+  .btn-primary,
+  .btn-success {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #000;
+    --bs-btn-border-color: #000;
+    --bs-btn-hover-color: #000;
+    --bs-btn-hover-bg: #fff;
+    --bs-btn-hover-border-color: #000;
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: #fff;
+    --bs-btn-active-border-color: #000;
+    --bs-btn-disabled-color: #999;
+    --bs-btn-disabled-bg: #ccc;
+    --bs-btn-disabled-border-color: #ccc;
   }
 }
