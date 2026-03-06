@@ -106,7 +106,7 @@ function playAgain() {
 
                     <div class="text-center">
                         <button
-                            class="btn btn-primary btn-lg px-5"
+                            class="btn btn-outline-primary btn-lg px-5"
                             @click="playAgain"
                         >
                             Play Again

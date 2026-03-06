@@ -150,7 +150,7 @@ async function handleNextClick(event: MouseEvent) {
                             />
                             <div class="d-flex gap-2">
                                 <button
-                                    class="btn btn-primary flex-grow-1"
+                                    class="btn btn-outline-primary flex-grow-1"
                                     :disabled="!isValidGuess"
                                     @click="handleSubmit()"
                                 >
@@ -182,7 +182,7 @@ async function handleNextClick(event: MouseEvent) {
                             </div>
                             <button
                                 ref="nextBtn"
-                                class="btn btn-success w-100"
+                                class="btn btn-outline-success w-100"
                                 @click="handleNextClick"
                             >
                                 <template v-if="isFinished">
