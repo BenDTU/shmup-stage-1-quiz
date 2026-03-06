@@ -119,18 +119,18 @@ function closeMenuViaNavigation() {
                     </li>
                     <li class="d-flex align-items-center">
                         <hr
-                            class="w-100 d-md-none my-1"
+                            class="w-100 d-md-none my-2"
                             aria-hidden="true"
                         >
                         <div
-                            class="vr d-none d-md-inline-block mx-1"
+                            class="vr d-none d-md-inline-block mx-2"
                             aria-hidden="true"
                         />
                     </li>
                     <li class="nav-item">
                         <button
                             type="button"
-                            class="btn btn-outline-secondary btn-sm p-2 d-inline-flex align-items-center gap-1"
+                            class="nav-link icon-link"
                             :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
                             :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
                             @click="toggleDark"
