@@ -326,11 +326,6 @@
     "@eslint/core" "^0.17.0"
     levn "^0.4.1"
 
-"@fontsource-variable/geist-mono@^5.2.7":
-  version "5.2.7"
-  resolved "https://registry.npmjs.org/@fontsource-variable/geist-mono/-/geist-mono-5.2.7.tgz"
-  integrity sha512-ZKlZ5sjtalb2TwXKs400mAGDlt/+2ENLNySPx0wTz3bP3mWARCsUW+rpxzZc7e05d2qGch70pItt3K4qttbIYA==
-
 "@fontsource-variable/geist@^5.2.8":
   version "5.2.8"
   resolved "https://registry.npmjs.org/@fontsource-variable/geist/-/geist-5.2.8.tgz"
@@ -1427,6 +1422,11 @@ flatted@^3.2.9:
   version "3.3.3"
   resolved "https://registry.npmjs.org/flatted/-/flatted-3.3.3.tgz"
   integrity sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==
+
+geist@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.npmjs.org/geist/-/geist-1.7.0.tgz"
+  integrity sha512-ZaoiZwkSf0DwwB1ncdLKp+ggAldqxl5L1+SXaNIBGkPAqcu+xjVJLxlf3/S8vLt9UHx1xu5fz3lbzKCj5iOVdQ==
 
 gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"

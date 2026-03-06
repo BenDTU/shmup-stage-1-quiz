@@ -8,8 +8,16 @@ body {
   font-family: 'Geist Variable', sans-serif;
 }
 
+@font-face {
+  font-family: 'Geist Pixel';
+  src: url('./fonts/GeistPixel-Square.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Geist Mono Variable', monospace;
+  font-family: 'Geist Pixel', monospace;
 }
 
 // Suppresses CSS transitions when bootstrap-vue-next adds the .no-transition class
