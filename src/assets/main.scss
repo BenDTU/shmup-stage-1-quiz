@@ -1,19 +1,19 @@
-:root {
-  --bs-font-sans-serif: 'Geist Variable', sans-serif;
-}
-
-body {
-  min-height: 100vh;
-  background-color: var(--bs-body-bg);
-  font-family: 'Geist Variable', sans-serif;
-}
-
 @font-face {
   font-family: 'Geist Pixel';
   src: url('./fonts/GeistPixel-Square.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
+}
+
+:root {
+  --bs-font-sans-serif: 'Geist Pixel', monospace;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bs-body-bg);
+  font-family: 'Geist Pixel', monospace;
 }
 
 h1, h2, h3, h4, h5, h6 {
