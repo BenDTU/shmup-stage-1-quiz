@@ -9,3 +9,79 @@ body {
 .no-transition {
   transition: none !important;
 }
+
+// Dark mode: pure black background, white borders (Asteroids / Robotron aesthetic)
+[data-bs-theme="dark"] {
+  --bs-body-bg: #000;
+  --bs-body-bg-rgb: 0, 0, 0;
+  --bs-secondary-bg: #000;
+  --bs-secondary-bg-rgb: 0, 0, 0;
+  --bs-tertiary-bg: #000;
+  --bs-tertiary-bg-rgb: 0, 0, 0;
+  --bs-border-color: #fff;
+  --bs-border-color-translucent: rgba(255, 255, 255, 0.25);
+
+  .card {
+    --bs-card-bg: #000;
+    --bs-card-border-color: #fff;
+  }
+
+  .list-group-item {
+    --bs-list-group-bg: #000;
+    --bs-list-group-border-color: #fff;
+  }
+
+  .table {
+    --bs-table-border-color: #fff;
+  }
+
+  .progress {
+    --bs-progress-bg: #333;
+  }
+
+  // Outline-secondary buttons: use btn-light colouring so they stand out against pure black
+  .btn-outline-secondary {
+    --bs-btn-color: #f8f9fa;
+    --bs-btn-border-color: #f8f9fa;
+    --bs-btn-hover-color: #000;
+    --bs-btn-hover-bg: #f8f9fa;
+    --bs-btn-hover-border-color: #f8f9fa;
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: #f8f9fa;
+    --bs-btn-active-border-color: #f8f9fa;
+    --bs-btn-disabled-color: #f8f9fa;
+    --bs-btn-disabled-border-color: #f8f9fa;
+  }
+}
+
+// Light mode: plain white background, strong black borders (Original Game Boy aesthetic)
+[data-bs-theme="light"] {
+  --bs-border-color: #000;
+  --bs-border-color-translucent: rgba(0, 0, 0, 0.5);
+
+  .card {
+    --bs-card-border-color: #000;
+  }
+
+  .list-group-item {
+    --bs-list-group-border-color: #000;
+  }
+
+  .table {
+    --bs-table-border-color: #000;
+  }
+
+  // Outline-secondary buttons: use btn-dark colouring so they stand out against white
+  .btn-outline-secondary {
+    --bs-btn-color: #212529;
+    --bs-btn-border-color: #212529;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #212529;
+    --bs-btn-hover-border-color: #212529;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #212529;
+    --bs-btn-active-border-color: #212529;
+    --bs-btn-disabled-color: #212529;
+    --bs-btn-disabled-border-color: #212529;
+  }
+}
