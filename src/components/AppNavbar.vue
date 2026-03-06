@@ -102,6 +102,19 @@ function closeMenuViaNavigation() {
                     </li>
                 </ul>
                 <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center mt-auto mt-md-0">
+                    <a
+                        href="https://github.com/BenDTU/shmup-stage-1-quiz"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-outline-secondary btn-sm p-2 d-inline-flex align-items-center gap-1 order-first order-md-last"
+                        aria-label="GitHub repository"
+                    >
+                        <i
+                            class="bi bi-github lh-1"
+                            aria-hidden="true"
+                        />
+                        <span class="d-md-none">GitHub</span>
+                    </a>
                     <button
                         type="button"
                         class="btn btn-outline-secondary btn-sm p-2 d-inline-flex align-items-center gap-1"
