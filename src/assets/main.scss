@@ -1,6 +1,23 @@
+@font-face {
+  font-family: 'Geist Pixel';
+  src: url('./fonts/GeistPixel-Square.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bs-font-sans-serif: 'Geist Pixel', monospace;
+}
+
 body {
   min-height: 100vh;
   background-color: var(--bs-body-bg);
+  font-family: 'Geist Pixel', monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Geist Pixel', monospace;
 }
 
 // Suppresses CSS transitions when bootstrap-vue-next adds the .no-transition class
@@ -10,24 +27,16 @@ body {
   transition: none !important;
 }
 
-// Dark mode: pure black background, white borders (Asteroids / Robotron aesthetic)
+// Dark mode: white borders (Asteroids / Robotron aesthetic)
 [data-bs-theme="dark"] {
-  --bs-body-bg: #000;
-  --bs-body-bg-rgb: 0, 0, 0;
-  --bs-secondary-bg: #000;
-  --bs-secondary-bg-rgb: 0, 0, 0;
-  --bs-tertiary-bg: #000;
-  --bs-tertiary-bg-rgb: 0, 0, 0;
   --bs-border-color: #fff;
   --bs-border-color-translucent: rgba(255, 255, 255, 0.25);
 
   .card {
-    --bs-card-bg: #000;
     --bs-card-border-color: #fff;
   }
 
   .list-group-item {
-    --bs-list-group-bg: #000;
     --bs-list-group-border-color: #fff;
   }
 
