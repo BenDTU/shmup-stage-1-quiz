@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { games } from '@/data/games'
 import type { SongEntry } from '@/data/games'
+import SongLinks from '@/components/SongLinks.vue'
 
 interface SongRow {
     songName: string
@@ -111,29 +112,11 @@ const hoveredGame = ref<string | null>(null)
                                     <td>
                                         {{ song.songName }}
                                         <div class="d-sm-none mt-1">
-                                            <div class="d-flex flex-column gap-1">
-                                                <a
-                                                    v-for="link in song.links"
-                                                    :key="link.url"
-                                                    :href="link.url"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    class="icon-link me-2 small"
-                                                ><i class="bi bi-youtube lh-1" /> {{ link.label }}</a>
-                                            </div>
+                                            <SongLinks :links="song.links" />
                                         </div>
                                     </td>
                                     <td class="text-nowrap d-none d-sm-table-cell">
-                                        <div class="d-flex flex-column gap-1">
-                                            <a
-                                                v-for="link in song.links"
-                                                :key="link.url"
-                                                :href="link.url"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                class="icon-link me-2 small"
-                                            ><i class="bi bi-youtube lh-1" /> {{ link.label }}</a>
-                                        </div>
+                                        <SongLinks :links="song.links" />
                                     </td>
                                 </tr>
                             </template>
