@@ -74,7 +74,10 @@ const hoveredGame = ref<string | null>(null)
                                 <th scope="col">
                                     Song
                                 </th>
-                                <th scope="col">
+                                <th
+                                    scope="col"
+                                    class="d-none d-sm-table-cell"
+                                >
                                     Link
                                 </th>
                             </tr>
@@ -105,8 +108,22 @@ const hoveredGame = ref<string | null>(null)
                                             {{ alias }}
                                         </div>
                                     </td>
-                                    <td>{{ song.songName }}</td>
-                                    <td class="text-nowrap">
+                                    <td>
+                                        {{ song.songName }}
+                                        <div class="d-sm-none mt-1">
+                                            <div class="d-flex flex-column gap-1">
+                                                <a
+                                                    v-for="link in song.links"
+                                                    :key="link.url"
+                                                    :href="link.url"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="icon-link me-2 small"
+                                                ><i class="bi bi-youtube lh-1" /> {{ link.label }}</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap d-none d-sm-table-cell">
                                         <div class="d-flex flex-column gap-1">
                                             <a
                                                 v-for="link in song.links"
