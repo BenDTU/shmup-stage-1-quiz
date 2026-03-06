@@ -119,11 +119,11 @@ function closeMenuViaNavigation() {
                     </li>
                     <li class="d-flex align-items-center">
                         <hr
-                            class="w-100 d-md-none my-2"
+                            class="navbar-divider w-100 d-md-none my-2"
                             aria-hidden="true"
                         >
                         <div
-                            class="vr d-none d-md-inline-block mx-2"
+                            class="navbar-divider vr d-none d-md-inline-block mx-2"
                             aria-hidden="true"
                         />
                     </li>
