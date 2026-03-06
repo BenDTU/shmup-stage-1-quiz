@@ -546,16 +546,19 @@ const gameEntries: GameEntry[] = [
     {
         name: 'RayForce',
         sortName: 'Rayforce 1',
+        alias: ['Layer Section', 'Galactic Attack', 'Gunlock'],
         songSource: { songName: 'Penetration', videoId: '234tjx8yO1I' },
     },
     {
         name: 'RayStorm',
         sortName: 'Rayforce 2',
+        alias: 'Layer Section II',
         songSource: { songName: 'Geometric City', videoId: 'kP5huZQRAY4' },
     },
     {
         name: 'RayCrisis',
         sortName: 'Rayforce 3',
+        alias: 'RayCrisis: Series Termination',
         songSource: { songName: 'Lavande Bleu', videoId: 'bCBXUBBZVDU' },
     },
     {
