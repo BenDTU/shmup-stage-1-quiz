@@ -27,24 +27,16 @@ h1, h2, h3, h4, h5, h6 {
   transition: none !important;
 }
 
-// Dark mode: pure black background, white borders (Asteroids / Robotron aesthetic)
+// Dark mode: white borders (Asteroids / Robotron aesthetic)
 [data-bs-theme="dark"] {
-  --bs-body-bg: #000;
-  --bs-body-bg-rgb: 0, 0, 0;
-  --bs-secondary-bg: #000;
-  --bs-secondary-bg-rgb: 0, 0, 0;
-  --bs-tertiary-bg: #000;
-  --bs-tertiary-bg-rgb: 0, 0, 0;
   --bs-border-color: #fff;
   --bs-border-color-translucent: rgba(255, 255, 255, 0.25);
 
   .card {
-    --bs-card-bg: #000;
     --bs-card-border-color: #fff;
   }
 
   .list-group-item {
-    --bs-list-group-bg: #000;
     --bs-list-group-border-color: #fff;
   }
 
