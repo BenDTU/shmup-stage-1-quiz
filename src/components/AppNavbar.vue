@@ -117,7 +117,11 @@ function closeMenuViaNavigation() {
                             <span class="d-md-none">GitHub</span>
                         </a>
                     </li>
-                    <li class="d-flex align-items-center">
+                    <li
+                        class="d-flex align-items-center"
+                        role="presentation"
+                        aria-hidden="true"
+                    >
                         <hr
                             class="navbar-divider w-100 d-md-none my-2"
                             aria-hidden="true"
