@@ -1,7 +1,23 @@
 <script setup lang="ts">
-defineProps<{
-    links: { label: string; url: string }[]
-}>()
+import { computed } from 'vue'
+import type { SongEntry } from '@/data/games'
+
+const props = defineProps<{ entry: SongEntry }>()
+
+const links = computed(() => {
+    if ('arrangements' in props.entry) {
+        return props.entry.arrangements.map((a) => ({
+            label: a.source,
+            url: `https://www.youtube.com/watch?v=${encodeURIComponent(a.videoId)}${a.startTime ? `&t=${a.startTime}` : ''}`,
+        }))
+    }
+    return [
+        {
+            label: 'YouTube',
+            url: `https://www.youtube.com/watch?v=${encodeURIComponent(props.entry.videoId)}${props.entry.startTime ? `&t=${props.entry.startTime}` : ''}`,
+        },
+    ]
+})
 </script>
 
 <template>

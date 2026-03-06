@@ -4,36 +4,10 @@ import { games } from '@/data/games'
 import type { SongEntry } from '@/data/games'
 import SongLinks from '@/components/SongLinks.vue'
 
-interface SongRow {
-    songName: string
-    links: { label: string; url: string }[]
-}
-
 interface GameGroup {
     gameName: string
     aliases: string[]
-    songs: SongRow[]
-}
-
-function songEntryToRow(entry: SongEntry): SongRow {
-    if ('arrangements' in entry) {
-        return {
-            songName: entry.songName,
-            links: entry.arrangements.map((a) => ({
-                label: a.source,
-                url: `https://www.youtube.com/watch?v=${encodeURIComponent(a.videoId)}${a.startTime ? `&t=${a.startTime}` : ''}`,
-            })),
-        }
-    }
-    return {
-        songName: entry.songName,
-        links: [
-            {
-                label: 'YouTube',
-                url: `https://www.youtube.com/watch?v=${encodeURIComponent(entry.videoId)}${entry.startTime ? `&t=${entry.startTime}` : ''}`,
-            },
-        ],
-    }
+    songs: SongEntry[]
 }
 
 function normalizeAlias(alias: string | string[]): string[] {
@@ -48,7 +22,7 @@ const gameGroups: GameGroup[] = games.map((game) => {
     return {
         gameName: game.name,
         aliases: game.alias ? normalizeAlias(game.alias) : [],
-        songs: sources.map(songEntryToRow),
+        songs: sources,
     }
 })
 
@@ -112,11 +86,11 @@ const hoveredGame = ref<string | null>(null)
                                     <td>
                                         {{ song.songName }}
                                         <div class="d-sm-none mt-1">
-                                            <SongLinks :links="song.links" />
+                                            <SongLinks :entry="song" />
                                         </div>
                                     </td>
                                     <td class="text-nowrap d-none d-sm-table-cell">
-                                        <SongLinks :links="song.links" />
+                                        <SongLinks :entry="song" />
                                     </td>
                                 </tr>
                             </template>
