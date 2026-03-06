@@ -544,11 +544,6 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Simulation Level 01 (Launch Base)', videoId: 'C4DFwgSpO00' },
     },
     {
-        name: 'RayCrisis',
-        sortName: 'Rayforce 3',
-        songSource: { songName: 'Lavande Bleu', videoId: 'bCBXUBBZVDU' },
-    },
-    {
         name: 'RayForce',
         sortName: 'Rayforce 1',
         songSource: { songName: 'Penetration', videoId: '234tjx8yO1I' },
@@ -557,6 +552,11 @@ const gameEntries: GameEntry[] = [
         name: 'RayStorm',
         sortName: 'Rayforce 2',
         songSource: { songName: 'Geometric City', videoId: 'kP5huZQRAY4' },
+    },
+    {
+        name: 'RayCrisis',
+        sortName: 'Rayforce 3',
+        songSource: { songName: 'Lavande Bleu', videoId: 'bCBXUBBZVDU' },
     },
     {
         name: 'RefleX',
