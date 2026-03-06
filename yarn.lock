@@ -326,6 +326,11 @@
     "@eslint/core" "^0.17.0"
     levn "^0.4.1"
 
+"@fontsource-variable/geist-mono@^5.2.7":
+  version "5.2.7"
+  resolved "https://registry.npmjs.org/@fontsource-variable/geist-mono/-/geist-mono-5.2.7.tgz"
+  integrity sha512-ZKlZ5sjtalb2TwXKs400mAGDlt/+2ENLNySPx0wTz3bP3mWARCsUW+rpxzZc7e05d2qGch70pItt3K4qttbIYA==
+
 "@fontsource-variable/geist@^5.2.8":
   version "5.2.8"
   resolved "https://registry.npmjs.org/@fontsource-variable/geist/-/geist-5.2.8.tgz"
