@@ -57,7 +57,7 @@ function begin() {
                     </li>
                 </ul>
                 <button
-                    class="btn btn-outline-primary btn-lg px-5"
+                    class="btn btn-primary btn-lg px-5"
                     @click="begin"
                 >
                     Start Quiz
