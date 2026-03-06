@@ -4,17 +4,21 @@ import type { SongEntry } from '@/data/games'
 
 const props = defineProps<{ entry: SongEntry }>()
 
+function youtubeUrl(videoId: string, startTime?: number): string {
+    return `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}${startTime ? `&t=${startTime}` : ''}`
+}
+
 const links = computed(() => {
     if ('arrangements' in props.entry) {
         return props.entry.arrangements.map((a) => ({
             label: a.source,
-            url: `https://www.youtube.com/watch?v=${encodeURIComponent(a.videoId)}${a.startTime ? `&t=${a.startTime}` : ''}`,
+            url: youtubeUrl(a.videoId, a.startTime),
         }))
     }
     return [
         {
             label: 'YouTube',
-            url: `https://www.youtube.com/watch?v=${encodeURIComponent(props.entry.videoId)}${props.entry.startTime ? `&t=${props.entry.startTime}` : ''}`,
+            url: youtubeUrl(props.entry.videoId, props.entry.startTime),
         },
     ]
 })
