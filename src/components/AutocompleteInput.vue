@@ -275,6 +275,19 @@ function onKeydown(event: KeyboardEvent) {
   max-height: 280px;
   overflow-y: auto;
   background-color: var(--bs-body-bg);
+  border: var(--bs-list-group-border-width) solid var(--bs-list-group-border-color);
+
+  .list-group-item {
+    border-inline: none;
+  }
+
+  .list-group-item:first-child {
+    border-top: none;
+  }
+
+  .list-group-item:last-child {
+    border-bottom: none;
+  }
 }
 
 .list-group-item.disabled {
