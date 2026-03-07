@@ -1,7 +1,7 @@
 export const quotes: string[] = [
     'Get Ready!',
     'For great justice!', // Zero Wing
-    "This one's for the fighters, this one's for the soliders", // Dariusburst
+    "This one's for the fighters, this one's for the soldiers", // Dariusburst
     'Be attitudes for gains', // Radiant Silvergun
     "Don't let the enemy freak you out!", // Space Invaders Extreme 2
     '3, 2, 1, let\'s go!', // R-Type Leo
