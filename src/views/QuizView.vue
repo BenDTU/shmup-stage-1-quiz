@@ -70,11 +70,15 @@ async function handleSubmit(viaKeyboard = false) {
     }
 }
 
-function handleNoviceSubmit(optionId: number) {
+async function handleNoviceSubmit(optionId: number, viaKeyboard = false) {
     if (state.isAnswered) return
     selectedGameId.value = optionId
     submitGuess(optionId)
     setFeedbackFromAnswer()
+    if (viaKeyboard) {
+        await nextTick()
+        nextBtn.value?.focus()
+    }
 }
 
 async function handleSkipClick(event: MouseEvent) {

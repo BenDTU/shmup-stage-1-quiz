@@ -13,7 +13,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
     'update:modelValue': [id: number]
-    'submit': [id: number]
+    'submit': [id: number, viaKeyboard: boolean]
 }>()
 
 function optionClass(optionId: number): string {
@@ -25,10 +25,10 @@ function optionClass(optionId: number): string {
     return 'btn-outline-secondary'
 }
 
-function handleSelect(optionId: number) {
+function handleSelect(event: MouseEvent, optionId: number) {
     if (props.isAnswered) return
     emit('update:modelValue', optionId)
-    emit('submit', optionId)
+    emit('submit', optionId, event.detail === 0)
 }
 </script>
 
@@ -43,7 +43,7 @@ function handleSelect(optionId: number) {
                 class="btn text-start w-100 h-100"
                 :class="[optionClass(optionId), { 'novice-option-done': isAnswered }]"
                 :aria-disabled="isAnswered ? 'true' : undefined"
-                @click="handleSelect(optionId)"
+                @click="handleSelect($event, optionId)"
             >
                 <div>{{ guessedGameName(optionId) }}</div>
                 <div

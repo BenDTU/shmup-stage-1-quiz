@@ -2,6 +2,7 @@
 import { useRouter } from 'vue-router'
 import { useQuiz } from '@/composables/useQuiz'
 import { games } from '@/data/games'
+import type { QuizMode } from '@/types'
 
 const router = useRouter()
 const { startQuiz } = useQuiz()
@@ -21,7 +22,7 @@ function countSongs(): number {
 
 const totalSongs = countSongs()
 
-function begin(mode: 'novice' | 'advanced') {
+function begin(mode: QuizMode) {
     startQuiz(mode)
     router.push('/quiz')
 }

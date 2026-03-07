@@ -1,6 +1,6 @@
 import { reactive, computed } from 'vue'
 import { games } from '../data/games'
-import { type Game, type GameEntryWithId, Series } from '../types'
+import { type Game, type GameEntryWithId, type QuizMode, Series } from '../types'
 
 function resolveGame(entry: GameEntryWithId): Game {
     const { name, alias, series, id } = entry
@@ -36,7 +36,7 @@ interface QuizState {
     answers: number[] // guessed game id per question, -1 for a skip
     isStarted: boolean
     isAnswered: boolean
-    mode: 'novice' | 'advanced'
+    mode: QuizMode
     noviceOptions: number[][] // 4 option IDs per question (populated in novice mode only)
 }
 
@@ -84,7 +84,7 @@ const seriesLimitedGameIds = computed<Set<number>>(() => {
     )
 })
 
-function startQuiz(mode: 'novice' | 'advanced' = 'advanced') {
+function startQuiz(mode: QuizMode = 'advanced') {
     const forceFirstGames = games.filter((g) => g.forceFirst)
     const shuffled = [...games].filter((g) => !g.forceFirst).sort(() => Math.random() - 0.5)
     const seriesCounts: Partial<Record<Series, number>> = {}
@@ -159,8 +159,6 @@ function resetQuiz() {
     state.isStarted = false
     state.isAnswered = false
     state.mode = 'advanced'
-    state.noviceOptions = []
-}
 
 export function useQuiz() {
     return { state, isFinished, usedGameIds, seriesLimitedGameIds, startQuiz, submitGuess, nextQuestion, resetQuiz }
