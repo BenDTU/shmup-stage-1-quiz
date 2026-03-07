@@ -66,8 +66,18 @@ onUnmounted(() => {
     clearStopTimer()
 })
 
-function pickRandomQuote(): string {
-    return quotes[Math.floor(Math.random() * quotes.length)]!
+function pickRandomQuote(previous?: string): string {
+    if (quotes.length === 0) {
+        throw new Error('No quotes are available to pick from.')
+    }
+    if (quotes.length === 1) {
+        return quotes[0]!
+    }
+    let quote: string
+    do {
+        quote = quotes[Math.floor(Math.random() * quotes.length)]!
+    } while (quote === previous)
+    return quote
 }
 
 const currentQuote = ref(pickRandomQuote())
@@ -86,7 +96,7 @@ onMounted(() => {
 // • Otherwise reload the iframe for a fresh muted-autoplay start.
 watch(() => props.videoId, () => {
     clearStopTimer()
-    currentQuote.value = pickRandomQuote()
+    currentQuote.value = pickRandomQuote(currentQuote.value)
     if (audioUnlocked.value) {
         sendCommand('loadVideoById', [props.videoId, props.startTime ?? 0])
         scheduleStop()
