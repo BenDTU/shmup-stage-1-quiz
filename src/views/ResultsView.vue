@@ -35,9 +35,10 @@ function playAgain() {
                         <p class="lead">
                             You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
                         </p>
-                        <p class="text-muted small mb-3">
-                            Mode: <span
-                                class="badge align-middle"
+                        <p class="text-muted small mb-3 d-flex align-items-center justify-content-center gap-2">
+                            <span>Mode:</span>
+                            <span
+                                class="badge"
                                 :class="state.mode === 'novice' ? 'bg-success' : 'bg-danger'"
                             >{{ state.mode === 'novice' ? 'Novice' : 'Advanced' }}</span>
                         </p>
