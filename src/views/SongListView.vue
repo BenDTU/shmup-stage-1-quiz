@@ -33,11 +33,11 @@ const hoveredGame = ref<string | null>(null)
     <main class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-9">
-                <h1 class="display-5 fw-bold mb-1 text-center">
+                <h1 class="display-5 fw-bold mb-2 text-center">
                     Song List
                 </h1>
                 <p class="text-center text-muted mb-4">
-                    There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups loaded in this quiz.
+                    There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups.
                 </p>
                 <div class="table-responsive">
                     <table class="table align-middle">
