@@ -159,6 +159,8 @@ function resetQuiz() {
     state.isStarted = false
     state.isAnswered = false
     state.mode = 'advanced'
+    state.noviceOptions = []
+}
 
 export function useQuiz() {
     return { state, isFinished, usedGameIds, seriesLimitedGameIds, startQuiz, submitGuess, nextQuestion, resetQuiz }
