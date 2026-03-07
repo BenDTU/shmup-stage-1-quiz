@@ -3,6 +3,7 @@ import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
 import AutocompleteInput from '../components/AutocompleteInput.vue'
+import NoviceOptions from '../components/NoviceOptions.vue'
 import { useQuiz } from '../composables/useQuiz'
 import { guessedGameName } from '../functions'
 import { games } from '../data/games'
@@ -27,6 +28,14 @@ function setFeedback(value: 'correct' | 'wrong') {
     }, value === 'correct' ? 800 : 600)
 }
 
+function setFeedbackFromAnswer() {
+    setFeedback(
+        state.answers[state.currentIndex] === state.questions[state.currentIndex]?.id
+            ? 'correct'
+            : 'wrong',
+    )
+}
+
 onMounted(() => {
     if (!state.isStarted || state.questions.length === 0) {
         router.replace('/')
@@ -48,16 +57,25 @@ const isAlmostCorrect = computed(() => {
 // Only allow submitting a guess that corresponds to an available game in the pool
 const isValidGuess = computed(() => {
     if (selectedGameId.value === null) return false
+    if (state.mode === 'novice') return true
     return !usedGameIds.value.has(selectedGameId.value) && !seriesLimitedGameIds.value.has(selectedGameId.value)
 })
+
 async function handleSubmit(viaKeyboard = false) {
     if (!isValidGuess.value || state.isAnswered) return
     submitGuess(selectedGameId.value!)
-    setFeedback(
-        state.answers[state.currentIndex] === state.questions[state.currentIndex]?.id
-            ? 'correct'
-            : 'wrong',
-    )
+    setFeedbackFromAnswer()
+    if (viaKeyboard) {
+        await nextTick()
+        nextBtn.value?.focus()
+    }
+}
+
+async function handleNoviceSubmit(optionId: number, viaKeyboard = false) {
+    if (state.isAnswered) return
+    selectedGameId.value = optionId
+    submitGuess(optionId)
+    setFeedbackFromAnswer()
     if (viaKeyboard) {
         await nextTick()
         nextBtn.value?.focus()
@@ -95,7 +113,7 @@ async function handleNextClick(event: MouseEvent) {
     const isKeyboard = event.detail === 0
     const wasFinished = isFinished.value
     handleNext()
-    if (isKeyboard && !wasFinished) {
+    if (isKeyboard && !wasFinished && state.mode === 'advanced') {
         await nextTick()
         autocompleteRef.value?.focus()
     }
@@ -150,7 +168,36 @@ async function handleNextClick(event: MouseEvent) {
                             Which game is this stage 1 theme from?
                         </h5>
 
-                        <div v-if="!state.isAnswered">
+                        <!-- Novice mode: correct/incorrect alert (above options, shown when answered) -->
+                        <div
+                            v-if="state.mode === 'novice' && state.isAnswered"
+                            class="alert mb-3"
+                            :class="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex] ? 'alert-success' : 'alert-danger'"
+                        >
+                            <span v-if="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]">
+                                <i class="bi bi-check-circle-fill text-success me-1" /> <strong>Correct!</strong>
+                            </span>
+                            <span v-else>
+                                <i class="bi bi-x-circle-fill text-danger me-1" /> <strong>Incorrect.</strong>
+                            </span>
+                        </div>
+
+                        <!-- Novice mode: 4 option buttons -->
+                        <NoviceOptions
+                            v-if="state.mode === 'novice'"
+                            v-model="selectedGameId"
+                            :options="state.noviceOptions[state.currentIndex] ?? []"
+                            :is-answered="state.isAnswered"
+                            :correct-id="currentQuestion.id"
+                            :answered-id="state.answers[state.currentIndex]"
+                            :song-name="currentQuestion.songName"
+                            :source="currentQuestion.source"
+                            :class="state.isAnswered ? 'mb-4' : 'mb-0'"
+                            @submit="handleNoviceSubmit"
+                        />
+
+                        <!-- Advanced mode: autocomplete + submit/skip buttons -->
+                        <div v-if="state.mode === 'advanced' && !state.isAnswered">
                             <AutocompleteInput
                                 ref="autocompleteRef"
                                 v-model="selectedGameId"
@@ -176,9 +223,11 @@ async function handleNextClick(event: MouseEvent) {
                             </div>
                         </div>
 
-                        <!-- Result -->
-                        <div v-else>
+                        <!-- Result section (answered state) -->
+                        <template v-if="state.isAnswered">
+                            <!-- Advanced mode: correct/incorrect alert -->
                             <div
+                                v-if="state.mode === 'advanced'"
                                 class="alert mb-3"
                                 :class="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex] ? 'alert-success' : 'alert-danger'"
                             >
@@ -215,7 +264,7 @@ async function handleNextClick(event: MouseEvent) {
                                     Next Question <i class="bi bi-arrow-right ms-1" />
                                 </template>
                             </button>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </div>

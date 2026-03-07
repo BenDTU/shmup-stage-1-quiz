@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { games } from '@/data/games'
+import { games, totalSongs, totalShmups } from '@/data/games'
 import type { SongEntry } from '@/data/games'
 import SongLinks from '@/components/SongLinks.vue'
 
@@ -34,10 +34,10 @@ const hoveredGame = ref<string | null>(null)
         <div class="row justify-content-center">
             <div class="col-lg-9">
                 <h1 class="display-5 fw-bold mb-1 text-center">
-                    <i class="bi bi-music-note-beamed" /> Song List
+                    Song List
                 </h1>
                 <p class="text-center text-muted mb-4">
-                    All <strong>{{ games.length }}</strong> games and their stage&nbsp;1 themes in the quiz.
+                    There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups loaded in this quiz.
                 </p>
                 <div class="table-responsive">
                     <table class="table align-middle">
