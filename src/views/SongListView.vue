@@ -34,7 +34,7 @@ const hoveredGame = ref<string | null>(null)
         <div class="row justify-content-center">
             <div class="col-lg-9">
                 <h1 class="display-5 fw-bold mb-1 text-center">
-                    <i class="bi bi-music-note-beamed" /> Song List
+                    Song List
                 </h1>
                 <p class="text-center text-muted mb-4">
                     All <strong>{{ games.length }}</strong> games and their stage&nbsp;1 themes in the quiz.
