@@ -33,24 +33,28 @@ function handleSelect(optionId: number) {
 </script>
 
 <template>
-    <div class="d-grid gap-2">
-        <button
+    <div class="row row-cols-1 row-cols-md-2 g-2">
+        <div
             v-for="optionId in options"
             :key="optionId"
-            class="btn text-start"
-            :class="[optionClass(optionId), { 'novice-option-done': isAnswered }]"
-            @click="handleSelect(optionId)"
+            class="col"
         >
-            <div>{{ guessedGameName(optionId) }}</div>
-            <div
-                v-if="isAnswered && optionId === correctId && songName"
-                class="small opacity-75"
+            <button
+                class="btn text-start w-100 h-100"
+                :class="[optionClass(optionId), { 'novice-option-done': isAnswered }]"
+                @click="handleSelect(optionId)"
             >
-                {{ songName }}<template v-if="source">
-                    ({{ source }} version)
-                </template>
-            </div>
-        </button>
+                <div>{{ guessedGameName(optionId) }}</div>
+                <div
+                    v-if="isAnswered && optionId === correctId && songName"
+                    class="small opacity-75"
+                >
+                    {{ songName }}<template v-if="source">
+                        ({{ source }} version)
+                    </template>
+                </div>
+            </button>
+        </div>
     </div>
 </template>
 
