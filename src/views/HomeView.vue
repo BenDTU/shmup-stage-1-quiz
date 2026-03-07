@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { h, ref, computed } from 'vue'
-import type { FunctionalComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuiz } from '@/composables/useQuiz'
 import { games } from '@/data/games'
@@ -8,27 +6,23 @@ import { games } from '@/data/games'
 const router = useRouter()
 const { startQuiz } = useQuiz()
 
-const totalGames = games.length
-const selectedMode = ref<'novice' | 'advanced'>('advanced')
+const totalShmups = games.length
 
-interface Tip {
-    icon: string
-    label: FunctionalComponent
+function countSongs(): number {
+    let count = 0
+    for (const game of games) {
+        const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource]
+        for (const source of sources) {
+            count += 'arrangements' in source ? source.arrangements.length : 1
+        }
+    }
+    return count
 }
 
-const tips = computed<Tip[]>(() => [
-    { icon: 'bi-music-note-beamed', label: () => h('span', 'Each track plays automatically — listen carefully!') },
-    selectedMode.value === 'novice'
-        ? { icon: 'bi-grid-3x3-gap-fill', label: () => h('span', 'Choose from 4 options — the correct answer is one of them!') }
-        : { icon: 'bi-search', label: () => h('span', 'Use the autocomplete box to find your answer.') },
-    { icon: 'bi-hand-index-thumb', label: () => h('span', ['You only get ', h('strong', 'one guess'), ' per song.']) },
-    { icon: 'bi-slash-circle',     label: () => h('span', 'Games already shown are disabled in later questions.') },
-    { icon: 'bi-bar-chart-fill',   label: () => h('span', 'See your full score and all answers at the end.') },
-    { icon: 'bi-controller',       label: () => h('span', ['There are currently ', h('strong', String(totalGames)), ' shmups loaded in!']) },
-])
+const totalSongs = countSongs()
 
-function begin() {
-    startQuiz(selectedMode.value)
+function begin(mode: 'novice' | 'advanced') {
+    startQuiz(mode)
     router.push('/quiz')
 }
 </script>
@@ -44,64 +38,31 @@ function begin() {
                     Think you know your shmup stage&nbsp;1 themes? Listen to the music and guess which game
                     it's from! A random set of <strong>20 tracks</strong> will be selected for you.
                 </p>
-                <ul
-                    class="list-group list-group-flush text-start mb-4 mx-auto"
-                    style="max-width: 440px"
-                >
-                    <li
-                        v-for="tip in tips"
-                        :key="tip.icon"
-                        class="list-group-item"
-                    >
-                        <div class="d-flex">
-                            <i :class="['bi', 'me-2', tip.icon]" />
-                            <component :is="tip.label" />
-                        </div>
-                    </li>
-                </ul>
-                <div class="d-flex flex-column align-items-center gap-2 mb-3">
-                    <div
-                        class="btn-group"
-                        role="group"
-                        aria-label="Quiz mode"
-                    >
-                        <input
-                            id="mode-novice"
-                            v-model="selectedMode"
-                            class="btn-check"
-                            type="radio"
-                            value="novice"
-                            autocomplete="off"
-                        >
-                        <label
-                            class="btn btn-outline-primary"
-                            for="mode-novice"
-                        >
-                            Novice
-                        </label>
-                        <input
-                            id="mode-advanced"
-                            v-model="selectedMode"
-                            class="btn-check"
-                            type="radio"
-                            value="advanced"
-                            autocomplete="off"
-                        >
-                        <label
-                            class="btn btn-outline-primary"
-                            for="mode-advanced"
-                        >
-                            Advanced
-                        </label>
-                    </div>
+                <h2 class="h5 mb-3">
+                    Choose your Difficulty
+                </h2>
+                <div class="d-flex flex-column align-items-center gap-3 mb-4">
                     <button
-                        class="btn btn-primary btn-lg px-5"
-                        @click="begin"
+                        class="btn btn-success btn-lg w-100 py-3"
+                        style="max-width: 320px"
+                        @click="begin('novice')"
                     >
-                        Start Quiz
+                        <div class="fw-bold fs-5">Novice</div>
+                        <div class="small opacity-75">Select from a list of 4 games</div>
+                    </button>
+                    <button
+                        class="btn btn-danger btn-lg w-100 py-3"
+                        style="max-width: 320px"
+                        @click="begin('advanced')"
+                    >
+                        <div class="fw-bold fs-5">Advanced</div>
+                        <div class="small opacity-75">Select from the whole list of games</div>
                     </button>
                 </div>
-                <div class="mt-3">
+                <p class="text-muted small mb-2">
+                    There are currently {{ totalSongs }} songs from {{ totalShmups }} shmups loaded in
+                </p>
+                <div>
                     <RouterLink to="/song-list">
                         View Full Song List
                     </RouterLink>
