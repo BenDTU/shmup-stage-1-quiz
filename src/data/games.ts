@@ -861,12 +861,12 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'BGM', videoId: 'w4vXIMFt9QU' },
     },
     {
-        name: 'Xevious Arrangement',
-        songSource: { songName: 'Area 1 & 4', videoId: 'tQMQJKFb4DU' },
-    },
-    {
         name: 'Xevious 3D/G',
         songSource: { songName: 'Area 1', videoId: 'enZ-rEt7U_A' },
+    },
+    {
+        name: 'Xevious Arrangement',
+        songSource: { songName: 'Area 1 & 4', videoId: 'tQMQJKFb4DU' },
     },
     {
         name: 'Xiizeal',
