@@ -101,21 +101,52 @@ function closeMenuViaNavigation() {
                         </RouterLink>
                     </li>
                 </ul>
-                <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center mt-auto mt-md-0">
-                    <button
-                        type="button"
-                        class="btn btn-outline-secondary btn-sm p-2 d-inline-flex align-items-center gap-1"
-                        :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
-                        :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
-                        @click="toggleDark"
+                <ul class="navbar-nav mt-auto mt-md-0 align-items-md-center">
+                    <li class="nav-item">
+                        <a
+                            href="https://github.com/BenDTU/shmup-stage-1-quiz"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="nav-link icon-link"
+                            aria-label="GitHub repository"
+                        >
+                            <i
+                                class="bi bi-github lh-1"
+                                aria-hidden="true"
+                            />
+                            <span class="d-md-none">GitHub</span>
+                        </a>
+                    </li>
+                    <li
+                        class="d-flex align-items-center"
+                        role="presentation"
+                        aria-hidden="true"
                     >
-                        <i
-                            :class="['lh-1', isDark ? 'bi bi-sun' : 'bi bi-moon']"
+                        <hr
+                            class="navbar-divider w-100 d-md-none my-2"
+                            aria-hidden="true"
+                        >
+                        <div
+                            class="navbar-divider vr d-none d-md-inline-block mx-2"
                             aria-hidden="true"
                         />
-                        <span class="d-md-none">{{ isDark ? 'Light mode' : 'Dark mode' }}</span>
-                    </button>
-                </div>
+                    </li>
+                    <li class="nav-item">
+                        <button
+                            type="button"
+                            class="nav-link icon-link"
+                            :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+                            :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+                            @click="toggleDark"
+                        >
+                            <i
+                                :class="['lh-1', isDark ? 'bi bi-sun' : 'bi bi-moon']"
+                                aria-hidden="true"
+                            />
+                            <span class="d-md-none">{{ isDark ? 'Light mode' : 'Dark mode' }}</span>
+                        </button>
+                    </li>
+                </ul>
             </BOffcanvas>
         </div>
     </nav>
