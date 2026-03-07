@@ -195,11 +195,12 @@ async function handleNextClick(event: MouseEvent) {
                                 v-if="seriesJustCompleted && !isFinished"
                                 class="text-muted small mb-2"
                             >
+                                <i class="bi bi-info-circle-fill me-1" /> 
                                 <template v-if="seriesJustCompletedMajorityCorrect">
-                                    <i class="bi bi-star-fill me-1" /> Nice work on the <strong>{{ seriesNames[seriesJustCompleted] }}</strong> series! No more {{ seriesNames[seriesJustCompleted] }} songs in this quiz.
+                                    That's the last <strong>{{ seriesNames[seriesJustCompleted] }}</strong> song you'll hear this quiz.
                                 </template>
                                 <template v-else>
-                                    <i class="bi bi-info-circle-fill me-1" /> That's the last of the <strong>{{ seriesNames[seriesJustCompleted] }}</strong> songs for this quiz. Better luck with the rest!
+                                    Don't worry - that's the last <strong>{{ seriesNames[seriesJustCompleted] }}</strong> song you'll hear this quiz.
                                 </template>
                             </p>
                             <button
