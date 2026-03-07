@@ -42,6 +42,7 @@ function handleSelect(optionId: number) {
             <button
                 class="btn text-start w-100 h-100"
                 :class="[optionClass(optionId), { 'novice-option-done': isAnswered }]"
+                :aria-disabled="isAnswered ? 'true' : undefined"
                 @click="handleSelect(optionId)"
             >
                 <div>{{ guessedGameName(optionId) }}</div>
