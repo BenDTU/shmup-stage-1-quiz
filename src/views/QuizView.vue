@@ -41,7 +41,7 @@ const isAlmostCorrect = computed(() => {
     const correctSeries = currentQuestion.value?.series
     if (correctSeries === undefined) return false
     const guessedGame = games.find((g) => g.id === answerId)
-    return guessedGame?.series !== undefined && guessedGame.series === correctSeries
+    return guessedGame?.series === correctSeries
 })
 
 // Only allow submitting a guess that corresponds to an available game in the pool
