@@ -62,11 +62,14 @@ const usedGameIds = computed<Set<number>>(
 )
 
 // The series whose last appearance in the quiz was just answered (while the result is being shown), or null
+// Only triggers when the series limit was actually hit (i.e. the quiz contains SERIES_LIMIT songs from that series)
 const seriesJustCompleted = computed<Series | null>(() => {
     if (!state.isAnswered) return null
     const currentQuestion = state.questions[state.currentIndex]
     if (!currentQuestion?.series) return null
     const series = currentQuestion.series
+    const seriesQuestions = state.questions.filter((q) => q.series === series)
+    if (seriesQuestions.length < SERIES_LIMIT) return null
     const lastIndexOfSeries = state.questions.reduce<number>(
         (maxIdx, q, i) => (q.series === series ? i : maxIdx),
         -1,
