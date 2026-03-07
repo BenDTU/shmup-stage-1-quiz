@@ -29,18 +29,17 @@ function playAgain() {
             <div class="col-lg-7">
                 <template v-if="total > 0">
                     <div class="text-center mb-5">
-                        <h1 class="display-5 fw-bold">
+                        <h1 class="display-5 mb-3 fw-bold">
                             Quiz Complete! <i class="bi bi-trophy-fill" />
                         </h1>
-                        <p class="lead">
-                            You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
-                        </p>
-                        <p class="text-muted small mb-3 d-flex align-items-center justify-content-center gap-2">
-                            <span>Mode:</span>
+                        <p class="text-muted mb-3">
                             <span
                                 class="badge"
                                 :class="state.mode === 'novice' ? 'bg-success' : 'bg-danger'"
                             >{{ state.mode === 'novice' ? 'Novice' : 'Advanced' }}</span>
+                        </p>
+                        <p class="lead">
+                            You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
                         </p>
                         <div
                             class="progress mb-3 mx-auto"
