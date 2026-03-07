@@ -137,7 +137,7 @@ function onRestartAnimationEnd() {
 </script>
 
 <template>
-    <div class="ratio ratio-16x9">
+    <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
         <!-- One-time Start overlay — only shown before the user's first
          audio interaction. The iframe behind it is already playing the
          video muted (muted autoplay is permitted by every browser).
