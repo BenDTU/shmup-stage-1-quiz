@@ -7,9 +7,10 @@ import NoviceOptions from '../components/NoviceOptions.vue'
 import { useQuiz } from '../composables/useQuiz'
 import { guessedGameName } from '../functions'
 import { games } from '../data/games'
+import { seriesNames } from '../types'
 
 const router = useRouter()
-const { state, isFinished, usedGameIds, seriesLimitedGameIds, submitGuess, nextQuestion } = useQuiz()
+const { state, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, submitGuess, nextQuestion } = useQuiz()
 
 const selectedGameId = ref<number | null>(null)
 const audioUnlocked = ref(false)
@@ -239,6 +240,18 @@ async function handleNextClick(event: MouseEvent) {
                                     You guessed: <em>{{ guessedGameName(state.answers[state.currentIndex]!) }}</em>.
                                 </span>
                             </div>
+                            <p
+                                v-if="seriesJustCompleted && !isFinished"
+                                class="text-muted small mb-2"
+                            >
+                                <i class="bi bi-info-circle-fill me-1" /> 
+                                <template v-if="seriesJustCompletedMajorityCorrect">
+                                    That's the last <strong>{{ seriesNames[seriesJustCompleted] }}</strong> song you'll hear this quiz.
+                                </template>
+                                <template v-else>
+                                    Don't worry - that's the last <strong>{{ seriesNames[seriesJustCompleted] }}</strong> song you'll hear this quiz.
+                                </template>
+                            </p>
                             <button
                                 ref="nextBtn"
                                 class="btn btn-success w-100"
