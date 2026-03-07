@@ -13,6 +13,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
     'update:modelValue': [id: number]
+    'submit': [id: number]
 }>()
 
 function optionClass(optionId: number): string {
@@ -27,6 +28,7 @@ function optionClass(optionId: number): string {
 function handleSelect(optionId: number) {
     if (props.isAnswered) return
     emit('update:modelValue', optionId)
+    emit('submit', optionId)
 }
 </script>
 

@@ -26,6 +26,14 @@ function setFeedback(value: 'correct' | 'wrong') {
     }, value === 'correct' ? 800 : 600)
 }
 
+function setFeedbackFromAnswer() {
+    setFeedback(
+        state.answers[state.currentIndex] === state.questions[state.currentIndex]?.id
+            ? 'correct'
+            : 'wrong',
+    )
+}
+
 onMounted(() => {
     if (!state.isStarted || state.questions.length === 0) {
         router.replace('/')
@@ -45,15 +53,18 @@ const isValidGuess = computed(() => {
 async function handleSubmit(viaKeyboard = false) {
     if (!isValidGuess.value || state.isAnswered) return
     submitGuess(selectedGameId.value!)
-    setFeedback(
-        state.answers[state.currentIndex] === state.questions[state.currentIndex]?.id
-            ? 'correct'
-            : 'wrong',
-    )
+    setFeedbackFromAnswer()
     if (viaKeyboard) {
         await nextTick()
         nextBtn.value?.focus()
     }
+}
+
+function handleNoviceSubmit(optionId: number) {
+    if (state.isAnswered) return
+    selectedGameId.value = optionId
+    submitGuess(optionId)
+    setFeedbackFromAnswer()
 }
 
 async function handleSkipClick(event: MouseEvent) {
@@ -167,6 +178,7 @@ async function handleNextClick(event: MouseEvent) {
                             :song-name="currentQuestion.songName"
                             :source="currentQuestion.source"
                             class="mb-3"
+                            @submit="handleNoviceSubmit"
                         />
 
                         <!-- Advanced mode: autocomplete + submit/skip buttons -->
@@ -194,20 +206,6 @@ async function handleNextClick(event: MouseEvent) {
                                     Skip <i class="bi bi-skip-forward-fill ms-1" />
                                 </button>
                             </div>
-                        </div>
-
-                        <!-- Novice mode: submit button (shown before answering) -->
-                        <div
-                            v-if="state.mode === 'novice' && !state.isAnswered"
-                            class="mb-3"
-                        >
-                            <button
-                                class="btn btn-primary w-100"
-                                :disabled="!isValidGuess"
-                                @click="handleSubmit()"
-                            >
-                                Submit Guess
-                            </button>
                         </div>
 
                         <!-- Result section (answered state) -->
