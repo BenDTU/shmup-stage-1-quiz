@@ -866,7 +866,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Xevious 3D/G',
-        songSource: { songName: 'Area 1', videoId: 'nZ-rEt7U_A' },
+        songSource: { songName: 'Area 1', videoId: 'enZ-rEt7U_A' },
     },
     {
         name: 'Xiizeal',
