@@ -21,7 +21,7 @@ function begin(mode: QuizMode) {
                     Shmup Stage 1 Quiz
                 </h1>
                 <p class="lead mb-5">
-                    Think you know your shmups? How many can you pick from their stage 1 theme? A random set of <strong>20 tracks</strong> will be selected for you.
+                    Think you know your shmups? How many can you pick from their stage 1 theme? Test your knowledge with a set of <strong>20 tracks</strong>.
                 </p>
                 <h2 class="h5 mb-3">
                     Choose your Difficulty
@@ -53,7 +53,7 @@ function begin(mode: QuizMode) {
                     </button>
                 </div>
                 <p class="text-muted small mb-2">
-                    There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups loaded in this quiz
+                    There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups
                 </p>
                 <div>
                     <RouterLink to="/song-list">
