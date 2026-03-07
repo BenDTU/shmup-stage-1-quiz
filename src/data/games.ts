@@ -44,6 +44,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Apocalypse ~ Stage 1A', videoId: 'WIeUpFJ4LY4' },
     },
     {
+        name: 'Blue Revolver',
+        songSource: { songName: 'Qygenomics', videoId: 'dTbpYrrSRPY' },
+    },
+    {
         name: 'Castle of Shikigami',
         alias: ['Mobile Light Force 2'],
         series: Series.CastleOfShikigami,
@@ -224,6 +228,11 @@ const gameEntries: GameEntry[] = [
         name: 'Gradius Gaiden',
         series: Series.Gradius,
         songSource: { songName: 'Sky 1 & 2', videoId: '4zZXuvaq5sA' },
+    },
+    {
+        name: 'Gradius: The Interstellar Assault',
+        series: Series.Gradius,
+        songSource: { songName: 'The Chase, A Ruins, Toadstool', videoId: '05L6GWxUugg', startTime: 103, endTime: 326 },
     },
     {
         name: 'Gun Frontier',
@@ -846,6 +855,18 @@ const gameEntries: GameEntry[] = [
     {
         name: 'X Multiply',
         songSource: { songName: 'Into the Human Body', videoId: 'MwwduquIWIo' },
+    },
+    {
+        name: 'Xevious',
+        songSource: { songName: 'BGM', videoId: 'w4vXIMFt9QU' },
+    },
+    {
+        name: 'Xevious Arrangement',
+        songSource: { songName: 'Area 1 & 4', videoId: 'tQMQJKFb4DU' },
+    },
+    {
+        name: 'Xevious 3D/G',
+        songSource: { songName: 'Area 1', videoId: 'nZ-rEt7U_A' },
     },
     {
         name: 'Xiizeal',
