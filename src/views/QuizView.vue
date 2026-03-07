@@ -6,9 +6,10 @@ import AutocompleteInput from '../components/AutocompleteInput.vue'
 import { useQuiz } from '../composables/useQuiz'
 import { guessedGameName } from '../functions'
 import { games } from '../data/games'
+import { seriesNames } from '../types'
 
 const router = useRouter()
-const { state, isFinished, usedGameIds, seriesLimitedGameIds, submitGuess, nextQuestion } = useQuiz()
+const { state, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, submitGuess, nextQuestion } = useQuiz()
 
 const selectedGameId = ref<number | null>(null)
 const audioUnlocked = ref(false)
@@ -137,6 +138,20 @@ async function handleNextClick(event: MouseEvent) {
                         :hidden="!state.isAnswered"
                         @audio-unlocked="audioUnlocked = true"
                     />
+                </div>
+
+                <!-- Series completion message -->
+                <div
+                    v-if="seriesJustCompleted"
+                    class="alert mb-3"
+                    :class="seriesJustCompletedMajorityCorrect ? 'alert-success' : 'alert-warning'"
+                >
+                    <template v-if="seriesJustCompletedMajorityCorrect">
+                        <i class="bi bi-star-fill me-1" /> Nice work on the <strong>{{ seriesNames[seriesJustCompleted] }}</strong> series! No more {{ seriesNames[seriesJustCompleted] }} songs in this quiz.
+                    </template>
+                    <template v-else>
+                        <i class="bi bi-info-circle-fill me-1" /> That's the last of the <strong>{{ seriesNames[seriesJustCompleted] }}</strong> songs for this quiz. Better luck with the rest!
+                    </template>
                 </div>
 
                 <!-- Guess form -->
