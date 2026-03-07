@@ -894,3 +894,10 @@ export const noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
 ]
 
 export const games: GameEntryWithId[] = gameEntries.map((entry, index) => ({ ...entry, id: index + 1 }))
+
+export const totalShmups: number = games.length
+
+export const totalSongs: number = games.reduce((count, game) => {
+    const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource]
+    return count + sources.reduce((c, source) => c + ('arrangements' in source ? source.arrangements.length : 1), 0)
+}, 0)

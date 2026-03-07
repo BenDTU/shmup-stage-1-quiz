@@ -1,6 +1,6 @@
 import { reactive, computed } from 'vue'
 import { games } from '../data/games'
-import { type Game, type GameEntryWithId, Series } from '../types'
+import { type Game, type GameEntryWithId, type QuizMode, Series } from '../types'
 
 function resolveGame(entry: GameEntryWithId): Game {
     const { name, alias, series, id } = entry
@@ -36,6 +36,8 @@ interface QuizState {
     answers: number[] // guessed game id per question, -1 for a skip
     isStarted: boolean
     isAnswered: boolean
+    mode: QuizMode
+    noviceOptions: number[][] // 4 option IDs per question (populated in novice mode only)
 }
 
 const QUIZ_SIZE = 20
@@ -47,6 +49,8 @@ const state = reactive<QuizState>({
     answers: [],
     isStarted: false,
     isAnswered: false,
+    mode: 'advanced',
+    noviceOptions: [],
 })
 
 const isFinished = computed(
@@ -111,7 +115,7 @@ const seriesLimitedGameIds = computed<Set<number>>(() => {
     )
 })
 
-function startQuiz() {
+function startQuiz(mode: QuizMode = 'advanced') {
     const forceFirstGames = games.filter((g) => g.forceFirst)
     const shuffled = [...games].filter((g) => !g.forceFirst).sort(() => Math.random() - 0.5)
     const seriesCounts: Partial<Record<Series, number>> = {}
@@ -125,11 +129,41 @@ function startQuiz() {
         }
         selected.push(resolveGame(game))
     }
+
+    let noviceOptions: number[][] = []
+    if (mode === 'novice') {
+        noviceOptions = selected.map((question, i) => {
+            const priorIds = new Set(selected.slice(0, i).map((q) => q.id))
+            const priorSeriesCounts: Partial<Record<Series, number>> = {}
+            for (const q of selected.slice(0, i)) {
+                if (q.series) {
+                    priorSeriesCounts[q.series] = (priorSeriesCounts[q.series] ?? 0) + 1
+                }
+            }
+            const limitedSeries = new Set<Series>(
+                (Object.entries(priorSeriesCounts) as [Series, number][])
+                    .filter(([, count]) => count >= SERIES_LIMIT)
+                    .map(([series]) => series),
+            )
+            const eligible = games.filter(
+                (g) =>
+                    g.id !== question.id &&
+                    !priorIds.has(g.id) &&
+                    !(g.series && limitedSeries.has(g.series)),
+            )
+            const shuffledEligible = [...eligible].sort(() => Math.random() - 0.5)
+            const incorrectIds = shuffledEligible.slice(0, 3).map((g) => g.id)
+            return [...incorrectIds, question.id].sort(() => Math.random() - 0.5)
+        })
+    }
+
     state.questions = selected
     state.currentIndex = 0
     state.answers = []
     state.isStarted = true
     state.isAnswered = false
+    state.mode = mode
+    state.noviceOptions = noviceOptions
 }
 
 function submitGuess(gameId: number) {
@@ -155,6 +189,8 @@ function resetQuiz() {
     state.answers = []
     state.isStarted = false
     state.isAnswered = false
+    state.mode = 'advanced'
+    state.noviceOptions = []
 }
 
 export function useQuiz() {
