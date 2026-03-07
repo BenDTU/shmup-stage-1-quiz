@@ -27,7 +27,12 @@ h1, h2, h3, h4, h5, h6 {
   transition: none !important;
 }
 
-// Dark mode: white borders (Asteroids / Robotron aesthetic)
+// Navbar dividers: use theme border color at full opacity (black in light, white in dark)
+.navbar-divider {
+  color: var(--bs-border-color);
+  opacity: 1;
+}
+
 [data-bs-theme="dark"] {
   --bs-border-color: #fff;
   --bs-border-color-translucent: rgba(255, 255, 255, 0.25);
