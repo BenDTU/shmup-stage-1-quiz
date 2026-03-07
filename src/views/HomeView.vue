@@ -1,26 +1,11 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useQuiz } from '@/composables/useQuiz'
-import { games } from '@/data/games'
+import { totalSongs, totalShmups } from '@/data/games'
 import type { QuizMode } from '@/types'
 
 const router = useRouter()
 const { startQuiz } = useQuiz()
-
-const totalShmups = games.length
-
-function countSongs(): number {
-    let count = 0
-    for (const game of games) {
-        const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource]
-        for (const source of sources) {
-            count += 'arrangements' in source ? source.arrangements.length : 1
-        }
-    }
-    return count
-}
-
-const totalSongs = countSongs()
 
 function begin(mode: QuizMode) {
     startQuiz(mode)
@@ -68,7 +53,7 @@ function begin(mode: QuizMode) {
                     </button>
                 </div>
                 <p class="text-muted small mb-2">
-                    There are currently {{ totalSongs }} songs from {{ totalShmups }} shmups loaded in this quiz
+                    There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups loaded in this quiz
                 </p>
                 <div>
                     <RouterLink to="/song-list">
