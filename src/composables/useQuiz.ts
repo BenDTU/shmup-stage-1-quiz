@@ -61,8 +61,8 @@ const usedGameIds = computed<Set<number>>(
     () => new Set(state.questions.slice(0, state.currentIndex).map((g) => g.id)),
 )
 
-// The series whose last appearance in the quiz was just answered (while the result is being shown), or null
-// Only triggers when the series limit was actually hit (i.e. the quiz contains SERIES_LIMIT songs from that series)
+// The series whose last appearance in the quiz was just answered (while the result is being shown), or null.
+// Only triggers when the series limit was actually hit (i.e. the quiz contains SERIES_LIMIT songs from that series).
 const seriesJustCompleted = computed<Series | null>(() => {
     if (!state.isAnswered) return null
     const currentQuestion = state.questions[state.currentIndex]
