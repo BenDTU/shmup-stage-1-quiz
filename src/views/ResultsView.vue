@@ -37,7 +37,7 @@ function playAgain() {
                         </p>
                         <p class="text-muted small mb-3">
                             Mode: <span
-                                class="badge"
+                                class="badge align-middle"
                                 :class="state.mode === 'novice' ? 'bg-success' : 'bg-danger'"
                             >{{ state.mode === 'novice' ? 'Novice' : 'Advanced' }}</span>
                         </p>
