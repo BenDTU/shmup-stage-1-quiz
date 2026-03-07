@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue'
+import { quotes } from '../constants/quotes'
 
 const props = defineProps<{
     videoId: string
@@ -65,6 +66,12 @@ onUnmounted(() => {
     clearStopTimer()
 })
 
+function pickRandomQuote(): string {
+    return quotes[Math.floor(Math.random() * quotes.length)]!
+}
+
+const currentQuote = ref(pickRandomQuote())
+
 // Start the first video playing silently so the player is active
 // by the time the user clicks Play.
 onMounted(() => {
@@ -79,6 +86,7 @@ onMounted(() => {
 // • Otherwise reload the iframe for a fresh muted-autoplay start.
 watch(() => props.videoId, () => {
     clearStopTimer()
+    currentQuote.value = pickRandomQuote()
     if (audioUnlocked.value) {
         sendCommand('loadVideoById', [props.videoId, props.startTime ?? 0])
         scheduleStop()
@@ -153,7 +161,7 @@ function onRestartAnimationEnd() {
                 <i class="bi bi-music-note-beamed" /> Now Playing…
             </p>
             <p class="mb-2 text-muted small">
-                Listen carefully and enter your guess below!
+                {{ currentQuote }}
             </p>
             <button
                 class="btn btn-outline-light btn-sm"
