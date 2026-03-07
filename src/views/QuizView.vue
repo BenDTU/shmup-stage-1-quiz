@@ -6,6 +6,7 @@ import AutocompleteInput from '../components/AutocompleteInput.vue'
 import NoviceOptions from '../components/NoviceOptions.vue'
 import { useQuiz } from '../composables/useQuiz'
 import { guessedGameName } from '../functions'
+import { games } from '../data/games'
 
 const router = useRouter()
 const { state, isFinished, usedGameIds, seriesLimitedGameIds, submitGuess, nextQuestion } = useQuiz()
@@ -42,6 +43,15 @@ onMounted(() => {
 
 const currentQuestion = computed(() => state.questions[state.currentIndex])
 const questionNumber = computed(() => state.currentIndex + 1)
+
+const isAlmostCorrect = computed(() => {
+    const answerId = state.answers[state.currentIndex]
+    if (!answerId || answerId === -1) return false
+    const correctSeries = currentQuestion.value?.series
+    if (correctSeries === undefined) return false
+    const guessedGame = games.find((g) => g.id === answerId)
+    return guessedGame?.series === correctSeries
+})
 
 // Only allow submitting a guess that corresponds to an available game in the pool
 const isValidGuess = computed(() => {
@@ -220,7 +230,7 @@ async function handleNextClick(event: MouseEvent) {
                                     <i class="bi bi-check-circle-fill text-success me-1" /> <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
                                 </span>
                                 <span v-else>
-                                    <i class="bi bi-x-circle-fill text-danger me-1" /> <strong>Incorrect.</strong> The song was
+                                    <i class="bi bi-x-circle-fill text-danger me-1" /> <strong>{{ isAlmostCorrect ? 'Almost!' : 'Incorrect.' }}</strong> The song was
                                     <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
                                     You guessed: <em>{{ guessedGameName(state.answers[state.currentIndex]!) }}</em>.
                                 </span>
