@@ -32,8 +32,7 @@ function playAgain() {
                         <h1 class="display-5 mb-3 fw-bold">
                             Quiz Complete! <i class="bi bi-trophy-fill" />
                         </h1>
-                        <p class="text-muted mb-3 d-flex align-items-center justify-content-center gap-2">
-                            <span>Mode:</span>
+                        <p class="text-muted mb-3">
                             <span
                                 class="badge"
                                 :class="state.mode === 'novice' ? 'bg-success' : 'bg-danger'"
