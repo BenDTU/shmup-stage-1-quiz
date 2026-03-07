@@ -177,7 +177,7 @@ async function handleNextClick(event: MouseEvent) {
                             :answered-id="state.answers[state.currentIndex]"
                             :song-name="currentQuestion.songName"
                             :source="currentQuestion.source"
-                            class="mb-3"
+                            :class="state.isAnswered ? 'mb-4' : 'mb-0'"
                             @submit="handleNoviceSubmit"
                         />
 
