@@ -140,20 +140,6 @@ async function handleNextClick(event: MouseEvent) {
                     />
                 </div>
 
-                <!-- Series completion message -->
-                <div
-                    v-if="seriesJustCompleted"
-                    class="alert mb-3"
-                    :class="seriesJustCompletedMajorityCorrect ? 'alert-success' : 'alert-warning'"
-                >
-                    <template v-if="seriesJustCompletedMajorityCorrect">
-                        <i class="bi bi-star-fill me-1" /> Nice work on the <strong>{{ seriesNames[seriesJustCompleted] }}</strong> series! No more {{ seriesNames[seriesJustCompleted] }} songs in this quiz.
-                    </template>
-                    <template v-else>
-                        <i class="bi bi-info-circle-fill me-1" /> That's the last of the <strong>{{ seriesNames[seriesJustCompleted] }}</strong> songs for this quiz. Better luck with the rest!
-                    </template>
-                </div>
-
                 <!-- Guess form -->
                 <div
                     v-show="audioUnlocked"
@@ -205,6 +191,17 @@ async function handleNextClick(event: MouseEvent) {
                                     You guessed: <em>{{ guessedGameName(state.answers[state.currentIndex]!) }}</em>.
                                 </span>
                             </div>
+                            <p
+                                v-if="seriesJustCompleted && !isFinished"
+                                class="text-muted small mb-2"
+                            >
+                                <template v-if="seriesJustCompletedMajorityCorrect">
+                                    <i class="bi bi-star-fill me-1" /> Nice work on the <strong>{{ seriesNames[seriesJustCompleted] }}</strong> series! No more {{ seriesNames[seriesJustCompleted] }} songs in this quiz.
+                                </template>
+                                <template v-else>
+                                    <i class="bi bi-info-circle-fill me-1" /> That's the last of the <strong>{{ seriesNames[seriesJustCompleted] }}</strong> songs for this quiz. Better luck with the rest!
+                                </template>
+                            </p>
                             <button
                                 ref="nextBtn"
                                 class="btn btn-success w-100"

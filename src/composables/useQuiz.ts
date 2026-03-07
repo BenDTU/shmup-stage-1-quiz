@@ -61,17 +61,17 @@ const usedGameIds = computed<Set<number>>(
     () => new Set(state.questions.slice(0, state.currentIndex).map((g) => g.id)),
 )
 
-// The series whose last appearance in the quiz was just answered (i.e. we just moved past it), or null
+// The series whose last appearance in the quiz was just answered (while the result is being shown), or null
 const seriesJustCompleted = computed<Series | null>(() => {
-    if (state.isAnswered || state.currentIndex === 0) return null
-    const previousQuestion = state.questions[state.currentIndex - 1]
-    if (!previousQuestion?.series) return null
-    const series = previousQuestion.series
+    if (!state.isAnswered) return null
+    const currentQuestion = state.questions[state.currentIndex]
+    if (!currentQuestion?.series) return null
+    const series = currentQuestion.series
     const lastIndexOfSeries = state.questions.reduce<number>(
         (maxIdx, q, i) => (q.series === series ? i : maxIdx),
         -1,
     )
-    return lastIndexOfSeries === state.currentIndex - 1 ? series : null
+    return lastIndexOfSeries === state.currentIndex ? series : null
 })
 
 // Whether the user got more than half the questions from the just-completed series correct
@@ -80,7 +80,7 @@ const seriesJustCompletedMajorityCorrect = computed<boolean>(() => {
     if (!series) return false
     let correct = 0
     let total = 0
-    for (let i = 0; i < state.currentIndex; i++) {
+    for (let i = 0; i <= state.currentIndex; i++) {
         if (state.questions[i]?.series === series) {
             total++
             if (state.answers[i] === state.questions[i]?.id) correct++
