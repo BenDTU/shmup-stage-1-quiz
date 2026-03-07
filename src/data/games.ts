@@ -275,7 +275,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Ironclad',
-        songSource: { songName: 'Theme of Super Iron Brikinger', videoId: 'an9E8DuCAg8' },
+        songSource: { songName: "Theme of Super Iron Brikin'ger", videoId: 'an9E8DuCAg8' },
     },
     {
         name: 'Jamestown',
@@ -544,16 +544,22 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Simulation Level 01 (Launch Base)', videoId: 'C4DFwgSpO00' },
     },
     {
-        name: 'RayCrisis',
-        songSource: { songName: 'Lavande Bleu', videoId: 'bCBXUBBZVDU' },
-    },
-    {
         name: 'RayForce',
+        sortName: 'Rayforce 1',
+        alias: ['Layer Section', 'Galactic Attack', 'Gunlock'],
         songSource: { songName: 'Penetration', videoId: '234tjx8yO1I' },
     },
     {
         name: 'RayStorm',
+        sortName: 'Rayforce 2',
+        alias: 'Layer Section II',
         songSource: { songName: 'Geometric City', videoId: 'kP5huZQRAY4' },
+    },
+    {
+        name: 'RayCrisis',
+        sortName: 'Rayforce 3',
+        alias: 'RayCrisis: Series Termination',
+        songSource: { songName: 'Lavande Bleu', videoId: 'bCBXUBBZVDU' },
     },
     {
         name: 'RefleX',
@@ -838,7 +844,7 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Go Straight Ahead', videoId: 'GUILDdRfmxw' },
     },
     {
-        name: 'X-Multiply',
+        name: 'X Multiply',
         songSource: { songName: 'Into the Human Body', videoId: 'MwwduquIWIo' },
     },
     {
