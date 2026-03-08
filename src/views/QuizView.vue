@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
 import AutocompleteInput from '../components/AutocompleteInput.vue'
 import NoviceOptions from '../components/NoviceOptions.vue'
+import AnswerFeedback from '../components/AnswerFeedback.vue'
 import { useQuiz } from '../composables/useQuiz'
 import { guessedGameName } from '../functions'
 import { games } from '../data/games'
@@ -169,20 +170,10 @@ async function handleNextClick(event: MouseEvent) {
                         </h5>
 
                         <!-- Novice mode: correct/incorrect alert (above options, shown when answered) -->
-                        <div
+                        <AnswerFeedback
                             v-if="state.mode === 'novice' && state.isAnswered"
-                            class="alert mb-3"
-                            :class="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex] ? 'alert-success' : 'alert-danger'"
-                        >
-                            <div v-if="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]" class="d-flex">
-                                <span class="me-1 text-nowrap"><i class="bi bi-check-circle-fill text-success" /></span>
-                                <span><strong>Correct!</strong></span>
-                            </div>
-                            <div v-else class="d-flex">
-                                <span class="me-1 text-nowrap"><i class="bi bi-x-circle-fill text-danger" /></span>
-                                <span><strong>Incorrect.</strong></span>
-                            </div>
-                        </div>
+                            :is-correct="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]"
+                        />
 
                         <!-- Novice mode: 4 option buttons -->
                         <NoviceOptions
@@ -228,22 +219,16 @@ async function handleNextClick(event: MouseEvent) {
                         <!-- Result section (answered state) -->
                         <template v-if="state.isAnswered">
                             <!-- Advanced mode: correct/incorrect alert -->
-                            <div
+                            <AnswerFeedback
                                 v-if="state.mode === 'advanced'"
-                                class="alert mb-3"
-                                :class="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex] ? 'alert-success' : 'alert-danger'"
-                            >
-                                <div v-if="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]" class="d-flex">
-                                    <span class="me-1 text-nowrap"><i class="bi bi-check-circle-fill text-success" /></span>
-                                    <span><strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.</span>
-                                </div>
-                                <div v-else class="d-flex">
-                                    <span class="me-1 text-nowrap"><i class="bi bi-x-circle-fill text-danger" /></span>
-                                    <span><strong>{{ isAlmostCorrect ? 'Almost!' : 'Incorrect.' }}</strong> The song was
-                                    <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
-                                    You guessed: <em>{{ guessedGameName(state.answers[state.currentIndex]!) }}</em>.</span>
-                                </div>
-                            </div>
+                                :is-correct="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]"
+                                :is-almost-correct="isAlmostCorrect"
+                                :show-details="true"
+                                :song-name="currentQuestion.songName"
+                                :game-name="currentQuestion.name"
+                                :source="currentQuestion.source"
+                                :guessed-name="guessedGameName(state.answers[state.currentIndex]!)"
+                            />
                             <p
                                 v-if="seriesJustCompleted && !isFinished"
                                 class="text-muted small mb-2"
