@@ -25,7 +25,7 @@ const label = computed(() => {
         :class="isCorrect ? 'alert-success' : 'alert-danger'"
     >
         <div class="d-flex">
-            <span class="me-1 text-nowrap"><i :class="iconClass" /></span>
+            <span class="me-2 text-nowrap"><i :class="iconClass" /></span>
             <span>
                 <strong>{{ label }}</strong>
                 <template v-if="details">
