@@ -21,7 +21,7 @@ function begin(mode: QuizMode) {
                     Shmup Stage 1 Quiz
                 </h1>
                 <p class="lead mb-5">
-                    Think you know your shmups? How many can you pick from their stage 1 song? Test your knowledge with a random set of <strong>20</strong> tracks.
+                    Think you know your shmups? How many can you pick from their stage 1 song? Test your knowledge with a random set of <strong class="fw-bold">20</strong> tracks.
                 </p>
                 <h2 class="h5 mb-3">
                     Choose your Difficulty
