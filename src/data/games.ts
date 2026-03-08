@@ -385,6 +385,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Front Line on the Earth', videoId: 'IexMUkiPg-M' },
     },
     {
+        name: 'QP Shooting - Dangerous!!',
+        songSource: { songName: 'Lucky Star', videoId: 'xOcPTLBEWGY' },
+    },
+    {
         name: 'R-Type',
         series: Series.RType,
         songSource: {
@@ -647,6 +651,11 @@ const gameEntries: GameEntry[] = [
         alias: ['Sonic Wings Limited', 'Aero Fighters Special'],
         series: Series.SonicWings,
         songSource: { songName: 'Japan stage', videoId: 'sXCTZsRJ6y8' },
+    },
+    {
+        name: "Space Invaders '91",
+        series: Series.SpaceInvaders,
+        songSource: { songName: 'Round 1 & 9', videoId: 'hicMw4XOMSQ' },
     },
     {
         name: 'Space Invaders (1999)',
