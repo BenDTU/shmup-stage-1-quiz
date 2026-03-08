@@ -8,7 +8,6 @@ import AnswerFeedback from '../components/AnswerFeedback.vue'
 import { useQuiz } from '../composables/useQuiz'
 import { guessedGameName } from '../functions'
 import { games } from '../data/games'
-import { seriesNames } from '../types'
 
 const router = useRouter()
 const { state, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, submitGuess, nextQuestion } = useQuiz()
@@ -239,10 +238,10 @@ async function handleNextClick(event: MouseEvent) {
                             >
                                 <i class="bi bi-info-circle-fill me-1" /> 
                                 <template v-if="seriesJustCompletedMajorityCorrect">
-                                    That's the last <strong>{{ seriesNames[seriesJustCompleted] }}</strong> song you'll hear this quiz.
+                                    That's the last <strong>{{ seriesJustCompleted }}</strong> song you'll hear this quiz.
                                 </template>
                                 <template v-else>
-                                    Don't worry - that's the last <strong>{{ seriesNames[seriesJustCompleted] }}</strong> song you'll hear this quiz.
+                                    Don't worry - that's the last <strong>{{ seriesJustCompleted }}</strong> song you'll hear this quiz.
                                 </template>
                             </p>
                             <button
