@@ -30,7 +30,7 @@ const label = computed(() => {
                 <strong>{{ label }}</strong>
                 <template v-if="details">
                     The song was <em>{{ details.songName }} from {{ details.gameName }}</em><template v-if="details.source"> ({{ details.source }} version)</template>.
-                    <template v-if="!isCorrect">
+                    <template v-if="!isCorrect && details.guessedName">
                         You guessed: <em>{{ details.guessedName }}</em>.
                     </template>
                 </template>
