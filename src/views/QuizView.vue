@@ -222,12 +222,13 @@ async function handleNextClick(event: MouseEvent) {
                             <AnswerFeedback
                                 v-if="state.mode === 'advanced'"
                                 :is-correct="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]"
-                                :is-almost-correct="isAlmostCorrect"
-                                :show-details="true"
-                                :song-name="currentQuestion.songName"
-                                :game-name="currentQuestion.name"
-                                :source="currentQuestion.source"
-                                :guessed-name="guessedGameName(state.answers[state.currentIndex]!)"
+                                :details="{
+                                    isAlmostCorrect,
+                                    songName: currentQuestion.songName,
+                                    gameName: currentQuestion.name,
+                                    source: currentQuestion.source,
+                                    guessedName: guessedGameName(state.answers[state.currentIndex]!),
+                                }"
                             />
                             <p
                                 v-if="seriesJustCompleted && !isFinished"
