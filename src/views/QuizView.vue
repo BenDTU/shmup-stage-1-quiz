@@ -45,6 +45,7 @@ onMounted(() => {
 
 const currentQuestion = computed(() => state.questions[state.currentIndex])
 const questionNumber = computed(() => state.currentIndex + 1)
+const isCurrentAnswerCorrect = computed(() => state.questions[state.currentIndex]?.id === state.answers[state.currentIndex])
 
 const isAlmostCorrect = computed(() => {
     const answerId = state.answers[state.currentIndex]
@@ -54,6 +55,14 @@ const isAlmostCorrect = computed(() => {
     const guessedGame = games.find((g) => g.id === answerId)
     return guessedGame?.series === correctSeries
 })
+
+const advancedFeedbackDetails = computed(() => ({
+    isAlmostCorrect: isAlmostCorrect.value,
+    songName: currentQuestion.value?.songName ?? '',
+    gameName: currentQuestion.value?.name ?? '',
+    source: currentQuestion.value?.source,
+    guessedName: guessedGameName(state.answers[state.currentIndex]!),
+}))
 
 // Only allow submitting a guess that corresponds to an available game in the pool
 const isValidGuess = computed(() => {
@@ -172,7 +181,7 @@ async function handleNextClick(event: MouseEvent) {
                         <!-- Novice mode: correct/incorrect alert (above options, shown when answered) -->
                         <AnswerFeedback
                             v-if="state.mode === 'novice' && state.isAnswered"
-                            :is-correct="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]"
+                            :is-correct="isCurrentAnswerCorrect"
                         />
 
                         <!-- Novice mode: 4 option buttons -->
@@ -221,14 +230,8 @@ async function handleNextClick(event: MouseEvent) {
                             <!-- Advanced mode: correct/incorrect alert -->
                             <AnswerFeedback
                                 v-if="state.mode === 'advanced'"
-                                :is-correct="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]"
-                                :details="{
-                                    isAlmostCorrect,
-                                    songName: currentQuestion.songName,
-                                    gameName: currentQuestion.name,
-                                    source: currentQuestion.source,
-                                    guessedName: guessedGameName(state.answers[state.currentIndex]!),
-                                }"
+                                :is-correct="isCurrentAnswerCorrect"
+                                :details="advancedFeedbackDetails"
                             />
                             <p
                                 v-if="seriesJustCompleted && !isFinished"
