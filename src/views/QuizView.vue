@@ -174,12 +174,14 @@ async function handleNextClick(event: MouseEvent) {
                             class="alert mb-3"
                             :class="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex] ? 'alert-success' : 'alert-danger'"
                         >
-                            <span v-if="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]">
-                                <i class="bi bi-check-circle-fill text-success me-1" /> <strong>Correct!</strong>
-                            </span>
-                            <span v-else>
-                                <i class="bi bi-x-circle-fill text-danger me-1" /> <strong>Incorrect.</strong>
-                            </span>
+                            <div v-if="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]" class="d-flex">
+                                <span class="me-1 text-nowrap"><i class="bi bi-check-circle-fill text-success" /></span>
+                                <span><strong>Correct!</strong></span>
+                            </div>
+                            <div v-else class="d-flex">
+                                <span class="me-1 text-nowrap"><i class="bi bi-x-circle-fill text-danger" /></span>
+                                <span><strong>Incorrect.</strong></span>
+                            </div>
                         </div>
 
                         <!-- Novice mode: 4 option buttons -->
@@ -231,14 +233,16 @@ async function handleNextClick(event: MouseEvent) {
                                 class="alert mb-3"
                                 :class="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex] ? 'alert-success' : 'alert-danger'"
                             >
-                                <span v-if="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]">
-                                    <i class="bi bi-check-circle-fill text-success me-1" /> <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
-                                </span>
-                                <span v-else>
-                                    <i class="bi bi-x-circle-fill text-danger me-1" /> <strong>{{ isAlmostCorrect ? 'Almost!' : 'Incorrect.' }}</strong> The song was
+                                <div v-if="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]" class="d-flex">
+                                    <span class="me-1 text-nowrap"><i class="bi bi-check-circle-fill text-success" /></span>
+                                    <span><strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.</span>
+                                </div>
+                                <div v-else class="d-flex">
+                                    <span class="me-1 text-nowrap"><i class="bi bi-x-circle-fill text-danger" /></span>
+                                    <span><strong>{{ isAlmostCorrect ? 'Almost!' : 'Incorrect.' }}</strong> The song was
                                     <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
-                                    You guessed: <em>{{ guessedGameName(state.answers[state.currentIndex]!) }}</em>.
-                                </span>
+                                    You guessed: <em>{{ guessedGameName(state.answers[state.currentIndex]!) }}</em>.</span>
+                                </div>
                             </div>
                             <p
                                 v-if="seriesJustCompleted && !isFinished"
