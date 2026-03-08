@@ -37,7 +37,7 @@ const hoveredGame = ref<string | null>(null)
                     Song List
                 </h1>
                 <p class="text-center text-muted mb-4">
-                    There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups.
+                    There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups loaded in!
                 </p>
                 <div class="table-responsive">
                     <table class="table align-middle">
