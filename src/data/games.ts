@@ -645,6 +645,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Sonic Wings Special',
         alias: ['Sonic Wings Limited', 'Aero Fighters Special'],
+        series: Series.SonicWings,
         songSource: { songName: 'Japan stage', videoId: 'sXCTZsRJ6y8' },
     },
     {
@@ -961,7 +962,7 @@ export const noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
         alias: ['Aero Fighters Reunion'],
         series: Series.SonicWings,
         songSource: { songName: 'Abu Dhabi, UAE stage' },
-    }
+    },
 ]
 
 export const games: GameEntryWithId[] = gameEntries.map((entry, index) => ({ ...entry, id: index + 1 }))
