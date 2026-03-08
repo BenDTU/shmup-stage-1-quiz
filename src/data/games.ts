@@ -722,7 +722,7 @@ const gameEntries: GameEntry[] = [
         alias: ['Firepower 2000', 'Mega SWIV'],
         songSource: [
             { songName: 'Stage 1', arrangements: [{ source: 'Super Nintendo', videoId: 't5IEOuoVOYo' }] },
-            { songName: 'Stage 1 & 6', arrangements: [{ source: 'Genesis', videoId: 'fSoAOxs5ZCk' }] },
+            { songName: 'Stage 1 & 6', arrangements: [{ source: 'Mega Drive', videoId: 'fSoAOxs5ZCk' }] },
         ],
     },
     {
@@ -888,12 +888,12 @@ const gameEntries: GameEntry[] = [
             songName: 'Open Your Eyes',
             arrangements: [
                 {
-                    source: 'Mega Drive',
-                    videoId: 'heMdH4ne0JQ',
-                },
-                {
                     source: 'Arcade',
                     videoId: 'u9GfzfjAFNo',
+                },
+                {
+                    source: 'Mega Drive',
+                    videoId: 'heMdH4ne0JQ',
                 },
                 {
                     source: 'PC Engine',
