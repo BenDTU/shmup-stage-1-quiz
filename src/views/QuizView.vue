@@ -168,6 +168,22 @@ async function handleNextClick(event: MouseEvent) {
                             Which game is this stage 1 theme from?
                         </h5>
 
+                        <!-- Novice mode: correct/incorrect alert (above options, shown when answered) -->
+                        <div
+                            v-if="state.mode === 'novice' && state.isAnswered"
+                            class="alert mb-3"
+                            :class="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex] ? 'alert-success' : 'alert-danger'"
+                        >
+                            <div v-if="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]" class="d-flex">
+                                <span class="me-1 text-nowrap"><i class="bi bi-check-circle-fill text-success" /></span>
+                                <span><strong>Correct!</strong></span>
+                            </div>
+                            <div v-else class="d-flex">
+                                <span class="me-1 text-nowrap"><i class="bi bi-x-circle-fill text-danger" /></span>
+                                <span><strong>Incorrect.</strong></span>
+                            </div>
+                        </div>
+
                         <!-- Novice mode: 4 option buttons -->
                         <NoviceOptions
                             v-if="state.mode === 'novice'"
@@ -211,20 +227,21 @@ async function handleNextClick(event: MouseEvent) {
 
                         <!-- Result section (answered state) -->
                         <template v-if="state.isAnswered">
-                            <!-- Correct/incorrect alert -->
+                            <!-- Advanced mode: correct/incorrect alert -->
                             <div
+                                v-if="state.mode === 'advanced'"
                                 class="alert mb-3"
                                 :class="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex] ? 'alert-success' : 'alert-danger'"
                             >
                                 <div v-if="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]" class="d-flex">
                                     <span class="me-1 text-nowrap"><i class="bi bi-check-circle-fill text-success" /></span>
-                                    <span><strong>Correct!</strong><template v-if="state.mode === 'advanced'"> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.</template></span>
+                                    <span><strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.</span>
                                 </div>
                                 <div v-else class="d-flex">
                                     <span class="me-1 text-nowrap"><i class="bi bi-x-circle-fill text-danger" /></span>
-                                    <span><strong>{{ isAlmostCorrect ? 'Almost!' : 'Incorrect.' }}</strong><template v-if="state.mode === 'advanced'"> The song was
+                                    <span><strong>{{ isAlmostCorrect ? 'Almost!' : 'Incorrect.' }}</strong> The song was
                                     <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
-                                    You guessed: <em>{{ guessedGameName(state.answers[state.currentIndex]!) }}</em>.</template></span>
+                                    You guessed: <em>{{ guessedGameName(state.answers[state.currentIndex]!) }}</em>.</span>
                                 </div>
                             </div>
                             <p
