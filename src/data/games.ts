@@ -607,6 +607,46 @@ const gameEntries: GameEntry[] = [
         name: 'Silver Surfer',
         songSource: { songName: 'Stage BGM 1', videoId: 'BGNSHNf-nlU' },
     },
+    // Sonic Wings 1-3 released in English as Aero Fighters, but series has since gone to using the Sonic Wings brand universally - will use this across the board for consistency.
+    {
+        name: 'Sonic Wings',
+        alias: ['Aero Fighters'],
+        series: Series.SonicWings,
+        songSource: [
+            { songName: 'New York, USA stage', videoId: 'O8TqZpvmcaw' },
+            { songName: 'Tokyo, Japan stage', videoId: 'S8ckubBlgkc' },
+            { songName: 'The Alps, Sweden stage', videoId: 'onjC2AbOaf8' },
+            { songName: 'Dover, England stage', videoId: 'CzH-9UCtfCw' },
+        ],
+    },
+    {
+        name: 'Sonic Wings (Super Nintendo)',
+        alias: ['Aero Fighters'],
+        series: Series.SonicWings,
+        songSource: [
+            { songName: 'New York, USA stage', videoId: 'DoNQbck9w4U' },
+            { songName: 'Tokyo, Japan stage', videoId: 'EeIRCfIkmYQ' },
+            { songName: 'The Alps, Sweden stage', videoId: 'xT_DYRoxgo8' },
+            { songName: 'Dover, England stage', videoId: 'XdYZsgvmlRQ' },
+        ],
+    },
+    {
+        name: 'Sonic Wings 2',
+        alias: ['Aero Fighters 2'],
+        series: Series.SonicWings,
+        songSource: { songName: 'Japan stage', videoId: 'pOD8u68tauY' },
+    },
+    {
+        name: 'Sonic Wings 3',
+        alias: ['Aero Fighters 3'],
+        series: Series.SonicWings,
+        songSource: { songName: 'Dirty City', videoId: 'iaa-1mR60No' },
+    },
+    {
+        name: 'Sonic Wings Special',
+        alias: ['Sonic Wings Limited', 'Aero Fighters Special'],
+        songSource: { songName: 'Japan stage', videoId: 'sXCTZsRJ6y8' },
+    },
     {
         name: 'Space Invaders (1999)',
         series: Series.SpaceInvaders,
@@ -916,6 +956,12 @@ export const noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
         series: Series.Zeal,
         songSource: { songName: 'Typhoon #12' },
     },
+    {
+        name: 'Sonic Wings Reunion',
+        alias: ['Aero Fighters Reunion'],
+        series: Series.SonicWings,
+        songSource: { songName: 'Abu Dhabi, UAE stage' },
+    }
 ]
 
 export const games: GameEntryWithId[] = gameEntries.map((entry, index) => ({ ...entry, id: index + 1 }))
