@@ -9,23 +9,10 @@ export enum Series {
     RType = 'R-Type',
     Raiden = 'Raiden',
     Strikers1945 = 'Strikers 1945',
+    SonicWings = 'Sonic Wings',
     SpaceInvaders = 'Space Invaders',
     Touhou = 'Touhou',
     Zeal = 'Zeal',
-}
-
-export const seriesNames: Record<Series, string> = {
-    [Series.CastleOfShikigami]: 'Castle of Shikigami',
-    [Series.Darius]: 'Darius',
-    [Series.Dodonpachi]: 'Dodonpachi',
-    [Series.Gradius]: 'Gradius',
-    [Series.Macross]: 'Macross',
-    [Series.RType]: 'R-Type',
-    [Series.Raiden]: 'Raiden',
-    [Series.Strikers1945]: 'Strikers 1945',
-    [Series.SpaceInvaders]: 'Space Invaders',
-    [Series.Touhou]: 'Touhou',
-    [Series.Zeal]: 'Zeal',
 }
 
 export interface SongArrangement {
