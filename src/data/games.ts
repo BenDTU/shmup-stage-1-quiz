@@ -12,6 +12,10 @@ export type { SongEntry, GameEntry, GameListEntry, Game, NoSoundTrackGameEntry }
 // startTime (seconds) is optional; omit it to start from the beginning of the video.
 const gameEntries: GameEntry[] = [
     {
+        name: 'Air Zonk',
+        songSource: { songName: 'Stage 1', videoId: '9IJcqceH3CM' },
+    },
+    {
         name: 'Armed Police Batrider',
         songSource: { songName: 'Easy to Go', videoId: 'UFc72Qz3S34' },
     },
@@ -32,12 +36,21 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Fly to the Leaden Sky', videoId: 'Szr0TSXcWok' },
     },
     {
+        name: 'Biohazard Battle',
+        songSource: { songName: 'Stage 1 & 8', videoId: 'oInjf0-talM' },
+    },
+    {
         name: 'BioMetal (JP)',
         songSource: { songName: 'Dark Clouds', videoId: 'DMhmwXbPcYg' },
     },
     {
         name: 'BioMetal (US)',
         songSource: { songName: 'Twilight Zone', videoId: '6N3Bfm057xM' },
+    },
+    {
+        name: 'Blazing Lazers',
+        alias: 'Gunhead',
+        songSource: { songName: 'Area 1', videoId: 'im7qZmxOSUI' },
     },
     {
         name: 'Blazing Star',
@@ -64,6 +77,10 @@ const gameEntries: GameEntry[] = [
         alias: ['Castle of Shikigami III'],
         series: Series.CastleOfShikigami,
         songSource: { songName: 'In the Heavens', videoId: 'dKjPet2iESs' },
+    },
+    {
+        name: 'Cho Ren Sha 68K',
+        songSource: { songName: 'Planet the E.A.R.T.H', videoId: 'aT3z4k1BlDg' },
     },
     {
         name: 'Crimzon Clover',
@@ -243,6 +260,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Gale in the Desert', videoId: 'JjsSvAsxTxY' },
     },
     {
+        name: 'Gun Nac',
+        songSource: { songName: 'Area 1', videoId: 'LSrJYxcYRPs' },
+    },
+    {
         name: 'Gunnail',
         songSource: { songName: 'Stage 1 & 2', videoId: 'hpzlZb-z7Kc', startTime: 97, endTime: 524 },
     },
@@ -325,7 +346,9 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Theme of Z (Part 2)', videoId: 'uHktcVQgXys' },
     },
     {
-        name: 'MUSHA',
+        name: 'M.U.S.H.A.: Metallic Uniframe Super Hybrid Armor',
+        alias: 'Musha Aleste: Full Metal Fighter Ellinor',
+        sortName: 'MUSHA',
         songSource: { songName: 'Fullmetal Fighter', videoId: '0MIqgHu3tsg' },
     },
     {
@@ -353,6 +376,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Setting Off Together', videoId: '2qoyJbieTOc' },
     },
     {
+        name: 'Parodius Da!',
+        songSource: { songName: 'Stage 1', videoId: 'IvCOyEYL6oI' },
+    },
+    {
         name: 'PD Ultraman Invader',
         songSource: { songName: 'Ultraman', videoId: 'UD8ILryBKPY' },
     },
@@ -367,6 +394,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Plus Alpha',
         songSource: { songName: 'Wind Dancer', videoId: 'SdHAikpTE2w', startTime: 120, endTime: 207 },
+    },
+    {
+        name: "Pop'n Twinbee",
+        songSource: { songName: 'Village Sky', videoId: 'AGt-RJr-khA' },
     },
     {
         name: 'Progear no Arashi',
@@ -753,6 +784,14 @@ const gameEntries: GameEntry[] = [
         ]
     },
     {
+        name: "Summer Carnival '92 Recca",
+        songSource: { songName: 'Jetter', videoId: 'tYg-HtcobKY' },
+    },
+    {
+        name: 'Super Aleste',
+        songSource: { songName: 'Stage 1', videoId: 'C--eV-L3gfE' },
+    },
+    {
         name: 'Super R-Type',
         series: Series.RType,
         songSource: { songName: 'Super Sortie', videoId: 'YuGRrVMLkxk' },
@@ -901,6 +940,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Tyrian',
         songSource: { songName: 'Tyrian , the level', videoId: 'wNnTGbbDJfo' },
+    },
+    {
+        name: 'U.N. Squadron',
+        songSource: { songName: 'Oil Field', videoId: 'DZnMcxaTI5Q' },
     },
     {
         name: 'Viper Phase 1',
