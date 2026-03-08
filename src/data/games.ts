@@ -111,7 +111,11 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Deathsmiles',
-        songSource: { songName: 'Burning Halloween Town - Stage A-1', videoId: 'LI3Z5UqqlrQ' },
+        songSource: [
+            { songName: 'Burning Halloween Town - Stage A-1', videoId: 'NMwYXwclFN4' },
+            { songName: 'Fury Of The Gravekeepers - Stage B-1', videoId: 'zGcGQUryyPc' },
+            { songName: 'Disturbance At The Lakeshore - Stage C-1', videoId: 'LUtn9Kqkakc' },
+        ],
     },
     {
         name: 'Deltazeal',
