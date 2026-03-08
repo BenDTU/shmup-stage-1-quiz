@@ -59,6 +59,14 @@ export type NoSoundTrackGameEntry = GameEntryBase & {
 
 export type GameListEntry = { id: number; name: string; alias?: string | string[]; series?: Series }
 
+export interface AdvancedFeedbackDetails {
+    isAlmostCorrect?: boolean
+    songName: string
+    gameName: string
+    source?: string
+    guessedName?: string
+}
+
 export type Game = {
     name: string
     alias?: string | string[] // optional alternative name(s) carried through from the game entry
