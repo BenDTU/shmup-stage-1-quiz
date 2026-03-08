@@ -386,7 +386,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'QP Shooting - Dangerous!!',
-        songSource: { songName: 'Lucky Star', videoId: 'OcPTLBEWGY' },
+        songSource: { songName: 'Lucky Star', videoId: 'xOcPTLBEWGY' },
     },
     {
         name: 'R-Type',
