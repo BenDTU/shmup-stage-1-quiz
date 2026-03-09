@@ -28,6 +28,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Unkai', videoId: 'pTQ_jezNUxE' },
     },
     {
+        name: 'Batsugun',
+        songSource: { songName: 'Heart Beat', videoId: 'cHXIKk-5o_0' },
+    },
+    {
         name: 'Battle Bakraid',
         songSource: { songName: 'Sky Gunner', videoId: 'gb39c-VlJkA' },
     },
@@ -208,6 +212,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Ex-Calibre',
         songSource: { songName: "Cruisin'", videoId: 'ddJJ_geDcYU' },
+    },
+    {
+        name: 'Explosive Breaker',
+        songSource: { songName: 'Stage 1, 3-2', videoId: '69wGmxanW20' },
     },
     {
         name: 'G-Darius',
