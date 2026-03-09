@@ -105,7 +105,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Darius',
         series: Series.Darius,
-        songSource: { songName: 'CAPTAIN NEO', videoId: 'a_GP2FBiK2o' },
+        songSource: { songName: 'Captain Neo', videoId: 'a_GP2FBiK2o' },
     },
     {
         name: 'Darius II',
@@ -128,7 +128,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Darius Gaiden',
         series: Series.Darius,
-        songSource: { songName: 'VISIONNERZ ~HALLUCINATED PEOPLE~', videoId: 'kG30WhHCnN4' },
+        songSource: { songName: 'Visionnerz ~Hallucinated People~', videoId: 'kG30WhHCnN4' },
     },
     {
         name: 'Dariusburst',
@@ -215,9 +215,9 @@ const gameEntries: GameEntry[] = [
     {
         name: 'ESP Ra.De.',
         songSource: [
-            { songName: 'DESPERATE SCHOOL (STAGE-A)', videoId: 'P3_U1wyESiA' },
-            { songName: 'NIGHTMARE (STAGE-B)', videoId: 'ZoxoMoDZ-0A' },
-            { songName: 'ACT IN JUDGE (STAGE-C)', videoId: 'q8s0A1R_c6k' },
+            { songName: 'Desperate School (Stage-A)', videoId: 'P3_U1wyESiA' },
+            { songName: 'Nightmare (Stage-B)', videoId: 'ZoxoMoDZ-0A' },
+            { songName: 'Act in Judge (Stage-C)', videoId: 'q8s0A1R_c6k' },
         ],
     },
     {
@@ -335,7 +335,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'In the Hunt',
-        songSource: { songName: 'THE SOUTH POLE', videoId: '9F8SiVzU1QI' },
+        songSource: { songName: 'The South Pole', videoId: '9F8SiVzU1QI' },
     },
     {
         name: 'In the Hunt (PlayStation)',
@@ -355,7 +355,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Ketsui',
-        songSource: { songName: 'INTERCEPTION - Noisy Town', videoId: 'z472pIce5CY' },
+        songSource: { songName: 'Interception - Noisy Town', videoId: 'z472pIce5CY' },
     },
     {
         name: 'Last Resort',
@@ -880,7 +880,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Super Spacefortress Macross II',
         series: Series.Macross,
-        songSource: { songName: 'SCOOPER', videoId: 'wnlpgkfsor0' }, // NOTE: Medium and Expert course themes don't seem to be on Youtube
+        songSource: { songName: 'Scooper', videoId: 'wnlpgkfsor0' }, // NOTE: Medium and Expert course themes don't seem to be on Youtube
     },
     {
         name: 'Super SWIV', // Super SWIV is SNES title, Firepower 2000 is US SNES title, Mega SWIV is Genesis / Mega Drive title
