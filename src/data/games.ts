@@ -12,6 +12,10 @@ export type { SongEntry, GameEntry, GameListEntry, Game, NoSoundTrackGameEntry }
 // startTime (seconds) is optional; omit it to start from the beginning of the video.
 const gameEntries: GameEntry[] = [
     {
+        name: 'Air Zonk',
+        songSource: { songName: 'Aqua Base stage', videoId: '9IJcqceH3CM' },
+    },
+    {
         name: 'Armed Police Batrider',
         songSource: { songName: 'Easy to Go', videoId: 'UFc72Qz3S34' },
     },
@@ -32,12 +36,21 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Fly to the Leaden Sky', videoId: 'Szr0TSXcWok' },
     },
     {
+        name: 'Bio-Hazard Battle',
+        songSource: { songName: 'Stage 1 & 8', videoId: 'oInjf0-talM' },
+    },
+    {
         name: 'BioMetal (JP)',
         songSource: { songName: 'Dark Clouds', videoId: 'DMhmwXbPcYg' },
     },
     {
         name: 'BioMetal (US)',
         songSource: { songName: 'Twilight Zone', videoId: '6N3Bfm057xM' },
+    },
+    {
+        name: 'Blazing Lazers',
+        alias: 'Gunhed',
+        songSource: { songName: 'Thunder Blaze', videoId: 'im7qZmxOSUI' },
     },
     {
         name: 'Blazing Star',
@@ -64,6 +77,10 @@ const gameEntries: GameEntry[] = [
         alias: ['Castle of Shikigami III'],
         series: Series.CastleOfShikigami,
         songSource: { songName: 'In the Heavens', videoId: 'dKjPet2iESs' },
+    },
+    {
+        name: 'Cho Ren Sha 68K',
+        songSource: { songName: 'Planet the E.A.R.T.H', videoId: 'aT3z4k1BlDg' },
     },
     {
         name: 'Crimzon Clover',
@@ -99,7 +116,7 @@ const gameEntries: GameEntry[] = [
             'Dariusburst: Second Prologue',
             'Dariusburst: Chronicle Saviours',
             'Dariusburst: Another Chronicle EX+',
-            'Dariusburst: CS Core + Taito/Sega Pack'
+            'Dariusburst: CS Core + Taito/Sega Pack',
         ],
         series: Series.Darius,
         songSource: [
@@ -107,7 +124,7 @@ const gameEntries: GameEntry[] = [
             { songName: 'Freedom', videoId: 'eKSsVzGkcqs' },
             { songName: 'Mortification of the Flesh', videoId: 'Vke1mMHGjJA' },
             { songName: 'Suite Photoconductivity ~First Tune Iron Fossil~', videoId: 'h52k2Et3AXk' },
-        ]
+        ],
     },
     {
         name: 'Deathsmiles',
@@ -145,8 +162,8 @@ const gameEntries: GameEntry[] = [
                     source: 'Black Label',
                     videoId: '4nzbL7kvhBk',
                 },
-            ]
-        }
+            ],
+        },
     },
     {
         name: 'DoDonPachi Resurrection',
@@ -175,7 +192,7 @@ const gameEntries: GameEntry[] = [
             { songName: 'DESPERATE SCHOOL (STAGE-A)', videoId: 'P3_U1wyESiA' },
             { songName: 'NIGHTMARE (STAGE-B)', videoId: 'ZoxoMoDZ-0A' },
             { songName: 'ACT IN JUDGE (STAGE-C)', videoId: 'q8s0A1R_c6k' },
-        ]
+        ],
     },
     {
         name: 'Espgaluda',
@@ -241,6 +258,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Gun Frontier',
         songSource: { songName: 'Gale in the Desert', videoId: 'JjsSvAsxTxY' },
+    },
+    {
+        name: 'Gun-Nac',
+        songSource: { songName: 'Area 1', videoId: 'LSrJYxcYRPs' },
     },
     {
         name: 'Gunnail',
@@ -325,7 +346,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Theme of Z (Part 2)', videoId: 'uHktcVQgXys' },
     },
     {
-        name: 'MUSHA',
+        name: 'M.U.S.H.A.: Metallic Uniframe Super Hybrid Armor',
+        alias: 'Musha Aleste: Full Metal Fighter Ellinor',
+        sortName: 'MUSHA',
+        series: Series.Aleste,
         songSource: { songName: 'Fullmetal Fighter', videoId: '0MIqgHu3tsg' },
     },
     {
@@ -344,13 +368,52 @@ const gameEntries: GameEntry[] = [
                 {
                     source: 'Arrange',
                     videoId: 'y9n4Z_baho0',
-                }
-            ]
-        }
+                },
+            ],
+        },
     },
     {
         name: 'Mushihimesama Futari',
         songSource: { songName: 'Setting Off Together', videoId: '2qoyJbieTOc' },
+    },
+    {
+        name: 'Parodius',
+        alias: [
+            'Parodius Da!',
+            'Parodius! From Myth to Laughter',
+            'Parodius: Non-Sense Fantasy',
+        ],
+        songSource: {
+            songName: 'Island of Pirates',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: 'IvCOyEYL6oI',
+                },
+                {
+                    source: 'Game Boy',
+                    videoId: 'Rk4AT-mZMgA',
+                },
+                {
+                    source: 'PC Engine',
+                    videoId: '-JzS-0aab2c',
+                },
+                {
+                    source: 'NES',
+                    videoId: 'StFAI1Sto7Y',
+                    startTime: 219,
+                    endTime: 314,
+                },
+                {
+                    source: 'Sharp X68000',
+                    videoId: 'Q2QWtH8HPi0',
+                },
+                {
+                    source: 'Super Nintendo',
+                    videoId: 'r8u0HF_wRuE',
+                },
+            ],
+        },
     },
     {
         name: 'PD Ultraman Invader',
@@ -367,6 +430,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Plus Alpha',
         songSource: { songName: 'Wind Dancer', videoId: 'SdHAikpTE2w', startTime: 120, endTime: 207 },
+    },
+    {
+        name: "Pop'n Twinbee",
+        songSource: { songName: 'Village Sky', videoId: 'AGt-RJr-khA' },
     },
     {
         name: 'Progear no Arashi',
@@ -405,8 +472,8 @@ const gameEntries: GameEntry[] = [
                 {
                     source: 'Dimensions',
                     videoId: 'q5CBa69BhLo',
-                }
-            ]
+                },
+            ],
         },
     },
     {
@@ -427,9 +494,9 @@ const gameEntries: GameEntry[] = [
                 {
                     source: 'Dimensions',
                     videoId: 'KtzwUQgMuZ8',
-                }
-            ]
-        }
+                },
+            ],
+        },
     },
     {
         name: 'R-Type III: The Third Lightning',
@@ -475,7 +542,7 @@ const gameEntries: GameEntry[] = [
                     source: 'The Raiden Project',
                     videoId: 'W6DvMtQGTpY',
                 },
-            ]
+            ],
         },
     },
     {
@@ -494,7 +561,7 @@ const gameEntries: GameEntry[] = [
                     source: 'The Raiden Project',
                     videoId: 'dT_6ixCATBw',
                 },
-            ]
+            ],
         },
     },
     {
@@ -512,8 +579,8 @@ const gameEntries: GameEntry[] = [
                     source: 'Raiden III x MIKADO MANIAX',
                     videoId: 'uk0J0hEHJmU',
                 },
-            ]
-        }
+            ],
+        },
     },
     {
         name: 'Raiden IV',
@@ -530,8 +597,8 @@ const gameEntries: GameEntry[] = [
                     source: 'Raiden IV x MiKADO Remix',
                     videoId: 'lI3Yl2Hygww',
                 },
-            ]
-        }
+            ],
+        },
     },
     {
         name: 'Raiden V',
@@ -545,7 +612,7 @@ const gameEntries: GameEntry[] = [
         songSource: [
             { songName: 'Souring Nature', videoId: '1r4xBHYos5A' },
             { songName: 'Task Force', videoId: '7pEYtbtAKpw' },
-        ]
+        ],
     },
     {
         name: 'Raiden Fighters 2: Operation Hell Dive',
@@ -553,7 +620,7 @@ const gameEntries: GameEntry[] = [
         songSource: [
             { songName: 'Scramble Attack', videoId: 'epWWOylKxrc' },
             { songName: 'Tight Rope', videoId: '13nezOfe6Oc' },
-        ]
+        ],
     },
     {
         name: 'Raiden Fighters Jet',
@@ -604,7 +671,7 @@ const gameEntries: GameEntry[] = [
                     source: 'Playstation',
                     videoId: 'ycQgBx7gfFQ',
                 },
-            ]
+            ],
         },
     },
     {
@@ -686,8 +753,8 @@ const gameEntries: GameEntry[] = [
                     source: 'Steam',
                     videoId: 'hY93BSMTU4A',
                 },
-            ]
-        }
+            ],
+        },
     },
     {
         name: 'Space Invaders Extreme 2',
@@ -710,7 +777,7 @@ const gameEntries: GameEntry[] = [
         songSource: [
             { songName: 'Stages 1, 4 & Ending', arrangements: [{ source: 'Arcade', videoId: 'Zi0fezKPdH0' }] },
             { songName: 'Stages 1, 3 & 5', arrangements: [{ source: 'Super Nintendo', videoId: 'g3L79GW6T7s' }] },
-        ]
+        ],
     },
     {
         name: 'Strikers 1945',
@@ -720,7 +787,7 @@ const gameEntries: GameEntry[] = [
             { songName: 'Shadow of Reich', videoId: 'pCVV3uTgqrE' },
             { songName: 'Flying Wing', videoId: 'lnHOTuI5jHU' },
             { songName: 'White Hell', videoId: 'VoPpcldi1Qc' },
-        ]
+        ],
     },
     {
         name: 'Strikers 1945 II',
@@ -730,7 +797,7 @@ const gameEntries: GameEntry[] = [
             { songName: 'Far from Cloud City', videoId: 'qOuf82IRzH0' },
             { songName: 'Battle of Extreme North', videoId: 'jQRQlpPJwE0' },
             { songName: 'Infinity Orbit', videoId: 'BhPYYhzPcSE' },
-        ]
+        ],
     },
     {
         name: 'Strikers 1945 III',
@@ -740,7 +807,7 @@ const gameEntries: GameEntry[] = [
             { songName: 'Sea of Battle', videoId: 'tvw-jInWc_o' },
             { songName: 'Turn Red', videoId: '-xGu9BfDTnE' },
             { songName: 'Rest of a Bomb', videoId: 'A8dyebZ-Thk' },
-        ]
+        ],
     },
     {
         name: 'Strikers 1945 Plus',
@@ -750,7 +817,17 @@ const gameEntries: GameEntry[] = [
             { songName: 'Sea Stage', videoId: 'skJr2TO7u3E' },
             { songName: 'Colliery Stage', videoId: '1valAlFDLRI' },
             { songName: 'Street Stage', videoId: 'NcSIHrnG5lA' },
-        ]
+        ],
+    },
+    {
+        name: "Summer Carnival '92 Recca",
+        songSource: { songName: 'Jetter', videoId: 'tYg-HtcobKY' },
+    },
+    {
+        name: 'Super Megaforce',
+        alias: 'Super Aleste',
+        series: Series.Aleste,
+        songSource: { songName: 'Stage 1', videoId: 'C--eV-L3gfE' },
     },
     {
         name: 'Super R-Type',
@@ -887,8 +964,8 @@ const gameEntries: GameEntry[] = [
                     source: 'PC Engine',
                     videoId: 'BpT6wqbxeeM',
                 },
-            ]
-        }
+            ],
+        },
     },
     {
         name: 'Truxton II',
@@ -901,6 +978,23 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Tyrian',
         songSource: { songName: 'Tyrian , the level', videoId: 'wNnTGbbDJfo' },
+    },
+    {
+        name: 'U.N. Squadron',
+        alias: 'Area 88',
+        songSource: {
+            songName: 'Oil Field',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: 'DZnMcxaTI5Q',
+                },
+                {
+                    source: 'Super Nintendo',
+                    videoId: 'zSFm_EaLRmQ',
+                },
+            ],
+        },
     },
     {
         name: 'Viper Phase 1',
@@ -949,7 +1043,7 @@ const gameEntries: GameEntry[] = [
                     source: 'PC Engine',
                     videoId: 'jYqboWg4KOc',
                 },
-            ]
+            ],
         },
     },
     {
