@@ -187,6 +187,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Determination -STAGE 1-', videoId: 'ppgo1QkNNxk' },
     },
     {
+        name: 'Eschatos',
+        songSource: { songName: 'Silver Lining', videoId: 'kqv4NiiVwI4' },
+    },
+    {
         name: 'ESP Ra.De.',
         songSource: [
             { songName: 'DESPERATE SCHOOL (STAGE-A)', videoId: 'P3_U1wyESiA' },
@@ -213,6 +217,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Gekirindan',
         songSource: { songName: 'Pure Spirit', videoId: 'OijiF6r1Xfc' },
+    },
+    {
+        name: 'Ginga Force',
+        songSource: { songName: 'Aeronaut', videoId: 'Go5MfC8S02o' },
     },
     {
         name: 'Gradius',
@@ -375,6 +383,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Mushihimesama Futari',
         songSource: { songName: 'Setting Off Together', videoId: '2qoyJbieTOc' },
+    },
+    {
+        name: 'Natsuki Chronicles',
+        songSource: { songName: 'Hopeful Morning Glow', videoId: 'HuzP7m6Us28' },
     },
     {
         name: 'Parodius',
