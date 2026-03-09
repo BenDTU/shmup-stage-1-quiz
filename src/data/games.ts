@@ -981,18 +981,18 @@ const gameEntries: GameEntry[] = [
     {
         name: 'U.N. Squadron',
         alias: 'Area 88',
-        songSource: { 
-            songName: 'Oil Field', 
+        songSource: {
+            songName: 'Oil Field',
             arrangements: [
-                { 
-                    source: 'Arcade', 
-                    videoId: 'DZnMcxaTI5Q' 
+                {
+                    source: 'Arcade',
+                    videoId: 'DZnMcxaTI5Q',
                 },
-                { 
-                    source: 'Super Nintendo', 
-                    videoId: 'zSFm_EaLRmQ', 
+                {
+                    source: 'Super Nintendo',
+                    videoId: 'zSFm_EaLRmQ',
                 },
-            ] 
+            ]
         },
     },
     {
