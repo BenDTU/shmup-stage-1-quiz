@@ -398,6 +398,10 @@ const gameEntries: GameEntry[] = [
                     source: 'PC-Engine',
                     videoId: '-JzS-0aab2c',
                 },
+                {
+                    source: 'NES',
+                    videoId: '9n8sKqjXo3E',
+                },
                 { 
                     source: 'Sharp X68000', 
                     videoId: 'Q2QWtH8HPi0' 
