@@ -108,6 +108,24 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'CAPTAIN NEO', videoId: 'a_GP2FBiK2o' },
     },
     {
+        name: 'Darius II',
+        sortName: 'Darius 2',
+        series: Series.Darius,
+        songSource: {
+            songName: 'Olga Breeze',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: 'BpjXgNbpTqU',
+                },
+                {
+                    source: 'Mega Drive',
+                    videoId: 'X3E1UgUGf8A',
+                },
+            ],
+        },
+    },
+    {
         name: 'Darius Gaiden',
         series: Series.Darius,
         songSource: { songName: 'VISIONNERZ ~HALLUCINATED PEOPLE~', videoId: 'kG30WhHCnN4' },
