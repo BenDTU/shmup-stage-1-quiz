@@ -400,7 +400,9 @@ const gameEntries: GameEntry[] = [
                 },
                 {
                     source: 'NES',
-                    videoId: '9n8sKqjXo3E',
+                    videoId: 'StFAI1Sto7Y',
+                    startTime: 219,
+                    endTime: 314,
                 },
                 { 
                     source: 'Sharp X68000', 
