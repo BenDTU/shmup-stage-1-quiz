@@ -377,8 +377,36 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Setting Off Together', videoId: '2qoyJbieTOc' },
     },
     {
-        name: 'Parodius Da!',
-        songSource: { songName: 'Island of Pirates', videoId: 'IvCOyEYL6oI' },
+        name: 'Parodius',
+        alias: [
+            'Parodius Da!',
+            'Parodius! From Myth to Laughter',
+            'Parodius: Non-Sense Fantasy',
+
+        ],
+        songSource: { songName: 'Island of Pirates', 
+            arrangements: [
+                { 
+                    source: 'Arcade', 
+                    videoId: 'IvCOyEYL6oI' 
+                },                
+                {
+                    source: 'Game Boy',
+                    videoId: '9n7sXo2lHj8'
+                },
+                {
+                    source: 'PC-Engine',
+                    videoId: '-JzS-0aab2c',
+                },
+                { 
+                    source: 'Sharp X68000', 
+                    videoId: 'Q2QWtH8HPi0' 
+                },                
+                {
+                    source: 'Super Nintendo',
+                    videoId: 'r8u0HF_wRuE',
+                }
+            ] },
     },
     {
         name: 'PD Ultraman Invader',
