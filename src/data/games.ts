@@ -382,17 +382,17 @@ const gameEntries: GameEntry[] = [
             'Parodius Da!',
             'Parodius! From Myth to Laughter',
             'Parodius: Non-Sense Fantasy',
-
         ],
-        songSource: { songName: 'Island of Pirates', 
+        songSource: {
+            songName: 'Island of Pirates',
             arrangements: [
-                { 
-                    source: 'Arcade', 
-                    videoId: 'IvCOyEYL6oI' 
-                },                
+                {
+                    source: 'Arcade',
+                    videoId: 'IvCOyEYL6oI',
+                },
                 {
                     source: 'Game Boy',
-                    videoId: 'Rk4AT-mZMgA'
+                    videoId: 'Rk4AT-mZMgA',
                 },
                 {
                     source: 'PC Engine',
@@ -404,15 +404,16 @@ const gameEntries: GameEntry[] = [
                     startTime: 219,
                     endTime: 314,
                 },
-                { 
-                    source: 'Sharp X68000', 
-                    videoId: 'Q2QWtH8HPi0' 
-                },                
+                {
+                    source: 'Sharp X68000',
+                    videoId: 'Q2QWtH8HPi0',
+                },
                 {
                     source: 'Super Nintendo',
                     videoId: 'r8u0HF_wRuE',
-                }
-            ] },
+                },
+            ]
+        },
     },
     {
         name: 'PD Ultraman Invader',
