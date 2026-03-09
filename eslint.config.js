@@ -79,6 +79,7 @@ export default tseslint.config(
         plugins: { '@stylistic': stylistic },
         rules: {
             '@stylistic/indent': ['error', 4],
+            '@stylistic/comma-dangle': ['error', 'always-multiline'],
         },
     },
     {
@@ -91,6 +92,7 @@ export default tseslint.config(
         },
         rules: {
             '@stylistic/indent': 'off',
+            '@stylistic/comma-dangle': ['error', 'always-multiline'],
             'vue/html-indent': ['error', 4],
             'vue/script-indent': ['error', 4],
         },

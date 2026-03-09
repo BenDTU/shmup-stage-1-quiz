@@ -9,5 +9,5 @@ export const quotes: string[] = [
     'Do you remember how many breads you\'ve eaten in your life?', // Touhou 6
     'First stop, enemy outpost. Let\'s see what you got.', // Donpachi
     'Bonus! Bonus! Bonus!', // Blazing Star
-    'I have to go on. I can\'t quit now' // Aero Fighters 2
+    'I have to go on. I can\'t quit now', // Aero Fighters 2
 ]
