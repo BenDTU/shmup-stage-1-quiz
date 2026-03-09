@@ -395,7 +395,7 @@ const gameEntries: GameEntry[] = [
                     videoId: 'Rk4AT-mZMgA'
                 },
                 {
-                    source: 'PC-Engine',
+                    source: 'PC Engine',
                     videoId: '-JzS-0aab2c',
                 },
                 {
