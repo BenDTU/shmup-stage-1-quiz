@@ -392,7 +392,7 @@ const gameEntries: GameEntry[] = [
                 },                
                 {
                     source: 'Game Boy',
-                    videoId: '9n7sXo2lHj8'
+                    videoId: 'Rk4AT-mZMgA'
                 },
                 {
                     source: 'PC-Engine',
