@@ -13,7 +13,7 @@ export type { SongEntry, GameEntry, GameListEntry, Game, NoSoundTrackGameEntry }
 const gameEntries: GameEntry[] = [
     {
         name: 'Air Zonk',
-        songSource: { songName: 'Stage 1', videoId: '9IJcqceH3CM' },
+        songSource: { songName: 'Aqua Base stage', videoId: '9IJcqceH3CM' },
     },
     {
         name: 'Armed Police Batrider',
@@ -36,7 +36,7 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Fly to the Leaden Sky', videoId: 'Szr0TSXcWok' },
     },
     {
-        name: 'Biohazard Battle',
+        name: 'Bio-Hazard Battle',
         songSource: { songName: 'Stage 1 & 8', videoId: 'oInjf0-talM' },
     },
     {
@@ -49,8 +49,8 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Blazing Lazers',
-        alias: 'Gunhead',
-        songSource: { songName: 'Area 1', videoId: 'im7qZmxOSUI' },
+        alias: 'Gunhed',
+        songSource: { songName: 'Thunder Blaze', videoId: 'im7qZmxOSUI' },
     },
     {
         name: 'Blazing Star',
@@ -260,7 +260,7 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Gale in the Desert', videoId: 'JjsSvAsxTxY' },
     },
     {
-        name: 'Gun Nac',
+        name: 'Gun-Nac',
         songSource: { songName: 'Area 1', videoId: 'LSrJYxcYRPs' },
     },
     {
@@ -349,6 +349,7 @@ const gameEntries: GameEntry[] = [
         name: 'M.U.S.H.A.: Metallic Uniframe Super Hybrid Armor',
         alias: 'Musha Aleste: Full Metal Fighter Ellinor',
         sortName: 'MUSHA',
+        series: Series.Aleste,
         songSource: { songName: 'Fullmetal Fighter', videoId: '0MIqgHu3tsg' },
     },
     {
@@ -377,7 +378,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Parodius Da!',
-        songSource: { songName: 'Stage 1', videoId: 'IvCOyEYL6oI' },
+        songSource: { songName: 'Island of Pirates', videoId: 'IvCOyEYL6oI' },
     },
     {
         name: 'PD Ultraman Invader',
@@ -788,7 +789,9 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Jetter', videoId: 'tYg-HtcobKY' },
     },
     {
-        name: 'Super Aleste',
+        name: 'Super Megaforce',
+        alias: 'Super Aleste',
+        series: Series.Aleste,
         songSource: { songName: 'Stage 1', videoId: 'C--eV-L3gfE' },
     },
     {
@@ -943,7 +946,20 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'U.N. Squadron',
-        songSource: { songName: 'Oil Field', videoId: 'DZnMcxaTI5Q' },
+        alias: 'Area 88',
+        songSource: { 
+            songName: 'Oil Field', 
+            arrangements: [
+                { 
+                    source: 'Arcade', 
+                    videoId: 'DZnMcxaTI5Q' 
+                },
+                { 
+                    source: 'Super Nintendo', 
+                    videoId: 'zSFm_EaLRmQ', 
+                },
+            ] 
+        },
     },
     {
         name: 'Viper Phase 1',

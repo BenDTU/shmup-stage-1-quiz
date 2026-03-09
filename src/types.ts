@@ -1,6 +1,7 @@
 export type QuizMode = 'novice' | 'advanced'
 
 export enum Series {
+    Aleste = 'Aleste',
     CastleOfShikigami = 'Castle of Shikigami',
     Darius = 'Darius',
     Dodonpachi = 'Dodonpachi',
