@@ -281,14 +281,14 @@ const gameEntries: GameEntry[] = [
         name: 'Gradius',
         alias: 'Nemesis',
         series: Series.Gradius,
-        songSource: { songName: 'Challenger 1985', videoId: 'nYES6OmvQFQ' },
+        songSource: { songName: 'Challenger 1985', videoId: '-Fcpo6qCXMY' },
     },
     {
         name: 'Gradius II',
         alias: 'Vulcan Venture',
         sortName: 'Gradius 2',
         series: Series.Gradius,
-        songSource: { songName: 'Burning Heat', videoId: 'FLc1msji0_w' },
+        songSource: { songName: 'Burning Heat', videoId: '76kJEPGvvMg' },
     },
     {
         name: 'Gradius III',
@@ -819,6 +819,22 @@ const gameEntries: GameEntry[] = [
         name: 'Sagaia (Game Boy)',
         series: Series.Darius,
         songSource: { songName: 'Cosmic Air Way', videoId: 'ekMGtD9cDhQ' },
+    },
+    {
+        name: 'Salamander',
+        alias: 'Life Force',
+        series: Series.Gradius,        
+        songSource: { songName: 'Power of Anger', videoId: 'gle0JLhaRxw' },
+    },
+    {
+        name: 'Salamander 2',
+        series: Series.Gradius,        
+        songSource: { songName: 'Silver Wings Again', videoId: 'Y0CFKk8WDTM' },
+    },
+    {
+        name: 'Salamander III',
+        series: Series.Gradius,        
+        songSource: { songName: 'Courage of Pride', videoId: '6VRkKpoJADc' },
     },
     {
         name: 'Shienryu',
