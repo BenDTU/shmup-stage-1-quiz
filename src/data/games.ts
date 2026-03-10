@@ -1032,7 +1032,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Tyrian',
-        songSource: { songName: 'Tyrian , the level', videoId: 'wNnTGbbDJfo' },
+        songSource: { songName: 'Tyrian, the level', videoId: 'wNnTGbbDJfo' },
     },
     {
         name: 'U.N. Squadron',
