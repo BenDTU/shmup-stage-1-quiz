@@ -17,6 +17,12 @@ export enum Series {
     Zeal = 'Zeal',
 }
 
+export enum AnswerType {
+    Correct = 'correct',
+    Incorrect = 'incorrect',
+    AlmostCorrect = 'almost-correct',
+}
+
 export interface SongArrangement {
     source: string
     videoId: string
@@ -49,7 +55,6 @@ export type NoSoundTrackGameEntry = GameEntryBase & {
 export type GameListEntry = { id: number; name: string; alias?: string | string[]; series?: Series }
 
 export interface AdvancedFeedbackDetails {
-    isAlmostCorrect?: boolean
     songName: string
     gameName: string
     source?: string

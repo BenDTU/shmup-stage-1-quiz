@@ -8,6 +8,7 @@ import AnswerFeedback from '../components/AnswerFeedback.vue'
 import { useQuiz } from '../composables/useQuiz'
 import { guessedGameName } from '../functions'
 import { games } from '../data/games'
+import { AnswerType, type AdvancedFeedbackDetails } from '@/types'
 
 const router = useRouter()
 const { state, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, submitGuess, nextQuestion } = useQuiz()
@@ -44,7 +45,14 @@ onMounted(() => {
 
 const currentQuestion = computed(() => state.questions[state.currentIndex])
 const questionNumber = computed(() => state.currentIndex + 1)
-const isCurrentAnswerCorrect = computed(() => state.questions[state.currentIndex]?.id === state.answers[state.currentIndex])
+
+const userAnswerType = computed<AnswerType>(() => {
+    if (isAnswerCorrect.value) return AnswerType.Correct
+    if (isAlmostCorrect.value) return AnswerType.AlmostCorrect
+    return AnswerType.Incorrect
+});
+
+const isAnswerCorrect = computed(() => state.questions[state.currentIndex]?.id === state.answers[state.currentIndex])
 
 const isAlmostCorrect = computed(() => {
     const answerId = state.answers[state.currentIndex]
@@ -55,8 +63,7 @@ const isAlmostCorrect = computed(() => {
     return guessedGame?.series === correctSeries
 })
 
-const advancedFeedbackDetails = computed(() => ({
-    isAlmostCorrect: isAlmostCorrect.value,
+const advancedFeedbackDetails = computed<AdvancedFeedbackDetails>(() => ({
     songName: currentQuestion.value?.songName ?? '',
     gameName: currentQuestion.value?.name ?? '',
     source: currentQuestion.value?.source,
@@ -180,7 +187,7 @@ async function handleNextClick(event: MouseEvent) {
                         <!-- Novice mode: correct/incorrect alert (above options, shown when answered) -->
                         <AnswerFeedback
                             v-if="state.mode === 'novice' && state.isAnswered"
-                            :is-correct="isCurrentAnswerCorrect"
+                            :answer-type="userAnswerType"
                         />
 
                         <!-- Novice mode: 4 option buttons -->
@@ -229,7 +236,7 @@ async function handleNextClick(event: MouseEvent) {
                             <!-- Advanced mode: correct/incorrect alert -->
                             <AnswerFeedback
                                 v-if="state.mode === 'advanced'"
-                                :is-correct="isCurrentAnswerCorrect"
+                                :answer-type="userAnswerType"
                                 :details="advancedFeedbackDetails"
                             />
                             <p
