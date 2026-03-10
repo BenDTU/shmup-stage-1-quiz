@@ -5,6 +5,7 @@ export enum Series {
     CastleOfShikigami = 'Castle of Shikigami',
     Darius = 'Darius',
     Dodonpachi = 'Dodonpachi',
+    Espgaluda = 'Espgaluda',
     Gradius = 'Gradius',
     Macross = 'Macross',
     RType = 'R-Type',
@@ -12,7 +13,7 @@ export enum Series {
     Strikers1945 = 'Strikers 1945',
     SonicWings = 'Sonic Wings',
     SpaceInvaders = 'Space Invaders',
-    Touhou = 'Touhou',
+    Touhou = 'Touhou Project',
     Zeal = 'Zeal',
 }
 
