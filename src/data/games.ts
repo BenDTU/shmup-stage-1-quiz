@@ -391,6 +391,89 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Jack to the Metro', videoId: 'HAGArKEC_M8' },
     },
     {
+        name: 'Lords of Thunder',
+        songSource: [
+            { 
+                songName: 'Dezant', 
+                arrangements: [
+                    { 
+                        source: 'PC Engine', 
+                        videoId: 'pu_pNnEymLY',
+                    },
+                    {
+                        source: 'Sega CD',
+                        videoId: 'fKymzvR4hE0',
+                    },
+                ], 
+            },
+            { 
+                songName: 'Auzal', 
+                arrangements: [
+                    { 
+                        source: 'PC Engine', 
+                        videoId: 'iyvdraPERr8',
+                    },
+                    {
+                        source: 'Sega CD',
+                        videoId: '6FYYwj6iyAA',
+                    },
+                ], 
+            },
+            { 
+                songName: 'Lamarada', 
+                arrangements: [
+                    { 
+                        source: 'PC Engine', 
+                        videoId: '76zevuMEbkg',
+                    },
+                    {
+                        source: 'Sega CD',
+                        videoId: 'fnbcvp9E4n0',
+                    },
+                ], 
+            },
+            { 
+                songName: 'Bosque', 
+                arrangements: [
+                    { 
+                        source: 'PC Engine', 
+                        videoId: 'ubBdRb1f5A8',
+                    },
+                    {
+                        source: 'Sega CD',
+                        videoId: 'dknJeoMiNfY',
+                    },
+                ], 
+            },
+            { 
+                songName: 'Helado', 
+                arrangements: [
+                    { 
+                        source: 'PC Engine', 
+                        videoId: '78anoPGi4Hk',
+                    },
+                    {
+                        source: 'Sega CD',
+                        videoId: 'ONJlKmFHUMY',
+                    },
+                ], 
+            },
+            { 
+                songName: 'Cielom', 
+                arrangements: [
+                    { 
+                        source: 'PC Engine', 
+                        videoId: 'sya6mhmygyM',
+                    },
+                    {
+                        source: 'Sega CD',
+                        videoId: '4C0zHb4fGAA',
+                    },
+                ], 
+            },
+        ],
+    },
+    {
         name: 'Macross Plus',
         series: Series.Macross,
         songSource: { songName: 'Area 1', videoId: 'h-VuFFy7LRA' },
