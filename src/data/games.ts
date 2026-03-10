@@ -1116,7 +1116,7 @@ export const noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
         songSource: { songName: 'Typhoon #12' },
     },
     {
-        name: 'Sonic Wings Reunion',
+        name: 'Sonic Wings Reunion?',
         alias: ['Aero Fighters Reunion'],
         series: Series.SonicWings,
         songSource: { songName: 'Abu Dhabi, UAE stage' },
