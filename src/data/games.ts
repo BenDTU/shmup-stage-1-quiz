@@ -12,7 +12,7 @@ export type { SongEntry, GameEntry, GameListEntry, Game, NoSoundTrackGameEntry }
 // startTime (seconds) is optional; omit it to start from the beginning of the video.
 const gameEntries: GameEntry[] = [
     {
-        name: 'Air Zonk!',
+        name: 'Air Zonk',
         songSource: { songName: 'Aqua Base stage', videoId: '9IJcqceH3CM' },
     },
     {
