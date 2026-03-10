@@ -407,7 +407,7 @@ const gameEntries: GameEntry[] = [
                 ], 
             },
             { 
-                songName: 'Aqual', 
+                songName: 'Auzal', 
                 arrangements: [
                     { 
                         source: 'PC Engine', 
@@ -420,7 +420,7 @@ const gameEntries: GameEntry[] = [
                 ], 
             },
             { 
-                songName: 'Levadara', 
+                songName: 'Lamarada', 
                 arrangements: [
                     { 
                         source: 'PC Engine', 
@@ -433,7 +433,7 @@ const gameEntries: GameEntry[] = [
                 ], 
             },
             { 
-                songName: 'Wildon', 
+                songName: 'Bosque', 
                 arrangements: [
                     { 
                         source: 'PC Engine', 
@@ -446,7 +446,7 @@ const gameEntries: GameEntry[] = [
                 ], 
             },
             { 
-                songName: 'Freezel', 
+                songName: 'Helado', 
                 arrangements: [
                     { 
                         source: 'PC Engine', 
@@ -459,7 +459,7 @@ const gameEntries: GameEntry[] = [
                 ], 
             },
             { 
-                songName: 'Ciodant', 
+                songName: 'Cielom', 
                 arrangements: [
                     { 
                         source: 'PC Engine', 
