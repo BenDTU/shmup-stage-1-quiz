@@ -105,11 +105,15 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Darius',
         series: Series.Darius,
-        songSource: { songName: 'Captain Neo', videoId: 'a_GP2FBiK2o' },
+        songSource: { songName: 'Captain Neo', videoId: 'YPM0APOpXmE' },
     },
     {
         name: 'Darius II',
         sortName: 'Darius 2',
+        alias: [
+            'Sagaia',
+            'Super Darius II',
+        ],
         series: Series.Darius,
         songSource: {
             songName: 'Olga Breeze',
@@ -121,6 +125,10 @@ const gameEntries: GameEntry[] = [
                 {
                     source: 'Mega Drive',
                     videoId: 'X3E1UgUGf8A',
+                },
+                {
+                    source: 'PC Engine',
+                    videoId: 'sZeE-HciN9g',
                 },
             ],
         },
@@ -723,6 +731,11 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Rolling Gunner',
         songSource: { songName: 'The Last Shining Star', videoId: 'iklxp3EUUi4' },
+    },
+    {
+        name: 'Sagaia (Game Boy)',
+        series: Series.Darius,
+        songSource: { songName: 'Cosmic Air Way', videoId: 'ekMGtD9cDhQ' },
     },
     {
         name: 'Shienryu',
