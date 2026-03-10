@@ -159,7 +159,7 @@ async function handleNextClick(event: MouseEvent) {
                     <div
                         class="progress-bar"
                         role="progressbar"
-                        :style="{ width: `${(questionNumber / state.questions.length) * 100}%` }"
+                        :style="{ width: `${(state.answers.length / state.questions.length) * 100}%` }"
                     />
                 </div>
 
