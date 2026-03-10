@@ -827,6 +827,12 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Selection (Genetic)', videoId: 'N3EJltfL7ok' },
     },
     {
+        name: 'Space Megaforce',
+        alias: 'Super Aleste',
+        series: Series.Aleste,
+        songSource: { songName: 'Stage 1', videoId: 'C--eV-L3gfE' },
+    },    
+    {
         name: 'Strike Gunner S.T.G.',
         // The theme has no official name; songName describes where it appears. The same melody is used in different stages across the Arcade and Super Nintendo versions.
         songSource: [
@@ -877,13 +883,7 @@ const gameEntries: GameEntry[] = [
     {
         name: "Summer Carnival '92 Recca",
         songSource: { songName: 'Jetter', videoId: 'tYg-HtcobKY' },
-    },
-    {
-        name: 'Super Megaforce',
-        alias: 'Super Aleste',
-        series: Series.Aleste,
-        songSource: { songName: 'Stage 1', videoId: 'C--eV-L3gfE' },
-    },
+    },    
     {
         name: 'Super R-Type',
         series: Series.RType,
