@@ -151,9 +151,9 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Deathsmiles',
         songSource: [
-            { songName: 'Burning Halloween Town - Stage A-1', videoId: 'NMwYXwclFN4' },
-            { songName: 'Fury Of The Gravekeepers - Stage B-1', videoId: 'zGcGQUryyPc' },
-            { songName: 'Disturbance At The Lakeshore - Stage C-1', videoId: 'LUtn9Kqkakc' },
+            { songName: 'Burning Halloween Town', videoId: 'NMwYXwclFN4' },
+            { songName: 'Fury Of The Gravekeepers', videoId: 'zGcGQUryyPc' },
+            { songName: 'Disturbance At The Lakeshore', videoId: 'LUtn9Kqkakc' },
         ],
     },
     {
@@ -161,6 +161,12 @@ const gameEntries: GameEntry[] = [
         alias: 'G-Stream G2020',
         series: Series.Zeal,
         songSource: { songName: 'Stage 1 & 4', videoId: '6xG4t2wE0rM' },
+    },
+    {
+        name: 'DonPachi',
+        sortName: 'Dodonpachi 0',
+        series: Series.Dodonpachi,
+        songSource: { songName: 'Silent Outpost Base', videoId: 'qiAb1O5ix2g' },
     },
     {
         name: 'DoDonPachi',
@@ -206,7 +212,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Drainus',
-        songSource: { songName: 'Determination -STAGE 1-', videoId: 'ppgo1QkNNxk' },
+        songSource: { songName: 'Determination', videoId: 'ppgo1QkNNxk' },
     },
     {
         name: 'Eschatos',
@@ -215,17 +221,28 @@ const gameEntries: GameEntry[] = [
     {
         name: 'ESP Ra.De.',
         songSource: [
-            { songName: 'Desperate School (Stage-A)', videoId: 'P3_U1wyESiA' },
-            { songName: 'Nightmare (Stage-B)', videoId: 'ZoxoMoDZ-0A' },
-            { songName: 'Act in Judge (Stage-C)', videoId: 'q8s0A1R_c6k' },
+            { songName: 'Desperate School', videoId: 'P3_U1wyESiA' },
+            { songName: 'Nightmare', videoId: 'ZoxoMoDZ-0A' },
+            { songName: 'Act in Judge', videoId: 'q8s0A1R_c6k' },
         ],
     },
     {
         name: 'Espgaluda',
+        series: Series.Espgaluda,
         songSource: {
-            songName: 'Bloody Separation ~ Bloody Arrival (Stage 1/Stage 5.2)',
+            songName: 'Bloody Separation ~ Bloody Arrival',
             videoId: '5A6oJRZSFBg',
         },
+    },
+    {
+        name: 'Espgaluda II',
+        series: Series.Espgaluda,
+        songSource: { 
+            songName: 'Mutiny ~ Fate is with the Girl', 
+            arrangements: [
+                { source: 'White Label', videoId: '1gALhcCbn4A' },
+                { source: 'Black Label', videoId: 'MUdtYy9UGAM' },
+            ] },
     },
     {
         name: 'Ex-Calibre',
@@ -474,8 +491,8 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Village Sky', videoId: 'AGt-RJr-khA' },
     },
     {
-        name: 'Progear no Arashi',
-        songSource: { songName: 'To the Blue Sky –Stage 1–', videoId: 'h-lt6fiIqvM' },
+        name: 'Progear',
+        songSource: { songName: 'To the Blue Sky', videoId: 'h-lt6fiIqvM' },
     },
     {
         name: 'ProtoCorgi',
