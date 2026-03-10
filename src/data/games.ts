@@ -215,6 +215,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Determination', videoId: 'ppgo1QkNNxk' },
     },
     {
+        name: 'Einhander',
+        songSource: { songName: 'Capital, Street', videoId: 'g0fmLsocKdg', startTime: 55 },
+    },
+    {
         name: 'Eschatos',
         songSource: { songName: 'Silver Lining', videoId: 'kqv4NiiVwI4' },
     },
@@ -396,6 +400,14 @@ const gameEntries: GameEntry[] = [
         name: 'Mazinger Z',
         songSource: { songName: 'Theme of Z (Part 2)', videoId: 'uHktcVQgXys' },
     },
+    {
+        name: 'Mecha Ritz: Steel Rondo',
+        songSource: { songName: 'Alone', videoId: 'UqKmOiETJeI' },
+    },
+    {
+        name: 'Metal Black',
+        songSource: { songName: 'Take off ~ Born to be free', videoId: 'GBS6KfJRyIg' },
+    },    
     {
         name: 'M.U.S.H.A.: Metallic Uniframe Super Hybrid Armor',
         alias: 'Musha Aleste: Full Metal Fighter Ellinor',
@@ -732,6 +744,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Silver Surfer',
         songSource: { songName: 'Stage BGM 1', videoId: 'BGNSHNf-nlU' },
+    },
+    {
+        name: 'Soldier Blade',
+        songSource: { songName: 'Operation 1', videoId: 'pEyJV4nVBTU' },
     },
     // Sonic Wings 1-3 released in English as Aero Fighters, but series has since gone to using the Sonic Wings brand universally - will use this across the board for consistency.
     {
