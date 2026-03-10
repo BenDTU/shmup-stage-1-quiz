@@ -3,16 +3,39 @@ import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
 import AutocompleteInput from '../components/AutocompleteInput.vue'
+import NoviceOptions from '../components/NoviceOptions.vue'
+import AnswerFeedback from '../components/AnswerFeedback.vue'
 import { useQuiz } from '../composables/useQuiz'
 import { guessedGameName } from '../functions'
+import { games } from '../data/games'
+import { AnswerType, type AdvancedFeedbackDetails } from '@/types'
 
 const router = useRouter()
-const { state, isFinished, usedGameIds, seriesLimitedGameIds, submitGuess, nextQuestion } = useQuiz()
+const { state, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, submitGuess, nextQuestion } = useQuiz()
 
 const selectedGameId = ref<number | null>(null)
 const audioUnlocked = ref(false)
 const nextBtn = ref<HTMLButtonElement | null>(null)
 const autocompleteRef = ref<{ focus: () => void } | null>(null)
+const feedbackState = ref<'correct' | 'wrong' | null>(null)
+let feedbackTimer: ReturnType<typeof setTimeout> | null = null
+
+function setFeedback(value: 'correct' | 'wrong') {
+    if (feedbackTimer !== null) clearTimeout(feedbackTimer)
+    feedbackState.value = value
+    feedbackTimer = setTimeout(() => {
+        feedbackState.value = null
+        feedbackTimer = null
+    }, value === 'correct' ? 800 : 600)
+}
+
+function setFeedbackFromAnswer() {
+    setFeedback(
+        state.answers[state.currentIndex] === state.questions[state.currentIndex]?.id
+            ? 'correct'
+            : 'wrong',
+    )
+}
 
 onMounted(() => {
     if (!state.isStarted || state.questions.length === 0) {
@@ -23,14 +46,52 @@ onMounted(() => {
 const currentQuestion = computed(() => state.questions[state.currentIndex])
 const questionNumber = computed(() => state.currentIndex + 1)
 
+const userAnswerType = computed<AnswerType>(() => {
+    if (isAnswerCorrect.value) return AnswerType.Correct
+    if (isAlmostCorrect.value) return AnswerType.AlmostCorrect
+    return AnswerType.Incorrect
+});
+
+const isAnswerCorrect = computed(() => state.questions[state.currentIndex]?.id === state.answers[state.currentIndex])
+
+const isAlmostCorrect = computed(() => {
+    const answerId = state.answers[state.currentIndex]
+    if (!answerId || answerId === -1) return false
+    const correctSeries = currentQuestion.value?.series
+    if (correctSeries === undefined) return false
+    const guessedGame = games.find((g) => g.id === answerId)
+    return guessedGame?.series === correctSeries
+})
+
+const advancedFeedbackDetails = computed<AdvancedFeedbackDetails>(() => ({
+    songName: currentQuestion.value?.songName ?? '',
+    gameName: currentQuestion.value?.name ?? '',
+    source: currentQuestion.value?.source,
+    guessedName: guessedGameName(state.answers[state.currentIndex]!),
+}))
+
 // Only allow submitting a guess that corresponds to an available game in the pool
 const isValidGuess = computed(() => {
     if (selectedGameId.value === null) return false
+    if (state.mode === 'novice') return true
     return !usedGameIds.value.has(selectedGameId.value) && !seriesLimitedGameIds.value.has(selectedGameId.value)
 })
+
 async function handleSubmit(viaKeyboard = false) {
     if (!isValidGuess.value || state.isAnswered) return
     submitGuess(selectedGameId.value!)
+    setFeedbackFromAnswer()
+    if (viaKeyboard) {
+        await nextTick()
+        nextBtn.value?.focus()
+    }
+}
+
+async function handleNoviceSubmit(optionId: number, viaKeyboard = false) {
+    if (state.isAnswered) return
+    selectedGameId.value = optionId
+    submitGuess(optionId)
+    setFeedbackFromAnswer()
     if (viaKeyboard) {
         await nextTick()
         nextBtn.value?.focus()
@@ -42,6 +103,7 @@ async function handleSkipClick(event: MouseEvent) {
     // event.detail is 0 for keyboard-triggered clicks (Enter/Space) and ≥1 for mouse clicks
     const isKeyboard = event.detail === 0
     submitGuess(-1)
+    setFeedback('wrong')
     if (isKeyboard) {
         await nextTick()
         nextBtn.value?.focus()
@@ -53,6 +115,11 @@ function handleNext() {
         router.push('/results')
     } else {
         selectedGameId.value = null
+        if (feedbackTimer !== null) {
+            clearTimeout(feedbackTimer)
+            feedbackTimer = null
+        }
+        feedbackState.value = null
         nextQuestion()
     }
 }
@@ -62,7 +129,7 @@ async function handleNextClick(event: MouseEvent) {
     const isKeyboard = event.detail === 0
     const wasFinished = isFinished.value
     handleNext()
-    if (isKeyboard && !wasFinished) {
+    if (isKeyboard && !wasFinished && state.mode === 'advanced') {
         await nextTick()
         autocompleteRef.value?.focus()
     }
@@ -83,12 +150,16 @@ async function handleNextClick(event: MouseEvent) {
                 </div>
                 <div
                     class="progress mb-4"
+                    :class="{
+                        'feedback-wrong': feedbackState === 'wrong',
+                        'feedback-correct': feedbackState === 'correct',
+                    }"
                     style="height: 8px"
                 >
                     <div
                         class="progress-bar"
                         role="progressbar"
-                        :style="{ width: `${(questionNumber / state.questions.length) * 100}%` }"
+                        :style="{ width: `${(state.answers.length / state.questions.length) * 100}%` }"
                     />
                 </div>
 
@@ -113,7 +184,28 @@ async function handleNextClick(event: MouseEvent) {
                             Which game is this stage 1 theme from?
                         </h5>
 
-                        <div v-if="!state.isAnswered">
+                        <!-- Novice mode: correct/incorrect alert (above options, shown when answered) -->
+                        <AnswerFeedback
+                            v-if="state.mode === 'novice' && state.isAnswered"
+                            :answer-type="userAnswerType"
+                        />
+
+                        <!-- Novice mode: 4 option buttons -->
+                        <NoviceOptions
+                            v-if="state.mode === 'novice'"
+                            v-model="selectedGameId"
+                            :options="state.noviceOptions[state.currentIndex] ?? []"
+                            :is-answered="state.isAnswered"
+                            :correct-id="currentQuestion.id"
+                            :answered-id="state.answers[state.currentIndex]"
+                            :song-name="currentQuestion.songName"
+                            :source="currentQuestion.source"
+                            :class="state.isAnswered ? 'mb-4' : 'mb-0'"
+                            @submit="handleNoviceSubmit"
+                        />
+
+                        <!-- Advanced mode: autocomplete + submit/skip buttons -->
+                        <div v-if="state.mode === 'advanced' && !state.isAnswered">
                             <AutocompleteInput
                                 ref="autocompleteRef"
                                 v-model="selectedGameId"
@@ -134,37 +226,90 @@ async function handleNextClick(event: MouseEvent) {
                                     class="btn btn-outline-secondary"
                                     @click="handleSkipClick"
                                 >
-                                    Skip ⏭
+                                    Skip <i class="bi bi-skip-forward-fill ms-1" />
                                 </button>
                             </div>
                         </div>
 
-                        <!-- Result -->
-                        <div v-else>
-                            <div
-                                class="alert mb-3"
-                                :class="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex] ? 'alert-success' : 'alert-danger'"
+                        <!-- Result section (answered state) -->
+                        <template v-if="state.isAnswered">
+                            <!-- Advanced mode: correct/incorrect alert -->
+                            <AnswerFeedback
+                                v-if="state.mode === 'advanced'"
+                                :answer-type="userAnswerType"
+                                :details="advancedFeedbackDetails"
+                            />
+                            <p
+                                v-if="seriesJustCompleted && !isFinished"
+                                class="text-muted small mb-2"
                             >
-                                <span v-if="state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]">
-                                    ✅ <strong>Correct!</strong> The song was <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
-                                </span>
-                                <span v-else>
-                                    ❌ <strong>Incorrect.</strong> The song was
-                                    <em>{{ currentQuestion.songName }} from {{ currentQuestion.name }}</em><template v-if="currentQuestion.source"> ({{ currentQuestion.source }} version)</template>.
-                                    You guessed: <em>{{ guessedGameName(state.answers[state.currentIndex]!) }}</em>.
-                                </span>
-                            </div>
+                                <i class="bi bi-info-circle-fill me-1" /> 
+                                <template v-if="seriesJustCompletedMajorityCorrect">
+                                    That's the last <strong>{{ seriesJustCompleted }}</strong> song you'll hear this quiz.
+                                </template>
+                                <template v-else>
+                                    Don't worry - that's the last <strong>{{ seriesJustCompleted }}</strong> song you'll hear this quiz.
+                                </template>
+                            </p>
                             <button
                                 ref="nextBtn"
                                 class="btn btn-success w-100"
                                 @click="handleNextClick"
                             >
-                                {{ isFinished ? 'See Results 🏆' : 'Next Question →' }}
+                                <template v-if="isFinished">
+                                    See Results <i class="bi bi-trophy-fill ms-1" />
+                                </template>
+                                <template v-else>
+                                    Next Question <i class="bi bi-arrow-right ms-1" />
+                                </template>
                             </button>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 </template>
+
+<style scoped>
+@keyframes shake {
+    0%,  100% { transform: translate(0, 0); }
+    15%       { transform: translate(-4px, -2px); }
+    30%       { transform: translate(4px, -2px); }
+    45%       { transform: translate(-3px, 1.5px); }
+    60%       { transform: translate(3px, -1.5px); }
+    75%       { transform: translate(1.5px, 1px); }
+    90%       { transform: translate(-1.5px, 1px); }
+}
+
+@keyframes flash-red {
+    50% {
+        background-color: var(--bs-danger);
+        box-shadow: 0 0 20px 12px rgba(var(--bs-danger-rgb), 0.9);
+    }
+}
+
+@keyframes pulse-green {
+    50% {
+        background-color: var(--bs-success);
+        box-shadow: 0 0 20px 12px rgba(var(--bs-success-rgb), 0.9);
+    }
+}
+
+.feedback-wrong {
+    overflow: visible;
+    animation: shake 0.6s ease-in-out;
+}
+
+.feedback-wrong .progress-bar {
+    animation: flash-red 0.6s ease-in-out;
+}
+
+.feedback-correct {
+    overflow: visible;
+}
+
+.feedback-correct .progress-bar {
+    animation: pulse-green 0.8s ease-in-out;
+}
+</style>

@@ -1,15 +1,26 @@
+export type QuizMode = 'novice' | 'advanced'
+
 export enum Series {
+    Aleste = 'Aleste',
     CastleOfShikigami = 'Castle of Shikigami',
     Darius = 'Darius',
     Dodonpachi = 'Dodonpachi',
+    Espgaluda = 'Espgaluda',
     Gradius = 'Gradius',
     Macross = 'Macross',
     RType = 'R-Type',
     Raiden = 'Raiden',
     Strikers1945 = 'Strikers 1945',
+    SonicWings = 'Sonic Wings',
     SpaceInvaders = 'Space Invaders',
-    Touhou = 'Touhou',
+    Touhou = 'Touhou Project',
     Zeal = 'Zeal',
+}
+
+export enum AnswerType {
+    Correct = 'correct',
+    Incorrect = 'incorrect',
+    AlmostCorrect = 'almost-correct',
 }
 
 export interface SongArrangement {
@@ -42,6 +53,13 @@ export type NoSoundTrackGameEntry = GameEntryBase & {
 }
 
 export type GameListEntry = { id: number; name: string; alias?: string | string[]; series?: Series }
+
+export interface AdvancedFeedbackDetails {
+    songName: string
+    gameName: string
+    source?: string
+    guessedName?: string
+}
 
 export type Game = {
     name: string

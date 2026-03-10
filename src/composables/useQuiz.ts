@@ -1,6 +1,6 @@
 import { reactive, computed } from 'vue'
 import { games } from '../data/games'
-import { type Game, type GameEntryWithId, Series } from '../types'
+import { type Game, type GameEntryWithId, type QuizMode, Series } from '../types'
 
 function resolveGame(entry: GameEntryWithId): Game {
     const { name, alias, series, id } = entry
@@ -36,6 +36,8 @@ interface QuizState {
     answers: number[] // guessed game id per question, -1 for a skip
     isStarted: boolean
     isAnswered: boolean
+    mode: QuizMode
+    noviceOptions: number[][] // 4 option IDs per question (populated in novice mode only)
 }
 
 const QUIZ_SIZE = 20
@@ -47,6 +49,8 @@ const state = reactive<QuizState>({
     answers: [],
     isStarted: false,
     isAnswered: false,
+    mode: 'advanced',
+    noviceOptions: [],
 })
 
 const isFinished = computed(
@@ -60,6 +64,37 @@ const isFinished = computed(
 const usedGameIds = computed<Set<number>>(
     () => new Set(state.questions.slice(0, state.currentIndex).map((g) => g.id)),
 )
+
+// The series whose last appearance in the quiz was just answered (while the result is being shown), or null.
+// Only triggers when the series limit was actually hit (i.e. the quiz contains SERIES_LIMIT songs from that series).
+const seriesJustCompleted = computed<Series | null>(() => {
+    if (!state.isAnswered) return null
+    const currentQuestion = state.questions[state.currentIndex]
+    if (!currentQuestion?.series) return null
+    const series = currentQuestion.series
+    const seriesQuestions = state.questions.filter((q) => q.series === series)
+    if (seriesQuestions.length < SERIES_LIMIT) return null
+    const lastIndexOfSeries = state.questions.reduce<number>(
+        (maxIdx, q, i) => (q.series === series ? i : maxIdx),
+        -1,
+    )
+    return lastIndexOfSeries === state.currentIndex ? series : null
+})
+
+// Whether the user got more than half the questions from the just-completed series correct
+const seriesJustCompletedMajorityCorrect = computed<boolean>(() => {
+    const series = seriesJustCompleted.value
+    if (!series) return false
+    let correct = 0
+    let total = 0
+    for (let i = 0; i <= state.currentIndex; i++) {
+        if (state.questions[i]?.series === series) {
+            total++
+            if (state.answers[i] === state.questions[i]?.id) correct++
+        }
+    }
+    return total > 0 && correct > total / 2
+})
 
 // IDs of games belonging to series that have reached the per-series limit (SERIES_LIMIT) in the current quiz
 const seriesLimitedGameIds = computed<Set<number>>(() => {
@@ -80,7 +115,7 @@ const seriesLimitedGameIds = computed<Set<number>>(() => {
     )
 })
 
-function startQuiz() {
+function startQuiz(mode: QuizMode = 'advanced') {
     const forceFirstGames = games.filter((g) => g.forceFirst)
     const shuffled = [...games].filter((g) => !g.forceFirst).sort(() => Math.random() - 0.5)
     const seriesCounts: Partial<Record<Series, number>> = {}
@@ -94,11 +129,41 @@ function startQuiz() {
         }
         selected.push(resolveGame(game))
     }
+
+    let noviceOptions: number[][] = []
+    if (mode === 'novice') {
+        noviceOptions = selected.map((question, i) => {
+            const priorIds = new Set(selected.slice(0, i).map((q) => q.id))
+            const priorSeriesCounts: Partial<Record<Series, number>> = {}
+            for (const q of selected.slice(0, i)) {
+                if (q.series) {
+                    priorSeriesCounts[q.series] = (priorSeriesCounts[q.series] ?? 0) + 1
+                }
+            }
+            const limitedSeries = new Set<Series>(
+                (Object.entries(priorSeriesCounts) as [Series, number][])
+                    .filter(([, count]) => count >= SERIES_LIMIT)
+                    .map(([series]) => series),
+            )
+            const eligible = games.filter(
+                (g) =>
+                    g.id !== question.id &&
+                    !priorIds.has(g.id) &&
+                    !(g.series && limitedSeries.has(g.series)),
+            )
+            const shuffledEligible = [...eligible].sort(() => Math.random() - 0.5)
+            const incorrectIds = shuffledEligible.slice(0, 3).map((g) => g.id)
+            return [...incorrectIds, question.id].sort(() => Math.random() - 0.5)
+        })
+    }
+
     state.questions = selected
     state.currentIndex = 0
     state.answers = []
     state.isStarted = true
     state.isAnswered = false
+    state.mode = mode
+    state.noviceOptions = noviceOptions
 }
 
 function submitGuess(gameId: number) {
@@ -124,8 +189,10 @@ function resetQuiz() {
     state.answers = []
     state.isStarted = false
     state.isAnswered = false
+    state.mode = 'advanced'
+    state.noviceOptions = []
 }
 
 export function useQuiz() {
-    return { state, isFinished, usedGameIds, seriesLimitedGameIds, startQuiz, submitGuess, nextQuestion, resetQuiz }
+    return { state, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, startQuiz, submitGuess, nextQuestion, resetQuiz }
 }

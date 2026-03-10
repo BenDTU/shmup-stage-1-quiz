@@ -29,9 +29,15 @@ function playAgain() {
             <div class="col-lg-7">
                 <template v-if="total > 0">
                     <div class="text-center mb-5">
-                        <h1 class="display-5 fw-bold">
-                            Quiz Complete! 🏆
+                        <h1 class="display-5 mb-3 fw-bold">
+                            Quiz Complete! <i class="bi bi-trophy-fill" />
                         </h1>
+                        <p class="text-muted mb-3">
+                            <span
+                                class="badge"
+                                :class="state.mode === 'novice' ? 'bg-success' : 'bg-danger'"
+                            >{{ state.mode === 'novice' ? 'Novice' : 'Advanced' }}</span>
+                        </p>
                         <p class="lead">
                             You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
                         </p>
@@ -49,10 +55,10 @@ function playAgain() {
                             </div>
                         </div>
                         <p class="text-muted">
-                            <span v-if="score === total">Perfect score! You're a true shmup fan. 🎖️</span>
+                            <span v-if="score === total">Perfect score! You're a true shmup fan. <i class="bi bi-award-fill" /></span>
                             <span v-else-if="score / total >= 0.7">Great job! You clearly know your shmups.</span>
                             <span v-else-if="score / total >= 0.4">Not bad! Keep practicing.</span>
-                            <span v-else>Time to play more shmups! 😄</span>
+                            <span v-else>Time to play more shmups! <i class="bi bi-emoji-smile" /></span>
                         </p>
                     </div>
 
@@ -68,8 +74,14 @@ function playAgain() {
                         >
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex">
-                                    <span class="fw-semibold me-1 text-nowrap">#{{ index + 1 }}</span>
-                                    <span class="me-2 text-nowrap">{{ state.questions[index]?.id === guessId ? '✅' : '❌' }}</span>
+                                    <span class="fw-semibold me-2 text-nowrap">#{{ index + 1 }}</span>
+                                    <span class="me-2 text-nowrap">
+                                        <i
+                                            :class="state.questions[index]?.id === guessId ? 'bi bi-check-circle-fill text-success' : 'bi bi-x-circle-fill text-danger'"
+                                            role="img"
+                                            :aria-label="state.questions[index]?.id === guessId ? 'Correct answer' : 'Incorrect answer'"
+                                        />
+                                    </span>
                                     <div>
                                         <div class="fw-semibold">
                                             {{ state.questions[index]?.name }}
@@ -92,8 +104,8 @@ function playAgain() {
                                     :href="`https://www.youtube.com/watch?v=${encodeURIComponent(state.questions[index]!.videoId)}`"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="ms-3 text-nowrap small"
-                                >▶ YouTube</a>
+                                    class="icon-link ms-3 small"
+                                ><i class="bi bi-youtube lh-1" /> YouTube</a>
                             </div>
                         </div>
                     </div>

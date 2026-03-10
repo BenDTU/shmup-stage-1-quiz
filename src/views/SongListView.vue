@@ -1,38 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { games } from '@/data/games'
+import { games, totalSongs, totalShmups } from '@/data/games'
 import type { SongEntry } from '@/data/games'
-
-interface SongRow {
-    songName: string
-    links: { label: string; url: string }[]
-}
+import SongLinks from '@/components/SongLinks.vue'
 
 interface GameGroup {
     gameName: string
     aliases: string[]
-    songs: SongRow[]
-}
-
-function songEntryToRow(entry: SongEntry): SongRow {
-    if ('arrangements' in entry) {
-        return {
-            songName: entry.songName,
-            links: entry.arrangements.map((a) => ({
-                label: a.source,
-                url: `https://www.youtube.com/watch?v=${encodeURIComponent(a.videoId)}${a.startTime ? `&t=${a.startTime}` : ''}`,
-            })),
-        }
-    }
-    return {
-        songName: entry.songName,
-        links: [
-            {
-                label: 'YouTube',
-                url: `https://www.youtube.com/watch?v=${encodeURIComponent(entry.videoId)}${entry.startTime ? `&t=${entry.startTime}` : ''}`,
-            },
-        ],
-    }
+    songs: SongEntry[]
 }
 
 function normalizeAlias(alias: string | string[]): string[] {
@@ -47,7 +22,7 @@ const gameGroups: GameGroup[] = games.map((game) => {
     return {
         gameName: game.name,
         aliases: game.alias ? normalizeAlias(game.alias) : [],
-        songs: sources.map(songEntryToRow),
+        songs: sources,
     }
 })
 
@@ -58,11 +33,11 @@ const hoveredGame = ref<string | null>(null)
     <main class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-9">
-                <h1 class="display-5 fw-bold mb-1 text-center">
-                    🎵 Song List
+                <h1 class="display-5 fw-bold mb-2 text-center">
+                    Song List
                 </h1>
                 <p class="text-center text-muted mb-4">
-                    All <strong>{{ games.length }}</strong> games and their stage&nbsp;1 themes in the quiz.
+                    There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups loaded in!
                 </p>
                 <div class="table-responsive">
                     <table class="table align-middle">
@@ -74,7 +49,10 @@ const hoveredGame = ref<string | null>(null)
                                 <th scope="col">
                                     Song
                                 </th>
-                                <th scope="col">
+                                <th
+                                    scope="col"
+                                    class="d-none d-sm-table-cell"
+                                >
                                     Link
                                 </th>
                             </tr>
@@ -105,16 +83,14 @@ const hoveredGame = ref<string | null>(null)
                                             {{ alias }}
                                         </div>
                                     </td>
-                                    <td>{{ song.songName }}</td>
-                                    <td class="text-nowrap">
-                                        <a
-                                            v-for="link in song.links"
-                                            :key="link.url"
-                                            :href="link.url"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="me-2"
-                                        >▶ {{ link.label }}</a>
+                                    <td>
+                                        {{ song.songName }}
+                                        <div class="d-sm-none mt-1">
+                                            <SongLinks :entry="song" />
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap d-none d-sm-table-cell">
+                                        <SongLinks :entry="song" />
                                     </td>
                                 </tr>
                             </template>
