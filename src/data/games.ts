@@ -377,6 +377,13 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Pure Spirit', videoId: 'OijiF6r1Xfc' },
     },
     {
+        name: 'Giga Wing',
+        songSource: [
+            { songName: 'Nighttime Battle', videoId: 'pnGYJToUTFk' },
+            { songName: 'On Lava Base', videoId: '9OmTsaHdDiI' },
+        ],
+    },
+    {
         name: 'Ginga Force',
         songSource: { songName: 'Aeronaut', videoId: 'Go5MfC8S02o' },
     },
@@ -605,6 +612,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Mad Shark',
         songSource: { songName: 'Round 1, Round 2, Round 5', videoId: '4eTABytlJZY', startTime: 9, endTime: 140 },
+    },
+    {
+        name: 'Mars Matrix',
+        songSource: { songName: 'Armed Satellite Phobos', videoId: 'thei1zxfJWA' },
     },
     {
         name: 'Mazinger Z',
@@ -1329,8 +1340,16 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'Varth: Operation Thunderstorm',
+        songSource: { songName: 'Stage 1, 16', videoId: 'x1H0Otv5R_E' },
+    },
+    {
         name: 'Viper Phase 1',
         songSource: { songName: 'Go Straight Ahead', videoId: 'GUILDdRfmxw' },
+    },
+    {
+        name: 'Vulgus',
+        songSource: { songName: 'Main BGM', videoId: 'Y6gEyApB4b4' },
     },
     {
         name: 'X Multiply',
