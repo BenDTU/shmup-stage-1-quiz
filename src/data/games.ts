@@ -351,6 +351,11 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1', videoId: 'lHGdbyX82TE' },
     },
     {
+        name: 'Ibara',
+        series: Series.Ibara,
+        songSource: { songName: 'Show Time', videoId: 'T65Zmc6iWCc' },
+    },
+    {
         name: 'Ikaruga',
         songSource: { songName: 'Ideal', videoId: 'fAn6XxsDDTI' },
     },
@@ -576,6 +581,11 @@ const gameEntries: GameEntry[] = [
     {
         name: 'PD Ultraman Invader',
         songSource: { songName: 'Ultraman', videoId: 'UD8ILryBKPY' },
+    },
+    {
+        name: 'Pink Sweets: Ibara Sorekara',
+        series: Series.Ibara,
+        songSource: { songName: 'Mama! Ora va!', videoId: '48L8QKOFehc' },
     },
     {
         name: 'Platypus',
