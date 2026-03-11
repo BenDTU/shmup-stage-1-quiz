@@ -10,12 +10,14 @@ export enum Series {
     Gradius = 'Gradius',
     Ibara = 'Ibara',
     Macross = 'Macross',
+    OutZone = 'Out Zone',
     RType = 'R-Type',
     Raiden = 'Raiden',
     Strikers1945 = 'Strikers 1945',
     SonicWings = 'Sonic Wings',
     SpaceInvaders = 'Space Invaders',
     Touhou = 'Touhou Project',
+    Truxton = 'Truxton',
     Zeal = 'Zeal',
 }
 
