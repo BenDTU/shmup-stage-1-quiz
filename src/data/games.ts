@@ -265,6 +265,11 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1, 3-2', videoId: '69wGmxanW20' },
     },
     {
+        name: 'FixEight',
+        series: Series.OutZone,
+        songSource: { songName: 'Fixer', videoId: 'pyefFS8SwiA', startTime: 10, endTime: 119 },
+    },
+    {
         name: 'Flying Shark',
         series: Series.FlyingShark,
         alias: 'Sky Shark',
@@ -349,6 +354,17 @@ const gameEntries: GameEntry[] = [
         name: 'Gradius: The Interstellar Assault',
         series: Series.Gradius,
         songSource: { songName: 'The Chase, A Ruins, Toadstool', videoId: '05L6GWxUugg', startTime: 103, endTime: 326 },
+    },
+    {
+        name: 'Grind Stormer',
+        alias: 'V・V',
+        songSource: {
+            songName: 'Wonderful Dreamer',
+            arrangements: [
+                { source: 'Arcade', videoId: 'Qe4Fy2oYehw' },
+                { source: 'Mega Drive', videoId: '3Cg7Tgp-d7k' },
+            ],
+        },
     },
     {
         name: 'Gun Frontier',
@@ -537,6 +553,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Take off ~ Born to be free', videoId: 'GBS6KfJRyIg' },
     },
     {
+        name: 'Muchi Muchi Pork!',
+        songSource: { songName: 'Doki Doki in the Sky', videoId: 'iTb0FEaqsv4' },
+    },
+    {
         name: 'M.U.S.H.A.: Metallic Uniframe Super Hybrid Armor',
         alias: 'Musha Aleste: Full Metal Fighter Ellinor',
         sortName: 'MUSHA',
@@ -570,6 +590,11 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Natsuki Chronicles',
         songSource: { songName: 'Hopeful Morning Glow', videoId: 'HuzP7m6Us28' },
+    },
+    {
+        name: 'Out Zone',
+        series: Series.OutZone,
+        songSource: { songName: 'To The Earth', videoId: 'zfefU4y8P00' },
     },
     {
         name: 'Parodius',
@@ -835,6 +860,10 @@ const gameEntries: GameEntry[] = [
         name: 'Raiden Fighters Jet',
         series: Series.Raiden,
         songSource: { songName: 'Simulation Level 01 (Launch Base)', videoId: 'C4DFwgSpO00' },
+    },
+    {
+        name: 'Rainchaser',
+        songSource: { songName: 'Rapid Approach', videoId: 'EXL2ur8D7iM', startTime: 323, endTime: 568 },
     },
     {
         name: 'RayForce',
@@ -1183,6 +1212,8 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Truxton',
+        series: Series.Truxton,
+        alias: 'Tatsujin',
         songSource: {
             songName: 'Brave Man, Far Away',
             arrangements: [
@@ -1203,6 +1234,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Truxton II',
+        alias: 'Tatsujin Oh',
         songSource: { songName: 'Live in Future', videoId: 'xgxFHJZrAfc' },
     },
     {
