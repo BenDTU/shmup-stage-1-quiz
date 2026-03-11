@@ -594,6 +594,15 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Village Sky', videoId: 'AGt-RJr-khA' },
     },
     {
+        name: 'Prehistoric Isle in 1930',
+        sortName: 'Prehistoric Isle',
+        songSource: { songName: 'Flying the Dinosaur', videoId: 'H7CYh7Y3E6w' },
+    },
+    {
+        name: 'Prehistoric Isle 2',
+        songSource: { songName: 'Stage 1', videoId: 'xbZlw0nzDNo' },
+    },    
+    {
         name: 'Progear',
         songSource: { songName: 'To the Blue Sky', videoId: 'h-lt6fiIqvM' },
     },
