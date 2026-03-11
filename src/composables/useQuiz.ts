@@ -11,7 +11,7 @@ function resolveGame(entry: GameEntryWithId): Game {
         const { songName, videoId, startTime = 0, endTime } = songEntry
         return { name, alias, series, id, songName, videoId, startTime, endTime }
     }
-  
+
     const arrangements = songEntry.arrangements
     const arrangement = arrangements[Math.floor(Math.random() * arrangements.length)]!
     const { songName } = songEntry;
