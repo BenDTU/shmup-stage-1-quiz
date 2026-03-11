@@ -351,7 +351,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Flying Shark (NES)',
         series: Series.FlyingShark,
-        alias: 'Sky Shark (NES)',
+        alias: 'Sky Shark',
         songSource: { songName: 'Stage 1', videoId: 'yxsKzGZ8WHg' },
     },
     {
