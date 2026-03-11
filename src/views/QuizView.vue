@@ -243,7 +243,7 @@ async function handleNextClick(event: MouseEvent) {
                                 v-if="seriesJustCompleted && !isFinished"
                                 class="text-muted small mb-2"
                             >
-                                <i class="bi bi-info-circle-fill me-1" /> 
+                                <i class="bi bi-info-circle-fill me-1" />
                                 <template v-if="seriesJustCompletedMajorityCorrect">
                                     That's the last <strong>{{ seriesJustCompleted }}</strong> song you'll hear this quiz.
                                 </template>

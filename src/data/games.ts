@@ -249,8 +249,8 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Espgaluda II',
         series: Series.Espgaluda,
-        songSource: { 
-            songName: 'Mutiny ~ Fate is with the Girl', 
+        songSource: {
+            songName: 'Mutiny ~ Fate is with the Girl',
             arrangements: [
                 { source: 'White Label', videoId: '1gALhcCbn4A' },
                 { source: 'Black Label', videoId: 'MUdtYy9UGAM' },
@@ -263,6 +263,38 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Explosive Breaker',
         songSource: { songName: 'Stage 1, 3-2', videoId: '69wGmxanW20' },
+    },
+    {
+        name: 'Flying Shark',
+        series: Series.FlyingShark,
+        alias: 'Sky Shark',
+        songSource: {
+            songName: 'Asia',
+            arrangements: [
+                { source: 'Arcade', videoId: 'pA-RGIQMAlY' },
+                { source: 'Atari ST', videoId: 'F2xGseAZMeo' },
+                { source: 'Sharp X68000', videoId: 'FkxXKMwjJTQ' },
+            ],
+        },
+    },
+    {
+        name: 'Flying Shark (NES)',
+        series: Series.FlyingShark,
+        alias: 'Sky Shark (NES)',
+        songSource: { songName: 'Stage 1', videoId: 'yxsKzGZ8WHg' },
+    },
+    {
+        name: 'Fire Shark',
+        alias: 'Same! Same! Same!',
+        series: Series.FlyingShark,
+        sortName: 'Flying Shark 2',
+        songSource: {
+            songName: 'Fire Shark',
+            arrangements: [
+                { source: 'Arcade', videoId: 'EBIn673qfHM' },
+                { source: 'Mega Drive', videoId: 'QDSzs97Mhzw' },
+            ],
+        },
     },
     {
         name: 'G-Darius',
@@ -398,83 +430,83 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Lords of Thunder',
         songSource: [
-            { 
-                songName: 'Dezant', 
+            {
+                songName: 'Dezant',
                 arrangements: [
-                    { 
-                        source: 'PC Engine', 
+                    {
+                        source: 'PC Engine',
                         videoId: 'pu_pNnEymLY',
                     },
                     {
                         source: 'Sega CD',
                         videoId: 'fKymzvR4hE0',
                     },
-                ], 
+                ],
             },
-            { 
-                songName: 'Auzal', 
+            {
+                songName: 'Auzal',
                 arrangements: [
-                    { 
-                        source: 'PC Engine', 
+                    {
+                        source: 'PC Engine',
                         videoId: 'iyvdraPERr8',
                     },
                     {
                         source: 'Sega CD',
                         videoId: '6FYYwj6iyAA',
                     },
-                ], 
+                ],
             },
-            { 
-                songName: 'Lamarada', 
+            {
+                songName: 'Lamarada',
                 arrangements: [
-                    { 
-                        source: 'PC Engine', 
+                    {
+                        source: 'PC Engine',
                         videoId: '76zevuMEbkg',
                     },
                     {
                         source: 'Sega CD',
                         videoId: 'fnbcvp9E4n0',
                     },
-                ], 
+                ],
             },
-            { 
-                songName: 'Bosque', 
+            {
+                songName: 'Bosque',
                 arrangements: [
-                    { 
-                        source: 'PC Engine', 
+                    {
+                        source: 'PC Engine',
                         videoId: 'ubBdRb1f5A8',
                     },
                     {
                         source: 'Sega CD',
                         videoId: 'dknJeoMiNfY',
                     },
-                ], 
+                ],
             },
-            { 
-                songName: 'Helado', 
+            {
+                songName: 'Helado',
                 arrangements: [
-                    { 
-                        source: 'PC Engine', 
+                    {
+                        source: 'PC Engine',
                         videoId: '78anoPGi4Hk',
                     },
                     {
                         source: 'Sega CD',
                         videoId: 'ONJlKmFHUMY',
                     },
-                ], 
+                ],
             },
-            { 
-                songName: 'Cielom', 
+            {
+                songName: 'Cielom',
                 arrangements: [
-                    { 
-                        source: 'PC Engine', 
+                    {
+                        source: 'PC Engine',
                         videoId: 'sya6mhmygyM',
                     },
                     {
                         source: 'Sega CD',
                         videoId: '4C0zHb4fGAA',
                     },
-                ], 
+                ],
             },
         ],
     },
@@ -503,7 +535,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Metal Black',
         songSource: { songName: 'Take off ~ Born to be free', videoId: 'GBS6KfJRyIg' },
-    },    
+    },
     {
         name: 'M.U.S.H.A.: Metallic Uniframe Super Hybrid Armor',
         alias: 'Musha Aleste: Full Metal Fighter Ellinor',
@@ -611,7 +643,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Prehistoric Isle 2',
         songSource: { songName: 'Stage 1', videoId: 'xbZlw0nzDNo' },
-    },    
+    },
     {
         name: 'Progear',
         songSource: { songName: 'To the Blue Sky', videoId: 'h-lt6fiIqvM' },
@@ -842,17 +874,17 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Salamander',
         alias: 'Life Force',
-        series: Series.Gradius,        
+        series: Series.Gradius,
         songSource: { songName: 'Power of Anger', videoId: 'gle0JLhaRxw' },
     },
     {
         name: 'Salamander 2',
-        series: Series.Gradius,        
+        series: Series.Gradius,
         songSource: { songName: 'Silver Wings Again', videoId: 'Y0CFKk8WDTM' },
     },
     {
         name: 'Salamander III',
-        series: Series.Gradius,        
+        series: Series.Gradius,
         songSource: { songName: 'Courage of Pride', videoId: '6VRkKpoJADc' },
     },
     {
@@ -978,7 +1010,7 @@ const gameEntries: GameEntry[] = [
         alias: 'Super Aleste',
         series: Series.Aleste,
         songSource: { songName: 'Stage 1', videoId: 'C--eV-L3gfE' },
-    },    
+    },
     {
         name: 'Strike Gunner S.T.G.',
         // The theme has no official name; songName describes where it appears. The same melody is used in different stages across the Arcade and Super Nintendo versions.
@@ -1030,7 +1062,7 @@ const gameEntries: GameEntry[] = [
     {
         name: "Summer Carnival '92 Recca",
         songSource: { songName: 'Jetter', videoId: 'tYg-HtcobKY' },
-    },    
+    },
     {
         name: 'Super R-Type',
         series: Series.RType,

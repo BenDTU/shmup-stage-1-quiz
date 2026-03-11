@@ -6,6 +6,7 @@ export enum Series {
     Darius = 'Darius',
     Dodonpachi = 'Dodonpachi',
     Espgaluda = 'Espgaluda',
+    FlyingShark = 'Flying Shark',
     Gradius = 'Gradius',
     Ibara = 'Ibara',
     Macross = 'Macross',
