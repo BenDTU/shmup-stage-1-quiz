@@ -12,6 +12,72 @@ export type { SongEntry, GameEntry, GameListEntry, Game, NoSoundTrackGameEntry }
 // startTime (seconds) is optional; omit it to start from the beginning of the video.
 const gameEntries: GameEntry[] = [
     {
+        name: '1942',
+        sortName: '194X 1',
+        series: Series._194X,
+        songSource: {
+            songName: 'Stage BGM',
+            arrangements: [
+                { source: 'Arcade', videoId: 'M3yi_zFe6Ic' },
+                { source: 'NES', videoId: 'dDwivbWwnt8' },
+            ],
+        },
+    },
+    {
+        name: '1943: The Battle of Midway',
+        sortName: '194X 2',
+        series: Series._194X,
+        songSource: {
+            songName: 'Air Battle A',
+            arrangements: [
+                { source: 'Arcade', videoId: 'L8Xlqpw27wE' },
+                { source: 'NES', videoId: 'MviUoCEbuO4' },
+            ],
+        },
+    },
+    {
+        name: '1943 Kai: Midway Kaisen',
+        sortName: '194X 2.5',
+        series: Series._194X,
+        songSource: {
+            songName: 'Air Battle A',
+            arrangements: [
+                { source: 'Arcade', videoId: 'NMraQpOe6gI' },
+                { source: 'PC Engine', videoId: 'x2MU_2KlTX0' },
+            ],
+        },
+    },
+    {
+        name: '1941: Counter Attack',
+        sortName: '194X 3',
+        series: Series._194X,
+        songSource: {
+            songName: 'Stage 1',
+            arrangements: [
+                { source: 'Arcade', videoId: 'ql-CxJSw0Qg' },
+                { source: 'PC Engine', videoId: 'dslqYml4T_c' },
+            ],
+        },
+    },
+    {
+        name: '19XX: The War Against Destiny',
+        sortName: '194X 4',
+        series: Series._194X,
+        songSource: { songName: 'A bit of blue sky between the clouds', videoId: 'fggwm2Rdmds' },
+    },
+    {
+        name: '1944: The Loop Master',
+        sortName: '194X 5',
+        series: Series._194X,
+        songSource: { songName: 'The Deep Blue', videoId: 'BWltBoObR7s' },
+    },
+    {
+        name: '1942: Joint Strike',
+        sortName: '194X 6',
+        series: Series._194X,
+        songSource: { songName: 'Retro Blitz', videoId: 'o-SVBG4IYSY' },
+    },
+    {
         name: 'Air Zonk',
         songSource: { songName: 'Aqua Base stage', videoId: '9IJcqceH3CM' },
     },
@@ -285,7 +351,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Flying Shark (NES)',
         series: Series.FlyingShark,
-        alias: 'Sky Shark (NES)',
+        alias: 'Sky Shark',
         songSource: { songName: 'Stage 1', videoId: 'yxsKzGZ8WHg' },
     },
     {
@@ -309,6 +375,13 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Gekirindan',
         songSource: { songName: 'Pure Spirit', videoId: 'OijiF6r1Xfc' },
+    },
+    {
+        name: 'Giga Wing',
+        songSource: [
+            { songName: 'Nighttime Battle', videoId: 'pnGYJToUTFk' },
+            { songName: 'On Lava Base', videoId: '9OmTsaHdDiI' },
+        ],
     },
     {
         name: 'Ginga Force',
@@ -539,6 +612,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Mad Shark',
         songSource: { songName: 'Round 1, Round 2, Round 5', videoId: '4eTABytlJZY', startTime: 9, endTime: 140 },
+    },
+    {
+        name: 'Mars Matrix',
+        songSource: { songName: 'Armed Satellite Phobos', videoId: 'thei1zxfJWA' },
     },
     {
         name: 'Mazinger Z',
@@ -1263,8 +1340,16 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'Varth: Operation Thunderstorm',
+        songSource: { songName: 'Stage 1, 16', videoId: 'x1H0Otv5R_E' },
+    },
+    {
         name: 'Viper Phase 1',
         songSource: { songName: 'Go Straight Ahead', videoId: 'GUILDdRfmxw' },
+    },
+    {
+        name: 'Vulgus',
+        songSource: { songName: 'Main BGM', videoId: 'Y6gEyApB4b4' },
     },
     {
         name: 'X Multiply',
