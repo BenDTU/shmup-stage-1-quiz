@@ -109,7 +109,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Alpha Mission II',
         series: Series.AlphaMission,
-        songSource: { songName: 'The Space Flight', videoId: '2nRERYlmKDE' },
+        songSource: { songName: 'The Space Flight', videoId: 'KAZ5n-C9JlM' },
     },
     {
         name: 'Armed Police Batrider',
