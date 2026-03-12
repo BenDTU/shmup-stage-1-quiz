@@ -109,7 +109,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Alpha Mission II',
         series: Series.AlphaMission,
-        songSource: { songName: "SYD's Theme", videoId: '2nRERYlmKDE' },
+        songSource: { songName: 'The Space Flight', videoId: '2nRERYlmKDE' },
     },
     {
         name: 'Armed Police Batrider',
@@ -395,7 +395,7 @@ const gameEntries: GameEntry[] = [
                 { source: 'Arcade', videoId: 'iyljD9_TY90' },
                 { source: 'Master System', videoId: 'KcJuHpHmf_0' },
                 { source: 'NES', videoId: 'qAeS1eXaCNQ' },
-                { source: 'Playstation 2', videoId: 'Kvp_vit1Ljo' },
+                { source: 'Sega Ages', videoId: 'Kvp_vit1Ljo' },
             ],
         },
     },
@@ -407,7 +407,7 @@ const gameEntries: GameEntry[] = [
             songName: 'Round 1 (Cholacoray)',
             arrangements: [
                 { source: 'Arcade', videoId: '_QIpZt0lMKY' },
-                { source: 'Master System', videoId: '9n2s8Xo7l3E' },
+                { source: 'Master System', videoId: 'qTCv1HuZqxQ' },
                 { source: 'NES', videoId: 'A8tt3jxuNiQ' },
             ],
         },
