@@ -1333,7 +1333,11 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Touhou 9: Phantasmagoria of Flower View',
         series: Series.Touhou,
-        songSource: { songName: 'Spring Lane ~ Colorful Path', videoId: 'LfqQa6JDlS8' },
+        songSource: [
+            { songName: 'Adventure of the Lovestruck Tomboy', videoId: 'QYYHxR4Ry4E' },
+            { songName: 'Ghostly Band ~ Phantom Ensemble', videoId: 'GW4v7sU5JAs' },
+            { songName: 'Deaf to All but the Song ~ Flower Mix', videoId: 'wBqeCV6H5zo' },
+        ],
     },
     {
         name: 'Touhou 10: Mountain of Faith',
