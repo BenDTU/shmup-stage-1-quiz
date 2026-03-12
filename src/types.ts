@@ -3,10 +3,13 @@ export type QuizMode = 'novice' | 'advanced'
 export enum Series {
     _194X = '194X',
     Aleste = 'Aleste',
+    AlphaMission = 'Alpha Mission',
     CastleOfShikigami = 'Castle of Shikigami',
+    DanmakuUnlimited = 'Danmaku Unlimited',
     Darius = 'Darius',
     Dodonpachi = 'Dodonpachi',
     Espgaluda = 'Espgaluda',
+    FantasyZone = 'Fantasy Zone',
     FlyingShark = 'Flying Shark',
     Gradius = 'Gradius',
     Ibara = 'Ibara',

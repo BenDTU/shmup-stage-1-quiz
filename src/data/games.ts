@@ -96,6 +96,22 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Aqua Base stage', videoId: '9IJcqceH3CM' },
     },
     {
+        name: 'Alpha Mission',
+        series: Series.AlphaMission,
+        songSource: {
+            songName: "SYD's Theme",
+            arrangements: [
+                { source: 'Arcade', videoId: '2nRERYlmKDE' },
+                { source: 'NES', videoId: 'ObVdeqcyFek' },
+            ],
+        },
+    },
+    {
+        name: 'Alpha Mission II',
+        series: Series.AlphaMission,
+        songSource: { songName: 'The Space Flight', videoId: 'KAZ5n-C9JlM' },
+    },
+    {
         name: 'Armed Police Batrider',
         songSource: { songName: 'Easy to Go', videoId: 'UFc72Qz3S34' },
     },
@@ -186,6 +202,16 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Daioh',
         songSource: { songName: 'Stage 1', videoId: 'vqi1eM9MNPw', startTime: 62, endTime: 213 },
+    },
+    {
+        name: 'Danmaku Unlimited 2',
+        series: Series.DanmakuUnlimited,
+        songSource: { songName: 'First Sortie', videoId: 'vHREMLcVciY' },
+    },
+    {
+        name: 'Danmaku Unlimited 3',
+        series: Series.DanmakuUnlimited,
+        songSource: { songName: "Yesterday's Tomorrow", videoId: '0-mq-HozJkA' },
     },
     {
         name: 'Darius',
@@ -359,6 +385,37 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Explosive Breaker',
         songSource: { songName: 'Stage 1, 3-2', videoId: '69wGmxanW20' },
+    },
+    {
+        name: 'Fantasy Zone',
+        series: Series.FantasyZone,
+        songSource: {
+            songName: 'Opa Opa!',
+            arrangements: [
+                { source: 'Arcade', videoId: 'iyljD9_TY90' },
+                { source: 'Master System', videoId: 'KcJuHpHmf_0' },
+                { source: 'NES', videoId: 'qAeS1eXaCNQ' },
+                { source: 'Sega Ages', videoId: 'Kvp_vit1Ljo' },
+            ],
+        },
+    },
+    {
+        name: 'Fantasy Zone II: The Tears of Opa-Opa',
+        sortName: 'Fantasy Zone 2',
+        series: Series.FantasyZone,
+        songSource: {
+            songName: 'Round 1 (Cholacoray)',
+            arrangements: [
+                { source: 'Arcade', videoId: '_QIpZt0lMKY' },
+                { source: 'Master System', videoId: 'qTCv1HuZqxQ' },
+                { source: 'NES', videoId: 'A8tt3jxuNiQ' },
+            ],
+        },
+    },
+    {
+        name: 'Fantasy Zone Gear',
+        series: Series.FantasyZone,
+        songSource: { songName: 'Wood stage', videoId: 'evHiKhEU54U' },
     },
     {
         name: 'Fever SOS',
@@ -666,6 +723,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Mecha Ritz: Steel Rondo',
         songSource: { songName: 'Alone', videoId: 'UqKmOiETJeI' },
+    },
+    {
+        name: 'Mega Zone',
+        songSource: { songName: 'Main BGM', videoId: 'Eww_CkmhF1M' },
     },
     {
         name: 'Metal Black',
@@ -1390,6 +1451,16 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'Under Defeat',
+        songSource: {
+            songName: "Don't Look Back", // Original song is listed in soundtrack as 'Can't Come Back' but HD soundtrack refers to it as 'Don't Look Back', will use most recent translation
+            arrangements: [
+                { source: 'Original', videoId: 'ynspAkuNVSg' },
+                { source: 'HD', videoId: '4T6uakczxfU' },
+            ],
+        },
+    },
+    {
         name: 'Varth: Operation Thunderstorm',
         songSource: { songName: 'Stage 1, 16', videoId: 'x1H0Otv5R_E' },
     },
@@ -1450,6 +1521,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'ZeroRanger',
         songSource: { songName: 'It May Be Greenish', videoId: 'U0MXZ_WXtsM' },
+    },
+    {
+        name: 'Zip Zip Zing',
+        songSource: { songName: 'Stage 1, 3, 5', videoId: 'RXFcfd1oh4g', startTime: 2, endTime: 51 },
     },
 ]
 
