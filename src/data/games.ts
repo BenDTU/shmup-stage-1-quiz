@@ -78,6 +78,20 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Retro Blitz', videoId: 'o-SVBG4IYSY' },
     },
     {
+        name: 'Air Duel',
+        songSource: { songName: 'Stage 1', videoId: '8WsKeA4v01U' },
+    },
+    {
+        name: 'Air Assault',
+        alias: 'Fire Barrel',
+        sortName: 'Air Duel 2',
+        songSource: { songName: 'Stage 1', videoId: 'SF4fQlJ58V8' },
+    },
+    {
+        name: 'Air Gallet',
+        songSource: { songName: 'Stage 1', videoId: 'YbM2D2_QJMY' },
+    },
+    {
         name: 'Air Zonk',
         songSource: { songName: 'Aqua Base stage', videoId: '9IJcqceH3CM' },
     },
@@ -129,6 +143,11 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Blue Revolver',
         songSource: { songName: 'Qygenomics', videoId: 'dTbpYrrSRPY' },
+    },
+    {
+        name: 'Carrier Air Wing',
+        alias: 'U.S. Navy',
+        songSource: { songName: 'Mission 1', videoId: 'xBNq6tCJVcE' },
     },
     {
         name: 'Castle of Shikigami',
@@ -200,9 +219,20 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'Darius Force',
+        alias: 'Super Nova',
+        series: Series.Darius,
+        songSource: { songName: 'A King', videoId: 'mtEtEeEfo0Y' },
+    },
+    {
         name: 'Darius Gaiden',
         series: Series.Darius,
         songSource: { songName: 'Visionnerz ~Hallucinated People~', videoId: 'kG30WhHCnN4' },
+    },
+    {
+        name: 'Darius Twin',
+        series: Series.Darius,
+        songSource: { songName: 'A Flasing Dual Hawk', videoId: '0wvJb9bgdCk' },
     },
     {
         name: 'Dariusburst',
@@ -331,6 +361,28 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1, 3-2', videoId: '69wGmxanW20' },
     },
     {
+        name: 'Fever SOS',
+        alias: 'Dangun Feveron',
+        songSource: { songName: 'Dancing Bomber', videoId: 'FOXIDqkCXaY' },
+    },
+    {
+        name: 'Fighter & Attacker',
+        alias: 'F/A',
+        songSource: { songName: 'Desert Storm', videoId: 'H23ZWktzasc' },
+    },
+    {
+        name: 'Fire Shark',
+        alias: 'Same! Same! Same!',
+        series: Series.FlyingShark,
+        songSource: {
+            songName: 'Fire Shark',
+            arrangements: [
+                { source: 'Arcade', videoId: 'EBIn673qfHM' },
+                { source: 'Mega Drive', videoId: 'QDSzs97Mhzw' },
+            ],
+        },
+    },
+    {
         name: 'FixEight',
         series: Series.OutZone,
         songSource: { songName: 'Fixer', videoId: 'pyefFS8SwiA', startTime: 10, endTime: 119 },
@@ -353,19 +405,6 @@ const gameEntries: GameEntry[] = [
         series: Series.FlyingShark,
         alias: 'Sky Shark',
         songSource: { songName: 'Stage 1', videoId: 'yxsKzGZ8WHg' },
-    },
-    {
-        name: 'Fire Shark',
-        alias: 'Same! Same! Same!',
-        series: Series.FlyingShark,
-        sortName: 'Flying Shark 2',
-        songSource: {
-            songName: 'Fire Shark',
-            arrangements: [
-                { source: 'Arcade', videoId: 'EBIn673qfHM' },
-                { source: 'Mega Drive', videoId: 'QDSzs97Mhzw' },
-            ],
-        },
     },
     {
         name: 'G-Darius',
@@ -474,7 +513,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Ibara',
         series: Series.Ibara,
-        songSource: { songName: 'Show Time', videoId: 'T65Zmc6iWCc' },
+        songSource: [
+            { songName: 'Show Time', videoId: 'T65Zmc6iWCc' },
+            { songName: 'Bonds of Steel', videoId: 'XgSMvKTaMXU' },
+        ] ,
     },
     {
         name: 'Ikaruga',
@@ -665,8 +707,16 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Setting Off Together', videoId: '2qoyJbieTOc' },
     },
     {
+        name: 'Mystic Riders',
+        songSource: { songName: 'Midnight Town', videoId: 'GjcgS4o0HFg' },
+    },
+    {
         name: 'Natsuki Chronicles',
         songSource: { songName: 'Hopeful Morning Glow', videoId: 'HuzP7m6Us28' },
+    },
+    {
+        name: 'NebulasRay',
+        songSource: { songName: 'Exeo', videoId: 'PyHmUSQaNYM' },
     },
     {
         name: 'Out Zone',
