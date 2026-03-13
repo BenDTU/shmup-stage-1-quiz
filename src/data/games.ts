@@ -1200,6 +1200,14 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage BGM 1', videoId: 'BGNSHNf-nlU' },
     },
     {
+        name: 'Sol Divide',
+        songSource: [
+            { songName: 'Knight of Darkness', videoId: '-2yayHs2-JA', startTime: 75, endTime: 158 },
+            { songName: 'Winged Fighter', videoId: '-2yayHs2-JA', startTime: 201, endTime: 277 },
+            { songName: 'Evil Monk of Ancient Times', videoId: '-2yayHs2-JA', startTime: 323, endTime: 397 },
+        ],
+    },
+    {
         name: 'Soldier Blade',
         songSource: { songName: 'Operation 1', videoId: 'pEyJV4nVBTU' },
     },
