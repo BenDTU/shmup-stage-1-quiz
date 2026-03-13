@@ -25,6 +25,7 @@ export enum Series {
     Touhou = 'Touhou Project',
     Truxton = 'Truxton',
     Zeal = 'Zeal',
+    ZeroGunner = 'Zero Gunner',
 }
 
 export enum AnswerType {

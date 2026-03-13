@@ -1588,6 +1588,21 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Shootaholic [Shockout MIX]', videoId: 'h35vxyOrmrA' },
     },
     {
+        name: 'Zero Gunner',
+        series: Series.ZeroGunner,
+        songSource: { songName: 'The Omen of Destruction', videoId: 'G2I1fsIpJUk' },
+    },
+    {
+        name: 'Zero Gunner 2',
+        series: Series.ZeroGunner,
+        songSource: [
+            { songName: 'Submergence City 1', videoId: 'bOIVzez4boc' },
+            { songName: 'Marine Base 1', videoId: 'OKp8lpLtQ9Y' },
+            { songName: 'Alpine Armored Train 1', videoId: 'fXQvL6Yw1C4' },
+            { songName: 'Sea of Cloud 1', videoId: 'dgeuBFgpIvc' },
+        ],
+    },
+    {
         name: 'Zero Wing',
         songSource: {
             songName: 'Open Your Eyes',
