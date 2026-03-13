@@ -553,6 +553,44 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Area 1', videoId: 'LSrJYxcYRPs' },
     },
     {
+        name: 'Gunbird',
+        series: Series.Gunbird,
+        songSource: [
+            {
+                songName: "Backstar's Fortress",
+                arrangements: [
+                    { source: 'Arcade', videoId: 'hkY01Kia99w' },
+                    { source: 'Console', videoId: 'PckgVYSPARg' },
+                    { source: 'Special Edition', videoId: 'aKKux5rXaNk' },
+                ],
+            },
+            {
+                songName: 'Pointed Square',
+                arrangements: [
+                    { source: 'Arcade', videoId: 'aF1k24OJxls' },
+                    { source: 'Console', videoId: 'L_tBZ7QGIIM' },
+                    { source: 'Special Edition', videoId: '0Vf5Ja4Wb0Y' },
+                ],
+            },
+            {
+                songName: 'Trick Tramp Train',
+                arrangements: [
+                    { source: 'Arcade', videoId: 'VJaghpy5MY8' },
+                    { source: 'Console', videoId: 'Mn6ksDyqM88' },
+                    { source: 'Special Edition', videoId: 'Q2gDybAhq7Q' },
+                ],
+            },
+            {
+                songName: 'Shot in the Underground',
+                arrangements: [
+                    { source: 'Arcade', videoId: 'N2tIuHbnFPs' },
+                    { source: 'Console', videoId: '9oHbJjnWTlc' },
+                    { source: 'Special Edition', videoId: 'kszfcopzkF0' },
+                ],
+            },
+        ],
+    },
+    {
         name: 'Gunnail',
         songSource: { songName: 'Stage 1 & 2', videoId: 'hpzlZb-z7Kc', startTime: 97, endTime: 524 },
     },

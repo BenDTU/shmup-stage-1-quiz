@@ -12,6 +12,7 @@ export enum Series {
     FantasyZone = 'Fantasy Zone',
     FlyingShark = 'Flying Shark',
     Gradius = 'Gradius',
+    Gunbird = 'Gunbird',
     Ibara = 'Ibara',
     Macross = 'Macross',
     OutZone = 'Out Zone',
