@@ -341,6 +341,15 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Dogyuun Magic', videoId: 'B5fpCSNNKsM' },
     },
     {
+        name: 'Dragon Blaze',
+        songSource: [
+            { songName: 'Swamplands stage', videoId: '00JwDgLdAMw', startTime: 43, endTime: 145 },
+            { songName: 'Underwater stage', videoId: '00JwDgLdAMw', startTime: 223, endTime: 318 },
+            { songName: 'Desert stage', videoId: '00JwDgLdAMw', startTime: 319, endTime: 397 },
+            { songName: 'Jungle stage', videoId: '00JwDgLdAMw', startTime: 398, endTime: 304 },
+        ],
+    },
+    {
         name: 'Drainus',
         songSource: { songName: 'Determination', videoId: 'ppgo1QkNNxk' },
     },
@@ -1103,6 +1112,16 @@ const gameEntries: GameEntry[] = [
         name: 'Salamander III',
         series: Series.Gradius,
         songSource: { songName: 'Courage of Pride', videoId: '6VRkKpoJADc' },
+    },
+    {
+        name: 'Samurai Aces',
+        alias: 'Sengoku Ace',
+        songSource: [
+            { songName: 'Lake stage', videoId: 'niwt7Y0kbc8', startTime: 43, endTime: 131 },
+            { songName: 'Mountain stage', videoId: 'niwt7Y0kbc8', startTime: 141, endTime: 193 },
+            { songName: 'Fields stage', videoId: 'niwt7Y0kbc8', startTime: 194, endTime: 203 },
+            { songName: 'Town stage', videoId: 'niwt7Y0kbc8', startTime: 204, endTime: 234 },
+        ],
     },
     {
         name: 'Shienryu',
