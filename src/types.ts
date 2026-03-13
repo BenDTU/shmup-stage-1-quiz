@@ -18,6 +18,7 @@ export enum Series {
     OutZone = 'Out Zone',
     RType = 'R-Type',
     Raiden = 'Raiden',
+    SengokuAce = 'Sengoku Ace',
     Strikers1945 = 'Strikers 1945',
     SonicWings = 'Sonic Wings',
     SpaceInvaders = 'Space Invaders',

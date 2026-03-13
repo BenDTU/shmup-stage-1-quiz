@@ -1165,6 +1165,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Samurai Aces',
         alias: 'Sengoku Ace',
+        series: Series.SengokuAce,
         songSource: [
             { songName: 'Lake stage', videoId: 'niwt7Y0kbc8', startTime: 43, endTime: 131 },
             { songName: 'Mountain stage', videoId: 'niwt7Y0kbc8', startTime: 141, endTime: 193 },
@@ -1369,6 +1370,17 @@ const gameEntries: GameEntry[] = [
         songSource: [
             { songName: 'Stage 1', arrangements: [{ source: 'Super Nintendo', videoId: 't5IEOuoVOYo' }] },
             { songName: 'Stage 1 & 6', arrangements: [{ source: 'Mega Drive', videoId: 'fSoAOxs5ZCk' }] },
+        ],
+    },
+    {
+        name: 'Tengai',
+        alias: ['Sengoku Blade', 'Sengoku Ace Episode II'],
+        series: Series.SengokuAce,
+        songSource: [
+            { songName: 'Dance of the Sky', videoId: 'TLdSuLnUGmw' },
+            { songName: 'Silence Breaker', videoId: 'Lck806a7DkQ' },
+            { songName: 'Somberness', videoId: 'HXJ9x-DTSJo' },
+            { songName: 'A High Ceder', videoId: 'B4-xPSqb4f0' },
         ],
     },
     {
