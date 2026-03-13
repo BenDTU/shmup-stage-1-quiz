@@ -1,4 +1,4 @@
-export type QuizMode = 'novice' | 'advanced'
+export type QuizMode = 'novice' | 'advanced';
 
 export enum Series {
     _194X = '194X',
@@ -43,7 +43,7 @@ export interface SongArrangement {
 
 export type SongEntry =
   | { songName: string; videoId: string; startTime?: number; endTime?: number }
-  | { songName: string; arrangements: [SongArrangement, ...SongArrangement[]] }
+  | { songName: string; arrangements: [SongArrangement, ...SongArrangement[]] };
 
 interface GameEntryBase {
     name: string
@@ -55,15 +55,15 @@ interface GameEntryBase {
 
 export type GameEntry = GameEntryBase & {
     songSource: SongEntry | [SongEntry, ...SongEntry[]]
-}
+};
 
-export type GameEntryWithId = GameEntry & { id: number }
+export type GameEntryWithId = GameEntry & { id: number };
 
 export type NoSoundTrackGameEntry = GameEntryBase & {
     songSource: { songName: string }
-}
+};
 
-export type GameListEntry = { id: number; name: string; alias?: string | string[]; series?: Series }
+export type GameListEntry = { id: number; name: string; alias?: string | string[]; series?: Series };
 
 export interface AdvancedFeedbackDetails {
     songName: string
@@ -82,4 +82,4 @@ export type Game = {
     id: number
     series?: Series
     source?: string // for songs with arrangements, indicates the specific arrangement used
-}
+};

@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue'
-import { quotes } from '../constants/quotes'
+import { computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue';
+import { quotes } from '../constants/quotes';
 
 const props = defineProps<{
     videoId: string
     startTime?: number
     endTime?: number
     hidden?: boolean
-}>()
+}>();
 
 const emit = defineEmits<{
     (e: 'audioUnlocked'): void
-}>()
+}>();
 
-const iframeRef = ref<HTMLIFrameElement | null>(null)
+const iframeRef = ref<HTMLIFrameElement | null>(null);
 
 // Whether the user has performed the one-time audio-unlock interaction.
 // Component-level: persists while the quiz view is mounted; automatically
 // resets when the user navigates away (component is destroyed).
-const audioUnlocked = ref(false)
+const audioUnlocked = ref(false);
 
 // Muted autoplay is permitted by every browser including Safari.
 // enablejsapi=1 lets us send postMessage commands (unMute, loadVideoById)
@@ -26,84 +26,84 @@ const audioUnlocked = ref(false)
 // origin= is required by the IFrame Player API so postMessage commands
 // (seekTo, unMute, loadVideoById) are accepted when deployed.
 const embedSrc = computed(() => {
-    const start = props.startTime ?? 0
+    const start = props.startTime ?? 0;
     const origin =
         typeof window !== 'undefined'
             ? `&origin=${encodeURIComponent(window.location.origin)}`
-            : ''
-    return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&mute=1&enablejsapi=1&start=${start}&rel=0&modestbranding=1${origin}`
-})
+            : '';
+    return `https://www.youtube-nocookie.com/embed/${props.videoId}?autoplay=1&mute=1&enablejsapi=1&start=${start}&rel=0&modestbranding=1${origin}`;
+});
 
 // Send a postMessage command to the YouTube player.
 function sendCommand(func: string, args: unknown[] = []) {
     iframeRef.value?.contentWindow?.postMessage(
         JSON.stringify({ event: 'command', func, args }),
         'https://www.youtube-nocookie.com',
-    )
+    );
 }
 
 // Stop timer: when endTime is set, pause the video when it is reached.
-let stopTimer: ReturnType<typeof setTimeout> | null = null
+let stopTimer: ReturnType<typeof setTimeout> | null = null;
 
 function clearStopTimer() {
     if (stopTimer !== null) {
-        clearTimeout(stopTimer)
-        stopTimer = null
+        clearTimeout(stopTimer);
+        stopTimer = null;
     }
 }
 
 function scheduleStop() {
-    clearStopTimer()
-    if (!props.endTime || !audioUnlocked.value) return
-    const duration = (props.endTime - (props.startTime ?? 0)) * 1000
-    if (duration <= 0) return
+    clearStopTimer();
+    if (!props.endTime || !audioUnlocked.value) return;
+    const duration = (props.endTime - (props.startTime ?? 0)) * 1000;
+    if (duration <= 0) return;
     stopTimer = setTimeout(() => {
-        sendCommand('pauseVideo')
-    }, duration)
+        sendCommand('pauseVideo');
+    }, duration);
 }
 
 onUnmounted(() => {
-    clearStopTimer()
-})
+    clearStopTimer();
+});
 
 function pickRandomQuote(previous?: string): string {
     if (quotes.length === 0) {
-        throw new Error('No quotes are available to pick from.')
+        throw new Error('No quotes are available to pick from.');
     }
     if (quotes.length === 1) {
-        return quotes[0]!
+        return quotes[0]!;
     }
-    let quote: string
+    let quote: string;
     do {
-        quote = quotes[Math.floor(Math.random() * quotes.length)]!
-    } while (quote === previous)
-    return quote
+        quote = quotes[Math.floor(Math.random() * quotes.length)]!;
+    } while (quote === previous);
+    return quote;
 }
 
-const currentQuote = ref(pickRandomQuote())
+const currentQuote = ref(pickRandomQuote());
 
 // Start the first video playing silently so the player is active
 // by the time the user clicks Play.
 onMounted(() => {
     if (iframeRef.value) {
-        iframeRef.value.src = embedSrc.value
+        iframeRef.value.src = embedSrc.value;
     }
-})
+});
 
 // When the question changes:
 // • If audio is already unlocked, use loadVideoById so the same player
 //   instance (and its user-activation state) is reused — no src reload.
 // • Otherwise reload the iframe for a fresh muted-autoplay start.
 watch(() => props.videoId, () => {
-    clearStopTimer()
-    currentQuote.value = pickRandomQuote(currentQuote.value)
+    clearStopTimer();
+    currentQuote.value = pickRandomQuote(currentQuote.value);
     if (audioUnlocked.value) {
-        sendCommand('loadVideoById', [props.videoId, props.startTime ?? 0])
-        scheduleStop()
+        sendCommand('loadVideoById', [props.videoId, props.startTime ?? 0]);
+        scheduleStop();
     } else if (iframeRef.value) {
-        iframeRef.value.src = embedSrc.value
+        iframeRef.value.src = embedSrc.value;
     }
-}, { flush: 'post' })
+}, { flush: 'post' });
 
 function startAudio() {
     // Seek back to the configured start time before unmuting, so the
@@ -112,27 +112,27 @@ function startAudio() {
     // Calling postMessage inside the click handler transfers user
     // activation into the iframe — the mechanism Safari requires to
     // permit audio on a muted embed.
-    sendCommand('seekTo', [props.startTime ?? 0, true])
-    sendCommand('unMute')
-    audioUnlocked.value = true
-    emit('audioUnlocked')
-    scheduleStop()
+    sendCommand('seekTo', [props.startTime ?? 0, true]);
+    sendCommand('unMute');
+    audioUnlocked.value = true;
+    emit('audioUnlocked');
+    scheduleStop();
 }
 
-const restartSpinning = ref(false)
+const restartSpinning = ref(false);
 
 function restartAudio() {
-    sendCommand('seekTo', [props.startTime ?? 0, true])
+    sendCommand('seekTo', [props.startTime ?? 0, true]);
     sendCommand('unMute');
-    sendCommand('playVideo')
-    scheduleStop()
+    sendCommand('playVideo');
+    scheduleStop();
     // Retrigger the spin animation: remove then re-add the class via a tick
-    restartSpinning.value = false
-    nextTick(() => { restartSpinning.value = true })
+    restartSpinning.value = false;
+    nextTick(() => { restartSpinning.value = true; });
 }
 
 function onRestartAnimationEnd() {
-    restartSpinning.value = false
+    restartSpinning.value = false;
 }
 </script>
 

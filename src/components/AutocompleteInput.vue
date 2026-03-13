@@ -1,205 +1,205 @@
 <script setup lang="ts">
-import { ref, computed, watch, nextTick, useId } from 'vue'
-import { games } from '../data/games'
-import { type GameListEntry } from '../types'
+import { ref, computed, watch, nextTick, useId } from 'vue';
+import { games } from '../data/games';
+import { type GameListEntry } from '../types';
 
 const props = defineProps<{
     modelValue: number | null   // selected game id, or null for no selection
     disabledGameIds: Set<number>
     seriesLimitedGameIds?: Set<number>
     disabled?: boolean
-}>()
+}>();
 
 const emit = defineEmits<{
     'update:modelValue': [value: number | null]
     submit: []
-}>()
+}>();
 
-const instanceId = useId()
-const isOpen = ref(false)
-const highlightedIndex = ref(-1)
-const inputRef = ref<HTMLInputElement | null>(null)
-const inputText = ref('')
-const internalUpdate = ref(false)
+const instanceId = useId();
+const isOpen = ref(false);
+const highlightedIndex = ref(-1);
+const inputRef = ref<HTMLInputElement | null>(null);
+const inputText = ref('');
+const internalUpdate = ref(false);
 
 watch(
     () => props.modelValue,
     (newId) => {
         if (internalUpdate.value) {
-            internalUpdate.value = false
-            return
+            internalUpdate.value = false;
+            return;
         }
         if (newId === null) {
-            inputText.value = ''
+            inputText.value = '';
         } else {
-            const game = games.find((g) => g.id === newId)
-            if (game) inputText.value = game.name
+            const game = games.find((g) => g.id === newId);
+            if (game) inputText.value = game.name;
         }
     },
     { immediate: true },
-)
+);
 
 defineExpose({
     focus: () => inputRef.value?.focus(),
-})
+});
 
-type AutocompleteItem = GameListEntry & { displayName: string }
+type AutocompleteItem = GameListEntry & { displayName: string };
 
 const allGames = computed<GameListEntry[]>(() =>
     games.map(({ id, name, alias, series }) => ({ id, name, alias, series })),
-)
+);
 
 const filteredGames = computed<AutocompleteItem[]>(() => {
-    const query = inputText.value.toLowerCase().trim()
-    if (!query) return allGames.value.map((g) => ({ ...g, displayName: g.name }))
+    const query = inputText.value.toLowerCase().trim();
+    if (!query) return allGames.value.map((g) => ({ ...g, displayName: g.name }));
     return allGames.value
         .filter((g) => {
-            if (g.name.toLowerCase().includes(query)) return true
-            const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : []
+            if (g.name.toLowerCase().includes(query)) return true;
+            const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : [];
             return aliases.some(
                 (a) =>
                     a.toLowerCase().includes(query) ||
                     `${g.name} (${a})`.toLowerCase().includes(query),
-            )
+            );
         })
         .map((g) => {
-            if (g.name.toLowerCase().includes(query)) return { ...g, displayName: g.name }
-            const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : []
+            if (g.name.toLowerCase().includes(query)) return { ...g, displayName: g.name };
+            const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : [];
             const matchedAlias = aliases.find(
                 (a) =>
                     a.toLowerCase().includes(query) ||
                     `${g.name} (${a})`.toLowerCase().includes(query),
-            )
-            return { ...g, displayName: matchedAlias ? `${g.name} (${matchedAlias})` : g.name }
-        })
-})
+            );
+            return { ...g, displayName: matchedAlias ? `${g.name} (${matchedAlias})` : g.name };
+        });
+});
 
 function matchGameToText(text: string): number | null {
-    const lower = text.toLowerCase().trim()
+    const lower = text.toLowerCase().trim();
     for (const g of allGames.value) {
-        if (g.name.toLowerCase() === lower) return g.id
-        const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : []
-        if (aliases.some((a) => `${g.name} (${a})`.toLowerCase() === lower)) return g.id
+        if (g.name.toLowerCase() === lower) return g.id;
+        const aliases = Array.isArray(g.alias) ? g.alias : g.alias ? [g.alias] : [];
+        if (aliases.some((a) => `${g.name} (${a})`.toLowerCase() === lower)) return g.id;
     }
-    return null
+    return null;
 }
 
 watch(inputText, (text) => {
-    const matchedId = matchGameToText(text)
+    const matchedId = matchGameToText(text);
     const isSelectable = matchedId !== null
         && !props.disabledGameIds.has(matchedId)
-        && !props.seriesLimitedGameIds?.has(matchedId)
-    internalUpdate.value = true
-    emit('update:modelValue', isSelectable ? matchedId : null)
+        && !props.seriesLimitedGameIds?.has(matchedId);
+    internalUpdate.value = true;
+    emit('update:modelValue', isSelectable ? matchedId : null);
     queueMicrotask(() => {
         if (internalUpdate.value) {
-            internalUpdate.value = false
+            internalUpdate.value = false;
         }
-    })
-}, { flush: 'sync' })
+    });
+}, { flush: 'sync' });
 
 function selectGame(game: AutocompleteItem) {
-    if (props.disabledGameIds.has(game.id)) return
-    if (props.seriesLimitedGameIds?.has(game.id)) return
-    inputText.value = game.displayName
-    isOpen.value = false
-    highlightedIndex.value = -1
+    if (props.disabledGameIds.has(game.id)) return;
+    if (props.seriesLimitedGameIds?.has(game.id)) return;
+    inputText.value = game.displayName;
+    isOpen.value = false;
+    highlightedIndex.value = -1;
 }
 
 function onInput(event: Event) {
-    inputText.value = (event.target as HTMLInputElement).value
-    isOpen.value = true
+    inputText.value = (event.target as HTMLInputElement).value;
+    isOpen.value = true;
     const firstEnabled = filteredGames.value.findIndex(
         (g) => !props.disabledGameIds.has(g.id) && !props.seriesLimitedGameIds?.has(g.id),
-    )
-    highlightedIndex.value = firstEnabled >= 0 ? firstEnabled : -1
+    );
+    highlightedIndex.value = firstEnabled >= 0 ? firstEnabled : -1;
     if (firstEnabled >= 0) {
         nextTick(() => {
-            scrollHighlightedIntoView()
-        })
+            scrollHighlightedIntoView();
+        });
     }
 }
 
 function onFocus() {
-    isOpen.value = true
+    isOpen.value = true;
 }
 
 function onBlur() {
     setTimeout(() => {
-        isOpen.value = false
-        highlightedIndex.value = -1
-    }, 150)
+        isOpen.value = false;
+        highlightedIndex.value = -1;
+    }, 150);
 }
 
-const optionRefs = ref<(HTMLElement | undefined)[]>([])
+const optionRefs = ref<(HTMLElement | undefined)[]>([]);
 
 function scrollHighlightedIntoView() {
-    const el = optionRefs.value[highlightedIndex.value]
-    if (el) el.scrollIntoView({ block: 'nearest' })
+    const el = optionRefs.value[highlightedIndex.value];
+    if (el) el.scrollIntoView({ block: 'nearest' });
 }
 
 function onOptionMouseenter(index: number, game: AutocompleteItem) {
-    if (props.disabledGameIds.has(game.id) || props.seriesLimitedGameIds?.has(game.id)) return
-    highlightedIndex.value = index
+    if (props.disabledGameIds.has(game.id) || props.seriesLimitedGameIds?.has(game.id)) return;
+    highlightedIndex.value = index;
 }
 
 function onKeydown(event: KeyboardEvent) {
     if (!isOpen.value) {
         if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-            isOpen.value = true
+            isOpen.value = true;
         } else if (event.key === 'Enter') {
-            event.preventDefault()
-            emit('submit')
+            event.preventDefault();
+            emit('submit');
         }
-        return
+        return;
     }
 
     const enabledGames = filteredGames.value.filter(
         (g) => !props.disabledGameIds.has(g.id) && !props.seriesLimitedGameIds?.has(g.id),
-    )
+    );
 
     if (event.key === 'ArrowDown') {
-        event.preventDefault()
-        let next = highlightedIndex.value + 1
+        event.preventDefault();
+        let next = highlightedIndex.value + 1;
         while (next < filteredGames.value.length) {
-            const game = filteredGames.value[next]
-            if (!game || (!props.disabledGameIds.has(game.id) && !props.seriesLimitedGameIds?.has(game.id))) break
-            next++
+            const game = filteredGames.value[next];
+            if (!game || (!props.disabledGameIds.has(game.id) && !props.seriesLimitedGameIds?.has(game.id))) break;
+            next++;
         }
         if (next < filteredGames.value.length) {
-            highlightedIndex.value = next
-            nextTick(() => scrollHighlightedIntoView())
+            highlightedIndex.value = next;
+            nextTick(() => scrollHighlightedIntoView());
         }
     } else if (event.key === 'ArrowUp') {
-        event.preventDefault()
-        let prev = highlightedIndex.value - 1
+        event.preventDefault();
+        let prev = highlightedIndex.value - 1;
         while (prev >= 0) {
-            const game = filteredGames.value[prev]
-            if (!game || (!props.disabledGameIds.has(game.id) && !props.seriesLimitedGameIds?.has(game.id))) break
-            prev--
+            const game = filteredGames.value[prev];
+            if (!game || (!props.disabledGameIds.has(game.id) && !props.seriesLimitedGameIds?.has(game.id))) break;
+            prev--;
         }
         if (prev >= 0) {
-            highlightedIndex.value = prev
-            nextTick(() => scrollHighlightedIntoView())
+            highlightedIndex.value = prev;
+            nextTick(() => scrollHighlightedIntoView());
         }
     } else if (event.key === 'Enter') {
-        event.preventDefault()
+        event.preventDefault();
         if (highlightedIndex.value >= 0) {
-            const game = filteredGames.value[highlightedIndex.value]
+            const game = filteredGames.value[highlightedIndex.value];
             if (game && !props.disabledGameIds.has(game.id) && !props.seriesLimitedGameIds?.has(game.id)) {
-                selectGame(game)
+                selectGame(game);
             }
         } else if (enabledGames.length === 1 && enabledGames[0]) {
-            selectGame(enabledGames[0])
+            selectGame(enabledGames[0]);
         } else {
-            emit('submit')
+            emit('submit');
         }
     } else if (event.key === 'Escape') {
-        isOpen.value = false
-        highlightedIndex.value = -1
+        isOpen.value = false;
+        highlightedIndex.value = -1;
     } else if (event.key === 'Tab') {
-        isOpen.value = false
-        highlightedIndex.value = -1
+        isOpen.value = false;
+        highlightedIndex.value = -1;
     }
 }
 </script>

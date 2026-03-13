@@ -1,7 +1,7 @@
-import { Series, type GameEntry, type GameEntryWithId, type NoSoundTrackGameEntry } from '../types'
+import { Series, type GameEntry, type GameEntryWithId, type NoSoundTrackGameEntry } from '../types';
 
-export { Series } from '../types'
-export type { SongEntry, GameEntry, GameListEntry, Game, NoSoundTrackGameEntry } from '../types'
+export { Series } from '../types';
+export type { SongEntry, GameEntry, GameListEntry, Game, NoSoundTrackGameEntry } from '../types';
 
 // Update videoId and startTime values with the correct YouTube video IDs and
 // timestamps for each game's stage 1 theme.
@@ -1638,7 +1638,7 @@ const gameEntries: GameEntry[] = [
         name: 'Zip Zip Zing',
         songSource: { songName: 'Stage 1, 3, 5', videoId: 'RXFcfd1oh4g', startTime: 2, endTime: 51 },
     },
-]
+];
 
 // Games without relevant YouTube links yet.
 // When a suitable YouTube video becomes available, replace '---' with the real videoId and move the entry into gameEntries above.
@@ -1654,13 +1654,13 @@ export const noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
         series: Series.SonicWings,
         songSource: { songName: 'Abu Dhabi, UAE stage' },
     },
-]
+];
 
-export const games: GameEntryWithId[] = gameEntries.map((entry, index) => ({ ...entry, id: index + 1 }))
+export const games: GameEntryWithId[] = gameEntries.map((entry, index) => ({ ...entry, id: index + 1 }));
 
-export const totalShmups: number = games.length
+export const totalShmups: number = games.length;
 
 export const totalSongs: number = games.reduce((count, game) => {
-    const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource]
-    return count + sources.reduce((c, source) => c + ('arrangements' in source ? source.arrangements.length : 1), 0)
-}, 0)
+    const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource];
+    return count + sources.reduce((c, source) => c + ('arrangements' in source ? source.arrangements.length : 1), 0);
+}, 0);

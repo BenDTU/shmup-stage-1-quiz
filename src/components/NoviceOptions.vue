@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { guessedGameName } from '../functions'
+import { guessedGameName } from '../functions';
 
 const props = defineProps<{
     options: number[]
@@ -9,26 +9,26 @@ const props = defineProps<{
     answeredId?: number
     songName?: string
     source?: string
-}>()
+}>();
 
 const emit = defineEmits<{
     'update:modelValue': [id: number]
     'submit': [id: number, viaKeyboard: boolean]
-}>()
+}>();
 
 function optionClass(optionId: number): string {
     if (!props.isAnswered) {
-        return optionId === props.modelValue ? 'btn-primary' : 'btn-outline-secondary'
+        return optionId === props.modelValue ? 'btn-primary' : 'btn-outline-secondary';
     }
-    if (optionId === props.correctId) return 'btn-success'
-    if (optionId === props.answeredId) return 'btn-danger'
-    return 'btn-outline-secondary'
+    if (optionId === props.correctId) return 'btn-success';
+    if (optionId === props.answeredId) return 'btn-danger';
+    return 'btn-outline-secondary';
 }
 
 function handleSelect(event: MouseEvent, optionId: number) {
-    if (props.isAnswered) return
-    emit('update:modelValue', optionId)
-    emit('submit', optionId, event.detail === 0)
+    if (props.isAnswered) return;
+    emit('update:modelValue', optionId);
+    emit('submit', optionId, event.detail === 0);
 }
 </script>
 

@@ -1,7 +1,7 @@
-import eslint from '@eslint/js'
-import tseslint from 'typescript-eslint'
-import pluginVue from 'eslint-plugin-vue'
-import stylistic from '@stylistic/eslint-plugin'
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import pluginVue from 'eslint-plugin-vue';
+import stylistic from '@stylistic/eslint-plugin';
 
 /**
  * Custom ESLint rule that enforces the `games` array in games.ts is sorted
@@ -24,33 +24,33 @@ const sortedGamesRule = {
     create(context) {
         return {
             'VariableDeclarator[id.name="gameEntries"] > ArrayExpression'(node) {
-                const elements = node.elements
+                const elements = node.elements;
 
                 /** @type {{ name: string; sortKey: string; node: import('eslint').Rule.Node }[]} */
-                const entries = []
+                const entries = [];
                 for (const el of elements) {
-                    if (!el || el.type !== 'ObjectExpression') continue
+                    if (!el || el.type !== 'ObjectExpression') continue;
                     const nameProp = el.properties.find(
                         (p) => p.type === 'Property' && p.key && p.key.name === 'name',
-                    )
-                    if (!nameProp || !nameProp.value || nameProp.value.type !== 'Literal') continue
-                    const name = String(nameProp.value.value)
+                    );
+                    if (!nameProp || !nameProp.value || nameProp.value.type !== 'Literal') continue;
+                    const name = String(nameProp.value.value);
                     const sortNameProp = el.properties.find(
                         (p) => p.type === 'Property' && p.key && p.key.name === 'sortName',
-                    )
+                    );
                     const sortKey =
                         sortNameProp && sortNameProp.value && sortNameProp.value.type === 'Literal'
                             ? String(sortNameProp.value.value)
-                            : name
-                    entries.push({ name, sortKey, node: el })
+                            : name;
+                    entries.push({ name, sortKey, node: el });
                 }
 
                 for (let i = 1; i < entries.length; i++) {
-                    const prev = entries[i - 1].sortKey
-                    const curr = entries[i].sortKey
+                    const prev = entries[i - 1].sortKey;
+                    const curr = entries[i].sortKey;
                     if (prev.localeCompare(curr, undefined, { sensitivity: 'base', numeric: true }) > 0) {
                         const useSortKeys =
-                            entries[i].sortKey !== entries[i].name || entries[i - 1].sortKey !== entries[i - 1].name
+                            entries[i].sortKey !== entries[i].name || entries[i - 1].sortKey !== entries[i - 1].name;
                         context.report({
                             node: entries[i].node,
                             messageId: useSortKeys ? 'unsortedWithKeys' : 'unsorted',
@@ -62,18 +62,25 @@ const sortedGamesRule = {
                                     previousKey: entries[i - 1].sortKey,
                                 }
                                 : { current: entries[i].name, previous: entries[i - 1].name },
-                        })
+                        });
                     }
                 }
             },
-        }
+        };
     },
-}
+};
 
 export default tseslint.config(
     eslint.configs.recommended,
     ...tseslint.configs.recommended,
     ...pluginVue.configs['flat/recommended'],
+    {
+        rules: {
+            'eqeqeq': ['error', 'always'],
+            'no-console': 'warn',
+            '@typescript-eslint/consistent-type-imports': 'error',
+        },
+    },
     {
         files: ['**/*.js', '**/*.ts'],
         plugins: { '@stylistic': stylistic },
@@ -81,6 +88,9 @@ export default tseslint.config(
             '@stylistic/indent': ['error', 4],
             '@stylistic/comma-dangle': ['error', 'always-multiline'],
             '@stylistic/no-trailing-spaces': 'error',
+            '@stylistic/semi': ['error', 'always'],
+            '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
+            '@stylistic/object-curly-spacing': ['error', 'always'],
         },
     },
     {
@@ -95,6 +105,9 @@ export default tseslint.config(
             '@stylistic/indent': 'off',
             '@stylistic/comma-dangle': ['error', 'always-multiline'],
             '@stylistic/no-trailing-spaces': 'error',
+            '@stylistic/semi': ['error', 'always'],
+            '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
+            '@stylistic/object-curly-spacing': ['error', 'always'],
             'vue/html-indent': ['error', 4],
             'vue/script-indent': ['error', 4],
         },
@@ -111,4 +124,4 @@ export default tseslint.config(
     {
         ignores: ['dist/**', 'node_modules/**'],
     },
-)
+);

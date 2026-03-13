@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from 'vue'
-import { useRouter } from 'vue-router'
-import YouTubePlayer from '../components/YouTubePlayer.vue'
-import AutocompleteInput from '../components/AutocompleteInput.vue'
-import NoviceOptions from '../components/NoviceOptions.vue'
-import AnswerFeedback from '../components/AnswerFeedback.vue'
-import { useQuiz } from '../composables/useQuiz'
-import { guessedGameName } from '../functions'
-import { games } from '../data/games'
-import { AnswerType, type AdvancedFeedbackDetails } from '@/types'
+import { ref, computed, onMounted, nextTick } from 'vue';
+import { useRouter } from 'vue-router';
+import YouTubePlayer from '../components/YouTubePlayer.vue';
+import AutocompleteInput from '../components/AutocompleteInput.vue';
+import NoviceOptions from '../components/NoviceOptions.vue';
+import AnswerFeedback from '../components/AnswerFeedback.vue';
+import { useQuiz } from '../composables/useQuiz';
+import { guessedGameName } from '../functions';
+import { games } from '../data/games';
+import { AnswerType, type AdvancedFeedbackDetails } from '@/types';
 
-const router = useRouter()
-const { state, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, submitGuess, nextQuestion } = useQuiz()
+const router = useRouter();
+const { state, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, submitGuess, nextQuestion } = useQuiz();
 
-const selectedGameId = ref<number | null>(null)
-const audioUnlocked = ref(false)
-const nextBtn = ref<HTMLButtonElement | null>(null)
-const autocompleteRef = ref<{ focus: () => void } | null>(null)
-const feedbackState = ref<'correct' | 'wrong' | null>(null)
-let feedbackTimer: ReturnType<typeof setTimeout> | null = null
+const selectedGameId = ref<number | null>(null);
+const audioUnlocked = ref(false);
+const nextBtn = ref<HTMLButtonElement | null>(null);
+const autocompleteRef = ref<{ focus: () => void } | null>(null);
+const feedbackState = ref<'correct' | 'wrong' | null>(null);
+let feedbackTimer: ReturnType<typeof setTimeout> | null = null;
 
 function setFeedback(value: 'correct' | 'wrong') {
-    if (feedbackTimer !== null) clearTimeout(feedbackTimer)
-    feedbackState.value = value
+    if (feedbackTimer !== null) clearTimeout(feedbackTimer);
+    feedbackState.value = value;
     feedbackTimer = setTimeout(() => {
-        feedbackState.value = null
-        feedbackTimer = null
-    }, value === 'correct' ? 800 : 600)
+        feedbackState.value = null;
+        feedbackTimer = null;
+    }, value === 'correct' ? 800 : 600);
 }
 
 function setFeedbackFromAnswer() {
@@ -34,104 +34,104 @@ function setFeedbackFromAnswer() {
         state.answers[state.currentIndex] === state.questions[state.currentIndex]?.id
             ? 'correct'
             : 'wrong',
-    )
+    );
 }
 
 onMounted(() => {
     if (!state.isStarted || state.questions.length === 0) {
-        router.replace('/')
+        router.replace('/');
     }
-})
-
-const currentQuestion = computed(() => state.questions[state.currentIndex])
-const questionNumber = computed(() => state.currentIndex + 1)
-
-const userAnswerType = computed<AnswerType>(() => {
-    if (isAnswerCorrect.value) return AnswerType.Correct
-    if (isAlmostCorrect.value) return AnswerType.AlmostCorrect
-    return AnswerType.Incorrect
 });
 
-const isAnswerCorrect = computed(() => state.questions[state.currentIndex]?.id === state.answers[state.currentIndex])
+const currentQuestion = computed(() => state.questions[state.currentIndex]);
+const questionNumber = computed(() => state.currentIndex + 1);
+
+const userAnswerType = computed<AnswerType>(() => {
+    if (isAnswerCorrect.value) return AnswerType.Correct;
+    if (isAlmostCorrect.value) return AnswerType.AlmostCorrect;
+    return AnswerType.Incorrect;
+});
+
+const isAnswerCorrect = computed(() => state.questions[state.currentIndex]?.id === state.answers[state.currentIndex]);
 
 const isAlmostCorrect = computed(() => {
-    const answerId = state.answers[state.currentIndex]
-    if (!answerId || answerId === -1) return false
-    const correctSeries = currentQuestion.value?.series
-    if (correctSeries === undefined) return false
-    const guessedGame = games.find((g) => g.id === answerId)
-    return guessedGame?.series === correctSeries
-})
+    const answerId = state.answers[state.currentIndex];
+    if (!answerId || answerId === -1) return false;
+    const correctSeries = currentQuestion.value?.series;
+    if (correctSeries === undefined) return false;
+    const guessedGame = games.find((g) => g.id === answerId);
+    return guessedGame?.series === correctSeries;
+});
 
 const advancedFeedbackDetails = computed<AdvancedFeedbackDetails>(() => ({
     songName: currentQuestion.value?.songName ?? '',
     gameName: currentQuestion.value?.name ?? '',
     source: currentQuestion.value?.source,
     guessedName: guessedGameName(state.answers[state.currentIndex]!),
-}))
+}));
 
 // Only allow submitting a guess that corresponds to an available game in the pool
 const isValidGuess = computed(() => {
-    if (selectedGameId.value === null) return false
-    if (state.mode === 'novice') return true
-    return !usedGameIds.value.has(selectedGameId.value) && !seriesLimitedGameIds.value.has(selectedGameId.value)
-})
+    if (selectedGameId.value === null) return false;
+    if (state.mode === 'novice') return true;
+    return !usedGameIds.value.has(selectedGameId.value) && !seriesLimitedGameIds.value.has(selectedGameId.value);
+});
 
 async function handleSubmit(viaKeyboard = false) {
-    if (!isValidGuess.value || state.isAnswered) return
-    submitGuess(selectedGameId.value!)
-    setFeedbackFromAnswer()
+    if (!isValidGuess.value || state.isAnswered) return;
+    submitGuess(selectedGameId.value!);
+    setFeedbackFromAnswer();
     if (viaKeyboard) {
-        await nextTick()
-        nextBtn.value?.focus()
+        await nextTick();
+        nextBtn.value?.focus();
     }
 }
 
 async function handleNoviceSubmit(optionId: number, viaKeyboard = false) {
-    if (state.isAnswered) return
-    selectedGameId.value = optionId
-    submitGuess(optionId)
-    setFeedbackFromAnswer()
+    if (state.isAnswered) return;
+    selectedGameId.value = optionId;
+    submitGuess(optionId);
+    setFeedbackFromAnswer();
     if (viaKeyboard) {
-        await nextTick()
-        nextBtn.value?.focus()
+        await nextTick();
+        nextBtn.value?.focus();
     }
 }
 
 async function handleSkipClick(event: MouseEvent) {
-    if (state.isAnswered) return
+    if (state.isAnswered) return;
     // event.detail is 0 for keyboard-triggered clicks (Enter/Space) and ≥1 for mouse clicks
-    const isKeyboard = event.detail === 0
-    submitGuess(-1)
-    setFeedback('wrong')
+    const isKeyboard = event.detail === 0;
+    submitGuess(-1);
+    setFeedback('wrong');
     if (isKeyboard) {
-        await nextTick()
-        nextBtn.value?.focus()
+        await nextTick();
+        nextBtn.value?.focus();
     }
 }
 
 function handleNext() {
     if (isFinished.value) {
-        router.push('/results')
+        router.push('/results');
     } else {
-        selectedGameId.value = null
+        selectedGameId.value = null;
         if (feedbackTimer !== null) {
-            clearTimeout(feedbackTimer)
-            feedbackTimer = null
+            clearTimeout(feedbackTimer);
+            feedbackTimer = null;
         }
-        feedbackState.value = null
-        nextQuestion()
+        feedbackState.value = null;
+        nextQuestion();
     }
 }
 
 async function handleNextClick(event: MouseEvent) {
     // event.detail is 0 for keyboard-triggered clicks (Enter/Space) and ≥1 for mouse clicks
-    const isKeyboard = event.detail === 0
-    const wasFinished = isFinished.value
-    handleNext()
+    const isKeyboard = event.detail === 0;
+    const wasFinished = isFinished.value;
+    handleNext();
     if (isKeyboard && !wasFinished && state.mode === 'advanced') {
-        await nextTick()
-        autocompleteRef.value?.focus()
+        await nextTick();
+        autocompleteRef.value?.focus();
     }
 }
 </script>
