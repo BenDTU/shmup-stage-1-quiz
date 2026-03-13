@@ -554,6 +554,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Gunbird',
+        alias: 'Mobile Light Force',
         series: Series.Gunbird,
         songSource: [
             {
@@ -588,6 +589,16 @@ const gameEntries: GameEntry[] = [
                     { source: 'Special Edition', videoId: 'kszfcopzkF0' },
                 ],
             },
+        ],
+    },
+    {
+        name: 'Gunbird 2',
+        series: Series.Gunbird,
+        songSource: [
+            { songName: 'Just Fly, The Dreamers', videoId: 'yel5KUMiwb8', startTime: 214, endTime: 396 },
+            { songName: 'Type of Essence', videoId: 'yel5KUMiwb8', startTime: 451, endTime: 572 },
+            { songName: 'Why Do You Wanna Fly?', videoId: 'yel5KUMiwb8', startTime: 573, endTime: 756 },
+            { songName: 'Gunbird', videoId: 'yel5KUMiwb8', startTime: 757, endTime: 937 },
         ],
     },
     {
