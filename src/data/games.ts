@@ -1174,6 +1174,11 @@ const gameEntries: GameEntry[] = [
         ],
     },
     {
+        name: 'Samurai Aces III – Sengoku Cannon',
+        series: Series.SengokuAce,
+        songSource: { songName: 'Stage 1', videoId: '5OADukw2FAA', startTime: 283, endTime: 401 },
+    },
+    {
         name: 'Shienryu',
         alias: ['Gekioh Shooting King', 'Steel Dragon'],
         songSource: {
