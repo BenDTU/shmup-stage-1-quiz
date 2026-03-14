@@ -112,6 +112,16 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'The Space Flight', videoId: 'KAZ5n-C9JlM' },
     },
     {
+        name: 'Argus',
+        songSource: {
+            songName: 'BGM 1',
+            arrangements: [
+                { source: 'Arcade', videoId: 'QDFHsys3Jlg' },
+                { source: 'NES', videoId: 'pdMWjPRrhWQ' },
+            ],
+        },
+    },
+    {
         name: 'Armed Police Batrider',
         songSource: { songName: 'Easy to Go', videoId: 'UFc72Qz3S34' },
     },
@@ -191,6 +201,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Cho Ren Sha 68K',
         songSource: { songName: 'Planet the E.A.R.T.H', videoId: 'aT3z4k1BlDg' },
+    },
+    {
+        name: 'Chopper 1',
+        songSource: { songName: 'Dream of Chopper', videoId: '2GodBWtgS3o' },
     },
     {
         name: 'Cosmo Dreamer',
@@ -399,6 +413,17 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Drainus',
         songSource: { songName: 'Determination', videoId: 'ppgo1QkNNxk' },
+    },
+    {
+        name: 'Earth Defense Force',
+        alias: 'Super Earth Defense Force',
+        songSource: {
+            songName: 'First Encounter',
+            arrangements: [
+                { source: 'Arcade', videoId: 'GU4z00gXU_E' },
+                { source: 'Super Nintendo', videoId: 'UquBgibh4h4' },
+            ],
+        },
     },
     {
         name: 'Einhander',
@@ -661,6 +686,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Falling Cherry Blossoms', videoId: 'EWYuTxCV11U' },
     },
     {
+        name: "Halley's Comet",
+        songSource: { songName: 'Ed1986', videoId: 'QliWHAxJ8V4', startTime: 2, endTime: 146 },
+    },
+    {
         name: 'Hellfire',
         songSource: { songName: 'Captain Lancer', videoId: '1VUMGMKTnKs' },
     },
@@ -888,6 +917,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'NebulasRay',
         songSource: { songName: 'Exeo', videoId: 'PyHmUSQaNYM' },
+    },
+    {
+        name: 'Omega Fighter',
+        songSource: { songName: 'Mission 1', videoId: '2rqNnp0ivmo', startTime: 1, endTime: 47 },
     },
     {
         name: 'Out Zone',
