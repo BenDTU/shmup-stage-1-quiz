@@ -983,8 +983,40 @@ const gameEntries: GameEntry[] = [
                     videoId: 'tXrxov_0oj0',
                 },
                 {
+                    source: 'Amiga',
+                    videoId: '42xjbdXze8E',
+                },
+                {
+                    source: 'Amstrad CPC',
+                    videoId: 'TUqxvufguZY',
+                    startTime: 271,
+                    endTime: 321,
+                },
+                {
+                    source: 'Commodore 64',
+                    videoId: 'VOcgGc6CLss',
+                },
+                {
                     source: 'Game Boy',
                     videoId: 'co0nkC6tKrI',
+                },
+                {
+                    source: 'Mega Drive',
+                    videoId: 'Bz4yJTi4OvA',
+                },
+                {
+                    source: 'MSX2',
+                    videoId: 'QKTRx-Ub7EQ',
+                    startTime: 60,
+                    endTime: 168,
+                },
+                {
+                    source: 'PC Engine',
+                    videoId: 'ZWTTEcsY_Ow',
+                },
+                {
+                    source: 'Sharp X68000',
+                    videoId: 'E1_INrNo8WA',
                 },
                 {
                     source: 'Dimensions',
@@ -1003,6 +1035,14 @@ const gameEntries: GameEntry[] = [
                 {
                     source: 'Arcade',
                     videoId: 'idU8lvOP9qA',
+                },
+                {
+                    source: 'Amiga',
+                    videoId: 'r1E2SN1hmRI',
+                },
+                {
+                    source: 'Atari ST',
+                    videoId: 'zJr19m40eDk',
                 },
                 {
                     source: 'Game Boy',
