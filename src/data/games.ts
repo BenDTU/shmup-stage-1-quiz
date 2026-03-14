@@ -989,7 +989,7 @@ const gameEntries: GameEntry[] = [
                 {
                     source: 'Amstrad CPC',
                     videoId: 'TUqxvufguZY',
-                    startTime: 271,
+                    startTime: 270,
                     endTime: 321,
                 },
                 {
