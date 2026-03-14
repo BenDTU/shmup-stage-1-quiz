@@ -9,6 +9,7 @@ export enum Series {
     DanmakuUnlimited = 'Danmaku Unlimited',
     Darius = 'Darius',
     Dodonpachi = 'Dodonpachi',
+    Dreamer = 'Dreamer',
     Espgaluda = 'Espgaluda',
     FantasyZone = 'Fantasy Zone',
     FlyingShark = 'Flying Shark',

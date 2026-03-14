@@ -161,6 +161,11 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Qygenomics', videoId: 'dTbpYrrSRPY' },
     },
     {
+        name: 'Bullet Soul',
+        alias: 'Bullet Soul: Infinite Burst',
+        songSource: { songName: 'Relentless Force', videoId: 'ahK-7dPcI6w' },
+    },
+    {
         name: 'Carrier Air Wing',
         alias: 'U.S. Navy',
         songSource: { songName: 'Mission 1', videoId: 'xBNq6tCJVcE' },
@@ -186,6 +191,11 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Cho Ren Sha 68K',
         songSource: { songName: 'Planet the E.A.R.T.H', videoId: 'aT3z4k1BlDg' },
+    },
+    {
+        name: 'Cosmo Dreamer',
+        series: Series.Dreamer,
+        songSource: { songName: 'InstaVista', videoId: 'A-SqHyJa-jU' },
     },
     {
         name: 'Cotton: Fantastic Night Dreams',
@@ -711,6 +721,11 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Jack to the Metro', videoId: 'HAGArKEC_M8' },
     },
     {
+        name: 'Like Dreamer',
+        series: Series.Dreamer,
+        songSource: { songName: 'Cat Mischief', videoId: '1iEJRCaanBY' },
+    },
+    {
         name: 'Lords of Thunder',
         songSource: [
             {
@@ -967,6 +982,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Pulstar',
         songSource: { songName: 'Front Line on the Earth', videoId: 'IexMUkiPg-M' },
+    },
+    {
+        name: 'Q-Side',
+        songSource: { songName: 'Q-Side', videoId: 'THAVdbVqh8U' },
     },
     {
         name: 'QP Shooting - Dangerous!!',
