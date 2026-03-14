@@ -421,7 +421,7 @@ const gameEntries: GameEntry[] = [
             songName: 'First Encounter',
             arrangements: [
                 { source: 'Arcade', videoId: 'GU4z00gXU_E' },
-                { source: 'Super Nintendo', videoId: 'UquBgibh4h4' },
+                { source: 'Super Nintendo', videoId: '2LLrf6Vk-Dk' },
             ],
         },
     },
