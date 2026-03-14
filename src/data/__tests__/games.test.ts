@@ -1,15 +1,15 @@
-import { describe, it, expect } from 'vitest'
-import { games } from '../games'
-import type { GameEntryWithId } from '../../types'
+import { describe, it, expect } from 'vitest';
+import { games } from '../games';
+import type { GameEntryWithId } from '../../types';
 
 /**
  * Extracts all YouTube video IDs from a game entry.
  */
 function getVideoIds(game: GameEntryWithId): string[] {
-    const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource]
+    const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource];
     return sources.flatMap((entry) =>
         'arrangements' in entry ? entry.arrangements.map((a) => a.videoId) : [entry.videoId],
-    )
+    );
 }
 
 /**
@@ -18,45 +18,45 @@ function getVideoIds(game: GameEntryWithId): string[] {
  * embedding disabled, or does not exist.
  */
 async function isEmbeddable(videoId: string): Promise<boolean> {
-    const url = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`
-    const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), 10_000)
+    const url = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10_000);
     try {
-        const response = await fetch(url, { signal: controller.signal })
-        return response.ok
+        const response = await fetch(url, { signal: controller.signal });
+        return response.ok;
     } catch (error) {
         if (error instanceof Error && error.name === 'AbortError') {
-            return false
+            return false;
         }
-        throw error
+        throw error;
     } finally {
-        clearTimeout(timeoutId)
+        clearTimeout(timeoutId);
     }
 }
 
 // Build a map from videoId -> list of game names that reference it, then
 // de-duplicate so each videoId is only checked once regardless of how many
 // games share it.
-const videoIdToGames = new Map<string, string[]>()
+const videoIdToGames = new Map<string, string[]>();
 for (const game of games) {
     for (const videoId of getVideoIds(game)) {
-        const names = videoIdToGames.get(videoId) ?? []
-        names.push(game.name)
-        videoIdToGames.set(videoId, names)
+        const names = videoIdToGames.get(videoId) ?? [];
+        names.push(game.name);
+        videoIdToGames.set(videoId, names);
     }
 }
 
 const uniqueVideoIds: { videoId: string; gameNames: string }[] = Array.from(
     videoIdToGames.entries(),
-).map(([videoId, names]) => ({ videoId, gameNames: names.join(', ') }))
+).map(([videoId, names]) => ({ videoId, gameNames: names.join(', ') }));
 
 describe('YouTube video IDs in games.ts', () => {
     it.each(uniqueVideoIds)(
         'video "$videoId" (used by: $gameNames) must be publicly embeddable',
         async ({ videoId }) => {
-            const embeddable = await isEmbeddable(videoId)
-            expect(embeddable, `Video ID "${videoId}" is not embeddable (private, premium-only, or embedding disabled)`).toBe(true)
+            const embeddable = await isEmbeddable(videoId);
+            expect(embeddable, `Video ID "${videoId}" is not embeddable (private, premium-only, or embedding disabled)`).toBe(true);
         },
         15_000, // 15 second timeout per video to account for network latency
-    )
-})
+    );
+});

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { useQuiz } from '@/composables/useQuiz'
-import { totalSongs, totalShmups } from '@/data/games'
-import type { QuizMode } from '@/types'
+import { useRouter } from 'vue-router';
+import { useQuiz } from '@/composables/useQuiz';
+import { totalSongs, totalShmups } from '@/data/games';
+import type { QuizMode } from '@/types';
 
-const router = useRouter()
-const { startQuiz } = useQuiz()
+const router = useRouter();
+const { startQuiz } = useQuiz();
 
 function begin(mode: QuizMode) {
-    startQuiz(mode)
-    router.push('/quiz')
+    startQuiz(mode);
+    router.push('/quiz');
 }
 </script>
 

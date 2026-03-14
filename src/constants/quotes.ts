@@ -10,4 +10,4 @@ export const quotes: string[] = [
     'First stop, enemy outpost. Let\'s see what you got.', // Donpachi
     'Bonus! Bonus! Bonus!', // Blazing Star
     'I have to go on. I can\'t quit now', // Aero Fighters 2
-]
+];

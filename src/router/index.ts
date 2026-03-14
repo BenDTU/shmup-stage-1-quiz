@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
 import QuizView from '../views/QuizView.vue';
 import ResultsView from '../views/ResultsView.vue';
 import SongListView  from '../views/SongListView.vue';
@@ -28,6 +28,6 @@ const router = createRouter({
             component: SongListView,
         },
     ],
-})
+});
 
-export default router
+export default router;

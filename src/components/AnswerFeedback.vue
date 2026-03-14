@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import type { AdvancedFeedbackDetails } from '../types'
-import { AnswerType } from '../types'
+import { computed } from 'vue';
+import type { AdvancedFeedbackDetails } from '../types';
+import { AnswerType } from '../types';
 
 const props = defineProps<{
     answerType: AnswerType
     details?: AdvancedFeedbackDetails
-}>()
+}>();
 
 const iconClass = computed(() =>
     isCorrect.value
         ? 'bi bi-check-circle-fill text-success'
         : 'bi bi-x-circle-fill text-danger',
-)
+);
 
 const label = computed(() => {
-    if (isCorrect.value) return 'Correct!'
-    return isAlmostCorrect.value ? 'Almost!' : 'Incorrect.'
-})
+    if (isCorrect.value) return 'Correct!';
+    return isAlmostCorrect.value ? 'Almost!' : 'Incorrect.';
+});
 
-const isCorrect = computed(() => props.answerType === AnswerType.Correct)
-const isAlmostCorrect = computed(() => props.answerType === AnswerType.AlmostCorrect)
+const isCorrect = computed(() => props.answerType === AnswerType.Correct);
+const isAlmostCorrect = computed(() => props.answerType === AnswerType.AlmostCorrect);
 </script>
 
 <template>

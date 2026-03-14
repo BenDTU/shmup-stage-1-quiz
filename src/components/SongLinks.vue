@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import type { SongEntry } from '@/data/games'
+import { computed } from 'vue';
+import type { SongEntry } from '@/data/games';
 
-const props = defineProps<{ entry: SongEntry }>()
+const props = defineProps<{ entry: SongEntry }>();
 
 function youtubeUrl(videoId: string, startTime?: number): string {
-    return `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}${startTime ? `&t=${startTime}` : ''}`
+    return `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}${startTime ? `&t=${startTime}` : ''}`;
 }
 
 const links = computed(() => {
@@ -13,15 +13,15 @@ const links = computed(() => {
         return props.entry.arrangements.map((a) => ({
             label: a.source,
             url: youtubeUrl(a.videoId, a.startTime),
-        }))
+        }));
     }
     return [
         {
             label: 'YouTube',
             url: youtubeUrl(props.entry.videoId, props.entry.startTime),
         },
-    ]
-})
+    ];
+});
 </script>
 
 <template>
