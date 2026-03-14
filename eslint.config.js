@@ -12,6 +12,7 @@ import stylistic from '@stylistic/eslint-plugin';
 const sortedGamesRule = {
     meta: {
         type: 'suggestion',
+        fixable: 'code',
         docs: {
             description: 'Enforce that the games array in games.ts is sorted alphabetically by name',
         },
@@ -45,6 +46,10 @@ const sortedGamesRule = {
                     entries.push({ name, sortKey, node: el });
                 }
 
+                const sortedEntries = [...entries].sort((a, b) =>
+                    a.sortKey.localeCompare(b.sortKey, undefined, { sensitivity: 'base', numeric: true }),
+                );
+
                 for (let i = 1; i < entries.length; i++) {
                     const prev = entries[i - 1].sortKey;
                     const curr = entries[i].sortKey;
@@ -62,6 +67,12 @@ const sortedGamesRule = {
                                     previousKey: entries[i - 1].sortKey,
                                 }
                                 : { current: entries[i].name, previous: entries[i - 1].name },
+                            fix(fixer) {
+                                const sourceCode = context.sourceCode;
+                                return entries.map((entry, j) =>
+                                    fixer.replaceText(entry.node, sourceCode.getText(sortedEntries[j].node)),
+                                );
+                            },
                         });
                     }
                 }
