@@ -189,6 +189,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Cotton: Fantastic Night Dreams',
+        alias: 'Cotton Reboot!',
         sortName: 'Cotton 1',
         series: Series.Cotton,
         songSource: {
@@ -197,7 +198,7 @@ const gameEntries: GameEntry[] = [
                 { source: 'Arcade', videoId: '2lYaiHRuFxA', startTime: 7, endTime: 193 },
                 { source: 'PC Engine', videoId: 'AzV4izkjzfA' },
                 { source: 'Softbank', videoId: 'pE-K6FqfK6A' },
-                { source: 'Reboot', videoId: 'FDFFWKvBWE' },
+                { source: 'Reboot', videoId: 'uFDFFWKvBWE' },
                 // Neo Geo pocket arrangement not on Youtube
             ] },
     },
