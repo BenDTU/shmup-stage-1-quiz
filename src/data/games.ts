@@ -188,6 +188,45 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Planet the E.A.R.T.H', videoId: 'aT3z4k1BlDg' },
     },
     {
+        name: 'Cotton: Fantastic Night Dreams',
+        alias: 'Cotton Reboot!',
+        sortName: 'Cotton 1',
+        series: Series.Cotton,
+        songSource: {
+            songName: 'Stage 1',
+            arrangements: [
+                { source: 'Arcade', videoId: '2lYaiHRuFxA', startTime: 7, endTime: 193 },
+                { source: 'PC Engine', videoId: 'AzV4izkjzfA' },
+                { source: 'Softbank', videoId: 'pE-K6FqfK6A' },
+                { source: 'Reboot', videoId: 'uFDFFWKvBWE' },
+                // Neo Geo pocket arrangement not on Youtube
+            ] },
+    },
+    {
+        name: 'Cotton 100%',
+        sortName: 'Cotton 1.5',
+        series: Series.Cotton,
+        songSource: { songName: 'Temple in the Wood', videoId: 'cMuoCgjdP9s' },
+    },
+    {
+        name: 'Cotton 2: Magical Night Dreams',
+        alias: 'Cotton Boomerang: Magical Night Dreams',
+        series: Series.Cotton,
+        songSource: { songName: 'Wataboushi Hill', videoId: 'JB4dmAwRZs8' },
+    },
+    {
+        name: 'Cotton Fantasy: Superlative Night Dreams',
+        forceFirst: true,
+        series: Series.Cotton,
+        songSource: { songName: 'Castle Garden', videoId: '8kDo9g846ug' },
+    },
+    {
+        name: 'Cotton Reboot! High Tension!',
+        forceFirst: true,
+        series: Series.Cotton,
+        songSource: { songName: 'Into the Adventure!', videoId: '6RcWxVWiWLo' },
+    },
+    {
         name: 'Crimzon Clover',
         songSource: { songName: 'UL-stage1', videoId: 'yYF3x1hACIU' },
     },
@@ -1524,6 +1563,14 @@ const gameEntries: GameEntry[] = [
         name: 'Trizeal',
         series: Series.Zeal,
         songSource: { songName: 'Cloudy Today, Again!', videoId: '1BiLJgH3hCM', startTime: 41, endTime: 162 },
+    },
+    {
+        name: 'Trouble Witches Episode 1 ~Daughters of Amalgam~',
+        alias: [
+            'Trouble Witches AC',
+            'Trouble Witches NEO!',
+        ],
+        songSource: { songName: 'Catch up with and overtake that express train!', videoId: 'SP42NFfj-FA' },
     },
     {
         name: 'Truxton',
