@@ -650,7 +650,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Gunnail',
-        songSource: { songName: 'Stage 1 & 2', videoId: 'hpzlZb-z7Kc', startTime: 97, endTime: 524 },
+        songSource: { songName: 'Stage 1', videoId: 'hpzlZb-z7Kc', startTime: 97, endTime: 524 },
     },
     {
         name: 'Gunvein',
@@ -1026,7 +1026,7 @@ const gameEntries: GameEntry[] = [
                     videoId: 'co0nkC6tKrI',
                 },
                 {
-                    source: 'Mega Drive',
+                    source: 'Master System',
                     videoId: 'Bz4yJTi4OvA',
                 },
                 {
