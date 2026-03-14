@@ -194,7 +194,7 @@ const gameEntries: GameEntry[] = [
         songSource: {
             songName: 'Stage 1',
             arrangements: [
-                { source: 'Arcade', videoId: '9n2s8l7Xo3E' },
+                { source: 'Arcade', videoId: '2lYaiHRuFxA', startTime: 7, endTime: 193 },
                 { source: 'PC Engine', videoId: 'AzV4izkjzfA' },
                 { source: 'Softbank', videoId: 'pE-K6FqfK6A' },
                 { source: 'Reboot', videoId: 'FDFFWKvBWE' },
