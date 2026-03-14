@@ -42,11 +42,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
+          cache: 'yarn'
 
       - name: Install dependencies
         if: steps.changes.outputs.relevant == 'true'
-        run: npm ci --legacy-peer-deps
+        run: yarn install --frozen-lockfile
 
       - name: Run YouTube video ID validation tests
         if: steps.changes.outputs.relevant == 'true'
