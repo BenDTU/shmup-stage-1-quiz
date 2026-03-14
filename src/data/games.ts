@@ -993,6 +993,12 @@ const gameEntries: GameEntry[] = [
                     endTime: 321,
                 },
                 {
+                    source: 'Atari ST',
+                    videoId: 'B-xGUTHedU0',
+                    startTime: 50,
+                    endTime: 101,
+                },
+                {
                     source: 'Commodore 64',
                     videoId: 'VOcgGc6CLss',
                 },
