@@ -1433,6 +1433,11 @@ const gameEntries: GameEntry[] = [
         ],
     },
     {
+        name: 'Touhou 9.5: Shoot the Bullet',
+        series: Series.Touhou,
+        songSource: { songName: 'Wind Circulation ~ Wind Tour', videoId: 'UbmTCwrdtkM' },
+    },
+    {
         name: 'Touhou 10: Mountain of Faith',
         series: Series.Touhou,
         songSource: {
@@ -1451,6 +1456,16 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'At the End of Spring', videoId: 'nn2BUBM-hQ4' },
     },
     {
+        name: 'Touhou 12.5: Double Spoiler',
+        series: Series.Touhou,
+        songSource: { songName: 'The Mystery in Your Town', videoId: 'Sl5szUesJEk' },
+    },
+    {
+        name: 'Touhou 12.8: Great Fairy Wars',
+        series: Series.Touhou,
+        songSource: { songName: 'The Refrain of the Lovely Great War', videoId: 'IrCcyn7qzdA' },
+    },
+    {
         name: 'Touhou 13: Ten Desires',
         series: Series.Touhou,
         songSource: { songName: 'Night Sakura of Dead Spirits', videoId: 'S_s2InH_pFk' },
@@ -1459,6 +1474,11 @@ const gameEntries: GameEntry[] = [
         name: 'Touhou 14: Double Dealing Character',
         series: Series.Touhou,
         songSource: { songName: 'Mist Lake', videoId: 'mo1glRtlyTg' },
+    },
+    {
+        name: 'Touhou 14.3: Impossible Spell Card',
+        series: Series.Touhou,
+        songSource: { songName: 'Cheat Against the Impossible Danmaku', videoId: 'CDwMR67w2HA' },
     },
     {
         name: 'Touhou 15: Legacy of Lunatic Kingdom',
@@ -1471,6 +1491,11 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'A Star of Hope Rises in the Blue Sky', videoId: 'PVva0VzDAR8' },
     },
     {
+        name: 'Touhou 16.5: Violet Detector',
+        series: Series.Touhou,
+        songSource: { songName: 'Lucid Dreamer', videoId: '2xI9Gm_CGbI' },
+    },
+    {
         name: 'Touhou 17: Wily Beast and Weakest Creature',
         series: Series.Touhou,
         songSource: { songName: 'The Lamentations Known Only by Jizo', videoId: 'uJ6VscWKMzA' },
@@ -1479,6 +1504,11 @@ const gameEntries: GameEntry[] = [
         name: 'Touhou 18: Unconnected Marketeers',
         series: Series.Touhou,
         songSource: { songName: 'A Shower of Strange Occurrences', videoId: 'W3HOWV3aY_s' },
+    },
+    {
+        name: 'Touhou 18.5: 100th Black Market',
+        series: Series.Touhou,
+        songSource: { songName: 'An Exciting and Familiar Gensokyo', videoId: 'JsUmqNi0Hhk' },
     },
     {
         name: 'Touhou 19: Unfinished Dream of All Living Ghost',
