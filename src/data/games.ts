@@ -216,13 +216,11 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Cotton Fantasy: Superlative Night Dreams',
-        forceFirst: true,
         series: Series.Cotton,
         songSource: { songName: 'Castle Garden', videoId: '8kDo9g846ug' },
     },
     {
         name: 'Cotton Reboot! High Tension!',
-        forceFirst: true,
         series: Series.Cotton,
         songSource: { songName: 'Into the Adventure!', videoId: '6RcWxVWiWLo' },
     },
