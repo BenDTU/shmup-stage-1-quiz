@@ -5,6 +5,7 @@ export enum Series {
     Aleste = 'Aleste',
     AlphaMission = 'Alpha Mission',
     CastleOfShikigami = 'Castle of Shikigami',
+    Cotton = 'Cotton',
     DanmakuUnlimited = 'Danmaku Unlimited',
     Darius = 'Darius',
     Dodonpachi = 'Dodonpachi',
