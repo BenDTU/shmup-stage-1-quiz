@@ -47,7 +47,7 @@ function playAgain() {
                         >
                             <div
                                 class="progress-bar"
-                                :class="score / total >= 0.7 ? 'bg-success' : score / total >= 0.4 ? 'bg-warning' : 'bg-danger'"
+                                :class="score / total >= 0.7 ? 'bg-success' : score / total >= 0.4 ? 'bg-warning text-dark' : 'bg-danger'"
                                 role="progressbar"
                                 :style="{ width: `${(score / total) * 100}%` }"
                             >
