@@ -1443,7 +1443,7 @@ const gameEntries: GameEntry[] = [
                 {
                     source: 'Sharp X68000',
                     videoId: 'oFsCy2s2HpI',
-                    startTime: 156,
+                    startTime: 158,
                     endTime: 277,
                 },
             ],
