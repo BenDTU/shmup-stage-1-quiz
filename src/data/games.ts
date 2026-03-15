@@ -1427,8 +1427,8 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Sorcer Striker',
-        series: Series.Mahou,
         alias: 'Mahou Daisakusen',
+        series: Series.Mahou,
         songSource: {
             songName: 'Sorcer Striker',
             arrangements: [
