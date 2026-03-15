@@ -703,7 +703,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Hydorah',
-        forceFirst: true,
         alias: 'Super Hydorah',
         songSource: { songName: 'Outer Wall', videoId: 'RRDj6Yo_9k8', startTime: 98, endTime: 178 },
     },
@@ -753,7 +752,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Koutetsu Yousai Strahl',
-        forceFirst: true,
         songSource: { songName: 'Stage 1A', videoId: '8uXun40kevw', startTime: 54, endTime: 151  },
     },
     {
@@ -762,7 +760,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Lightning Fighters',
-        forceFirst: true,
         alias: 'Trigon',
         songSource: { songName: 'Faraway', videoId: 'jQJQ_rrN5hA' },
     },
@@ -890,7 +887,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Metal Hawk',
-        forceFirst: true,
         songSource: { songName: 'Game BGM 1', videoId: 'rX-6X3NIYX4' },
     },
     {
@@ -1358,7 +1354,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Sinistron',
-        forceFirst: true,
         alias: 'Violet Soldier',
         songSource: { songName: 'Stage 1', videoId: 'MBFv2bBU-yI', startTime: 10, endTime: 121 },
     },
@@ -1468,13 +1463,11 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Space Invaders Revolution',
-        forceFirst: true,
         series: Series.SpaceInvaders,
         songSource: { songName: 'Italy ~ Leaning Tower of Pisa', videoId: 'wLfjcM7xBlQ' },
     },
     {
         name: 'Space Invaders: Fukkatsu no Hi',
-        forceFirst: true,
         series: Series.SpaceInvaders,
         songSource: { songName: 'Main BGM 1', videoId: 'boeQyKFK7Bk' },
     },
@@ -1486,7 +1479,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Space Moth',
-        forceFirst: true,
         alias: [
             'Space Moth DX',
             'Space Moth Lunar Edition',
@@ -1581,13 +1573,11 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Thunder Cross',
-        forceFirst: true,
         series: Series.ThunderCross,
         songSource: { songName: 'First Attack', videoId: 'l1ANFKTBcas' },
     },
     {
         name: 'Thunder Cross II',
-        forceFirst: true,
         series: Series.ThunderCross,
         songSource: { songName: 'Air Battle', videoId: '5XNyi-7265A' },
     },
