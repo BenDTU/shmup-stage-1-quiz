@@ -702,6 +702,12 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1', videoId: 'lHGdbyX82TE' },
     },
     {
+        name: 'Hydorah',
+        forceFirst: true,
+        alias: 'Super Hydorah',
+        songSource: { songName: 'Outer Wall', videoId: 'RRDj6Yo_9k8', startTime: 98, endTime: 178 },
+    },
+    {
         name: 'Ibara',
         series: Series.Ibara,
         songSource: [
@@ -746,8 +752,19 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Interception - Noisy Town', videoId: 'z472pIce5CY' },
     },
     {
+        name: 'Koutetsu Yousai Strahl',
+        forceFirst: true,
+        songSource: { songName: 'Stage 1A', videoId: '8uXun40kevw', startTime: 54, endTime: 151  },
+    },
+    {
         name: 'Last Resort',
         songSource: { songName: 'Jack to the Metro', videoId: 'HAGArKEC_M8' },
+    },
+    {
+        name: 'Lightning Fighters',
+        forceFirst: true,
+        alias: 'Trigon',
+        songSource: { songName: 'Faraway', videoId: 'jQJQ_rrN5hA' },
     },
     {
         name: 'Like Dreamer',
@@ -870,6 +887,11 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Metal Black',
         songSource: { songName: 'Take off ~ Born to be free', videoId: 'GBS6KfJRyIg' },
+    },
+    {
+        name: 'Metal Hawk',
+        forceFirst: true,
+        songSource: { songName: 'Game BGM 1', videoId: 'rX-6X3NIYX4' },
     },
     {
         name: 'Muchi Muchi Pork!',
@@ -1335,6 +1357,12 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage BGM 1', videoId: 'BGNSHNf-nlU' },
     },
     {
+        name: 'Sinistron',
+        forceFirst: true,
+        alias: 'Violet Soldier',
+        songSource: { songName: 'Stage 1', videoId: 'MBFv2bBU-yI', startTime: 10, endTime: 121 },
+    },
+    {
         name: 'Sol Divide',
         songSource: [
             { songName: 'Knight of Darkness', videoId: '-2yayHs2-JA', startTime: 75, endTime: 158 },
@@ -1346,9 +1374,8 @@ const gameEntries: GameEntry[] = [
         name: 'Soldier Blade',
         songSource: { songName: 'Operation 1', videoId: 'pEyJV4nVBTU' },
     },
-    // Sonic Wings 1-3 released in English as Aero Fighters, but series has since gone to using the Sonic Wings brand universally - will use this across the board for consistency.
     {
-        name: 'Sonic Wings',
+        name: 'Sonic Wings', // Sonic Wings 1-3 released in English as Aero Fighters, but series has since gone to using the Sonic Wings brand universally - will use this across the board for consistency.
         alias: ['Aero Fighters'],
         series: Series.SonicWings,
         songSource: [
@@ -1440,14 +1467,35 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Selection (Genetic)', videoId: 'N3EJltfL7ok' },
     },
     {
+        name: 'Space Invaders Revolution',
+        forceFirst: true,
+        series: Series.SpaceInvaders,
+        songSource: { songName: 'Italy ~ Leaning Tower of Pisa', videoId: 'wLfjcM7xBlQ' },
+    },
+    {
+        name: 'Space Invaders: Fukkatsu no Hi',
+        forceFirst: true,
+        series: Series.SpaceInvaders,
+        songSource: { songName: 'Main BGM 1', videoId: 'boeQyKFK7Bk' },
+    },
+    {
         name: 'Space Megaforce',
         alias: 'Super Aleste',
         series: Series.Aleste,
         songSource: { songName: 'Stage 1', videoId: 'C--eV-L3gfE' },
     },
     {
+        name: 'Space Moth',
+        forceFirst: true,
+        alias: [
+            'Space Moth DX',
+            'Space Moth Lunar Edition',
+        ],
+        songSource: { songName: 'Broken Butterfly', videoId: 'JH460d3LzY4', startTime: 0, endTime: 100 },
+    },
+    {
         name: 'Strike Gunner S.T.G.',
-        // The theme has no official name; songName describes where it appears. The same melody is used in different stages across the Arcade and Super Nintendo versions.
+        // Song has no official name, is used in different stages in Arcade / Super Nintendo
         songSource: [
             { songName: 'Stages 1, 4 & Ending', arrangements: [{ source: 'Arcade', videoId: 'Zi0fezKPdH0' }] },
             { songName: 'Stages 1, 3 & 5', arrangements: [{ source: 'Super Nintendo', videoId: 'g3L79GW6T7s' }] },
@@ -1532,11 +1580,25 @@ const gameEntries: GameEntry[] = [
         ],
     },
     {
+        name: 'Thunder Cross',
+        forceFirst: true,
+        series: Series.ThunderCross,
+        songSource: { songName: 'First Attack', videoId: 'l1ANFKTBcas' },
+    },
+    {
+        name: 'Thunder Cross II',
+        forceFirst: true,
+        series: Series.ThunderCross,
+        songSource: { songName: 'Air Battle', videoId: '5XNyi-7265A' },
+    },
+    {
         name: 'Thunder Dragon',
+        series: Series.ThunderDragon,
         songSource: { songName: 'Wild Thunder', videoId: 'W6GrFBQUVKE', startTime: 72, endTime: 538 },
     },
     {
         name: 'Thunder Dragon II',
+        series: Series.ThunderDragon,
         songSource: { songName: 'Fly to Live I', videoId: 'Gtz9ZfaG2m8' },
     },
     {
