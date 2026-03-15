@@ -17,6 +17,7 @@ export enum Series {
     Gunbird = 'Gunbird',
     Ibara = 'Ibara',
     Macross = 'Macross',
+    Mahou = 'Mahou',
     OutZone = 'Out Zone',
     RType = 'R-Type',
     Raiden = 'Raiden',
