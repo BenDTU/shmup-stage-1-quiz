@@ -81,6 +81,62 @@ const sortedGamesRule = {
     },
 };
 
+
+/**
+ * Custom ESLint rule that enforces the `Series` enum in types.ts is sorted
+ * alphabetically (case-insensitive) by each member's string value.
+ * @type {import('eslint').Rule.RuleModule}
+ */
+const sortedSeriesEnumRule = {
+    meta: {
+        type: 'suggestion',
+        fixable: 'code',
+        docs: {
+            description: 'Enforce that the Series enum in types.ts is sorted alphabetically by value',
+        },
+        schema: [],
+        messages: {
+            unsorted: 'Series member "{{current}}" should come before "{{previous}}". Keep the Series enum sorted alphabetically by value.',
+        },
+    },
+    create(context) {
+        return {
+            'TSEnumDeclaration[id.name="Series"]'(node) {
+                const members = node.members;
+
+                /** @type {{ value: string; node: import('eslint').Rule.Node }[]} */
+                const entries = [];
+                for (const member of members) {
+                    if (!member.initializer || member.initializer.type !== 'Literal') continue;
+                    entries.push({ value: String(member.initializer.value), node: member });
+                }
+
+                const sortedEntries = [...entries].sort((a, b) =>
+                    a.value.localeCompare(b.value, undefined, { sensitivity: 'base', numeric: true }),
+                );
+
+                for (let i = 1; i < entries.length; i++) {
+                    const prev = entries[i - 1].value;
+                    const curr = entries[i].value;
+                    if (prev.localeCompare(curr, undefined, { sensitivity: 'base', numeric: true }) > 0) {
+                        context.report({
+                            node: entries[i].node,
+                            messageId: 'unsorted',
+                            data: { current: curr, previous: prev },
+                            fix(fixer) {
+                                const sourceCode = context.sourceCode;
+                                return entries.map((entry, j) =>
+                                    fixer.replaceText(entry.node, sourceCode.getText(sortedEntries[j].node)),
+                                );
+                            },
+                        });
+                    }
+                }
+            },
+        };
+    },
+};
+
 export default tseslint.config(
     eslint.configs.recommended,
     ...tseslint.configs.recommended,
@@ -130,6 +186,15 @@ export default tseslint.config(
         },
         rules: {
             'local/sorted-games': 'error',
+        },
+    },
+    {
+        files: ['src/types.ts'],
+        plugins: {
+            local: { rules: { 'sorted-series-enum': sortedSeriesEnumRule } },
+        },
+        rules: {
+            'local/sorted-series-enum': 'error',
         },
     },
     {

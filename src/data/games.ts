@@ -96,6 +96,21 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Aqua Base stage', videoId: '9IJcqceH3CM' },
     },
     {
+        name: 'Akai Katana',
+        alias: [
+            'Akai Katana Shin',
+            'Zetsu Akai Katana',
+        ],
+        songSource: {
+            songName: 'Nirvana Gate',
+            arrangements: [
+                { source: 'Original', videoId: 'A5fFOsU1cD8' },
+                { source: 'Arrange', videoId: 'HYL9Ydm_e7A' },
+                { source: "Arrange '22", videoId: 'VrkaDdKbB64' },
+            ],
+        },
+    },
+    {
         name: 'Alpha Mission',
         series: Series.AlphaMission,
         songSource: {
@@ -345,11 +360,18 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Deathsmiles',
+        series: Series.Deathsmiles,
         songSource: [
             { songName: 'Burning Halloween Town', videoId: 'NMwYXwclFN4' },
             { songName: 'Fury Of The Gravekeepers', videoId: 'zGcGQUryyPc' },
             { songName: 'Disturbance At The Lakeshore', videoId: 'LUtn9Kqkakc' },
         ],
+    },
+    {
+        name: 'Deathsmiles II',
+        series: Series.Deathsmiles,
+        alias: 'Deathsmiles IIX',
+        songSource: { songName: 'On Christmas Eve...', videoId: 'gfigWRSQI84' },
     },
     {
         name: 'Deltazeal',
@@ -376,6 +398,12 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: '1 & 4 Scene BGM', videoId: 'nDMjMv6COIU' },
     },
     {
+        name: 'DoDonPachi II: Bee Storm',
+        sortName: 'Dodonpachi 1.5',
+        series: Series.Dodonpachi,
+        songSource: { songName: 'Awakening ・ Nightmare', videoId: 'J14LDuEJG4U' },
+    },
+    {
         name: 'DoDonPachi Blissful Death',
         alias: 'DoDonPachi DaiOuJou',
         sortName: 'Dodonpachi 2',
@@ -390,6 +418,10 @@ const gameEntries: GameEntry[] = [
                 {
                     source: 'Black Label',
                     videoId: '4nzbL7kvhBk',
+                },
+                {
+                    source: 'Perfect Remix',
+                    videoId: '7vDIgz-VeBQ',
                 },
             ],
         },
@@ -406,6 +438,11 @@ const gameEntries: GameEntry[] = [
         sortName: 'Dodonpachi 4',
         series: Series.Dodonpachi,
         songSource: { songName: 'Ran', videoId: 'GFlCCYlXcE8' },
+    },
+    {
+        name: 'Dodonpachi Maximum',
+        series: Series.Dodonpachi,
+        songSource: { songName: 'East Asia', videoId: '87k8_kfwwLY' },
     },
     {
         name: 'Dogyuun',
@@ -446,9 +483,44 @@ const gameEntries: GameEntry[] = [
     {
         name: 'ESP Ra.De.',
         songSource: [
-            { songName: 'Desperate School', videoId: 'P3_U1wyESiA' },
-            { songName: 'Nightmare', videoId: 'ZoxoMoDZ-0A' },
-            { songName: 'Act in Judge', videoId: 'q8s0A1R_c6k' },
+            {
+                songName: 'Desperate School',
+                arrangements: [
+                    {
+                        source: 'Original',
+                        videoId: 'f46LchO1f9U',
+                    }, {
+                        source: 'Drive Waves 2019',
+                        videoId: 'u6Y8mZEGUc4',
+                    },
+                ],
+            },
+            {
+                songName: 'Nightmare',
+                arrangements: [
+                    {
+                        source: 'Original',
+                        videoId: 'YgSyX1ujF8U',
+                    },
+                    {
+                        source: 'Drive Waves 2019',
+                        videoId: 'N_xI6oApT50',
+                    },
+                ],
+            },
+            {
+                songName: 'Act in Judge',
+                arrangements: [
+                    {
+                        source: 'Original',
+                        videoId: 'treWH7SONvU',
+                    },
+                    {
+                        source: 'Drive Waves 2019',
+                        videoId: 'H5Eis9kfMIU',
+                    },
+                ],
+            },
         ],
     },
     {
