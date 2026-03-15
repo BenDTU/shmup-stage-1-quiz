@@ -171,6 +171,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Qygenomics', videoId: 'dTbpYrrSRPY' },
     },
     {
+        name: 'Brave Blade',
+        songSource: { songName: 'The Initial Battle', videoId: 's8ejVCXrdZw' },
+    },
+    {
         name: 'Bullet Soul',
         alias: 'Bullet Soul: Infinite Burst',
         songSource: { songName: 'Relentless Force', videoId: 'ahK-7dPcI6w' },
@@ -352,6 +356,12 @@ const gameEntries: GameEntry[] = [
         alias: 'G-Stream G2020',
         series: Series.Zeal,
         songSource: { songName: 'Stage 1 & 4', videoId: '6xG4t2wE0rM' },
+    },
+    {
+        name: 'Dimahoo',
+        alias: 'Great Mahou Daisakusen',
+        series: Series.Mahou,
+        songSource: { songName: 'Scramble!', videoId: 'uAvNXEP_P6o' },
     },
     {
         name: 'DonPachi',
@@ -749,6 +759,12 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Ketsui',
         songSource: { songName: 'Interception - Noisy Town', videoId: 'z472pIce5CY' },
+    },
+    {
+        name: 'Kingdom Grandprix',
+        alias: 'Shippu Mahou Daisakusen',
+        series: Series.Mahou,
+        songSource: { songName: 'Lead Departure', videoId: 'UqaoXFJQmIY' },
     },
     {
         name: 'Koutetsu Yousai Strahl',
@@ -1410,6 +1426,30 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Japan stage', videoId: 'sXCTZsRJ6y8' },
     },
     {
+        name: 'Sorcer Striker',
+        series: Series.Mahou,
+        alias: 'Mahou Daisakusen',
+        songSource: {
+            songName: 'Sorcer Striker',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: 'PsSehe9jCDs',
+                },
+                {
+                    source: 'FM Towns',
+                    videoId: 'aI5z5trc_Ko',
+                },
+                {
+                    source: 'Sharp X68000',
+                    videoId: 'oFsCy2s2HpI',
+                    startTime: 156,
+                    endTime: 277,
+                },
+            ],
+        },
+    },
+    {
         name: "Space Invaders '91",
         series: Series.SpaceInvaders,
         songSource: { songName: 'Round 1 & 9', videoId: 'hicMw4XOMSQ' },
@@ -1570,6 +1610,11 @@ const gameEntries: GameEntry[] = [
             { songName: 'Somberness', videoId: 'HXJ9x-DTSJo' },
             { songName: 'A High Ceder', videoId: 'B4-xPSqb4f0' },
         ],
+    },
+    {
+        name: 'Terra Diver',
+        alias: 'Soukyugurentai',
+        songSource: { songName: 'Above Ota City', videoId: '5X4BCG65cm8' },
     },
     {
         name: 'Thunder Cross',
