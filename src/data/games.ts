@@ -401,7 +401,7 @@ const gameEntries: GameEntry[] = [
         name: 'DoDonPachi II: Bee Storm',
         sortName: 'Dodonpachi 1.5',
         series: Series.Dodonpachi,
-        songSource: { songName: 'The Year 2000, Tokyo', videoId: 'J14LDuEJG4U' },
+        songSource: { songName: 'Awakening ・ Nightmare', videoId: 'J14LDuEJG4U' },
     },
     {
         name: 'DoDonPachi Blissful Death',
