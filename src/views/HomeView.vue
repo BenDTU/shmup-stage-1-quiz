@@ -37,7 +37,7 @@
                         </div>
                     </button>
                 </div>
-                <hr class="mb-5">
+                <hr class="mb-5 text-warning-emphasis opacity-100">
                 <h2 class="mb-2 text-warning-emphasis">
                     Daily Challenge
                 </h2>
@@ -106,7 +106,7 @@
                 <p class="mb-5">
                     Time until next daily challenge: <strong>{{ timeUntilNextDaily }}</strong>
                 </p>
-                <hr class="mb-5">
+                <hr class="mb-5 text-warning-emphasis opacity-100">
                 <p class="text-muted small mb-2">
                     There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups loaded in!
                 </p>
@@ -171,7 +171,7 @@ function viewDailyResults() {
 
 <style scoped>
 .daily-btn {
-    box-shadow: 0 0 10px 3px rgba(255, 193, 7, 0.5);
+    box-shadow: var(--daily-glow);
     transition: box-shadow 0.2s ease;
     width: 200px;
     color: var(--bs-warning-text-emphasis);
@@ -179,9 +179,15 @@ function viewDailyResults() {
 }
 
 .daily-btn:hover {
-    box-shadow: 0 0 18px 6px rgba(255, 193, 7, 0.75);
+    box-shadow: var(--daily-glow-intense);
     color: var(--bs-warning-text-emphasis);
     background-color: var(--bs-warning-bg-subtle);
     border-color: var(--bs-warning-text-emphasis);
 }
+
+hr {
+    box-shadow: var(--daily-glow);
+}
+
+
 </style>

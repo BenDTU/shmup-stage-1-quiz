@@ -15,7 +15,7 @@
                 type="button"
                 @click="startAudio"
             >
-                {{ resuming ? 'Resume' : 'Start!' }}
+                {{ resuming ? 'Resume!' : 'Start!' }}
             </button>
         </div>
         <!-- Spoiler overlay — shown while the answer is still hidden -->
