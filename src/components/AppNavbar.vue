@@ -1,34 +1,3 @@
-<script setup lang="ts">
-import { ref, computed } from 'vue';
-import { RouterLink, useRoute } from 'vue-router';
-import { BOffcanvas } from 'bootstrap-vue-next';
-import { useDarkMode } from '../composables/useDarkMode';
-
-const { isDark, toggleDark } = useDarkMode();
-const route = useRoute();
-const isPlayActive = computed(() => !route.path.startsWith('/song-list'));
-
-const isMenuOpen = ref(false);
-const togglerRef = ref<HTMLButtonElement | null>(null);
-const closedByNavigation = ref(false);
-
-function onHidden() {
-    if (!closedByNavigation.value) {
-        togglerRef.value?.focus();
-    }
-    closedByNavigation.value = false;
-}
-
-function closeMenuViaNavigation() {
-    if (isMenuOpen.value) {
-        closedByNavigation.value = true;
-        isMenuOpen.value = false;
-    } else {
-        closedByNavigation.value = false;
-    }
-}
-</script>
-
 <template>
     <nav class="navbar navbar-expand-md sticky-top border-bottom bg-body">
         <div class="container">
@@ -151,3 +120,34 @@ function closeMenuViaNavigation() {
         </div>
     </nav>
 </template>
+
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { RouterLink, useRoute } from 'vue-router';
+import { BOffcanvas } from 'bootstrap-vue-next';
+import { useDarkMode } from '../composables/useDarkMode';
+
+const { isDark, toggleDark } = useDarkMode();
+const route = useRoute();
+const isPlayActive = computed(() => !route.path.startsWith('/song-list'));
+
+const isMenuOpen = ref(false);
+const togglerRef = ref<HTMLButtonElement | null>(null);
+const closedByNavigation = ref(false);
+
+function onHidden() {
+    if (!closedByNavigation.value) {
+        togglerRef.value?.focus();
+    }
+    closedByNavigation.value = false;
+}
+
+function closeMenuViaNavigation() {
+    if (isMenuOpen.value) {
+        closedByNavigation.value = true;
+        isMenuOpen.value = false;
+    } else {
+        closedByNavigation.value = false;
+    }
+}
+</script>

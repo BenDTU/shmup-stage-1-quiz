@@ -1,34 +1,3 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-import { games, totalSongs, totalShmups } from '@/data/games';
-import type { SongEntry } from '@/data/games';
-import SongLinks from '@/components/SongLinks.vue';
-
-interface GameGroup {
-    gameName: string
-    aliases: string[]
-    songs: SongEntry[]
-}
-
-function normalizeAlias(alias: string | string[]): string[] {
-    if (Array.isArray(alias)) {
-        return alias;
-    }
-    return [alias];
-}
-
-const gameGroups: GameGroup[] = games.map((game) => {
-    const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource];
-    return {
-        gameName: game.name,
-        aliases: game.alias ? normalizeAlias(game.alias) : [],
-        songs: sources,
-    };
-});
-
-const hoveredGame = ref<string | null>(null);
-</script>
-
 <template>
     <main class="container py-5">
         <div class="row justify-content-center">
@@ -109,6 +78,37 @@ const hoveredGame = ref<string | null>(null);
         </div>
     </main>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import { games, totalSongs, totalShmups } from '@/data/games';
+import type { SongEntry } from '@/data/games';
+import SongLinks from '@/components/SongLinks.vue';
+
+interface GameGroup {
+    gameName: string
+    aliases: string[]
+    songs: SongEntry[]
+}
+
+function normalizeAlias(alias: string | string[]): string[] {
+    if (Array.isArray(alias)) {
+        return alias;
+    }
+    return [alias];
+}
+
+const gameGroups: GameGroup[] = games.map((game) => {
+    const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource];
+    return {
+        gameName: game.name,
+        aliases: game.alias ? normalizeAlias(game.alias) : [],
+        songs: sources,
+    };
+});
+
+const hoveredGame = ref<string | null>(null);
+</script>
 
 <style scoped lang="scss">
 tr.row-hovered > td {
