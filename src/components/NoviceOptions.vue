@@ -1,3 +1,30 @@
+<template>
+    <div class="row row-cols-1 row-cols-md-2 g-2">
+        <div
+            v-for="optionId in options"
+            :key="optionId"
+            class="col"
+        >
+            <button
+                class="btn text-start w-100 h-100"
+                :class="[optionClass(optionId), { 'novice-option-done': isAnswered }]"
+                :aria-disabled="isAnswered ? 'true' : undefined"
+                @click="handleSelect($event, optionId)"
+            >
+                <div>{{ guessedGameName(optionId) }}</div>
+                <div
+                    v-if="isAnswered && optionId === correctId && songName"
+                    class="small opacity-75"
+                >
+                    {{ songName }}<template v-if="source">
+                        ({{ source }} version)
+                    </template>
+                </div>
+            </button>
+        </div>
+    </div>
+</template>
+
 <script setup lang="ts">
 import { guessedGameName } from '../functions';
 
@@ -31,33 +58,6 @@ function handleSelect(event: MouseEvent, optionId: number) {
     emit('submit', optionId, event.detail === 0);
 }
 </script>
-
-<template>
-    <div class="row row-cols-1 row-cols-md-2 g-2">
-        <div
-            v-for="optionId in options"
-            :key="optionId"
-            class="col"
-        >
-            <button
-                class="btn text-start w-100 h-100"
-                :class="[optionClass(optionId), { 'novice-option-done': isAnswered }]"
-                :aria-disabled="isAnswered ? 'true' : undefined"
-                @click="handleSelect($event, optionId)"
-            >
-                <div>{{ guessedGameName(optionId) }}</div>
-                <div
-                    v-if="isAnswered && optionId === correctId && songName"
-                    class="small opacity-75"
-                >
-                    {{ songName }}<template v-if="source">
-                        ({{ source }} version)
-                    </template>
-                </div>
-            </button>
-        </div>
-    </div>
-</template>
 
 <style scoped>
 .novice-option-done {

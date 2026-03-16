@@ -177,6 +177,7 @@ export default tseslint.config(
             '@stylistic/object-curly-spacing': ['error', 'always'],
             'vue/html-indent': ['error', 4],
             'vue/script-indent': ['error', 4],
+            'vue/component-tags-order': ['error', { order: ['template', 'script', 'style'] }],
         },
     },
     {
