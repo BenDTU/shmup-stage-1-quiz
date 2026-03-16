@@ -3,6 +3,14 @@ import { games } from '../data/games';
 import type { Series } from '../types';
 import { type Game, type GameEntryWithId, type QuizMode } from '../types';
 
+function shuffle<T>(arr: T[]): T[] {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j]!, arr[i]!];
+    }
+    return arr;
+}
+
 function resolveGame(entry: GameEntryWithId): Game {
     const { name, alias, series, id } = entry;
     const sources = Array.isArray(entry.songSource) ? entry.songSource : [entry.songSource];
@@ -130,7 +138,7 @@ const seriesLimitedGameIds = computed<Set<number>>(() => {
 
 function startQuiz(mode: QuizMode = 'advanced') {
     const forceFirstGames = games.filter((g) => g.forceFirst);
-    const shuffled = [...games].filter((g) => !g.forceFirst).sort(() => Math.random() - 0.5);
+    const shuffled = shuffle([...games].filter((g) => !g.forceFirst));
     const seriesCounts: Partial<Record<Series, number>> = {};
     const selected: Game[] = [];
     for (const game of [...forceFirstGames, ...shuffled]) {
@@ -164,9 +172,9 @@ function startQuiz(mode: QuizMode = 'advanced') {
                     !priorIds.has(g.id) &&
                     !(g.series && limitedSeries.has(g.series)),
             );
-            const shuffledEligible = [...eligible].sort(() => Math.random() - 0.5);
+            const shuffledEligible = shuffle([...eligible]);
             const incorrectIds = shuffledEligible.slice(0, 3).map((g) => g.id);
-            return [...incorrectIds, question.id].sort(() => Math.random() - 0.5);
+            return shuffle([...incorrectIds, question.id]);
         });
     }
 
