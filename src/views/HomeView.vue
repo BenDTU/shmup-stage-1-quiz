@@ -44,7 +44,7 @@
                 <p class="mb-4">
                     Once per day - challenge the same set of songs as everyone else!
                 </p>
-                <div class="d-flex flex-column flex-md-row justify-content-center gap-3 mb-4">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 mb-4">
                     <button
                         class="btn btn-outline-warning btn-lg py-3 daily-btn"
                         @click="beginDaily('novice')"
