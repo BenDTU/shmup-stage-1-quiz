@@ -37,7 +37,8 @@
                         </div>
                     </button>
                 </div>
-                <hr class="mb-5 text-warning-emphasis opacity-100">
+                <br>
+                <hr class="mt-1 mb-5 text-warning-emphasis opacity-100">
                 <h2 class="mb-2 text-warning-emphasis">
                     Daily Challenge
                 </h2>
