@@ -9,7 +9,7 @@
                     Think you know your shmups? How many can you pick from their stage 1 song? Test your knowledge with a random set of <strong class="fw-bold">20</strong> tracks.
                 </p>
                 <h2 class="h5 mb-3">
-                    Random Quiz
+                    Choose your Difficulty
                 </h2>
                 <div class="d-flex flex-column align-items-center gap-3 mb-5">
                     <button
@@ -37,38 +37,35 @@
                         </div>
                     </button>
                 </div>
-                <h2 class="h5 mb-1">
-                    Daily Quiz
+                <hr class="mb-5">
+                <h2 class="mb-2 text-warning-emphasis">
+                    Daily Challenge
                 </h2>
-                <p class="text-muted small mb-3">
-                    Same questions for everyone today
+                <p class="mb-4">
+                    Once per day - challenge the same set of songs as everyone else!
                 </p>
-                <div class="d-flex flex-column align-items-center gap-3 mb-5">
+                <div class="d-flex flex-column flex-md-row justify-content-center gap-3 mb-4">
                     <button
-                        class="btn btn-success btn-lg w-100 py-3"
-                        style="max-width: 400px"
+                        class="btn btn-outline-warning btn-lg py-3 daily-btn"
                         @click="beginDaily('novice')"
                     >
                         <div class="fw-bold fs-5">
                             Daily Novice
                         </div>
-                        <div class="small opacity-75">
-                            Select from a list of 4 games
-                        </div>
                     </button>
                     <button
-                        class="btn btn-danger btn-lg w-100 py-3"
-                        style="max-width: 400px"
+                        class="btn btn-outline-warning btn-lg py-3 daily-btn"
                         @click="beginDaily('advanced')"
                     >
                         <div class="fw-bold fs-5">
                             Daily Advanced
                         </div>
-                        <div class="small opacity-75">
-                            Select from the whole list of games
-                        </div>
                     </button>
                 </div>
+                <p class="mb-5">
+                    Time until next daily challenge: <strong>{{ timeUntilNextDaily }}</strong>
+                </p>
+                <hr class="mb-5">
                 <p class="text-muted small mb-2">
                     There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups loaded in!
                 </p>
@@ -83,6 +80,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuiz } from '@/composables/useQuiz';
 import { totalSongs, totalShmups } from '@/data/games';
@@ -90,6 +88,21 @@ import type { QuizMode } from '@/types';
 
 const router = useRouter();
 const { startQuiz, startDailyQuiz } = useQuiz();
+
+function getTimeUntilMidnightUTC(): string {
+    const now = new Date();
+    const midnight = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
+    const diff = midnight.getTime() - now.getTime();
+    const h = Math.floor(diff / 3_600_000);
+    const m = Math.floor((diff % 3_600_000) / 60_000);
+    const s = Math.floor((diff % 60_000) / 1_000);
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+}
+
+const timeUntilNextDaily = ref(getTimeUntilMidnightUTC());
+let timer: ReturnType<typeof setInterval>;
+onMounted(() => { timer = setInterval(() => { timeUntilNextDaily.value = getTimeUntilMidnightUTC(); }, 1000); });
+onUnmounted(() => { clearInterval(timer); });
 
 function begin(mode: QuizMode) {
     startQuiz(mode);
@@ -101,3 +114,20 @@ function beginDaily(mode: QuizMode) {
     router.push('/quiz');
 }
 </script>
+
+<style scoped>
+.daily-btn {
+    box-shadow: 0 0 10px 3px rgba(255, 193, 7, 0.5);
+    transition: box-shadow 0.2s ease;
+    width: 200px;
+    color: var(--bs-warning-text-emphasis);
+    border-color: var(--bs-warning-text-emphasis);
+}
+
+.daily-btn:hover {
+    box-shadow: 0 0 18px 6px rgba(255, 193, 7, 0.75);
+    color: var(--bs-warning-text-emphasis);
+    background-color: var(--bs-warning-bg-subtle);
+    border-color: var(--bs-warning-text-emphasis);
+}
+</style>
