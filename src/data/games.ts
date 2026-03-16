@@ -807,11 +807,16 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'In the Hunt',
-        songSource: { songName: 'The South Pole', videoId: '9F8SiVzU1QI' },
-    },
-    {
-        name: 'In the Hunt (PlayStation)',
-        songSource: { songName: 'Stage 1', videoId: '7fI0-TLbPkY' },
+        songSource: [
+            {
+                songName: 'The South Pole',
+                arrangements: [
+                    { source: 'Arcade', videoId: '9F8SiVzU1QI' },
+                    { source: 'Saturn', videoId: 'Si944QJcWHg' },
+                ],
+            },
+            { songName: 'Stage 1 (Playstation arrangement)', videoId: '7fI0-TLbPkY' },
+        ],
     },
     {
         name: 'Ironclad',
