@@ -97,13 +97,14 @@
                         </div>
                     </div>
 
-                    <div class="text-center">
-                        <button
-                            class="btn btn-primary btn-lg px-5"
-                            @click="playAgain"
+                    <div class="text-center mt-4">
+                        <RouterLink
+                            to="/"
+                            class="btn btn-outline-secondary icon-link"
                         >
-                            Play Again
-                        </button>
+                            <i class="lh-1 bi bi-arrow-left" />
+                            Back to Home
+                        </RouterLink>
                     </div>
                 </template>
             </div>
@@ -120,7 +121,7 @@ import DailyCountdown from '../components/DailyCountdown.vue';
 
 
 const router = useRouter();
-const { state, isDaily, resetQuiz } = useQuiz();
+const { state, isDaily } = useQuiz();
 
 onMounted(() => {
     if (!state.isStarted || state.answers.length === 0) {
@@ -131,10 +132,6 @@ onMounted(() => {
 const score = state.answers.filter((id, i) => state.questions[i]?.id === id).length;
 const total = state.answers.length;
 
-function playAgain() {
-    resetQuiz();
-    router.push('/');
-}
 </script>
 
 <style scoped>
