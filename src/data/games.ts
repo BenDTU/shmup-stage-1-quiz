@@ -791,10 +791,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Ibara',
         series: Series.Ibara,
-        songSource: [
-            { songName: 'Show Time', videoId: 'T65Zmc6iWCc' },
-            { songName: 'Bonds of Steel', videoId: 'XgSMvKTaMXU' },
-        ] ,
+        songSource: { songName: 'Show Time', videoId: 'T65Zmc6iWCc' },
     },
     {
         name: 'Ikaruga',
