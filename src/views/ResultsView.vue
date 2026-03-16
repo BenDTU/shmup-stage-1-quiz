@@ -4,8 +4,11 @@
             <div class="col-lg-7">
                 <template v-if="total > 0">
                     <div class="text-center mb-5">
-                        <h1 class="display-5 mb-3 fw-bold">
-                            Quiz Complete! <i class="bi bi-trophy-fill" />
+                        <h1
+                            class="display-5 mb-3 fw-bold"
+                            :class="isDaily ? 'text-warning-emphasis' : ''"
+                        >
+                            {{ isDaily ? 'Daily Challenge Complete!' : 'Quiz Complete!' }} <i class="bi bi-trophy-fill" />
                         </h1>
                         <p class="text-muted mb-3">
                             <span
@@ -41,7 +44,10 @@
                     <h5 class="mb-3">
                         All Answers
                     </h5>
-                    <div class="list-group mb-5">
+                    <div
+                        class="list-group mb-5"
+                        :class="isDaily ? 'list-group-daily' : ''"
+                    >
                         <div
                             v-for="(guessId, index) in state.answers"
                             :key="index"
@@ -107,7 +113,7 @@ import { guessedGameName } from '../functions';
 
 
 const router = useRouter();
-const { state, resetQuiz } = useQuiz();
+const { state, isDaily, resetQuiz } = useQuiz();
 
 onMounted(() => {
     if (!state.isStarted || state.answers.length === 0) {
@@ -123,3 +129,14 @@ function playAgain() {
     router.push('/');
 }
 </script>
+
+<style scoped>
+.list-group-daily {
+    --bs-list-group-border-color: var(--bs-warning-text-emphasis);
+    box-shadow: var(--daily-glow);
+
+    .list-group-item {
+        border-color: var(--bs-warning-text-emphasis);
+    }
+}
+</style>

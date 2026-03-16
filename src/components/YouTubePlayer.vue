@@ -33,7 +33,7 @@
             <p class="mb-0 fw-semibold fs-5">
                 <i class="bi bi-music-note-beamed" /> Now Playing…
             </p>
-            <p class="mb-2 text-muted small">
+            <p class="mb-2 text-white text-opacity-75 small">
                 {{ currentQuote }}
             </p>
             <button
@@ -254,9 +254,9 @@ function onRestartAnimationEnd() {
   transition: box-shadow 0.2s ease;
 
   &:hover {
-    color: var(--bs-warning-text-emphasis);
-    background-color: var(--bs-warning-bg-subtle);
-    border-color: var(--bs-warning-text-emphasis);
+    color: var(--bs-warning);
+    background-color: #332701; // Equivalent of var(--bs-warning-bg-subtle) in dark mode
+    border-color: var(--bs-warning);
     box-shadow: var(--daily-glow-intense);
   }
 }

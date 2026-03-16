@@ -13,8 +13,14 @@
             <div class="col-lg-8">
                 <!-- Progress bar -->
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <span class="fw-semibold">Question {{ questionNumber }} of {{ state.questions.length }}</span>
-                    <span class="text-muted small">Score: {{ state.answers.filter((id, i) => state.questions[i]?.id === id).length }} / {{ state.answers.length }}</span>
+                    <span
+                        class="fw-semibold"
+                        :class="isDaily ? 'text-warning-emphasis' : ''"
+                    >Question {{ questionNumber }} of {{ state.questions.length }}</span>
+                    <span
+                        class="small"
+                        :class="isDaily ? 'text-warning-emphasis opacity-75' : 'text-muted'"
+                    >Score: {{ state.answers.filter((id, i) => state.questions[i]?.id === id).length }} / {{ state.answers.length }}</span>
                 </div>
                 <div
                     class="progress mb-4"
@@ -51,7 +57,7 @@
                     :class="{ 'card-daily': isDaily }"
                 >
                     <div class="card-body">
-                        <h5 class="card-title mb-3 text-warning-emphasis">
+                        <h5 class="card-title mb-3">
                             Which game is this stage 1 theme from?
                         </h5>
 
