@@ -1,28 +1,3 @@
-<script setup lang="ts">
-import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useQuiz } from '../composables/useQuiz';
-import { guessedGameName } from '../functions';
-
-
-const router = useRouter();
-const { state, resetQuiz } = useQuiz();
-
-onMounted(() => {
-    if (!state.isStarted || state.answers.length === 0) {
-        router.replace('/');
-    }
-});
-
-const score = state.answers.filter((id, i) => state.questions[i]?.id === id).length;
-const total = state.answers.length;
-
-function playAgain() {
-    resetQuiz();
-    router.push('/');
-}
-</script>
-
 <template>
     <main class="container py-5">
         <div class="row justify-content-center">
@@ -123,3 +98,28 @@ function playAgain() {
         </div>
     </main>
 </template>
+
+<script setup lang="ts">
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { useQuiz } from '../composables/useQuiz';
+import { guessedGameName } from '../functions';
+
+
+const router = useRouter();
+const { state, resetQuiz } = useQuiz();
+
+onMounted(() => {
+    if (!state.isStarted || state.answers.length === 0) {
+        router.replace('/');
+    }
+});
+
+const score = state.answers.filter((id, i) => state.questions[i]?.id === id).length;
+const total = state.answers.length;
+
+function playAgain() {
+    resetQuiz();
+    router.push('/');
+}
+</script>

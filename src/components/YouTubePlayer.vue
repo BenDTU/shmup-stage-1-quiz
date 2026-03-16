@@ -1,3 +1,65 @@
+<template>
+    <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
+        <!-- One-time Start overlay — only shown before the user's first
+         audio interaction. The iframe behind it is already playing the
+         video muted (muted autoplay is permitted by every browser).
+         Clicking Play sends an unMute command via postMessage inside the
+         gesture, which transfers user activation into the iframe and
+         allows Safari (and all other browsers) to enable audio. -->
+        <div
+            v-if="!audioUnlocked"
+            class="audio-overlay audio-placeholder rounded-3 text-center"
+        >
+            <button
+                class="btn btn-outline-light btn-lg"
+                type="button"
+                @click="startAudio"
+            >
+                Start!
+            </button>
+        </div>
+        <!-- Spoiler overlay — shown while the answer is still hidden -->
+        <div
+            v-else-if="hidden"
+            class="audio-overlay audio-placeholder rounded-3 text-center"
+        >
+            <div
+                class="bars mb-3"
+                aria-hidden="true"
+            >
+                <span /><span /><span /><span /><span />
+            </div>
+            <p class="mb-0 fw-semibold fs-5">
+                <i class="bi bi-music-note-beamed" /> Now Playing…
+            </p>
+            <p class="mb-2 text-muted small">
+                {{ currentQuote }}
+            </p>
+            <button
+                class="btn btn-outline-light btn-sm"
+                type="button"
+                @click="restartAudio"
+            >
+                <i
+                    class="bi bi-arrow-counterclockwise"
+                    :class="{ 'spin-once': restartSpinning }"
+                    @animationend="onRestartAnimationEnd"
+                /> Restart
+            </button>
+        </div>
+        <!-- src is managed imperatively (onMounted + watcher + startAudio).
+         No :key so the same element — and its user-activation state —
+         persists for every question without a src reload. -->
+        <iframe
+            ref="iframeRef"
+            src=""
+            title="Stage 1 theme"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+        />
+    </div>
+</template>
+
 <script setup lang="ts">
 import { computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue';
 import { quotes } from '../constants/quotes';
@@ -135,68 +197,6 @@ function onRestartAnimationEnd() {
     restartSpinning.value = false;
 }
 </script>
-
-<template>
-    <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
-        <!-- One-time Start overlay — only shown before the user's first
-         audio interaction. The iframe behind it is already playing the
-         video muted (muted autoplay is permitted by every browser).
-         Clicking Play sends an unMute command via postMessage inside the
-         gesture, which transfers user activation into the iframe and
-         allows Safari (and all other browsers) to enable audio. -->
-        <div
-            v-if="!audioUnlocked"
-            class="audio-overlay audio-placeholder rounded-3 text-center"
-        >
-            <button
-                class="btn btn-outline-light btn-lg"
-                type="button"
-                @click="startAudio"
-            >
-                Start!
-            </button>
-        </div>
-        <!-- Spoiler overlay — shown while the answer is still hidden -->
-        <div
-            v-else-if="hidden"
-            class="audio-overlay audio-placeholder rounded-3 text-center"
-        >
-            <div
-                class="bars mb-3"
-                aria-hidden="true"
-            >
-                <span /><span /><span /><span /><span />
-            </div>
-            <p class="mb-0 fw-semibold fs-5">
-                <i class="bi bi-music-note-beamed" /> Now Playing…
-            </p>
-            <p class="mb-2 text-muted small">
-                {{ currentQuote }}
-            </p>
-            <button
-                class="btn btn-outline-light btn-sm"
-                type="button"
-                @click="restartAudio"
-            >
-                <i
-                    class="bi bi-arrow-counterclockwise"
-                    :class="{ 'spin-once': restartSpinning }"
-                    @animationend="onRestartAnimationEnd"
-                /> Restart
-            </button>
-        </div>
-        <!-- src is managed imperatively (onMounted + watcher + startAudio).
-         No :key so the same element — and its user-activation state —
-         persists for every question without a src reload. -->
-        <iframe
-            ref="iframeRef"
-            src=""
-            title="Stage 1 theme"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-        />
-    </div>
-</template>
 
 <style scoped lang="scss">
 /* The overlay sits on top of the iframe, covering the video while
