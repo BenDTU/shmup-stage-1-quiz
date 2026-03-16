@@ -2,7 +2,7 @@ import { reactive, computed, ref } from 'vue';
 import { games } from '../data/games';
 import type { Series } from '../types';
 import { type Game, type GameEntryWithId, type QuizMode } from '../types';
-import { getDailyProgress, saveDailyProgress } from './useDailyProgress';
+import { getDailyProgress, saveDailyProgress } from './dailyProgressStorage';
 
 type RandomFn = () => number;
 
@@ -23,7 +23,11 @@ function getDailySeed(): number {
     for (const char of today) {
         hash = (Math.imul(31, hash) + char.charCodeAt(0)) | 0;
     }
-    return hash;
+    // Run one round of Mulberry32 mixing to avoid adjacent-seed correlation
+    hash = (hash + 0x6D2B79F5) | 0;
+    let t = Math.imul(hash ^ (hash >>> 15), 1 | hash);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return (t ^ (t >>> 14)) >>> 0;
 }
 
 function shuffle<T>(arr: T[], random: RandomFn = Math.random): T[] {

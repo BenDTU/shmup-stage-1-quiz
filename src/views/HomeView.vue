@@ -123,7 +123,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuiz } from '@/composables/useQuiz';
-import { getDailyProgress } from '@/composables/useDailyProgress';
+import { getDailyProgress } from '@/composables/dailyProgressStorage';
 import { totalSongs, totalShmups } from '@/data/games';
 import type { QuizMode } from '@/types';
 import DailyCountdown from '@/components/DailyCountdown.vue';
