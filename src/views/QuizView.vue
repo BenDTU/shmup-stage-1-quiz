@@ -39,6 +39,7 @@
                         :end-time="currentQuestion.endTime"
                         :hidden="!state.isAnswered"
                         :resuming="isResumed"
+                        :daily="isDaily"
                         @audio-unlocked="audioUnlocked = true; isResumed = false"
                     />
                 </div>
@@ -47,9 +48,10 @@
                 <div
                     v-show="audioUnlocked"
                     class="card"
+                    :class="{ 'card-daily': isDaily }"
                 >
                     <div class="card-body">
-                        <h5 class="card-title mb-3">
+                        <h5 class="card-title mb-3 text-warning-emphasis">
                             Which game is this stage 1 theme from?
                         </h5>
 
@@ -279,6 +281,11 @@ async function handleNextClick(event: MouseEvent) {
 </script>
 
 <style scoped>
+.card-daily {
+    --bs-card-border-color: var(--bs-warning-text-emphasis);
+    box-shadow: var(--daily-glow);
+}
+
 @keyframes shake {
     0%,  100% { transform: translate(0, 0); }
     15%       { transform: translate(-4px, -2px); }

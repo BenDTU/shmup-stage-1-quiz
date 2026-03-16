@@ -11,7 +11,8 @@
             class="audio-overlay audio-placeholder rounded-3 text-center"
         >
             <button
-                class="btn btn-outline-light btn-lg"
+                class="btn btn-lg"
+                :class="daily ? 'btn-start-daily' : 'btn-outline-light'"
                 type="button"
                 @click="startAudio"
             >
@@ -70,6 +71,7 @@ const props = defineProps<{
     endTime?: number
     hidden?: boolean
     resuming?: boolean
+    daily?: boolean
 }>();
 
 const emit = defineEmits<{
@@ -240,6 +242,23 @@ function onRestartAnimationEnd() {
 @keyframes bounce {
   0%, 100% { transform: scaleY(0.4); }
   50%       { transform: scaleY(1); }
+}
+
+.btn-start-daily {
+  color: var(--bs-warning);
+  border-color: var(--bs-warning);
+  border-style: solid;
+  border-width: 1px;
+  background: transparent;
+  box-shadow: var(--daily-glow);
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    color: var(--bs-warning-text-emphasis);
+    background-color: var(--bs-warning-bg-subtle);
+    border-color: var(--bs-warning-text-emphasis);
+    box-shadow: var(--daily-glow-intense);
+  }
 }
 
 /* One-shot anticlockwise spin for the restart icon */
