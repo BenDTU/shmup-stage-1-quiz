@@ -9,7 +9,7 @@
                     Think you know your shmups? How many can you pick from their stage 1 song? Test your knowledge with a random set of <strong class="fw-bold">20</strong> tracks.
                 </p>
                 <h2 class="h5 mb-3">
-                    Choose your Difficulty
+                    Random Quiz
                 </h2>
                 <div class="d-flex flex-column align-items-center gap-3 mb-5">
                     <button
@@ -37,6 +37,38 @@
                         </div>
                     </button>
                 </div>
+                <h2 class="h5 mb-1">
+                    Daily Quiz
+                </h2>
+                <p class="text-muted small mb-3">
+                    Same questions for everyone today
+                </p>
+                <div class="d-flex flex-column align-items-center gap-3 mb-5">
+                    <button
+                        class="btn btn-success btn-lg w-100 py-3"
+                        style="max-width: 400px"
+                        @click="beginDaily('novice')"
+                    >
+                        <div class="fw-bold fs-5">
+                            Daily Novice
+                        </div>
+                        <div class="small opacity-75">
+                            Select from a list of 4 games
+                        </div>
+                    </button>
+                    <button
+                        class="btn btn-danger btn-lg w-100 py-3"
+                        style="max-width: 400px"
+                        @click="beginDaily('advanced')"
+                    >
+                        <div class="fw-bold fs-5">
+                            Daily Advanced
+                        </div>
+                        <div class="small opacity-75">
+                            Select from the whole list of games
+                        </div>
+                    </button>
+                </div>
                 <p class="text-muted small mb-2">
                     There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups loaded in!
                 </p>
@@ -57,10 +89,15 @@ import { totalSongs, totalShmups } from '@/data/games';
 import type { QuizMode } from '@/types';
 
 const router = useRouter();
-const { startQuiz } = useQuiz();
+const { startQuiz, startDailyQuiz } = useQuiz();
 
 function begin(mode: QuizMode) {
     startQuiz(mode);
+    router.push('/quiz');
+}
+
+function beginDaily(mode: QuizMode) {
+    startDailyQuiz(mode);
     router.push('/quiz');
 }
 </script>
