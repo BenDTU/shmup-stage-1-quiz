@@ -41,27 +41,68 @@
                 <h2 class="mb-2 text-warning-emphasis">
                     Daily Challenge
                 </h2>
-                <p class="mb-4">
-                    Once per day - challenge the same set of songs as everyone else!
-                </p>
-                <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 mb-4">
-                    <button
-                        class="btn btn-outline-warning btn-lg py-3 daily-btn"
-                        @click="beginDaily('novice')"
-                    >
-                        <div class="fw-bold fs-5">
-                            Daily Novice
-                        </div>
-                    </button>
-                    <button
-                        class="btn btn-outline-warning btn-lg py-3 daily-btn"
-                        @click="beginDaily('advanced')"
-                    >
-                        <div class="fw-bold fs-5">
-                            Daily Advanced
-                        </div>
-                    </button>
-                </div>
+
+                <!-- Finished state -->
+                <template v-if="dailyProgress?.status === 'finished'">
+                    <p class="mb-3">
+                        You've completed today's challenge!
+                    </p>
+                    <div class="mb-4">
+                        <button
+                            class="btn btn-outline-warning btn-lg py-3 daily-btn"
+                            style="width: auto"
+                            @click="viewDailyResults"
+                        >
+                            <div class="fw-bold">
+                                View Full Results
+                            </div>
+                        </button>
+                    </div>
+                </template>
+
+                <!-- In-progress state -->
+                <template v-else-if="dailyProgress?.status === 'in-progress'">
+                    <p class="mb-4">
+                        You have an unfinished daily challenge — pick up where you left off!
+                    </p>
+                    <div class="mb-4">
+                        <button
+                            class="btn btn-outline-warning btn-lg py-3 daily-btn"
+                            style="width: auto"
+                            @click="resumeDaily"
+                        >
+                            <div class="fw-bold fs-5">
+                                Resume Daily {{ dailyProgress.mode === 'novice' ? 'Novice' : 'Advanced' }}
+                            </div>
+                        </button>
+                    </div>
+                </template>
+
+                <!-- Default: no progress -->
+                <template v-else>
+                    <p class="mb-4">
+                        Once per day - challenge the same set of songs as everyone else!
+                    </p>
+                    <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 mb-4">
+                        <button
+                            class="btn btn-outline-warning btn-lg py-3 daily-btn"
+                            @click="beginDaily('novice')"
+                        >
+                            <div class="fw-bold fs-5">
+                                Daily Novice
+                            </div>
+                        </button>
+                        <button
+                            class="btn btn-outline-warning btn-lg py-3 daily-btn"
+                            @click="beginDaily('advanced')"
+                        >
+                            <div class="fw-bold fs-5">
+                                Daily Advanced
+                            </div>
+                        </button>
+                    </div>
+                </template>
+
                 <p class="mb-5">
                     Time until next daily challenge: <strong>{{ timeUntilNextDaily }}</strong>
                 </p>
@@ -83,11 +124,14 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuiz } from '@/composables/useQuiz';
+import { getDailyProgress } from '@/composables/useDailyProgress';
 import { totalSongs, totalShmups } from '@/data/games';
 import type { QuizMode } from '@/types';
 
 const router = useRouter();
-const { startQuiz, startDailyQuiz } = useQuiz();
+const { startQuiz, startDailyQuiz, resumeDailyQuiz } = useQuiz();
+
+const dailyProgress = ref(getDailyProgress());
 
 function getTimeUntilMidnightUTC(): string {
     const now = new Date();
@@ -112,6 +156,16 @@ function begin(mode: QuizMode) {
 function beginDaily(mode: QuizMode) {
     startDailyQuiz(mode);
     router.push('/quiz');
+}
+
+function resumeDaily() {
+    resumeDailyQuiz();
+    router.push('/quiz');
+}
+
+function viewDailyResults() {
+    resumeDailyQuiz();
+    router.push('/results');
 }
 </script>
 

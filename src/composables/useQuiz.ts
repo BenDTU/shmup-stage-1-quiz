@@ -1,7 +1,8 @@
-import { reactive, computed } from 'vue';
+import { reactive, computed, ref } from 'vue';
 import { games } from '../data/games';
 import type { Series } from '../types';
 import { type Game, type GameEntryWithId, type QuizMode } from '../types';
+import { getDailyProgress, saveDailyProgress } from './useDailyProgress';
 
 type RandomFn = () => number;
 
@@ -83,6 +84,9 @@ const state = reactive<QuizState>({
     mode: 'advanced',
     noviceOptions: [],
 });
+
+const isDaily = ref(false);
+const isResumed = ref(false);
 
 const isFinished = computed(
     () =>
@@ -210,11 +214,16 @@ function buildQuiz(mode: QuizMode, random: RandomFn) {
 }
 
 function startQuiz(mode: QuizMode = 'advanced') {
+    isDaily.value = false;
+    isResumed.value = false;
     buildQuiz(mode, Math.random);
 }
 
 function startDailyQuiz(mode: QuizMode = 'advanced') {
+    isDaily.value = true;
+    isResumed.value = false;
     buildQuiz(mode, mulberry32(getDailySeed()));
+    saveDailyProgress({ mode, status: 'in-progress', currentIndex: 0, answers: [], score: 0 });
 }
 
 function submitGuess(gameId: number) {
@@ -225,6 +234,17 @@ function submitGuess(gameId: number) {
     if (!isSkip && !games.find((g) => g.id === gameId)) return;
     state.answers.push(gameId);
     state.isAnswered = true;
+    if (isDaily.value) {
+        const isLastQuestion = state.currentIndex === state.questions.length - 1;
+        const score = state.answers.filter((id, i) => state.questions[i]?.id === id).length;
+        saveDailyProgress({
+            mode: state.mode,
+            status: isLastQuestion ? 'finished' : 'in-progress',
+            currentIndex: isLastQuestion ? state.currentIndex : state.currentIndex + 1,
+            answers: [...state.answers],
+            score,
+        });
+    }
 }
 
 function nextQuestion() {
@@ -232,6 +252,18 @@ function nextQuestion() {
         state.currentIndex++;
         state.isAnswered = false;
     }
+}
+
+function resumeDailyQuiz(): boolean {
+    const progress = getDailyProgress();
+    if (!progress) return false;
+    isDaily.value = true;
+    isResumed.value = true;
+    buildQuiz(progress.mode, mulberry32(getDailySeed()));
+    state.answers = [...progress.answers];
+    state.currentIndex = progress.currentIndex;
+    state.isAnswered = progress.status === 'finished';
+    return true;
 }
 
 function resetQuiz() {
@@ -242,8 +274,24 @@ function resetQuiz() {
     state.isAnswered = false;
     state.mode = 'advanced';
     state.noviceOptions = [];
+    isResumed.value = false;
 }
 
 export function useQuiz() {
-    return { state, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, startQuiz, startDailyQuiz, submitGuess, nextQuestion, resetQuiz };
+    return {
+        state,
+        isDaily,
+        isResumed,
+        isFinished,
+        usedGameIds,
+        seriesLimitedGameIds,
+        seriesJustCompleted,
+        seriesJustCompletedMajorityCorrect,
+        startQuiz,
+        startDailyQuiz,
+        resumeDailyQuiz,
+        submitGuess,
+        nextQuestion,
+        resetQuiz,
+    };
 }

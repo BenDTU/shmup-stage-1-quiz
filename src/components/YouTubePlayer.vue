@@ -15,7 +15,7 @@
                 type="button"
                 @click="startAudio"
             >
-                Start!
+                {{ resuming ? 'Resume' : 'Start!' }}
             </button>
         </div>
         <!-- Spoiler overlay — shown while the answer is still hidden -->
@@ -69,6 +69,7 @@ const props = defineProps<{
     startTime?: number
     endTime?: number
     hidden?: boolean
+    resuming?: boolean
 }>();
 
 const emit = defineEmits<{

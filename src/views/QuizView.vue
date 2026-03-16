@@ -4,6 +4,12 @@
         class="container py-4"
     >
         <div class="row justify-content-center">
+            <h1
+                v-if="isDaily"
+                class="h3 text-warning-emphasis text-center mb-3"
+            >
+                Daily Challenge!
+            </h1>
             <div class="col-lg-8">
                 <!-- Progress bar -->
                 <div class="d-flex justify-content-between align-items-center mb-2">
@@ -32,7 +38,8 @@
                         :start-time="currentQuestion.startTime"
                         :end-time="currentQuestion.endTime"
                         :hidden="!state.isAnswered"
-                        @audio-unlocked="audioUnlocked = true"
+                        :resuming="isResumed"
+                        @audio-unlocked="audioUnlocked = true; isResumed = false"
                     />
                 </div>
 
@@ -146,7 +153,7 @@ import { games } from '../data/games';
 import { AnswerType, type AdvancedFeedbackDetails } from '@/types';
 
 const router = useRouter();
-const { state, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, submitGuess, nextQuestion } = useQuiz();
+const { state, isDaily, isResumed, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, submitGuess, nextQuestion } = useQuiz();
 
 const selectedGameId = ref<number | null>(null);
 const audioUnlocked = ref(false);
