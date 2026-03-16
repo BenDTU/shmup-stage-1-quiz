@@ -5,10 +5,7 @@ const STORAGE_KEY = 'shmup-quiz-daily';
 export interface DailyProgress {
     date: string;
     mode: QuizMode;
-    status: 'in-progress' | 'finished';
-    currentIndex: number;
     answers: number[];
-    score: number;
 }
 
 function getTodayDate(): string {

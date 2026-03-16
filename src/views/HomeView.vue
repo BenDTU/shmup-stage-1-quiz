@@ -44,7 +44,7 @@
                 </h2>
 
                 <!-- Finished state -->
-                <template v-if="dailyProgress?.status === 'finished'">
+                <template v-if="dailyProgress && dailyProgress.answers.length === 20">
                     <p class="mb-3">
                         You've completed today's challenge!
                     </p>
@@ -62,7 +62,7 @@
                 </template>
 
                 <!-- In-progress state -->
-                <template v-else-if="dailyProgress?.status === 'in-progress'">
+                <template v-else-if="dailyProgress && dailyProgress.answers.length > 0">
                     <p class="mb-4">
                         You have an unfinished daily challenge — pick up where you left off!
                     </p>
