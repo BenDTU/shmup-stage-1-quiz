@@ -13,6 +13,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
+import { getTodayDate } from '../composables/dailyProgressStorage';
 
 function getMsUntilMidnightUTC(): number {
     const now = new Date();
@@ -29,6 +30,7 @@ function formatCountdown(ms: number): string {
 
 const expired = ref(false);
 const timeUntilNextDaily = ref(formatCountdown(getMsUntilMidnightUTC()));
+const startDate = getTodayDate();
 
 function refresh() {
     window.location.href = '/';
@@ -37,13 +39,13 @@ function refresh() {
 let timer: ReturnType<typeof setInterval>;
 onMounted(() => {
     timer = setInterval(() => {
-        const ms = getMsUntilMidnightUTC();
-        if (ms <= 0) {
+        if (getTodayDate() !== startDate) {
             expired.value = true;
             clearInterval(timer);
-        } else {
-            timeUntilNextDaily.value = formatCountdown(ms);
+            return;
         }
+        const ms = getMsUntilMidnightUTC();
+        timeUntilNextDaily.value = formatCountdown(ms);
     }, 1000);
 });
 onUnmounted(() => { clearInterval(timer); });

@@ -2,7 +2,7 @@ import { reactive, computed, ref } from 'vue';
 import { games } from '../data/games';
 import type { Series } from '../types';
 import { type Game, type GameEntryWithId, type QuizMode } from '../types';
-import { getDailyProgress, saveDailyProgress } from './dailyProgressStorage';
+import { getDailyProgress, saveDailyProgress, getTodayDate } from './dailyProgressStorage';
 
 type RandomFn = () => number;
 
@@ -18,7 +18,7 @@ function mulberry32(seed: number): RandomFn {
 }
 
 function getDailySeed(): number {
-    const today = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+    const today = getTodayDate();
     let hash = 0;
     for (const char of today) {
         hash = (Math.imul(31, hash) + char.charCodeAt(0)) | 0;

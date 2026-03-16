@@ -8,7 +8,7 @@ export interface DailyProgress {
     answers: number[];
 }
 
-function getTodayDate(): string {
+export function getTodayDate(): string {
     return new Date().toISOString().slice(0, 10);
 }
 
