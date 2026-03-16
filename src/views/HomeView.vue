@@ -103,9 +103,7 @@
                     </div>
                 </template>
 
-                <p class="mb-5">
-                    Time until next daily challenge: <strong>{{ timeUntilNextDaily }}</strong>
-                </p>
+                <DailyCountdown class="mb-5" />
                 <hr class="mb-5 text-warning-emphasis opacity-100">
                 <p class="text-muted small mb-2">
                     There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups loaded in!
@@ -121,32 +119,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuiz } from '@/composables/useQuiz';
 import { getDailyProgress } from '@/composables/useDailyProgress';
 import { totalSongs, totalShmups } from '@/data/games';
 import type { QuizMode } from '@/types';
+import DailyCountdown from '@/components/DailyCountdown.vue';
 
 const router = useRouter();
 const { startQuiz, startDailyQuiz, resumeDailyQuiz } = useQuiz();
 
 const dailyProgress = ref(getDailyProgress());
 
-function getTimeUntilMidnightUTC(): string {
-    const now = new Date();
-    const midnight = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
-    const diff = midnight.getTime() - now.getTime();
-    const h = Math.floor(diff / 3_600_000);
-    const m = Math.floor((diff % 3_600_000) / 60_000);
-    const s = Math.floor((diff % 60_000) / 1_000);
-    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-}
-
-const timeUntilNextDaily = ref(getTimeUntilMidnightUTC());
-let timer: ReturnType<typeof setInterval>;
-onMounted(() => { timer = setInterval(() => { timeUntilNextDaily.value = getTimeUntilMidnightUTC(); }, 1000); });
-onUnmounted(() => { clearInterval(timer); });
 
 function begin(mode: QuizMode) {
     startQuiz(mode);

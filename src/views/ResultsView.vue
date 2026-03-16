@@ -38,6 +38,12 @@
                             <span v-else-if="score / total >= 0.4">Not bad! Keep practicing.</span>
                             <span v-else>Time to play more shmups! <i class="bi bi-emoji-smile" /></span>
                         </p>
+                        <div
+                            v-if="isDaily"
+                            class="text-center mt-4"
+                        >
+                            <DailyCountdown />
+                        </div>
                     </div>
 
                     <!-- Answer breakdown -->
@@ -110,6 +116,7 @@ import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuiz } from '../composables/useQuiz';
 import { guessedGameName } from '../functions';
+import DailyCountdown from '../components/DailyCountdown.vue';
 
 
 const router = useRouter();
