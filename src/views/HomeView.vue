@@ -6,7 +6,7 @@
                     Shmup Stage 1 Quiz
                 </h1>
                 <p class="lead mb-5">
-                    Think you know your shmups? How many can you pick from their stage 1 song? Test your knowledge with a random set of <strong class="fw-bold">20</strong> tracks.
+                    Think you know your shmups? How many can you pick from their stage 1 song? Test your knowledge with a random set of <strong class="fw-bold">{{ QUIZ_SIZE }}</strong> tracks.
                 </p>
                 <h2 class="h5 mb-3">
                     Choose your Difficulty
@@ -44,7 +44,7 @@
                 </h2>
 
                 <!-- Finished state -->
-                <template v-if="dailyProgress && dailyProgress.answers.length === 20">
+                <template v-if="dailyProgress && dailyProgress.answers.length === QUIZ_SIZE">
                     <p class="mb-3">
                         You've completed today's challenge!
                     </p>
@@ -128,7 +128,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useQuiz } from '@/composables/useQuiz';
+import { useQuiz, QUIZ_SIZE } from '@/composables/useQuiz';
 import { getDailyProgress, wasProgressInvalidated } from '@/composables/dailyProgressStorage';
 import { totalSongs, totalShmups } from '@/data/games';
 import type { QuizMode } from '@/types';

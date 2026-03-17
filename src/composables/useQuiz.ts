@@ -76,7 +76,7 @@ interface QuizState {
     noviceOptions: number[][] // 4 option IDs per question (populated in novice mode only)
 }
 
-const QUIZ_SIZE = 20;
+export const QUIZ_SIZE = 20;
 const SERIES_LIMIT = 3;
 
 const state = reactive<QuizState>({
