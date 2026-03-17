@@ -1,3 +1,67 @@
+<template>
+    <div class="position-relative">
+        <input
+            ref="inputRef"
+            type="text"
+            class="form-control"
+            placeholder="Type to search for a game…"
+            :value="inputText"
+            :disabled="disabled"
+            role="combobox"
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+            aria-haspopup="listbox"
+            :aria-controls="isOpen && filteredGames.length > 0 ? `autocomplete-listbox-${instanceId}` : undefined"
+            aria-autocomplete="list"
+            :aria-expanded="isOpen && filteredGames.length > 0"
+            :aria-activedescendant="isOpen && highlightedIndex >= 0 && filteredGames[highlightedIndex] ? `autocomplete-option-${instanceId}-${filteredGames[highlightedIndex]!.id}` : undefined"
+            @input="onInput"
+            @focus="onFocus"
+            @blur="onBlur"
+            @keydown="onKeydown"
+        >
+        <ul
+            v-if="isOpen && filteredGames.length > 0"
+            :id="`autocomplete-listbox-${instanceId}`"
+            role="listbox"
+            tabindex="-1"
+            class="list-group position-absolute w-100 autocomplete-dropdown shadow"
+        >
+            <li
+                v-for="(game, index) in filteredGames"
+                :id="`autocomplete-option-${instanceId}-${game.id}`"
+                :ref="(el) => { if (el) { optionRefs[index] = el as HTMLElement } else { optionRefs[index] = undefined } }"
+                :key="game.id"
+                role="option"
+                class="list-group-item list-group-item-action"
+                :class="{
+                    disabled: disabledGameIds.has(game.id) || seriesLimitedGameIds?.has(game.id),
+                    active: index === highlightedIndex && !disabledGameIds.has(game.id) && !seriesLimitedGameIds?.has(game.id),
+                }"
+                :aria-selected="index === highlightedIndex && !disabledGameIds.has(game.id) && !seriesLimitedGameIds?.has(game.id)"
+                :aria-disabled="disabledGameIds.has(game.id) || seriesLimitedGameIds?.has(game.id) || undefined"
+                @mouseenter="onOptionMouseenter(index, game)"
+                @mousedown.prevent="selectGame(game)"
+            >
+                {{ game.displayName }}
+                <span
+                    v-if="disabledGameIds.has(game.id)"
+                    class="ms-2 badge text-bg-secondary"
+                >
+                    Already played
+                </span>
+                <span
+                    v-else-if="seriesLimitedGameIds?.has(game.id)"
+                    class="ms-2 badge text-bg-secondary"
+                >
+                    Series limit reached
+                </span>
+            </li>
+        </ul>
+    </div>
+</template>
+
 <script setup lang="ts">
 import { ref, computed, watch, nextTick, useId } from 'vue';
 import { games } from '../data/games';
@@ -203,70 +267,6 @@ function onKeydown(event: KeyboardEvent) {
     }
 }
 </script>
-
-<template>
-    <div class="position-relative">
-        <input
-            ref="inputRef"
-            type="text"
-            class="form-control"
-            placeholder="Type to search for a game…"
-            :value="inputText"
-            :disabled="disabled"
-            role="combobox"
-            autocomplete="off"
-            autocorrect="off"
-            spellcheck="false"
-            aria-haspopup="listbox"
-            :aria-controls="isOpen && filteredGames.length > 0 ? `autocomplete-listbox-${instanceId}` : undefined"
-            aria-autocomplete="list"
-            :aria-expanded="isOpen && filteredGames.length > 0"
-            :aria-activedescendant="isOpen && highlightedIndex >= 0 && filteredGames[highlightedIndex] ? `autocomplete-option-${instanceId}-${filteredGames[highlightedIndex]!.id}` : undefined"
-            @input="onInput"
-            @focus="onFocus"
-            @blur="onBlur"
-            @keydown="onKeydown"
-        >
-        <ul
-            v-if="isOpen && filteredGames.length > 0"
-            :id="`autocomplete-listbox-${instanceId}`"
-            role="listbox"
-            tabindex="-1"
-            class="list-group position-absolute w-100 autocomplete-dropdown shadow"
-        >
-            <li
-                v-for="(game, index) in filteredGames"
-                :id="`autocomplete-option-${instanceId}-${game.id}`"
-                :ref="(el) => { if (el) { optionRefs[index] = el as HTMLElement } else { optionRefs[index] = undefined } }"
-                :key="game.id"
-                role="option"
-                class="list-group-item list-group-item-action"
-                :class="{
-                    disabled: disabledGameIds.has(game.id) || seriesLimitedGameIds?.has(game.id),
-                    active: index === highlightedIndex && !disabledGameIds.has(game.id) && !seriesLimitedGameIds?.has(game.id),
-                }"
-                :aria-selected="index === highlightedIndex && !disabledGameIds.has(game.id) && !seriesLimitedGameIds?.has(game.id)"
-                :aria-disabled="disabledGameIds.has(game.id) || seriesLimitedGameIds?.has(game.id) || undefined"
-                @mouseenter="onOptionMouseenter(index, game)"
-                @mousedown.prevent="selectGame(game)"
-            >
-                {{ game.displayName }}
-                <span
-                    v-if="disabledGameIds.has(game.id)"
-                    class="ms-2 badge text-bg-secondary"
-                >
-                    Already played
-                </span>
-                <span
-                    v-else-if="seriesLimitedGameIds?.has(game.id)"
-                    class="ms-2 badge text-bg-secondary"
-                >
-                    Series limit reached
-                </span>
-            </li>
-        </ul>
-    </div>
-</template>
 
 <style scoped lang="scss">
 .autocomplete-dropdown {

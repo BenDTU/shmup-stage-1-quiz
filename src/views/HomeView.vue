@@ -1,18 +1,3 @@
-<script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { useQuiz } from '@/composables/useQuiz';
-import { totalSongs, totalShmups } from '@/data/games';
-import type { QuizMode } from '@/types';
-
-const router = useRouter();
-const { startQuiz } = useQuiz();
-
-function begin(mode: QuizMode) {
-    startQuiz(mode);
-    router.push('/quiz');
-}
-</script>
-
 <template>
     <main class="container py-5">
         <div class="row justify-content-center">
@@ -64,3 +49,18 @@ function begin(mode: QuizMode) {
         </div>
     </main>
 </template>
+
+<script setup lang="ts">
+import { useRouter } from 'vue-router';
+import { useQuiz } from '@/composables/useQuiz';
+import { totalSongs, totalShmups } from '@/data/games';
+import type { QuizMode } from '@/types';
+
+const router = useRouter();
+const { startQuiz } = useQuiz();
+
+function begin(mode: QuizMode) {
+    startQuiz(mode);
+    router.push('/quiz');
+}
+</script>

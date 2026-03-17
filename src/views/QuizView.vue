@@ -1,3 +1,138 @@
+<template>
+    <main
+        v-if="currentQuestion"
+        class="container py-4"
+    >
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Progress bar -->
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="fw-semibold">Question {{ questionNumber }} of {{ state.questions.length }}</span>
+                    <span class="text-muted small">Score: {{ state.answers.filter((id, i) => state.questions[i]?.id === id).length }} / {{ state.answers.length }}</span>
+                </div>
+                <div
+                    class="progress mb-4"
+                    :class="{
+                        'feedback-wrong': feedbackState === 'wrong',
+                        'feedback-correct': feedbackState === 'correct',
+                    }"
+                    style="height: 8px"
+                >
+                    <div
+                        class="progress-bar"
+                        role="progressbar"
+                        :style="{ width: `${(state.answers.length / state.questions.length) * 100}%` }"
+                    />
+                </div>
+
+                <!-- YouTube player -->
+                <div class="mb-4">
+                    <YouTubePlayer
+                        :video-id="currentQuestion.videoId"
+                        :start-time="currentQuestion.startTime"
+                        :end-time="currentQuestion.endTime"
+                        :hidden="!state.isAnswered"
+                        @audio-unlocked="audioUnlocked = true"
+                    />
+                </div>
+
+                <!-- Guess form -->
+                <div
+                    v-show="audioUnlocked"
+                    class="card"
+                >
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">
+                            Which game is this stage 1 theme from?
+                        </h5>
+
+                        <!-- Novice mode: correct/incorrect alert (above options, shown when answered) -->
+                        <AnswerFeedback
+                            v-if="state.mode === 'novice' && state.isAnswered"
+                            :answer-type="userAnswerType"
+                        />
+
+                        <!-- Novice mode: 4 option buttons -->
+                        <NoviceOptions
+                            v-if="state.mode === 'novice'"
+                            v-model="selectedGameId"
+                            :options="state.noviceOptions[state.currentIndex] ?? []"
+                            :is-answered="state.isAnswered"
+                            :correct-id="currentQuestion.id"
+                            :answered-id="state.answers[state.currentIndex]"
+                            :song-name="currentQuestion.songName"
+                            :source="currentQuestion.source"
+                            :class="state.isAnswered ? 'mb-4' : 'mb-0'"
+                            @submit="handleNoviceSubmit"
+                        />
+
+                        <!-- Advanced mode: autocomplete + submit/skip buttons -->
+                        <div v-if="state.mode === 'advanced' && !state.isAnswered">
+                            <AutocompleteInput
+                                ref="autocompleteRef"
+                                v-model="selectedGameId"
+                                :disabled-game-ids="usedGameIds"
+                                :series-limited-game-ids="seriesLimitedGameIds"
+                                class="mb-3"
+                                @submit="handleSubmit(true)"
+                            />
+                            <div class="d-flex gap-2">
+                                <button
+                                    class="btn btn-primary flex-grow-1"
+                                    :disabled="!isValidGuess"
+                                    @click="handleSubmit()"
+                                >
+                                    Submit Guess
+                                </button>
+                                <button
+                                    class="btn btn-outline-secondary"
+                                    @click="handleSkipClick"
+                                >
+                                    Skip <i class="bi bi-skip-forward-fill ms-1" />
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Result section (answered state) -->
+                        <template v-if="state.isAnswered">
+                            <!-- Advanced mode: correct/incorrect alert -->
+                            <AnswerFeedback
+                                v-if="state.mode === 'advanced'"
+                                :answer-type="userAnswerType"
+                                :details="advancedFeedbackDetails"
+                            />
+                            <p
+                                v-if="seriesJustCompleted && !isFinished"
+                                class="text-muted small mb-2"
+                            >
+                                <i class="bi bi-info-circle-fill me-1" />
+                                <template v-if="seriesJustCompletedMajorityCorrect">
+                                    That's the last <strong>{{ seriesJustCompleted }}</strong> song you'll hear this quiz.
+                                </template>
+                                <template v-else>
+                                    Don't worry - that's the last <strong>{{ seriesJustCompleted }}</strong> song you'll hear this quiz.
+                                </template>
+                            </p>
+                            <button
+                                ref="nextBtn"
+                                class="btn btn-success w-100"
+                                @click="handleNextClick"
+                            >
+                                <template v-if="isFinished">
+                                    See Results <i class="bi bi-trophy-fill ms-1" />
+                                </template>
+                                <template v-else>
+                                    Next Question <i class="bi bi-arrow-right ms-1" />
+                                </template>
+                            </button>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</template>
+
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
@@ -135,141 +270,6 @@ async function handleNextClick(event: MouseEvent) {
     }
 }
 </script>
-
-<template>
-    <main
-        v-if="currentQuestion"
-        class="container py-4"
-    >
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <!-- Progress bar -->
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <span class="fw-semibold">Question {{ questionNumber }} of {{ state.questions.length }}</span>
-                    <span class="text-muted small">Score: {{ state.answers.filter((id, i) => state.questions[i]?.id === id).length }} / {{ state.answers.length }}</span>
-                </div>
-                <div
-                    class="progress mb-4"
-                    :class="{
-                        'feedback-wrong': feedbackState === 'wrong',
-                        'feedback-correct': feedbackState === 'correct',
-                    }"
-                    style="height: 8px"
-                >
-                    <div
-                        class="progress-bar"
-                        role="progressbar"
-                        :style="{ width: `${(state.answers.length / state.questions.length) * 100}%` }"
-                    />
-                </div>
-
-                <!-- YouTube player -->
-                <div class="mb-4">
-                    <YouTubePlayer
-                        :video-id="currentQuestion.videoId"
-                        :start-time="currentQuestion.startTime"
-                        :end-time="currentQuestion.endTime"
-                        :hidden="!state.isAnswered"
-                        @audio-unlocked="audioUnlocked = true"
-                    />
-                </div>
-
-                <!-- Guess form -->
-                <div
-                    v-show="audioUnlocked"
-                    class="card"
-                >
-                    <div class="card-body">
-                        <h5 class="card-title mb-3">
-                            Which game is this stage 1 theme from?
-                        </h5>
-
-                        <!-- Novice mode: correct/incorrect alert (above options, shown when answered) -->
-                        <AnswerFeedback
-                            v-if="state.mode === 'novice' && state.isAnswered"
-                            :answer-type="userAnswerType"
-                        />
-
-                        <!-- Novice mode: 4 option buttons -->
-                        <NoviceOptions
-                            v-if="state.mode === 'novice'"
-                            v-model="selectedGameId"
-                            :options="state.noviceOptions[state.currentIndex] ?? []"
-                            :is-answered="state.isAnswered"
-                            :correct-id="currentQuestion.id"
-                            :answered-id="state.answers[state.currentIndex]"
-                            :song-name="currentQuestion.songName"
-                            :source="currentQuestion.source"
-                            :class="state.isAnswered ? 'mb-4' : 'mb-0'"
-                            @submit="handleNoviceSubmit"
-                        />
-
-                        <!-- Advanced mode: autocomplete + submit/skip buttons -->
-                        <div v-if="state.mode === 'advanced' && !state.isAnswered">
-                            <AutocompleteInput
-                                ref="autocompleteRef"
-                                v-model="selectedGameId"
-                                :disabled-game-ids="usedGameIds"
-                                :series-limited-game-ids="seriesLimitedGameIds"
-                                class="mb-3"
-                                @submit="handleSubmit(true)"
-                            />
-                            <div class="d-flex gap-2">
-                                <button
-                                    class="btn btn-primary flex-grow-1"
-                                    :disabled="!isValidGuess"
-                                    @click="handleSubmit()"
-                                >
-                                    Submit Guess
-                                </button>
-                                <button
-                                    class="btn btn-outline-secondary"
-                                    @click="handleSkipClick"
-                                >
-                                    Skip <i class="bi bi-skip-forward-fill ms-1" />
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Result section (answered state) -->
-                        <template v-if="state.isAnswered">
-                            <!-- Advanced mode: correct/incorrect alert -->
-                            <AnswerFeedback
-                                v-if="state.mode === 'advanced'"
-                                :answer-type="userAnswerType"
-                                :details="advancedFeedbackDetails"
-                            />
-                            <p
-                                v-if="seriesJustCompleted && !isFinished"
-                                class="text-muted small mb-2"
-                            >
-                                <i class="bi bi-info-circle-fill me-1" />
-                                <template v-if="seriesJustCompletedMajorityCorrect">
-                                    That's the last <strong>{{ seriesJustCompleted }}</strong> song you'll hear this quiz.
-                                </template>
-                                <template v-else>
-                                    Don't worry - that's the last <strong>{{ seriesJustCompleted }}</strong> song you'll hear this quiz.
-                                </template>
-                            </p>
-                            <button
-                                ref="nextBtn"
-                                class="btn btn-success w-100"
-                                @click="handleNextClick"
-                            >
-                                <template v-if="isFinished">
-                                    See Results <i class="bi bi-trophy-fill ms-1" />
-                                </template>
-                                <template v-else>
-                                    Next Question <i class="bi bi-arrow-right ms-1" />
-                                </template>
-                            </button>
-                        </template>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-</template>
 
 <style scoped>
 @keyframes shake {
