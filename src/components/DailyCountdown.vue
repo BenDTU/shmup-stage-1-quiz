@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
-import { getTodayDate } from '../composables/dailyProgressStorage';
+import { getTodayDate } from '../storage/dailyProgressStorage';
 
 function getMsUntilMidnightUTC(): number {
     const now = new Date();

@@ -2,7 +2,7 @@ import { reactive, computed, ref } from 'vue';
 import { games } from '../data/games';
 import type { Series } from '../types';
 import { type Game, type GameEntryWithId, type QuizMode } from '../types';
-import { getDailyProgress, saveDailyProgress, getSessionDate } from './dailyProgressStorage';
+import { getDailyProgress, saveDailyProgress, getSessionDate } from '../storage/dailyProgressStorage';
 
 type RandomFn = () => number;
 

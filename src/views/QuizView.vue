@@ -156,7 +156,7 @@ import AutocompleteInput from '../components/AutocompleteInput.vue';
 import NoviceOptions from '../components/NoviceOptions.vue';
 import AnswerFeedback from '../components/AnswerFeedback.vue';
 import { useQuiz } from '../composables/useQuiz';
-import { saveDailyProgress } from '../composables/dailyProgressStorage';
+import { saveDailyProgress } from '../storage/dailyProgressStorage';
 import { guessedGameName } from '../functions';
 import { games } from '../data/games';
 import { AnswerType, type AdvancedFeedbackDetails } from '@/types';

@@ -63,7 +63,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue';
-import { quotes } from '../constants/quotes';
+import { quotes } from '../data/quotes';
 
 const props = defineProps<{
     videoId: string
