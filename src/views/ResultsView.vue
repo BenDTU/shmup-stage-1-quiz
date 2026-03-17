@@ -5,18 +5,21 @@
                 <template v-if="total > 0">
                     <div class="text-center mb-5">
                         <h1
-                            class="display-5 mb-3 fw-bold"
-                            :class="isDaily ? 'text-warning-emphasis' : ''"
+                            class="mb-3 fw-bold"
+                            :class="isDaily ? 'display-6 text-warning-emphasis' : 'display-5'"
                         >
                             {{ isDaily ? 'Daily Challenge Complete!' : 'Quiz Complete!' }} <i class="bi bi-trophy-fill" />
                         </h1>
-                        <p class="text-muted mb-3">
+                        <p class="h5 text-muted mb-3">
                             <span
                                 class="badge"
                                 :class="state.mode === 'novice' ? 'bg-success' : 'bg-danger'"
                             >{{ state.mode === 'novice' ? 'Novice' : 'Advanced' }}</span>
                         </p>
-                        <p class="lead">
+                        <p
+                            class="lead"
+                            :class="isDaily ? 'text-warning-emphasis' : ''"
+                        >
                             You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
                         </p>
                         <div
