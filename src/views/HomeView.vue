@@ -171,11 +171,21 @@ function beginDaily(mode: QuizMode) {
 }
 
 function resumeDaily() {
+    const current = getDailyProgress();
+    if (!current || current.answers.length >= QUIZ_SIZE) {
+        dailyProgress.value = current;
+        return;
+    }
     resumeDailyQuiz();
     router.push('/quiz');
 }
 
 function viewDailyResults() {
+    const current = getDailyProgress();
+    if (!current || current.answers.length < QUIZ_SIZE) {
+        dailyProgress.value = current;
+        return;
+    }
     resumeDailyQuiz();
     router.push('/results');
 }
