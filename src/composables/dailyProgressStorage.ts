@@ -3,6 +3,12 @@ import { games } from '../data/games';
 
 const STORAGE_KEY = 'shmup-quiz-daily';
 
+let dataVersionMismatch = false;
+
+export function wasProgressInvalidated(): boolean {
+    return dataVersionMismatch;
+}
+
 // Captured once when the module first loads — fixed for the lifetime of this page session
 const SESSION_DATE: string = new Date().toISOString().slice(0, 10);
 
@@ -45,7 +51,10 @@ export function getDailyProgress(): DailyProgress | null {
         if (!raw) return null;
         const parsed = JSON.parse(raw) as DailyProgress;
         if (parsed.date !== SESSION_DATE) return null;
-        if (parsed.dataVersion !== DATA_VERSION) return null;
+        if (parsed.dataVersion !== DATA_VERSION) {
+            dataVersionMismatch = true;
+            return null;
+        }
         return parsed;
     } catch {
         return null;

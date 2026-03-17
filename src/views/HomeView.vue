@@ -81,6 +81,12 @@
 
                 <!-- Default: no progress -->
                 <template v-else>
+                    <p
+                        v-if="progressInvalidated"
+                        class="text-warning-emphasis small mb-3"
+                    >
+                        Today's daily challenge has been updated — your previous progress has been cleared.
+                    </p>
                     <p class="mb-4">
                         Once per day - challenge the same set of songs as everyone else!
                     </p>
@@ -123,7 +129,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuiz } from '@/composables/useQuiz';
-import { getDailyProgress } from '@/composables/dailyProgressStorage';
+import { getDailyProgress, wasProgressInvalidated } from '@/composables/dailyProgressStorage';
 import { totalSongs, totalShmups } from '@/data/games';
 import type { QuizMode } from '@/types';
 import DailyCountdown from '@/components/DailyCountdown.vue';
@@ -132,6 +138,7 @@ const router = useRouter();
 const { startQuiz, startDailyQuiz, resumeDailyQuiz } = useQuiz();
 
 const dailyProgress = ref(getDailyProgress());
+const progressInvalidated = wasProgressInvalidated();
 
 
 function begin(mode: QuizMode) {
