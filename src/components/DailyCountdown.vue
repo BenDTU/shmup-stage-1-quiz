@@ -32,21 +32,24 @@ const expired = ref(false);
 const timeUntilNextDaily = ref(formatCountdown(getMsUntilMidnightUTC()));
 const startDate = getTodayDate();
 
+// Full page reload is intentional — it re-initialises SESSION_DATE and DATA_VERSION
+// in dailyProgressStorage so the new day's quiz is picked up correctly.
 function refresh() {
     window.location.href = '/';
 }
 
-let timer: ReturnType<typeof setInterval>;
+let timer: ReturnType<typeof setInterval> | null = null;
 onMounted(() => {
     timer = setInterval(() => {
         if (getTodayDate() !== startDate) {
             expired.value = true;
-            clearInterval(timer);
+            clearInterval(timer ?? undefined);
+            timer = null;
             return;
         }
         const ms = getMsUntilMidnightUTC();
         timeUntilNextDaily.value = formatCountdown(ms);
     }, 1000);
 });
-onUnmounted(() => { clearInterval(timer); });
+onUnmounted(() => { clearInterval(timer ?? undefined); });
 </script>

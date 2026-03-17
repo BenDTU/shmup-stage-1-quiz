@@ -126,7 +126,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuiz, QUIZ_SIZE } from '@/composables/useQuiz';
 import { getDailyProgress, wasProgressInvalidated } from '@/storage/dailyProgressStorage';
@@ -140,6 +140,9 @@ const { startQuiz, startDailyQuiz, resumeDailyQuiz } = useQuiz();
 const dailyProgress = ref(getDailyProgress());
 const progressInvalidated = wasProgressInvalidated();
 
+onMounted(() => {
+    dailyProgress.value = getDailyProgress();
+});
 
 function begin(mode: QuizMode) {
     startQuiz(mode);

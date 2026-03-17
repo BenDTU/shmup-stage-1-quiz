@@ -159,7 +159,7 @@ import { useQuiz } from '../composables/useQuiz';
 import { saveDailyProgress } from '../storage/dailyProgressStorage';
 import { guessedGameName } from '../functions';
 import { games } from '../data/games';
-import { AnswerType, type AdvancedFeedbackDetails } from '@/types';
+import { AnswerType, type AdvancedFeedbackDetails } from '../types';
 
 const router = useRouter();
 const { state, isDaily, isResumed, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, submitGuess, nextQuestion } = useQuiz();
