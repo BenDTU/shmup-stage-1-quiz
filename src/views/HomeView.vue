@@ -62,7 +62,7 @@
                 </template>
 
                 <!-- In-progress state -->
-                <template v-else-if="dailyProgress && dailyProgress.answers.length > 0">
+                <template v-else-if="dailyProgress">
                     <p class="mb-4">
                         You have an unfinished daily challenge — pick up where you left off!
                     </p>

@@ -46,7 +46,7 @@
                         :hidden="!state.isAnswered"
                         :resuming="isResumed"
                         :daily="isDaily"
-                        @audio-unlocked="audioUnlocked = true; isResumed = false"
+                        @audio-unlocked="handleAudioUnlocked"
                     />
                 </div>
 
@@ -156,6 +156,7 @@ import AutocompleteInput from '../components/AutocompleteInput.vue';
 import NoviceOptions from '../components/NoviceOptions.vue';
 import AnswerFeedback from '../components/AnswerFeedback.vue';
 import { useQuiz } from '../composables/useQuiz';
+import { saveDailyProgress } from '../composables/dailyProgressStorage';
 import { guessedGameName } from '../functions';
 import { games } from '../data/games';
 import { AnswerType, type AdvancedFeedbackDetails } from '@/types';
@@ -169,6 +170,14 @@ const nextBtn = ref<HTMLButtonElement | null>(null);
 const autocompleteRef = ref<{ focus: () => void } | null>(null);
 const feedbackState = ref<'correct' | 'wrong' | null>(null);
 let feedbackTimer: ReturnType<typeof setTimeout> | null = null;
+
+function handleAudioUnlocked() {
+    audioUnlocked.value = true;
+    if (isDaily.value && state.answers.length === 0) {
+        saveDailyProgress({ mode: state.mode, answers: [] });
+    }
+    isResumed.value = false;
+}
 
 function setFeedback(value: 'correct' | 'wrong') {
     if (feedbackTimer !== null) clearTimeout(feedbackTimer);
