@@ -1,0 +1,13 @@
+on:
+  schedule:
+    - cron: '0 0 * * *' # Deploys every day at midnight
+jobs:
+  merge-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Merge develop into main
+        run: |
+          git checkout main
+          git merge develop
+          git push
