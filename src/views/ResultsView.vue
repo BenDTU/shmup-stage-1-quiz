@@ -5,11 +5,17 @@
                 <template v-if="total > 0">
                     <div class="text-center mb-5">
                         <h1
-                            class="mb-3 fw-bold"
+                            class="mb-1 fw-bold"
                             :class="isDaily ? 'display-6 text-warning-emphasis' : 'display-5'"
                         >
                             {{ isDaily ? 'Daily Challenge Complete!' : 'Quiz Complete!' }} <i class="bi bi-trophy-fill" />
                         </h1>
+                        <p
+                            v-if="isDaily"
+                            class="text-warning-emphasis opacity-75 small mb-3"
+                        >
+                            {{ SESSION_DATE_FORMATTED }}
+                        </p>
                         <p class="h5 text-muted mb-3">
                             <span
                                 class="badge"
@@ -119,6 +125,7 @@
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuiz } from '../composables/useQuiz';
+import { SESSION_DATE_FORMATTED } from '../storage/dailyProgressStorage';
 import { guessedGameName } from '../functions';
 import DailyCountdown from '../components/DailyCountdown.vue';
 

@@ -12,6 +12,10 @@ export function wasProgressInvalidated(): boolean {
 // Captured once when the module first loads — fixed for the lifetime of this page session
 const SESSION_DATE: string = new Date().toISOString().slice(0, 10);
 
+export const SESSION_DATE_FORMATTED: string = new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
+}).format(new Date(SESSION_DATE + 'T00:00:00Z'));
+
 // Hash of the structure that drives PRNG consumption in resolveGame:
 // game ID, number of song sources, and arrangement count per source.
 // Changes whenever games are added/removed/reordered or song sources/arrangements change.
