@@ -57,7 +57,10 @@
                     :class="{ 'card-daily': isDaily }"
                 >
                     <div class="card-body">
-                        <h5 class="card-title mb-3">
+                        <h5
+                            class="card-title mb-3"
+                            :class="{ 'text-warning-emphasis': isDaily }"
+                        >
                             Which game is this stage 1 theme from?
                         </h5>
 
