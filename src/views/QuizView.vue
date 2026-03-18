@@ -57,7 +57,10 @@
                     :class="{ 'card-daily': isDaily }"
                 >
                     <div class="card-body">
-                        <h5 class="card-title mb-3">
+                        <h5
+                            class="card-title mb-3"
+                            :class="{ 'text-warning-emphasis': isDaily }"
+                        >
                             Which game is this stage 1 theme from?
                         </h5>
 
@@ -159,7 +162,7 @@ import { useQuiz } from '../composables/useQuiz';
 import { saveDailyProgress } from '../storage/dailyProgressStorage';
 import { guessedGameName } from '../functions';
 import { games } from '../data/games';
-import { AnswerType, type AdvancedFeedbackDetails } from '@/types';
+import { AnswerType, type AdvancedFeedbackDetails } from '../types';
 
 const router = useRouter();
 const { state, isDaily, isResumed, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, submitGuess, nextQuestion } = useQuiz();

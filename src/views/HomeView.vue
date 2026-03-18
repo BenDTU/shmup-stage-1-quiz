@@ -126,10 +126,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuiz, QUIZ_SIZE } from '@/composables/useQuiz';
-import { getDailyProgress, wasProgressInvalidated } from '@/storage/dailyProgressStorage';
+import { getDailyProgress, wasProgressInvalidated, STORAGE_KEY } from '@/storage/dailyProgressStorage';
 import { totalSongs, totalShmups } from '@/data/games';
 import type { QuizMode } from '@/types';
 import DailyCountdown from '@/components/DailyCountdown.vue';
@@ -140,6 +140,20 @@ const { startQuiz, startDailyQuiz, resumeDailyQuiz } = useQuiz();
 const dailyProgress = ref(getDailyProgress());
 const progressInvalidated = wasProgressInvalidated();
 
+function handleStorageChange(e: StorageEvent) {
+    if (e.key === null || e.key === STORAGE_KEY) {
+        dailyProgress.value = getDailyProgress();
+    }
+}
+
+onMounted(() => {
+    dailyProgress.value = getDailyProgress();
+    window.addEventListener('storage', handleStorageChange);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('storage', handleStorageChange);
+});
 
 function begin(mode: QuizMode) {
     startQuiz(mode);
@@ -147,16 +161,31 @@ function begin(mode: QuizMode) {
 }
 
 function beginDaily(mode: QuizMode) {
+    const existing = getDailyProgress();
+    if (existing) {
+        dailyProgress.value = existing;
+        return;
+    }
     startDailyQuiz(mode);
     router.push('/quiz');
 }
 
 function resumeDaily() {
+    const current = getDailyProgress();
+    if (!current || current.answers.length >= QUIZ_SIZE) {
+        dailyProgress.value = current;
+        return;
+    }
     resumeDailyQuiz();
     router.push('/quiz');
 }
 
 function viewDailyResults() {
+    const current = getDailyProgress();
+    if (!current || current.answers.length < QUIZ_SIZE) {
+        dailyProgress.value = current;
+        return;
+    }
     resumeDailyQuiz();
     router.push('/results');
 }

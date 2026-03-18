@@ -1,7 +1,7 @@
 import type { QuizMode } from '../types';
 import { games } from '../data/games';
 
-const STORAGE_KEY = 'shmup-quiz-daily';
+export const STORAGE_KEY = 'shmup-quiz-daily';
 
 let dataVersionMismatch = false;
 

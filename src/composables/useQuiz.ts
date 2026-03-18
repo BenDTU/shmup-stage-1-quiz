@@ -1,7 +1,6 @@
 import { reactive, computed, ref } from 'vue';
 import { games } from '../data/games';
-import type { Series } from '../types';
-import { type Game, type GameEntryWithId, type QuizMode } from '../types';
+import type { Series, Game, GameEntryWithId, QuizMode } from '../types';
 import { getDailyProgress, saveDailyProgress, getSessionDate } from '../storage/dailyProgressStorage';
 
 type RandomFn = () => number;
@@ -227,7 +226,6 @@ function startDailyQuiz(mode: QuizMode = 'advanced') {
     isDaily.value = true;
     isResumed.value = false;
     buildQuiz(mode, mulberry32(getDailySeed()));
-    saveDailyProgress({ mode, answers: [] });
 }
 
 function submitGuess(gameId: number) {
