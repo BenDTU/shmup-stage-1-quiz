@@ -5,8 +5,8 @@
                 <template v-if="total > 0">
                     <div class="text-center mb-5">
                         <h1
-                            class="mb-1 fw-bold"
-                            :class="isDaily ? 'display-6 text-warning-emphasis' : 'display-5'"
+                            class="fw-bold"
+                            :class="isDaily ? 'display-6 text-warning-emphasis mb-1' : 'display-5 mb-3'"
                         >
                             {{ isDaily ? 'Daily Challenge Complete!' : 'Quiz Complete!' }} <i class="bi bi-trophy-fill" />
                         </h1>
