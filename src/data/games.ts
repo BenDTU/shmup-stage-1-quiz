@@ -459,7 +459,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Dragon Spirit',
-        forceFirst: true, // always the first question in the quiz
         alias: 'Dragon Spirit: The New Legend',
         series: Series.DragonSpirit,
         songSource: {
@@ -472,7 +471,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Dragon Saber',
-        forceFirst: true, // always the first question in the quiz
         sortName: 'Dragon Spirit 2',
         series: Series.DragonSpirit,
         songSource: { songName: 'Submerged City', videoId: 'YmSOfpOkmDE' },
@@ -1482,7 +1480,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Slap Fight',
-        forceFirst: true,
         alias: 'Alcon',
         songSource: {
             songName: 'Except Success',
@@ -1771,7 +1768,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Tiger-Heli',
-        forceFirst: true,
         songSource: {
             songName: 'First Mission ~ Look Out',
             arrangements: [
@@ -1947,7 +1943,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Twin Cobra',
-        forceFirst: true,
         songSource: {
             songName: 'Challenge ~ Break a Leg',
             arrangements: [
@@ -1972,7 +1967,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Twin Hawk',
-        forceFirst: true,
         songSource: {
             songName: 'Ray of Hope ~ Wake Up, to The Sky',
             arrangements: [
@@ -2034,7 +2028,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Vimana',
-        forceFirst: true,
         songSource: {
             songName: 'Opening ~ Space High',
             videoId: 'yMhVyFzxBCU',
