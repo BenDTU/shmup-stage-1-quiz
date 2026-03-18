@@ -1,5 +1,6 @@
 import { reactive, computed, ref } from 'vue';
 import { games } from '../data/games';
+import { quotes } from '../data/quotes';
 import type { Series, Game, GameEntryWithId, QuizMode } from '../types';
 import { getDailyProgress, saveDailyProgress, SESSION_DATE } from '../storage/dailyProgressStorage';
 
@@ -73,6 +74,7 @@ interface QuizState {
     isAnswered: boolean
     mode: QuizMode
     noviceOptions: number[][] // 4 option IDs per question (populated in novice mode only)
+    questionQuotes: string[] // one quote pre-assigned per question
 }
 
 export const QUIZ_SIZE = 20;
@@ -86,6 +88,7 @@ const state = reactive<QuizState>({
     isAnswered: false,
     mode: 'advanced',
     noviceOptions: [],
+    questionQuotes: [],
 });
 
 const isDaily = ref(false);
@@ -214,6 +217,7 @@ function buildQuiz(mode: QuizMode, random: RandomFn) {
     state.isAnswered = false;
     state.mode = mode;
     state.noviceOptions = noviceOptions;
+    state.questionQuotes = shuffle([...quotes], random).slice(0, selected.length);
 }
 
 function startQuiz(mode: QuizMode = 'advanced') {
@@ -272,6 +276,7 @@ function resetQuiz() {
     state.isAnswered = false;
     state.mode = 'advanced';
     state.noviceOptions = [];
+    state.questionQuotes = [];
     isResumed.value = false;
 }
 

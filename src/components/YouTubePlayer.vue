@@ -63,7 +63,6 @@
 
 <script setup lang="ts">
 import { computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue';
-import { quotes } from '../data/quotes';
 
 const props = defineProps<{
     videoId: string
@@ -72,6 +71,7 @@ const props = defineProps<{
     hidden?: boolean
     resuming?: boolean
     daily?: boolean
+    quote?: string
 }>();
 
 const emit = defineEmits<{
@@ -131,21 +131,7 @@ onUnmounted(() => {
     clearStopTimer();
 });
 
-function pickRandomQuote(previous?: string): string {
-    if (quotes.length === 0) {
-        throw new Error('No quotes are available to pick from.');
-    }
-    if (quotes.length === 1) {
-        return quotes[0]!;
-    }
-    let quote: string;
-    do {
-        quote = quotes[Math.floor(Math.random() * quotes.length)]!;
-    } while (quote === previous);
-    return quote;
-}
-
-const currentQuote = ref(pickRandomQuote());
+const currentQuote = computed(() => props.quote ?? '');
 
 // Start the first video playing silently so the player is active
 // by the time the user clicks Play.
@@ -161,7 +147,6 @@ onMounted(() => {
 // • Otherwise reload the iframe for a fresh muted-autoplay start.
 watch(() => props.videoId, () => {
     clearStopTimer();
-    currentQuote.value = pickRandomQuote(currentQuote.value);
     if (audioUnlocked.value) {
         sendCommand('loadVideoById', [props.videoId, props.startTime ?? 0]);
         scheduleStop();
