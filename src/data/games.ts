@@ -161,6 +161,19 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Fly to the Leaden Sky', videoId: 'Szr0TSXcWok' },
     },
     {
+        name: 'Bells & Whistles',
+        alias: 'Detana!! Twinbee',
+        series: Series.Twinbee,
+        songSource: {
+            songName: "The Wind's Gift",
+            arrangements: [
+                { source: 'Arcade', videoId: 'UdAGJGfSTDg' },
+                { source: 'PC Engine', videoId: 'CyNDWlb8QJ8', startTime: 48, endTime: 208 },
+                { source: 'Sharp X68000', videoId: 'f1V-bjJpbLE' },
+            ],
+        },
+    },
+    {
         name: 'Bio-Hazard Battle',
         songSource: { songName: 'Stage 1 & 8', videoId: 'oInjf0-talM' },
     },
@@ -458,6 +471,24 @@ const gameEntries: GameEntry[] = [
         ],
     },
     {
+        name: 'Dragon Spirit',
+        alias: 'Dragon Spirit: The New Legend',
+        series: Series.DragonSpirit,
+        songSource: {
+            songName: 'Area 1',
+            arrangements: [
+                { source: 'Arcade', videoId: 'yIQ4aQ_ifsg' },
+                { source: 'NES', videoId: 'mfWLhTlHBGU' },
+            ],
+        },
+    },
+    {
+        name: 'Dragon Saber',
+        sortName: 'Dragon Spirit 2',
+        series: Series.DragonSpirit,
+        songSource: { songName: 'Submerged City', videoId: 'YmSOfpOkmDE' },
+    },
+    {
         name: 'Drainus',
         songSource: { songName: 'Determination', videoId: 'ppgo1QkNNxk' },
     },
@@ -650,20 +681,33 @@ const gameEntries: GameEntry[] = [
         name: 'Gradius',
         alias: 'Nemesis',
         series: Series.Gradius,
-        songSource: { songName: 'Challenger 1985', videoId: '-Fcpo6qCXMY' },
+        songSource: { songName: 'Challenger 1985',
+            arrangements: [
+                { source: 'Arcade', videoId: '-Fcpo6qCXMY' },
+                { source: 'NES', videoId: 'FGqnctiqTGQ' },
+            ],
+        },
     },
     {
         name: 'Gradius II',
         alias: 'Vulcan Venture',
         sortName: 'Gradius 2',
         series: Series.Gradius,
-        songSource: { songName: 'Burning Heat', videoId: '76kJEPGvvMg' },
+        songSource: { songName: 'Burning Heat', arrangements: [
+            { source: 'Arcade', videoId: '76kJEPGvvMg' },
+            { source: 'NES', videoId: 'oXhHwtJxHno' },
+        ] },
     },
     {
         name: 'Gradius III',
         sortName: 'Gradius 3',
         series: Series.Gradius,
-        songSource: { songName: 'Sand Storm', videoId: 'NyQzfqNIKTI' },
+        songSource: { songName: 'Sand Storm',
+            arrangements: [
+                { source: 'Arcade', videoId: 'NyQzfqNIKTI' },
+                { source: 'SNES', videoId: 'd_w43Ew_-jI' },
+            ],
+        },
     },
     {
         name: 'Gradius IV',
@@ -980,6 +1024,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Game BGM 1', videoId: 'rX-6X3NIYX4' },
     },
     {
+        name: "Miss Kobayashi's Dragon Maid Burst Forth!! Choro-gon☆Breath",
+        songSource: { songName: 'Fin Fantasy', videoId: '80A7SNQFokU' },
+    },
+    {
         name: 'Muchi Muchi Pork!',
         songSource: { songName: 'Doki Doki in the Sky', videoId: 'iTb0FEaqsv4' },
     },
@@ -1097,6 +1145,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: "Pop'n Twinbee",
+        series: Series.Twinbee,
         songSource: { songName: 'Village Sky', videoId: 'AGt-RJr-khA' },
     },
     {
@@ -1448,6 +1497,27 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1', videoId: 'MBFv2bBU-yI', startTime: 10, endTime: 121 },
     },
     {
+        name: 'Slap Fight',
+        alias: 'Alcon',
+        songSource: {
+            songName: 'Except Success',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: 'H-HASsEeIU0',
+                    startTime: 11,
+                    endTime: 111,
+                },
+                {
+                    source: 'Mega Drive',
+                    videoId: '9Jql7FoX-2E',
+                    startTime: 9,
+                    endTime: 118,
+                },
+            ],
+        },
+    },
+    {
         name: 'Sol Divide',
         songSource: [
             { songName: 'Knight of Darkness', videoId: '-2yayHs2-JA', startTime: 75, endTime: 158 },
@@ -1600,6 +1670,15 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Broken Butterfly', videoId: 'JH460d3LzY4', startTime: 0, endTime: 100 },
     },
     {
+        name: 'STELLAVANITY - Prelude to the Destined Calamity -',
+        songSource: { songName: 'Junk Doll Dances in the Moonlight', videoId: 'DcTL146ANTI' },
+    },
+    {
+        name: 'Stinger',
+        series: Series.Twinbee,
+        songSource: { songName: 'Start ~ Main BGM', videoId: 'SC1gxfeKlM4' },
+    },
+    {
         name: 'Strike Gunner S.T.G.',
         // Song has no official name, is used in different stages in Arcade / Super Nintendo
         songSource: [
@@ -1713,6 +1792,25 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Thunder Force IV',
         songSource: { songName: 'Fighting Back', videoId: 'IJE-iAE1Mt8' },
+    },
+    {
+        name: 'Tiger-Heli',
+        songSource: {
+            songName: 'First Mission ~ Look Out',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: 'mTdJBHL-iIE',
+                    startTime: 1,
+                    endTime: 64,
+                },
+                {
+                    source: 'NES',
+                    videoId: 'qU_mllB2Vr8',
+                    startTime: 0,
+                    endTime: 188,
+                },
+            ] },
     },
     {
         name: 'Touhou 6: Embodiment of Scarlet Devil',
@@ -1871,6 +1969,77 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1 & 6', videoId: 'QB4vsrMuWNM' },
     },
     {
+        name: 'Twin Cobra',
+        songSource: {
+            songName: 'Challenge ~ Break a Leg',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: '5hwAES50kkQ',
+                },
+                {
+                    source: 'NES',
+                    videoId: 'n3UCfoz2JTY',
+                    startTime: 0,
+                    endTime: 133,
+                },
+                {
+                    source: 'Mega Drive',
+                    videoId: '2jlexX27808',
+                    startTime: 0,
+                    endTime: 119,
+                },
+            ],
+        },
+    },
+    {
+        name: 'Twin Hawk',
+        songSource: {
+            songName: 'Ray of Hope ~ Wake Up, to The Sky',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: 'nG-9_Az9Ffo',
+                    startTime: 2,
+                    endTime: 206,
+                },
+                {
+                    source: 'Mega Drive',
+                    videoId: '7cE3lfpzYR0',
+                    startTime: 46,
+                    endTime: 276,
+                },
+                {
+                    source: 'PC Engine',
+                    videoId: '082LACEM6AM',
+                    startTime: 0,
+                    endTime: 223,
+                },
+            ],
+        },
+    },
+    {
+        name: 'Twinbee',
+        series: Series.Twinbee,
+        songSource: {
+            songName: 'Start ~ Main BGM Lv 0',
+            arrangements: [
+                { source: 'Arcade', videoId: 'j3sr__rdFmA' },
+                { source: 'NES', videoId: 'HfHiIrZHHro' },
+            ],
+        },
+    },
+    {
+        name: 'Twinbee 3: Poko Poko Daimaou',
+        series: Series.Twinbee,
+        songSource: { songName: 'Start ~ Tiny Boy', videoId: 'JnMhHf37xeY', startTime: 42, endTime: 353 },
+    },
+    {
+        name: 'Twinbee Yahho!',
+        series: Series.Twinbee,
+        songSource: { songName: 'Twin Flight', videoId: '4hG606bVSZU' },
+    },
+    {
         name: 'Tyrian',
         songSource: { songName: 'Tyrian, the level', videoId: 'wNnTGbbDJfo' },
     },
@@ -1904,6 +2073,15 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Varth: Operation Thunderstorm',
         songSource: { songName: 'Stage 1, 16', videoId: 'x1H0Otv5R_E' },
+    },
+    {
+        name: 'Vimana',
+        songSource: {
+            songName: 'Opening ~ Space High',
+            videoId: 'yMhVyFzxBCU',
+            startTime: 2,
+            endTime: 120,
+        },
     },
     {
         name: 'Viper Phase 1',

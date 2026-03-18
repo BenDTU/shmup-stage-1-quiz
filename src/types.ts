@@ -10,6 +10,7 @@ export enum Series {
     Darius = 'Darius',
     Deathsmiles = 'Deathsmiles',
     Dodonpachi = 'Dodonpachi',
+    DragonSpirit = 'Dragon Spirit',
     Dreamer = 'Dreamer',
     Espgaluda = 'Espgaluda',
     FantasyZone = 'Fantasy Zone',
@@ -30,6 +31,7 @@ export enum Series {
     ThunderDragon = 'Thunder Dragon',
     Touhou = 'Touhou Project',
     Truxton = 'Truxton',
+    Twinbee = 'Twinbee',
     Zeal = 'Zeal',
     ZeroGunner = 'Zero Gunner',
 }
