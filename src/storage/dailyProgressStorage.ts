@@ -10,7 +10,7 @@ export function wasProgressInvalidated(): boolean {
 }
 
 // Captured once when the module first loads — fixed for the lifetime of this page session
-const SESSION_DATE: string = new Date().toISOString().slice(0, 10);
+export const SESSION_DATE: string = new Date().toISOString().slice(0, 10);
 
 export const SESSION_DATE_FORMATTED: string = new Intl.DateTimeFormat('en-GB', {
     day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
@@ -39,15 +39,6 @@ export interface DailyProgress {
     answers: number[];
 }
 
-// Returns the actual current date — used by DailyCountdown to detect day rollover
-export function getTodayDate(): string {
-    return new Date().toISOString().slice(0, 10);
-}
-
-// Returns the date as of page load — used for seed/progress so they don't shift mid-session
-export function getSessionDate(): string {
-    return SESSION_DATE;
-}
 
 export function getDailyProgress(): DailyProgress | null {
     try {
