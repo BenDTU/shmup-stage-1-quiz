@@ -14,7 +14,7 @@
                 <div class="d-flex flex-column align-items-center gap-3 mb-5">
                     <button
                         class="btn btn-success btn-lg w-100 py-3"
-                        style="max-width: 400px"
+                        style="max-width: 350px"
                         @click="begin('novice')"
                     >
                         <div class="fw-bold fs-5">
@@ -26,7 +26,7 @@
                     </button>
                     <button
                         class="btn btn-danger btn-lg w-100 py-3"
-                        style="max-width: 400px"
+                        style="max-width: 350px"
                         @click="begin('advanced')"
                     >
                         <div class="fw-bold fs-5">
