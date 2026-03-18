@@ -1024,6 +1024,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Game BGM 1', videoId: 'rX-6X3NIYX4' },
     },
     {
+        name: "Miss Kobayashi's Dragon Maid Burst Forth!! Choro-gon☆Breath",
+        songSource: { songName: 'Fin Fantasy', videoId: '80A7SNQFokU' },
+    },
+    {
         name: 'Muchi Muchi Pork!',
         songSource: { songName: 'Doki Doki in the Sky', videoId: 'iTb0FEaqsv4' },
     },
