@@ -146,6 +146,7 @@ export default tseslint.config(
             'eqeqeq': ['error', 'always'],
             'no-console': 'warn',
             '@typescript-eslint/consistent-type-imports': 'error',
+            '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
         },
     },
     {

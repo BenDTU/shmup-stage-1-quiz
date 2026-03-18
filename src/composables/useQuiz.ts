@@ -78,7 +78,7 @@ interface QuizState {
 }
 
 export const QUIZ_SIZE = 20;
-const SERIES_LIMIT = 3;
+export const SERIES_LIMIT = 3;
 
 const state = reactive<QuizState>({
     questions: [],
@@ -268,6 +268,31 @@ function resumeDailyQuiz(): boolean {
     return true;
 }
 
+function fillDebugAnswers(targetScore?: number) {
+    const allGameIds = games.map((g) => g.id);
+
+    if (targetScore !== undefined) {
+        const clampedScore = Math.max(0, Math.min(targetScore, state.questions.length));
+        const correctIndices = new Set(
+            shuffle([...state.questions.keys()]).slice(0, clampedScore),
+        );
+        state.answers = state.questions.map((question, i) => {
+            if (correctIndices.has(i)) return question.id;
+            const others = allGameIds.filter((id) => id !== question.id);
+            return others[Math.floor(Math.random() * others.length)]!;
+        });
+    } else {
+        state.answers = state.questions.map((question) => {
+            if (Math.random() < 0.5) return question.id;
+            const others = allGameIds.filter((id) => id !== question.id);
+            return others[Math.floor(Math.random() * others.length)]!;
+        });
+    }
+
+    state.currentIndex = state.questions.length - 1;
+    state.isAnswered = true;
+}
+
 function resetQuiz() {
     state.questions = [];
     state.currentIndex = 0;
@@ -296,5 +321,6 @@ export function useQuiz() {
         submitGuess,
         nextQuestion,
         resetQuiz,
+        fillDebugAnswers,
     };
 }
