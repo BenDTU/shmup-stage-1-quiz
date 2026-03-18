@@ -458,6 +458,26 @@ const gameEntries: GameEntry[] = [
         ],
     },
     {
+        name: 'Dragon Spirit',
+        forceFirst: true, // always the first question in the quiz
+        alias: 'Dragon Spirit: The New Legend',
+        series: Series.DragonSpirit,
+        songSource: {
+            songName: 'Area 1',
+            arrangements: [
+                { source: 'Arcade', videoId: 'yIQ4aQ_ifsg' },
+                { source: 'NES', videoId: 'mfWLhTlHBGU' },
+            ],
+        },
+    },
+    {
+        name: 'Dragon Saber',
+        forceFirst: true, // always the first question in the quiz
+        sortName: 'Dragon Spirit 2',
+        series: Series.DragonSpirit,
+        songSource: { songName: 'Submerged City', videoId: 'YmSOfpOkmDE' },
+    },
+    {
         name: 'Drainus',
         songSource: { songName: 'Determination', videoId: 'ppgo1QkNNxk' },
     },
@@ -650,20 +670,33 @@ const gameEntries: GameEntry[] = [
         name: 'Gradius',
         alias: 'Nemesis',
         series: Series.Gradius,
-        songSource: { songName: 'Challenger 1985', videoId: '-Fcpo6qCXMY' },
+        songSource: { songName: 'Challenger 1985',
+            arrangements: [
+                { source: 'Arcade', videoId: '-Fcpo6qCXMY' },
+                { source: 'NES', videoId: 'FGqnctiqTGQ' },
+            ],
+        },
     },
     {
         name: 'Gradius II',
         alias: 'Vulcan Venture',
         sortName: 'Gradius 2',
         series: Series.Gradius,
-        songSource: { songName: 'Burning Heat', videoId: '76kJEPGvvMg' },
+        songSource: { songName: 'Burning Heat', arrangements: [
+            { source: 'Arcade', videoId: '76kJEPGvvMg' },
+            { source: 'NES', videoId: 'oXhHwtJxHno' },
+        ] },
     },
     {
         name: 'Gradius III',
         sortName: 'Gradius 3',
         series: Series.Gradius,
-        songSource: { songName: 'Sand Storm', videoId: 'NyQzfqNIKTI' },
+        songSource: { songName: 'Sand Storm',
+            arrangements: [
+                { source: 'Arcade', videoId: 'NyQzfqNIKTI' },
+                { source: 'SNES', videoId: 'd_w43Ew_-jI' },
+            ],
+        },
     },
     {
         name: 'Gradius IV',
@@ -1448,6 +1481,28 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1', videoId: 'MBFv2bBU-yI', startTime: 10, endTime: 121 },
     },
     {
+        name: 'Slap Fight',
+        forceFirst: true,
+        alias: 'Alcon',
+        songSource: {
+            songName: 'Except Success',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: 'H-HASsEeIU0',
+                    startTime: 11,
+                    endTime: 111,
+                },
+                {
+                    source: 'Mega Drive',
+                    videoId: '9Jql7FoX-2E',
+                    startTime: 9,
+                    endTime: 118,
+                },
+            ],
+        },
+    },
+    {
         name: 'Sol Divide',
         songSource: [
             { songName: 'Knight of Darkness', videoId: '-2yayHs2-JA', startTime: 75, endTime: 158 },
@@ -1715,6 +1770,26 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Fighting Back', videoId: 'IJE-iAE1Mt8' },
     },
     {
+        name: 'Tiger-Heli',
+        forceFirst: true,
+        songSource: {
+            songName: 'First Mission ~ Look Out',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: 'mTdJBHL-iIE',
+                    startTime: 1,
+                    endTime: 64,
+                },
+                {
+                    source: 'NES',
+                    videoId: 'qU_mllB2Vr8',
+                    startTime: 0,
+                    endTime: 188,
+                },
+            ] },
+    },
+    {
         name: 'Touhou 6: Embodiment of Scarlet Devil',
         series: Series.Touhou,
         songSource: { songName: 'A Soul as Red as a Ground Cherry', videoId: 'nazi6JmAV_c' },
@@ -1871,6 +1946,58 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1 & 6', videoId: 'QB4vsrMuWNM' },
     },
     {
+        name: 'Twin Cobra',
+        forceFirst: true,
+        songSource: {
+            songName: 'Challenge ~ Break a Leg',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: '5hwAES50kkQ',
+                },
+                {
+                    source: 'NES',
+                    videoId: 'n3UCfoz2JTY',
+                    startTime: 0,
+                    endTime: 133,
+                },
+                {
+                    source: 'Mega Drive',
+                    videoId: '2jlexX27808',
+                    startTime: 0,
+                    endTime: 119,
+                },
+            ],
+        },
+    },
+    {
+        name: 'Twin Hawk',
+        forceFirst: true,
+        songSource: {
+            songName: 'Ray of Hope ~ Wake Up, to The Sky',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: 'nG-9_Az9Ffo',
+                    startTime: 2,
+                    endTime: 206,
+                },
+                {
+                    source: 'Mega Drive',
+                    videoId: '7cE3lfpzYR0',
+                    startTime: 46,
+                    endTime: 276,
+                },
+                {
+                    source: 'PC Engine',
+                    videoId: '082LACEM6AM',
+                    startTime: 0,
+                    endTime: 223,
+                },
+            ],
+        },
+    },
+    {
         name: 'Tyrian',
         songSource: { songName: 'Tyrian, the level', videoId: 'wNnTGbbDJfo' },
     },
@@ -1904,6 +2031,16 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Varth: Operation Thunderstorm',
         songSource: { songName: 'Stage 1, 16', videoId: 'x1H0Otv5R_E' },
+    },
+    {
+        name: 'Vimana',
+        forceFirst: true,
+        songSource: {
+            songName: 'Opening ~ Space High',
+            videoId: 'yMhVyFzxBCU',
+            startTime: 2,
+            endTime: 120,
+        },
     },
     {
         name: 'Viper Phase 1',

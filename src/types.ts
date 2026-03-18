@@ -10,6 +10,7 @@ export enum Series {
     Darius = 'Darius',
     Deathsmiles = 'Deathsmiles',
     Dodonpachi = 'Dodonpachi',
+    DragonSpirit = 'Dragon Spirit',
     Dreamer = 'Dreamer',
     Espgaluda = 'Espgaluda',
     FantasyZone = 'Fantasy Zone',
