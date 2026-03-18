@@ -46,6 +46,7 @@
                         :hidden="!state.isAnswered"
                         :resuming="isResumed"
                         :daily="isDaily"
+                        :quote="state.questionQuotes[state.currentIndex]"
                         @audio-unlocked="handleAudioUnlocked"
                     />
                 </div>

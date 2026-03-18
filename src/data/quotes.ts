@@ -1,5 +1,5 @@
 export const quotes: string[] = [
-    'Get Ready!',
+    'Get Ready!', // Blazing Star (And probably a lot of other games too)
     'For great justice.', // Zero Wing
     "This one's for the fighters, this one's for the soldiers", // Dariusburst
     'Be attitudes for gains', // Radiant Silvergun
