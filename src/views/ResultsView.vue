@@ -4,16 +4,22 @@
             <div class="col-lg-7">
                 <template v-if="total > 0">
                     <div class="text-center mb-5">
-                        <h1 class="display-5 mb-3 fw-bold">
-                            Quiz Complete! <i class="bi bi-trophy-fill" />
+                        <h1
+                            class="mb-3 fw-bold"
+                            :class="isDaily ? 'display-6 text-warning-emphasis' : 'display-5'"
+                        >
+                            {{ isDaily ? 'Daily Challenge Complete!' : 'Quiz Complete!' }} <i class="bi bi-trophy-fill" />
                         </h1>
-                        <p class="text-muted mb-3">
+                        <p class="h5 text-muted mb-3">
                             <span
                                 class="badge"
                                 :class="state.mode === 'novice' ? 'bg-success' : 'bg-danger'"
                             >{{ state.mode === 'novice' ? 'Novice' : 'Advanced' }}</span>
                         </p>
-                        <p class="lead">
+                        <p
+                            class="lead"
+                            :class="isDaily ? 'text-warning-emphasis' : ''"
+                        >
                             You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
                         </p>
                         <div
@@ -35,13 +41,22 @@
                             <span v-else-if="score / total >= 0.4">Not bad! Keep practicing.</span>
                             <span v-else>Time to play more shmups! <i class="bi bi-emoji-smile" /></span>
                         </p>
+                        <div
+                            v-if="isDaily"
+                            class="text-center mt-4"
+                        >
+                            <DailyCountdown />
+                        </div>
                     </div>
 
                     <!-- Answer breakdown -->
                     <h5 class="mb-3">
                         All Answers
                     </h5>
-                    <div class="list-group mb-5">
+                    <div
+                        class="list-group mb-5"
+                        :class="isDaily ? 'list-group-daily' : ''"
+                    >
                         <div
                             v-for="(guessId, index) in state.answers"
                             :key="index"
@@ -85,13 +100,14 @@
                         </div>
                     </div>
 
-                    <div class="text-center">
-                        <button
-                            class="btn btn-primary btn-lg px-5"
-                            @click="playAgain"
+                    <div class="text-center mt-4">
+                        <RouterLink
+                            to="/"
+                            class="btn btn-outline-secondary icon-link"
                         >
-                            Play Again
-                        </button>
+                            <i class="lh-1 bi bi-arrow-left" />
+                            Back to Home
+                        </RouterLink>
                     </div>
                 </template>
             </div>
@@ -104,10 +120,11 @@ import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuiz } from '../composables/useQuiz';
 import { guessedGameName } from '../functions';
+import DailyCountdown from '../components/DailyCountdown.vue';
 
 
 const router = useRouter();
-const { state, resetQuiz } = useQuiz();
+const { state, isDaily } = useQuiz();
 
 onMounted(() => {
     if (!state.isStarted || state.answers.length === 0) {
@@ -118,8 +135,15 @@ onMounted(() => {
 const score = state.answers.filter((id, i) => state.questions[i]?.id === id).length;
 const total = state.answers.length;
 
-function playAgain() {
-    resetQuiz();
-    router.push('/');
-}
 </script>
+
+<style scoped>
+.list-group-daily {
+    --bs-list-group-border-color: var(--bs-warning-text-emphasis);
+    box-shadow: var(--daily-glow);
+
+    .list-group-item {
+        border-color: var(--bs-warning-text-emphasis);
+    }
+}
+</style>

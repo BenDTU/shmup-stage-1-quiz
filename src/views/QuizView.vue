@@ -4,11 +4,23 @@
         class="container py-4"
     >
         <div class="row justify-content-center">
+            <h1
+                v-if="isDaily"
+                class="h3 text-warning-emphasis text-center mb-3"
+            >
+                Daily Challenge!
+            </h1>
             <div class="col-lg-8">
                 <!-- Progress bar -->
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <span class="fw-semibold">Question {{ questionNumber }} of {{ state.questions.length }}</span>
-                    <span class="text-muted small">Score: {{ state.answers.filter((id, i) => state.questions[i]?.id === id).length }} / {{ state.answers.length }}</span>
+                    <span
+                        class="fw-semibold"
+                        :class="isDaily ? 'text-warning-emphasis' : ''"
+                    >Question {{ questionNumber }} of {{ state.questions.length }}</span>
+                    <span
+                        class="small"
+                        :class="isDaily ? 'text-warning-emphasis opacity-75' : 'text-muted'"
+                    >Score: {{ state.answers.filter((id, i) => state.questions[i]?.id === id).length }} / {{ state.answers.length }}</span>
                 </div>
                 <div
                     class="progress mb-4"
@@ -32,7 +44,9 @@
                         :start-time="currentQuestion.startTime"
                         :end-time="currentQuestion.endTime"
                         :hidden="!state.isAnswered"
-                        @audio-unlocked="audioUnlocked = true"
+                        :resuming="isResumed"
+                        :daily="isDaily"
+                        @audio-unlocked="handleAudioUnlocked"
                     />
                 </div>
 
@@ -40,9 +54,13 @@
                 <div
                     v-show="audioUnlocked"
                     class="card"
+                    :class="{ 'card-daily': isDaily }"
                 >
                     <div class="card-body">
-                        <h5 class="card-title mb-3">
+                        <h5
+                            class="card-title mb-3"
+                            :class="{ 'text-warning-emphasis': isDaily }"
+                        >
                             Which game is this stage 1 theme from?
                         </h5>
 
@@ -141,12 +159,13 @@ import AutocompleteInput from '../components/AutocompleteInput.vue';
 import NoviceOptions from '../components/NoviceOptions.vue';
 import AnswerFeedback from '../components/AnswerFeedback.vue';
 import { useQuiz } from '../composables/useQuiz';
+import { saveDailyProgress } from '../storage/dailyProgressStorage';
 import { guessedGameName } from '../functions';
 import { games } from '../data/games';
-import { AnswerType, type AdvancedFeedbackDetails } from '@/types';
+import { AnswerType, type AdvancedFeedbackDetails } from '../types';
 
 const router = useRouter();
-const { state, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, submitGuess, nextQuestion } = useQuiz();
+const { state, isDaily, isResumed, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, submitGuess, nextQuestion } = useQuiz();
 
 const selectedGameId = ref<number | null>(null);
 const audioUnlocked = ref(false);
@@ -154,6 +173,14 @@ const nextBtn = ref<HTMLButtonElement | null>(null);
 const autocompleteRef = ref<{ focus: () => void } | null>(null);
 const feedbackState = ref<'correct' | 'wrong' | null>(null);
 let feedbackTimer: ReturnType<typeof setTimeout> | null = null;
+
+function handleAudioUnlocked() {
+    audioUnlocked.value = true;
+    if (isDaily.value && state.answers.length === 0) {
+        saveDailyProgress({ mode: state.mode, answers: [] });
+    }
+    isResumed.value = false;
+}
 
 function setFeedback(value: 'correct' | 'wrong') {
     if (feedbackTimer !== null) clearTimeout(feedbackTimer);
@@ -272,6 +299,11 @@ async function handleNextClick(event: MouseEvent) {
 </script>
 
 <style scoped>
+.card-daily {
+    --bs-card-border-color: var(--bs-warning-text-emphasis);
+    box-shadow: var(--daily-glow);
+}
+
 @keyframes shake {
     0%,  100% { transform: translate(0, 0); }
     15%       { transform: translate(-4px, -2px); }

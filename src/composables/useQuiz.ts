@@ -1,20 +1,46 @@
-import { reactive, computed } from 'vue';
+import { reactive, computed, ref } from 'vue';
 import { games } from '../data/games';
-import type { Series } from '../types';
-import { type Game, type GameEntryWithId, type QuizMode } from '../types';
+import type { Series, Game, GameEntryWithId, QuizMode } from '../types';
+import { getDailyProgress, saveDailyProgress, getSessionDate } from '../storage/dailyProgressStorage';
 
-function shuffle<T>(arr: T[]): T[] {
+type RandomFn = () => number;
+
+function mulberry32(seed: number): RandomFn {
+    let s = seed;
+    return function () {
+        s |= 0;
+        s = (s + 0x6D2B79F5) | 0;
+        let t = Math.imul(s ^ (s >>> 15), 1 | s);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+}
+
+function getDailySeed(): number {
+    const today = getSessionDate();
+    let hash = 0;
+    for (const char of today) {
+        hash = (Math.imul(31, hash) + char.charCodeAt(0)) | 0;
+    }
+    // Run one round of Mulberry32 mixing to avoid adjacent-seed correlation
+    hash = (hash + 0x6D2B79F5) | 0;
+    let t = Math.imul(hash ^ (hash >>> 15), 1 | hash);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return (t ^ (t >>> 14)) >>> 0;
+}
+
+function shuffle<T>(arr: T[], random: RandomFn = Math.random): T[] {
     for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+        const j = Math.floor(random() * (i + 1));
         [arr[i], arr[j]] = [arr[j]!, arr[i]!];
     }
     return arr;
 }
 
-function resolveGame(entry: GameEntryWithId): Game {
+function resolveGame(entry: GameEntryWithId, random: RandomFn = Math.random): Game {
     const { name, alias, series, id } = entry;
     const sources = Array.isArray(entry.songSource) ? entry.songSource : [entry.songSource];
-    const songEntry = sources[Math.floor(Math.random() * sources.length)]!;
+    const songEntry = sources[Math.floor(random() * sources.length)]!;
 
     if (!('arrangements' in songEntry)) {
         const { songName, videoId, startTime = 0, endTime } = songEntry;
@@ -22,7 +48,7 @@ function resolveGame(entry: GameEntryWithId): Game {
     }
 
     const arrangements = songEntry.arrangements;
-    const arrangement = arrangements[Math.floor(Math.random() * arrangements.length)]!;
+    const arrangement = arrangements[Math.floor(random() * arrangements.length)]!;
     const { songName } = songEntry;
     const { videoId, startTime = 0, endTime, source } = arrangement;
 
@@ -49,7 +75,7 @@ interface QuizState {
     noviceOptions: number[][] // 4 option IDs per question (populated in novice mode only)
 }
 
-const QUIZ_SIZE = 20;
+export const QUIZ_SIZE = 20;
 const SERIES_LIMIT = 3;
 
 const state = reactive<QuizState>({
@@ -61,6 +87,9 @@ const state = reactive<QuizState>({
     mode: 'advanced',
     noviceOptions: [],
 });
+
+const isDaily = ref(false);
+const isResumed = ref(false);
 
 const isFinished = computed(
     () =>
@@ -136,9 +165,9 @@ const seriesLimitedGameIds = computed<Set<number>>(() => {
     );
 });
 
-function startQuiz(mode: QuizMode = 'advanced') {
+function buildQuiz(mode: QuizMode, random: RandomFn) {
     const forceFirstGames = games.filter((g) => g.forceFirst);
-    const shuffled = shuffle([...games].filter((g) => !g.forceFirst));
+    const shuffled = shuffle([...games].filter((g) => !g.forceFirst), random);
     const seriesCounts: Partial<Record<Series, number>> = {};
     const selected: Game[] = [];
     for (const game of [...forceFirstGames, ...shuffled]) {
@@ -148,7 +177,7 @@ function startQuiz(mode: QuizMode = 'advanced') {
             if (count >= SERIES_LIMIT) continue;
             seriesCounts[game.series] = count + 1;
         }
-        selected.push(resolveGame(game));
+        selected.push(resolveGame(game, random));
     }
 
     let noviceOptions: number[][] = [];
@@ -172,9 +201,9 @@ function startQuiz(mode: QuizMode = 'advanced') {
                     !priorIds.has(g.id) &&
                     !(g.series && limitedSeries.has(g.series)),
             );
-            const shuffledEligible = shuffle([...eligible]);
+            const shuffledEligible = shuffle([...eligible], random);
             const incorrectIds = shuffledEligible.slice(0, 3).map((g) => g.id);
-            return shuffle([...incorrectIds, question.id]);
+            return shuffle([...incorrectIds, question.id], random);
         });
     }
 
@@ -187,6 +216,18 @@ function startQuiz(mode: QuizMode = 'advanced') {
     state.noviceOptions = noviceOptions;
 }
 
+function startQuiz(mode: QuizMode = 'advanced') {
+    isDaily.value = false;
+    isResumed.value = false;
+    buildQuiz(mode, Math.random);
+}
+
+function startDailyQuiz(mode: QuizMode = 'advanced') {
+    isDaily.value = true;
+    isResumed.value = false;
+    buildQuiz(mode, mulberry32(getDailySeed()));
+}
+
 function submitGuess(gameId: number) {
     if (state.isAnswered) return;
     const currentGame = state.questions[state.currentIndex];
@@ -195,6 +236,12 @@ function submitGuess(gameId: number) {
     if (!isSkip && !games.find((g) => g.id === gameId)) return;
     state.answers.push(gameId);
     state.isAnswered = true;
+    if (isDaily.value) {
+        saveDailyProgress({
+            mode: state.mode,
+            answers: [...state.answers],
+        });
+    }
 }
 
 function nextQuestion() {
@@ -202,6 +249,19 @@ function nextQuestion() {
         state.currentIndex++;
         state.isAnswered = false;
     }
+}
+
+function resumeDailyQuiz(): boolean {
+    const progress = getDailyProgress();
+    if (!progress) return false;
+    isDaily.value = true;
+    isResumed.value = true;
+    buildQuiz(progress.mode, mulberry32(getDailySeed()));
+    state.answers = [...progress.answers];
+    const finished = progress.answers.length === state.questions.length;
+    state.currentIndex = finished ? state.questions.length - 1 : progress.answers.length;
+    state.isAnswered = finished;
+    return true;
 }
 
 function resetQuiz() {
@@ -212,8 +272,24 @@ function resetQuiz() {
     state.isAnswered = false;
     state.mode = 'advanced';
     state.noviceOptions = [];
+    isResumed.value = false;
 }
 
 export function useQuiz() {
-    return { state, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, startQuiz, submitGuess, nextQuestion, resetQuiz };
+    return {
+        state,
+        isDaily,
+        isResumed,
+        isFinished,
+        usedGameIds,
+        seriesLimitedGameIds,
+        seriesJustCompleted,
+        seriesJustCompletedMajorityCorrect,
+        startQuiz,
+        startDailyQuiz,
+        resumeDailyQuiz,
+        submitGuess,
+        nextQuestion,
+        resetQuiz,
+    };
 }

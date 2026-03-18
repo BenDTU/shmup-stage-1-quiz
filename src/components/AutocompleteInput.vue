@@ -37,7 +37,7 @@
                 class="list-group-item list-group-item-action"
                 :class="{
                     disabled: disabledGameIds.has(game.id) || seriesLimitedGameIds?.has(game.id),
-                    active: index === highlightedIndex && !disabledGameIds.has(game.id) && !seriesLimitedGameIds?.has(game.id),
+                    highlighted: index === highlightedIndex && !disabledGameIds.has(game.id) && !seriesLimitedGameIds?.has(game.id),
                 }"
                 :aria-selected="index === highlightedIndex && !disabledGameIds.has(game.id) && !seriesLimitedGameIds?.has(game.id)"
                 :aria-disabled="disabledGameIds.has(game.id) || seriesLimitedGameIds?.has(game.id) || undefined"
@@ -288,6 +288,11 @@ function onKeydown(event: KeyboardEvent) {
   .list-group-item:last-child {
     border-bottom: none;
   }
+}
+
+.list-group-item.highlighted {
+  color: var(--bs-list-group-action-hover-color);
+  background-color: var(--bs-list-group-action-hover-bg);
 }
 
 .list-group-item.disabled {

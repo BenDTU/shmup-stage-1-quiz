@@ -69,9 +69,10 @@
                 <div class="text-center mt-4">
                     <RouterLink
                         to="/"
-                        class="btn btn-outline-secondary"
+                        class="btn btn-outline-secondary icon-link"
                     >
-                        ← Back to Home
+                        <i class="lh-1 bi bi-arrow-left" />
+                        Back to Home
                     </RouterLink>
                 </div>
             </div>

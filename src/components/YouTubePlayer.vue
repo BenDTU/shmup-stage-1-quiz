@@ -11,11 +11,12 @@
             class="audio-overlay audio-placeholder rounded-3 text-center"
         >
             <button
-                class="btn btn-outline-light btn-lg"
+                class="btn btn-lg"
+                :class="daily ? 'btn-start-daily' : 'btn-outline-light'"
                 type="button"
                 @click="startAudio"
             >
-                Start!
+                {{ resuming ? 'Resume!' : 'Start!' }}
             </button>
         </div>
         <!-- Spoiler overlay — shown while the answer is still hidden -->
@@ -32,7 +33,7 @@
             <p class="mb-0 fw-semibold fs-5">
                 <i class="bi bi-music-note-beamed" /> Now Playing…
             </p>
-            <p class="mb-2 text-muted small">
+            <p class="mb-2 text-white text-opacity-75 small">
                 {{ currentQuote }}
             </p>
             <button
@@ -62,13 +63,15 @@
 
 <script setup lang="ts">
 import { computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue';
-import { quotes } from '../constants/quotes';
+import { quotes } from '../data/quotes';
 
 const props = defineProps<{
     videoId: string
     startTime?: number
     endTime?: number
     hidden?: boolean
+    resuming?: boolean
+    daily?: boolean
 }>();
 
 const emit = defineEmits<{
@@ -239,6 +242,23 @@ function onRestartAnimationEnd() {
 @keyframes bounce {
   0%, 100% { transform: scaleY(0.4); }
   50%       { transform: scaleY(1); }
+}
+
+.btn-start-daily {
+  color: var(--bs-warning);
+  border-color: var(--bs-warning);
+  border-style: solid;
+  border-width: 1px;
+  background: transparent;
+  box-shadow: var(--daily-glow);
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    color: var(--bs-warning);
+    background-color: #332701; // Equivalent of var(--bs-warning-bg-subtle) in dark mode
+    border-color: var(--bs-warning);
+    box-shadow: var(--daily-glow-intense);
+  }
 }
 
 /* One-shot anticlockwise spin for the restart icon */
