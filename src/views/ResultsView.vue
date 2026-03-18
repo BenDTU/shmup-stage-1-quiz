@@ -53,6 +53,19 @@
                         >
                             <DailyCountdown />
                         </div>
+                        <div
+                            v-if="masteredSeries.length > 0"
+                            class="mt-5"
+                        >
+                            <p
+                                v-for="series in masteredSeries"
+                                :key="series"
+                                class="mb-1"
+                                :class="isDaily ? 'text-warning-emphasis' : ''"
+                            >
+                                {{ series }} master! <i class="bi bi-trophy-fill" />
+                            </p>
+                        </div>
                     </div>
 
                     <!-- Answer breakdown -->
@@ -122,25 +135,67 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { onMounted, computed } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import { useQuiz } from '../composables/useQuiz';
 import { SESSION_DATE_FORMATTED } from '../storage/dailyProgressStorage';
 import { guessedGameName } from '../functions';
 import DailyCountdown from '../components/DailyCountdown.vue';
+import { SERIES_LIMIT } from '../composables/useQuiz';
 
 
 const router = useRouter();
-const { state, isDaily } = useQuiz();
+const route = useRoute();
+const { state, isDaily, startQuiz, startDailyQuiz, fillDebugAnswers } = useQuiz();
 
 onMounted(() => {
+    if (!import.meta.env.PROD) {
+        const params = route.query;
+        const scoreParam = 'fill-score' in params ? parseInt(params['fill-score'] as string, 10) : undefined;
+        const targetScore = scoreParam !== undefined && !isNaN(scoreParam) ? scoreParam : undefined;
+
+        if ('fill-basic' in params) {
+            startQuiz('novice');
+            fillDebugAnswers(targetScore);
+            return;
+        }
+        if ('fill-advanced' in params) {
+            startQuiz('advanced');
+            fillDebugAnswers(targetScore);
+            return;
+        }
+        if ('fill-daily-basic' in params) {
+            startDailyQuiz('novice');
+            fillDebugAnswers(targetScore);
+            return;
+        }
+        if ('fill-daily-advanced' in params) {
+            startDailyQuiz('advanced');
+            fillDebugAnswers(targetScore);
+            return;
+        }
+    }
+
     if (!state.isStarted || state.answers.length === 0) {
         router.replace('/');
     }
 });
 
-const score = state.answers.filter((id, i) => state.questions[i]?.id === id).length;
-const total = state.answers.length;
+const score = computed(() => state.answers.filter((id, i) => state.questions[i]?.id === id).length);
+const total = computed(() => state.answers.length);
+
+const masteredSeries = computed(() => {
+    const seriesCorrectCounts = new Map<string, number>();
+    for (let i = 0; i < state.questions.length; i++) {
+        const series = state.questions[i]?.series;
+        if (series && state.answers[i] === state.questions[i]?.id) {
+            seriesCorrectCounts.set(series, (seriesCorrectCounts.get(series) ?? 0) + 1);
+        }
+    }
+    return [...seriesCorrectCounts.entries()]
+        .filter(([, correct]) => correct === SERIES_LIMIT)
+        .map(([series]) => series);
+});
 
 </script>
 
