@@ -161,6 +161,19 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Fly to the Leaden Sky', videoId: 'Szr0TSXcWok' },
     },
     {
+        name: 'Bells & Whistles',
+        alias: 'Detana!! Twinbee',
+        series: Series.Twinbee,
+        songSource: {
+            songName: "The Wind's Gift",
+            arrangements: [
+                { source: 'Arcade', videoId: 'UdAGJGfSTDg' },
+                { source: 'PC Engine', videoId: 'CyNDWlb8QJ8', startTime: 48, endTime: 208 },
+                { source: 'Sharp X68000', videoId: 'f1V-bjJpbLE' },
+            ],
+        },
+    },
+    {
         name: 'Bio-Hazard Battle',
         songSource: { songName: 'Stage 1 & 8', videoId: 'oInjf0-talM' },
     },
@@ -1128,6 +1141,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: "Pop'n Twinbee",
+        series: Series.Twinbee,
         songSource: { songName: 'Village Sky', videoId: 'AGt-RJr-khA' },
     },
     {
@@ -1652,6 +1666,11 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Broken Butterfly', videoId: 'JH460d3LzY4', startTime: 0, endTime: 100 },
     },
     {
+        name: 'Stinger',
+        series: Series.Twinbee,
+        songSource: { songName: 'Start ~ Main BGM', videoId: 'SC1gxfeKlM4' },
+    },
+    {
         name: 'Strike Gunner S.T.G.',
         // Song has no official name, is used in different stages in Arcade / Super Nintendo
         songSource: [
@@ -1990,6 +2009,27 @@ const gameEntries: GameEntry[] = [
                 },
             ],
         },
+    },
+    {
+        name: 'Twinbee',
+        series: Series.Twinbee,
+        songSource: {
+            songName: 'Start ~ Main BGM Lv 0',
+            arrangements: [
+                { source: 'Arcade', videoId: 'j3sr__rdFmA' },
+                { source: 'NES', videoId: 'HfHiIrZHHro' },
+            ],
+        },
+    },
+    {
+        name: 'Twinbee 3: Poko Poko Daimaou',
+        series: Series.Twinbee,
+        songSource: { songName: 'Start ~ Tiny Boy', videoId: 'JnMhHf37xeY', startTime: 42, endTime: 353 },
+    },
+    {
+        name: 'Twinbee Yahho!',
+        series: Series.Twinbee,
+        songSource: { songName: 'Twin Flight', videoId: '4hG606bVSZU' },
     },
     {
         name: 'Tyrian',

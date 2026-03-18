@@ -31,6 +31,7 @@ export enum Series {
     ThunderDragon = 'Thunder Dragon',
     Touhou = 'Touhou Project',
     Truxton = 'Truxton',
+    Twinbee = 'Twinbee',
     Zeal = 'Zeal',
     ZeroGunner = 'Zero Gunner',
 }
