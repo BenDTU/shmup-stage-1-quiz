@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
-import { getTodayDate } from '../storage/dailyProgressStorage';
+import { SESSION_DATE } from '../storage/dailyProgressStorage';
 
 function getMsUntilMidnightUTC(): number {
     const now = new Date();
@@ -30,7 +30,6 @@ function formatCountdown(ms: number): string {
 
 const expired = ref(false);
 const timeUntilNextDaily = ref(formatCountdown(getMsUntilMidnightUTC()));
-const startDate = getTodayDate();
 
 // Full page reload is intentional — it re-initialises SESSION_DATE and DATA_VERSION
 // in dailyProgressStorage so the new day's quiz is picked up correctly.
@@ -41,7 +40,7 @@ function refresh() {
 let timer: ReturnType<typeof setInterval> | null = null;
 onMounted(() => {
     timer = setInterval(() => {
-        if (getTodayDate() !== startDate) {
+        if (new Date().toISOString().slice(0, 10) !== SESSION_DATE) {
             expired.value = true;
             clearInterval(timer ?? undefined);
             timer = null;
