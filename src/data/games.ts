@@ -1666,6 +1666,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Broken Butterfly', videoId: 'JH460d3LzY4', startTime: 0, endTime: 100 },
     },
     {
+        name: 'STELLAVANITY - Prelude to the Destined Calamity -',
+        songSource: { songName: 'Junk Doll Dances in the Moonlight', videoId: 'DcTL146ANTI' },
+    },
+    {
         name: 'Stinger',
         series: Series.Twinbee,
         songSource: { songName: 'Start ~ Main BGM', videoId: 'SC1gxfeKlM4' },
