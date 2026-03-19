@@ -28,7 +28,7 @@ function formatCountdown(ms: number): string {
     return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
 }
 
-const expired = ref(false);
+const expired = ref(new Date().toISOString().slice(0, 10) !== SESSION_DATE);
 const timeUntilNextDaily = ref(formatCountdown(getMsUntilMidnightUTC()));
 
 // Full page reload is intentional — it re-initialises SESSION_DATE and DATA_VERSION
