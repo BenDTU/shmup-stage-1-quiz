@@ -8,6 +8,17 @@
                 <p class="text-center text-muted mb-4">
                     There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups loaded in!
                 </p>
+                <p class="text-center mb-4">
+                    <a
+                        :href="playlistUrl"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-outline-primary icon-link"
+                    >
+                        <i class="lh-1 bi bi-youtube" />
+                        Open Full Playlist
+                    </a>
+                </p>
                 <div class="table-responsive">
                     <table class="table align-middle">
                         <thead>
@@ -107,6 +118,24 @@ const gameGroups: GameGroup[] = games.map((game) => {
         songs: sources,
     };
 });
+
+const playlistVideoIds: string[] = [];
+for (const group of gameGroups) {
+    for (const song of group.songs) {
+        if ('arrangements' in song) {
+            for (const arrangement of song.arrangements) {
+                if (!arrangement.endTime) {
+                    playlistVideoIds.push(arrangement.videoId);
+                }
+            }
+        } else {
+            if (!song.endTime) {
+                playlistVideoIds.push(song.videoId);
+            }
+        }
+    }
+}
+const playlistUrl = `https://www.youtube.com/watch_videos?video_ids=${playlistVideoIds.join(',')}`;
 
 const hoveredGame = ref<string | null>(null);
 </script>
