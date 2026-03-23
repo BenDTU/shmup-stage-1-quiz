@@ -10,13 +10,15 @@
                 </p>
                 <p class="text-center mb-4">
                     <a
-                        :href="playlistUrl"
+                        v-for="(url, index) in playlistUrls"
+                        :key="index"
+                        :href="url"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="btn btn-outline-primary icon-link"
+                        class="btn btn-outline-primary icon-link me-2 mb-2"
                     >
                         <i class="lh-1 bi bi-youtube" />
-                        Open Full Playlist
+                        {{ playlistUrls.length === 1 ? 'Open Full Playlist' : `Part ${index + 1} of ${playlistUrls.length}` }}
                     </a>
                 </p>
                 <div class="table-responsive">
@@ -135,7 +137,12 @@ for (const group of gameGroups) {
         }
     }
 }
-const playlistUrl = `https://www.youtube.com/watch_videos?video_ids=${playlistVideoIds.join(',')}`;
+const PLAYLIST_CHUNK_SIZE = 50;
+const playlistUrls: string[] = [];
+for (let i = 0; i < playlistVideoIds.length; i += PLAYLIST_CHUNK_SIZE) {
+    const chunk = playlistVideoIds.slice(i, i + PLAYLIST_CHUNK_SIZE);
+    playlistUrls.push(`https://www.youtube.com/watch_videos?video_ids=${chunk.join(',')}`);
+}
 
 const hoveredGame = ref<string | null>(null);
 </script>
