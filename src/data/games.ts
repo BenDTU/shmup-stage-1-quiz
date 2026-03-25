@@ -142,7 +142,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Armed Police Batrider',
-        songSource: { songName: 'Easy to Go', videoId: 'UFc72Qz3S34' },
+        songSource: { songName: 'Easy to Go', videoId: '5f-5kmdPmLk' },
     },
     {
         name: 'Assault Shell',
