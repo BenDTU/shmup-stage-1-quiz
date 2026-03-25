@@ -693,6 +693,7 @@ const gameEntries: GameEntry[] = [
             arrangements: [
                 { source: 'Arcade', videoId: '-Fcpo6qCXMY' },
                 { source: 'NES', videoId: 'FGqnctiqTGQ' },
+                { source: 'PC Engine', videoId: 'zAEIApqtnTg' },
             ],
         },
     },
@@ -704,6 +705,7 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Burning Heat', arrangements: [
             { source: 'Arcade', videoId: '76kJEPGvvMg' },
             { source: 'NES', videoId: 'oXhHwtJxHno' },
+            { source: 'Sharp X68000', videoId: 'kyc1UuYwiO8' },
         ] },
     },
     {
@@ -1334,6 +1336,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Raiden',
+        alias: 'Raiden Trad',
         series: Series.Raiden,
         songSource: {
             songName: 'Gallantry',
@@ -1341,6 +1344,14 @@ const gameEntries: GameEntry[] = [
                 {
                     source: 'Original',
                     videoId: 'vaGenJ5GXxE',
+                },
+                {
+                    source: 'Mega Drive',
+                    videoId: 'vtOHNnZKlCI',
+                },
+                {
+                    source: 'SNES',
+                    videoId: 'zSqXP-ITmv8',
                 },
                 {
                     source: 'The Raiden Project',
