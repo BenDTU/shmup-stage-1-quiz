@@ -78,6 +78,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Retro Blitz', videoId: 'o-SVBG4IYSY' },
     },
     {
+        name: 'Abadox: The Deadly Inner War',
+        songSource: { songName: 'Internal Combat', videoId: 'tXxLHnwg7ec' },
+    },
+    {
         name: 'Air Duel',
         songSource: { songName: 'Stage 1', videoId: '8WsKeA4v01U' },
     },
@@ -414,7 +418,7 @@ const gameEntries: GameEntry[] = [
         name: 'DoDonPachi II: Bee Storm',
         sortName: 'Dodonpachi 1.5',
         series: Series.Dodonpachi,
-        songSource: { songName: 'Awakening ・ Nightmare', videoId: 'J14LDuEJG4U' },
+        songSource: { songName: 'Awakening ・ Nightmare', videoId: '_L7_poH5PQg', startTime: 113, endTime: 184 },
     },
     {
         name: 'DoDonPachi Blissful Death',
@@ -639,6 +643,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Fixer', videoId: 'pyefFS8SwiA', startTime: 10, endTime: 119 },
     },
     {
+        name: 'Flame Zapper Kotsujin',
+        songSource: { songName: 'Sky is Well Supplied', videoId: '0Ys8TfcBIws' },
+    },
+    {
         name: 'Flying Shark',
         series: Series.FlyingShark,
         alias: 'Sky Shark',
@@ -800,6 +808,16 @@ const gameEntries: GameEntry[] = [
         ],
     },
     {
+        name: 'Gundemonium Recollection',
+        songSource: {
+            songName: 'Tuxedo Knight',
+            arrangements: [
+                { source: 'Original', videoId: 'L4-NMZWwtWc' },
+                { source: 'Arranged', videoId: '_BuVrmR3sNY' },
+            ],
+        },
+    },
+    {
         name: 'Gunnail',
         songSource: { songName: 'Stage 1', videoId: 'hpzlZb-z7Kc', startTime: 97, endTime: 524 },
     },
@@ -822,6 +840,16 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Hellsinker',
         songSource: { songName: 'Segment 1 BEHIND', videoId: 'M7vl9LzMAa8' },
+    },
+    {
+        name: 'Hitogata Happa',
+        songSource: {
+            songName: 'Dedicated to the Honorable R.C.',
+            arrangements: [
+                { source: 'Original', videoId: 'jGu9Ixz1Wk4' },
+                { source: 'Arranged', videoId: 'Pide6YHdOrE' },
+            ],
+        },
     },
     {
         name: 'Hotdog Storm',
@@ -1073,6 +1101,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'NebulasRay',
         songSource: { songName: 'Exeo', videoId: 'PyHmUSQaNYM' },
+    },
+    {
+        name: 'Nyahax 93',
+        songSource: { songName: 'Carnival!', videoId: 'vMylOG43a20' },
     },
     {
         name: 'Omega Fighter',
