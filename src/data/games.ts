@@ -1459,7 +1459,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'REZON',
-        songSource: { songName: 'Stage 1 & 4', videoId: 'ZAKUutWAdDM', startTime: 2, endTime: 31 },
+        songSource: { songName: 'Stage 1 & 4', videoId: 'NVd5YiNB_fI' },
     },
     {
         name: 'Rolling Gunner',
