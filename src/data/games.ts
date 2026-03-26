@@ -1540,6 +1540,12 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1', videoId: 'MBFv2bBU-yI', startTime: 10, endTime: 121 },
     },
     {
+        name: 'Sky Robo',
+        series: Series.TerraCresta,
+        alias: 'Tatake! Big Fighter',
+        songSource: { songName: 'Stage 1', videoId: 'TX9afsgviIM', startTime: 11, endTime: 125 },
+    },
+    {
         name: 'Slap Fight',
         alias: 'Alcon',
         songSource: {
@@ -1559,6 +1565,11 @@ const gameEntries: GameEntry[] = [
                 },
             ],
         },
+    },
+    {
+        name: 'Sol Cresta',
+        series: Series.TerraCresta,
+        songSource: { songName: 'Neptune Storm', videoId: 'cHpkRnODwyM' },
     },
     {
         name: 'Sol Divide',
@@ -2087,6 +2098,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Tyrian, the level', videoId: 'wNnTGbbDJfo' },
     },
     {
+        name: 'U.N. Defense Force: Earth Joker',
+        songSource: { songName: 'Round 1', videoId: 'h70kkYY4SC4' },
+    },
+    {
         name: 'U.N. Squadron',
         alias: 'Area 88',
         songSource: {
@@ -2116,6 +2131,16 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Varth: Operation Thunderstorm',
         songSource: { songName: 'Stage 1, 16', videoId: 'x1H0Otv5R_E' },
+    },
+    {
+        name: 'Vasara',
+        series: Series.Vasara,
+        songSource: { songName: 'Here is Mr. Sanada Yukimura', videoId: 'G6DMPvVzMPg' },
+    },
+    {
+        name: 'Vasara 2',
+        series: Series.Vasara,
+        songSource: { songName: 'Like the Wind', videoId: '_Di0WbKOkHg' },
     },
     {
         name: 'Vimana',
