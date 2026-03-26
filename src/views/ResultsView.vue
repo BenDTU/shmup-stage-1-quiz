@@ -214,7 +214,7 @@ function copyResults() {
         : `Shmup Stage 1 Quiz – ${mode}`;
     const squares = state.answers
         .map((guessId, i) => (state.questions[i]?.id === guessId ? '🟩' : '🟥'))
-        .join('');
+        .join(' ');
     const text = `${prefix}\n${score.value}/${total.value} ${squares}\n${window.location.origin}`;
     navigator.clipboard.writeText(text).then(() => {
         copied.value = true;
