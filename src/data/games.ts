@@ -675,6 +675,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Pure Spirit', videoId: 'OijiF6r1Xfc' },
     },
     {
+        name: 'Ghost Pilots',
+        songSource: { songName: 'Stage 1-1, 4, 13', videoId: 'abdL-S1dL_s' },
+    },
+    {
         name: 'Giga Wing',
         songSource: [
             { songName: 'Nighttime Battle', videoId: 'pnGYJToUTFk' },
@@ -865,7 +869,16 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Ibara',
         series: Series.Ibara,
-        songSource: { songName: 'Bonds of Steel', videoId: 'XgSMvKTaMXU' },
+        songSource: [
+            {
+                songName: 'Bonds of Steel',
+                videoId: 'XgSMvKTaMXU',
+            },
+            {
+                songName: 'Show Time',
+                videoId: 'T65Zmc6iWCc',
+            },
+        ],
     },
     {
         name: 'Ikaruga',
@@ -889,11 +902,12 @@ const gameEntries: GameEntry[] = [
                     { source: 'Saturn', videoId: 'Si944QJcWHg' },
                 ],
             },
-            { songName: 'Stage 1 (Playstation arrangement)', videoId: '7fI0-TLbPkY' },
+            { songName: 'Stage 1 (Console arrangement)', videoId: '7fI0-TLbPkY' },
         ],
     },
     {
         name: 'Ironclad',
+        alias: "Choutetsu Brikin'ger",
         songSource: { songName: "Theme of Super Iron Brikin'ger", videoId: 'an9E8DuCAg8' },
     },
     {
