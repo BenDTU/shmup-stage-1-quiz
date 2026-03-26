@@ -49,25 +49,28 @@
                         </p>
 
                         <!-- Shareable results grid -->
-                        <div class="results-grid my-3">
-                            <div
-                                v-for="(guessId, index) in state.answers"
-                                :key="index"
-                                class="result-square"
-                                :class="state.questions[index]?.id === guessId ? 'result-square--correct' : 'result-square--wrong'"
-                                :title="`#${index + 1}: ${state.questions[index]?.name}`"
-                            />
-                        </div>
-                        <button
-                            class="btn btn-sm btn-outline-secondary"
-                            @click="copyResults"
-                        >
-                            <i
-                                class="bi"
-                                :class="copied ? 'bi-check2' : 'bi-share'"
-                            />
-                            {{ copied ? 'Copied!' : 'Share' }}
-                        </button>
+                        <template v-if="false">
+                            <div class="results-grid my-3">
+                                <div
+                                    v-for="(guessId, index) in state.answers"
+                                    :key="index"
+                                    class="result-square"
+                                    :class="state.questions[index]?.id === guessId ? 'result-square--correct' : 'result-square--wrong'"
+                                    :title="`#${index + 1}: ${state.questions[index]?.name}`"
+                                />
+                            </div>
+                            <button
+                                class="btn btn-sm btn-outline-secondary"
+                                @click="copyResults"
+                            >
+                                <i
+                                    class="bi"
+                                    :class="copied ? 'bi-check2' : 'bi-share'"
+                                />
+                                {{ copied ? 'Copied!' : 'Share' }}
+                            </button>
+                        </template>
+
                         <div
                             v-if="isDaily"
                             class="text-center mt-4"
