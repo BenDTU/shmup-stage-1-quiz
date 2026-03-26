@@ -47,6 +47,30 @@
                             <span v-else-if="score / total >= 0.4">Not bad! Keep practicing.</span>
                             <span v-else>Time to play more shmups! <i class="bi bi-emoji-smile" /></span>
                         </p>
+
+                        <!-- Shareable results grid -->
+                        <template v-if="false">
+                            <div class="results-grid my-3">
+                                <div
+                                    v-for="(guessId, index) in state.answers"
+                                    :key="index"
+                                    class="result-square"
+                                    :class="state.questions[index]?.id === guessId ? 'result-square--correct' : 'result-square--wrong'"
+                                    :title="`#${index + 1}: ${state.questions[index]?.name}`"
+                                />
+                            </div>
+                            <button
+                                class="btn btn-sm btn-outline-secondary"
+                                @click="copyResults"
+                            >
+                                <i
+                                    class="bi"
+                                    :class="copied ? 'bi-check2' : 'bi-share'"
+                                />
+                                {{ copied ? 'Copied!' : 'Share' }}
+                            </button>
+                        </template>
+
                         <div
                             v-if="isDaily"
                             class="text-center mt-4"
@@ -135,7 +159,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed } from 'vue';
+import { onMounted, computed, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useQuiz } from '../composables/useQuiz';
 import { SESSION_DATE_FORMATTED } from '../storage/dailyProgressStorage';
@@ -184,6 +208,23 @@ onMounted(() => {
 const score = computed(() => state.answers.filter((id, i) => state.questions[i]?.id === id).length);
 const total = computed(() => state.answers.length);
 
+const copied = ref(false);
+
+function copyResults() {
+    const mode = state.mode === 'novice' ? 'Novice' : 'Advanced';
+    const prefix = isDaily.value
+        ? `Shmup Stage 1 Quiz Daily (${SESSION_DATE_FORMATTED}) – ${mode}`
+        : `Shmup Stage 1 Quiz – ${mode}`;
+    const squares = state.answers
+        .map((guessId, i) => (state.questions[i]?.id === guessId ? '🟩' : '🟥'))
+        .join(' ');
+    const text = `${prefix}\n${score.value}/${total.value} ${squares}\n${window.location.origin}`;
+    navigator.clipboard.writeText(text).then(() => {
+        copied.value = true;
+        setTimeout(() => { copied.value = false; }, 2000);
+    });
+}
+
 const masteredSeries = computed(() => {
     const seriesCorrectCounts = new Map<string, number>();
     for (let i = 0; i < state.questions.length; i++) {
@@ -199,7 +240,34 @@ const masteredSeries = computed(() => {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.results-grid {
+    display: grid;
+    grid-template-rows: repeat(2, 28px);
+    grid-auto-flow: column;
+    justify-content: center;
+    gap: 4px;
+
+    @media (min-width: 576px) {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+}
+
+.result-square {
+    width: 28px;
+    height: 28px;
+    border-radius: 3px;
+}
+
+.result-square--correct {
+    background-color: var(--bs-success);
+}
+
+.result-square--wrong {
+    background-color: var(--bs-danger);
+}
+
 .list-group-daily {
     --bs-list-group-border-color: var(--bs-warning-text-emphasis);
     box-shadow: var(--daily-glow);
