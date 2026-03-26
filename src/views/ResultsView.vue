@@ -64,9 +64,9 @@
                         >
                             <i
                                 class="bi"
-                                :class="copied ? 'bi-check2' : 'bi-clipboard'"
+                                :class="copied ? 'bi-check2' : 'bi-share'"
                             />
-                            {{ copied ? 'Copied!' : 'Copy Results' }}
+                            {{ copied ? 'Copied!' : 'Share' }}
                         </button>
                         <div
                             v-if="isDaily"
