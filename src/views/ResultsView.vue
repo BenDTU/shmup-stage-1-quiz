@@ -49,7 +49,7 @@
                         </p>
 
                         <!-- Shareable results grid -->
-                        <div class="d-flex flex-wrap justify-content-center gap-1 my-3">
+                        <div class="results-grid my-3">
                             <div
                                 v-for="(guessId, index) in state.answers"
                                 :key="index"
@@ -210,8 +210,8 @@ const copied = ref(false);
 function copyResults() {
     const mode = state.mode === 'novice' ? 'Novice' : 'Advanced';
     const prefix = isDaily.value
-        ? `Shmup Quiz Daily (${SESSION_DATE_FORMATTED}) – ${mode}`
-        : `Shmup Quiz – ${mode}`;
+        ? `Shmup Stage 1 Quiz Daily (${SESSION_DATE_FORMATTED}) – ${mode}`
+        : `Shmup Stage 1 Quiz – ${mode}`;
     const squares = state.answers
         .map((guessId, i) => (state.questions[i]?.id === guessId ? '🟩' : '🟥'))
         .join('');
@@ -238,6 +238,19 @@ const masteredSeries = computed(() => {
 </script>
 
 <style scoped lang="scss">
+.results-grid {
+    display: grid;
+    grid-template-rows: repeat(2, 28px);
+    grid-auto-flow: column;
+    justify-content: center;
+    gap: 4px;
+
+    @media (min-width: 576px) {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+}
+
 .result-square {
     width: 28px;
     height: 28px;
