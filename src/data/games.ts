@@ -1376,7 +1376,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Raiden II',
-        alias: 'Raiden DX',
         sortName: 'Raiden 2',
         series: Series.Raiden,
         songSource: {
