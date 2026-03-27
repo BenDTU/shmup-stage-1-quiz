@@ -1356,7 +1356,20 @@ const gameEntries: GameEntry[] = [
     {
         name: 'R-Type Delta',
         series: Series.RType,
-        songSource: { songName: 'Crazy Machine', videoId: 'BMecwpal5GE' },
+        songSource: {
+            songName: 'Crazy Machine',
+            arrangements: [
+                {
+                    source: 'Original',
+                    videoId: 'BMecwpal5GE',
+                },
+                {
+                    source: 'Arrange',
+                    videoId: 'Q24KLvAyNso',
+                    startTime: 4,
+                },
+            ],
+        },
     },
     {
         name: 'R-Type Final',
