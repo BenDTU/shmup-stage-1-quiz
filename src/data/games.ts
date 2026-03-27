@@ -1512,7 +1512,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Samurai Aces',
-        forceFirst: true,
         alias: 'Sengoku Ace',
         series: Series.SengokuAce,
         songSource: [
