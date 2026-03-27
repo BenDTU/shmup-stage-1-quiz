@@ -115,6 +115,10 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'ALLTYNEX Second',
+        songSource: { songName: 'Encounter', videoId: 'HHINwzQWqgM' },
+    },
+    {
         name: 'Alpha Mission',
         series: Series.AlphaMission,
         songSource: {
@@ -286,7 +290,10 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Crimzon Clover',
-        songSource: { songName: 'UL-stage1', videoId: 'yYF3x1hACIU' },
+        songSource: [
+            { songName: 'Cybernated City', videoId: 'GHQ1hlVD-5w' },
+            { songName: 'UL-stage1', videoId: 'yYF3x1hACIU' },
+        ],
     },
     {
         name: 'Cygni: All Guns Blazing',
@@ -1391,6 +1398,15 @@ const gameEntries: GameEntry[] = [
                 },
             ],
         },
+    },
+    {
+        name: 'Raiden DX',
+        sortName: 'Raiden 2.5',
+        series: Series.Raiden,
+        songSource: [
+            { songName: 'Gallantry', videoId: 'h3EgBk9fiNI' },
+            { songName: 'Conflict', videoId: '1tO2YwEG14Y' },
+        ],
     },
     {
         name: 'Raiden III',
