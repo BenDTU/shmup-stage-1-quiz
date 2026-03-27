@@ -49,27 +49,26 @@
                         </p>
 
                         <!-- Shareable results grid -->
-                        <template v-if="false">
-                            <div class="results-grid my-3">
-                                <div
-                                    v-for="(guessId, index) in state.answers"
-                                    :key="index"
-                                    class="result-square"
-                                    :class="state.questions[index]?.id === guessId ? 'result-square--correct' : 'result-square--wrong'"
-                                    :title="`#${index + 1}: ${state.questions[index]?.name}`"
-                                />
-                            </div>
-                            <button
-                                class="btn btn-sm btn-outline-secondary"
-                                @click="copyResults"
-                            >
-                                <i
-                                    class="bi"
-                                    :class="copied ? 'bi-check2' : 'bi-share'"
-                                />
-                                {{ copied ? 'Copied!' : 'Share' }}
-                            </button>
-                        </template>
+
+                        <div class="results-grid my-3">
+                            <div
+                                v-for="(guessId, index) in state.answers"
+                                :key="index"
+                                class="result-square"
+                                :class="state.questions[index]?.id === guessId ? 'result-square--correct' : 'result-square--wrong'"
+                                :title="`#${index + 1}: ${state.questions[index]?.name}`"
+                            />
+                        </div>
+                        <button
+                            class="btn btn-sm btn-outline-secondary"
+                            @click="copyResults"
+                        >
+                            <i
+                                class="bi"
+                                :class="copied ? 'bi-check2' : 'bi-share'"
+                            />
+                            {{ copied ? 'Copied!' : 'Share' }}
+                        </button>
 
                         <div
                             v-if="isDaily"
@@ -212,13 +211,25 @@ const copied = ref(false);
 
 function copyResults() {
     const mode = state.mode === 'novice' ? 'Novice' : 'Advanced';
-    const prefix = isDaily.value
-        ? `Shmup Stage 1 Quiz Daily (${SESSION_DATE_FORMATTED}) – ${mode}`
-        : `Shmup Stage 1 Quiz – ${mode}`;
-    const squares = state.answers
-        .map((guessId, i) => (state.questions[i]?.id === guessId ? '🟩' : '🟥'))
-        .join(' ');
-    const text = `${prefix}\n${score.value}/${total.value} ${squares}\n${window.location.origin}`;
+    const pct = Math.round((score.value / total.value) * 100);
+    const secondLineParts = [
+        ...(isDaily.value ? [SESSION_DATE_FORMATTED] : []),
+        mode,
+    ];
+    const squareList = state.answers.map((guessId, i) =>
+        state.questions[i]?.id === guessId ? '🟩' : '🟥',
+    );
+    const squares = [
+        squareList.slice(0, 10).join(''),
+        squareList.slice(10).join(''),
+    ].filter(Boolean).join('\n');
+    const text = [
+        'Shmup Stage 1 Quiz',
+        secondLineParts.join(' • '),
+        `${score.value}/${total.value} (${pct}%)`,
+        squares,
+        window.location.origin,
+    ].join('\n');
     navigator.clipboard.writeText(text).then(() => {
         copied.value = true;
         setTimeout(() => { copied.value = false; }, 2000);
@@ -243,15 +254,10 @@ const masteredSeries = computed(() => {
 <style scoped lang="scss">
 .results-grid {
     display: grid;
+    grid-template-columns: repeat(10, 28px);
     grid-template-rows: repeat(2, 28px);
-    grid-auto-flow: column;
     justify-content: center;
     gap: 4px;
-
-    @media (min-width: 576px) {
-        display: flex;
-        flex-wrap: nowrap;
-    }
 }
 
 .result-square {
