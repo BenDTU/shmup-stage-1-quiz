@@ -20,7 +20,7 @@
                             <span
                                 class="badge"
                                 :class="state.mode === 'novice' ? 'bg-success' : 'bg-danger'"
-                            >{{ state.mode === 'novice' ? 'Novice' : 'Advanced' }}</span>
+                            >{{ modeLabel }}</span>
                         </p>
                         <p
                             class="lead"
@@ -34,42 +34,41 @@
                         >
                             <div
                                 class="progress-bar"
-                                :class="score / total >= 0.7 ? 'bg-success' : score / total >= 0.4 ? 'bg-warning text-dark' : 'bg-danger'"
+                                :class="scorePercent >= 70 ? 'bg-success' : scorePercent >= 40 ? 'bg-warning text-dark' : 'bg-danger'"
                                 role="progressbar"
-                                :style="{ width: `${(score / total) * 100}%` }"
+                                :style="{ width: `${scorePercent}%` }"
                             >
-                                {{ Math.round((score / total) * 100) }}%
+                                {{ scorePercent }}%
                             </div>
                         </div>
                         <p class="text-muted">
                             <span v-if="score === total">Perfect score! You're a true shmup fan. <i class="bi bi-award-fill" /></span>
-                            <span v-else-if="score / total >= 0.7">Great job! You clearly know your shmups.</span>
-                            <span v-else-if="score / total >= 0.4">Not bad! Keep practicing.</span>
+                            <span v-else-if="scorePercent >= 70">Great job! You clearly know your shmups.</span>
+                            <span v-else-if="scorePercent >= 40">Not bad! Keep practicing.</span>
                             <span v-else>Time to play more shmups! <i class="bi bi-emoji-smile" /></span>
                         </p>
 
                         <!-- Shareable results grid -->
-                        <template v-if="false">
-                            <div class="results-grid my-3">
-                                <div
-                                    v-for="(guessId, index) in state.answers"
-                                    :key="index"
-                                    class="result-square"
-                                    :class="state.questions[index]?.id === guessId ? 'result-square--correct' : 'result-square--wrong'"
-                                    :title="`#${index + 1}: ${state.questions[index]?.name}`"
-                                />
-                            </div>
-                            <button
-                                class="btn btn-sm btn-outline-secondary"
-                                @click="copyResults"
-                            >
-                                <i
-                                    class="bi"
-                                    :class="copied ? 'bi-check2' : 'bi-share'"
-                                />
-                                {{ copied ? 'Copied!' : 'Share' }}
-                            </button>
-                        </template>
+
+                        <div class="results-grid my-3">
+                            <div
+                                v-for="(_, index) in state.answers"
+                                :key="index"
+                                class="result-square"
+                                :class="resultSquares[index] ? 'result-square--correct' : 'result-square--wrong'"
+                                :title="`#${index + 1}: ${state.questions[index]?.name}`"
+                            />
+                        </div>
+                        <button
+                            class="btn btn-sm btn-outline-secondary"
+                            @click="copyResults"
+                        >
+                            <i
+                                class="bi"
+                                :class="copied ? 'bi-check2' : 'bi-share'"
+                            />
+                            {{ copied ? 'Copied!' : 'Share' }}
+                        </button>
 
                         <div
                             v-if="isDaily"
@@ -205,20 +204,31 @@ onMounted(() => {
     }
 });
 
-const score = computed(() => state.answers.filter((id, i) => state.questions[i]?.id === id).length);
+const resultSquares = computed(() => state.answers.map((id, i) => state.questions[i]?.id === id));
+const score = computed(() => resultSquares.value.filter(Boolean).length);
 const total = computed(() => state.answers.length);
+const scorePercent = computed(() => Math.round((score.value / total.value) * 100));
+const modeLabel = computed(() => state.mode === 'novice' ? 'Novice' : 'Advanced');
 
 const copied = ref(false);
 
 function copyResults() {
-    const mode = state.mode === 'novice' ? 'Novice' : 'Advanced';
-    const prefix = isDaily.value
-        ? `Shmup Stage 1 Quiz Daily (${SESSION_DATE_FORMATTED}) – ${mode}`
-        : `Shmup Stage 1 Quiz – ${mode}`;
-    const squares = state.answers
-        .map((guessId, i) => (state.questions[i]?.id === guessId ? '🟩' : '🟥'))
-        .join(' ');
-    const text = `${prefix}\n${score.value}/${total.value} ${squares}\n${window.location.origin}`;
+    const secondLineParts = [
+        ...(isDaily.value ? [SESSION_DATE_FORMATTED] : []),
+        modeLabel.value,
+    ];
+    const squareList = resultSquares.value.map(correct => correct ? '🟩' : '🟥');
+    const squares = [
+        squareList.slice(0, 10).join(''),
+        squareList.slice(10).join(''),
+    ].filter(Boolean).join('\n');
+    const text = [
+        'Shmup Stage 1 Quiz',
+        secondLineParts.join(' • '),
+        `${score.value}/${total.value} (${scorePercent.value}%)`,
+        squares,
+        window.location.origin,
+    ].join('\n');
     navigator.clipboard.writeText(text).then(() => {
         copied.value = true;
         setTimeout(() => { copied.value = false; }, 2000);
@@ -243,15 +253,10 @@ const masteredSeries = computed(() => {
 <style scoped lang="scss">
 .results-grid {
     display: grid;
+    grid-template-columns: repeat(10, 28px);
     grid-template-rows: repeat(2, 28px);
-    grid-auto-flow: column;
     justify-content: center;
     gap: 4px;
-
-    @media (min-width: 576px) {
-        display: flex;
-        flex-wrap: nowrap;
-    }
 }
 
 .result-square {

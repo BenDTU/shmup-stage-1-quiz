@@ -1566,10 +1566,10 @@ const gameEntries: GameEntry[] = [
         alias: 'Sengoku Ace',
         series: Series.SengokuAce,
         songSource: [
-            { songName: 'Lake stage', videoId: 'niwt7Y0kbc8', startTime: 43, endTime: 131 },
-            { songName: 'Mountain stage', videoId: 'niwt7Y0kbc8', startTime: 141, endTime: 193 },
-            { songName: 'Fields stage', videoId: 'niwt7Y0kbc8', startTime: 194, endTime: 203 },
-            { songName: 'Town stage', videoId: 'niwt7Y0kbc8', startTime: 204, endTime: 234 },
+            { songName: 'Lake stage', videoId: 'niwt7Y0kbc8', startTime: 43, endTime: 132 },
+            { songName: 'Mountain stage', videoId: 'niwt7Y0kbc8', startTime: 141, endTime: 194 },
+            { songName: 'Fields stage', videoId: 'niwt7Y0kbc8', startTime: 194, endTime: 204 },
+            { songName: 'Town stage', videoId: 'niwt7Y0kbc8', startTime: 204, endTime: 235 },
         ],
     },
     {
