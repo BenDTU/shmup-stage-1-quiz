@@ -6,7 +6,7 @@ TARGET="src/data/games.ts"
 
 if git diff --cached --name-only | grep -qF "$TARGET"; then
     if grep -q 'forceFirst' "$TARGET"; then
-        perl -i -ne 'print unless /forceFirst/' "$TARGET"
+        perl -i -ne 'print unless /^\s+forceFirst\s*:/' "$TARGET"
         git add "$TARGET"
         echo "Stripped forceFirst from $TARGET"
     fi
