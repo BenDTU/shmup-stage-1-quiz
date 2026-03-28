@@ -214,7 +214,7 @@ const copied = ref(false);
 
 function copyResults() {
     const secondLineParts = [
-        ...(isDaily.value ? [SESSION_DATE_FORMATTED] : []),
+        (isDaily.value ? SESSION_DATE_FORMATTED : 'Random'),
         modeLabel.value,
     ];
     const squareList = resultSquares.value.map(correct => correct ? '🟩' : '🟥');
