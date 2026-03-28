@@ -115,6 +115,10 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'ALLTYNEX Second',
+        songSource: { songName: 'Encounter', videoId: 'HHINwzQWqgM' },
+    },
+    {
         name: 'Alpha Mission',
         series: Series.AlphaMission,
         songSource: {
@@ -286,7 +290,10 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Crimzon Clover',
-        songSource: { songName: 'UL-stage1', videoId: 'yYF3x1hACIU' },
+        songSource: [
+            { songName: 'Cybernated City', videoId: 'GHQ1hlVD-5w' },
+            { songName: 'UL-stage1', videoId: 'yYF3x1hACIU' },
+        ],
     },
     {
         name: 'Cygni: All Guns Blazing',
@@ -690,6 +697,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Aeronaut', videoId: 'Go5MfC8S02o' },
     },
     {
+        name: 'Gleylancer',
+        songSource: { songName: 'Stage 1', videoId: 'REeqewfO5Lg' },
+    },
+    {
         name: 'Gradius',
         alias: 'Nemesis',
         series: Series.Gradius,
@@ -744,6 +755,16 @@ const gameEntries: GameEntry[] = [
         name: 'Gradius: The Interstellar Assault',
         series: Series.Gradius,
         songSource: { songName: 'The Chase, A Ruins, Toadstool', videoId: '05L6GWxUugg', startTime: 103, endTime: 326 },
+    },
+    {
+        name: 'Graze Counter',
+        songSource: {
+            songName: 'Graze Counter',
+            arrangements:[
+                { source: 'Original', videoId: 'c_N77ksMaNU' },
+                { source: 'GM', videoId: 'Fu3RFcnsEic' },
+            ],
+        },
     },
     {
         name: 'Grind Stormer',
@@ -858,6 +879,10 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'Homura',
+        songSource: { songName: 'Stage 1', videoId: 'rJeDQGm1jD8' },
+    },
+    {
         name: 'Hotdog Storm',
         songSource: { songName: 'Stage 1', videoId: 'lHGdbyX82TE' },
     },
@@ -917,6 +942,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Judgement Silversword',
         songSource: { songName: 'BGM 01', videoId: '-VIXuLTGoYo', startTime: 0, endTime: 123 },
+    },
+    {
+        name: 'Kamui',
+        songSource: { songName: 'Final Hour', videoId: 'Ij44absscCw' },
     },
     {
         name: 'Ketsui',
@@ -1327,7 +1356,20 @@ const gameEntries: GameEntry[] = [
     {
         name: 'R-Type Delta',
         series: Series.RType,
-        songSource: { songName: 'Crazy Machine', videoId: 'BMecwpal5GE' },
+        songSource: {
+            songName: 'Crazy Machine',
+            arrangements: [
+                {
+                    source: 'Original',
+                    videoId: 'BMecwpal5GE',
+                },
+                {
+                    source: 'Arrange',
+                    videoId: 'Q24KLvAyNso',
+                    startTime: 4,
+                },
+            ],
+        },
     },
     {
         name: 'R-Type Final',
@@ -1391,6 +1433,15 @@ const gameEntries: GameEntry[] = [
                 },
             ],
         },
+    },
+    {
+        name: 'Raiden DX',
+        sortName: 'Raiden 2.5',
+        series: Series.Raiden,
+        songSource: [
+            { songName: 'Gallantry', videoId: 'h3EgBk9fiNI' },
+            { songName: 'Conflict', videoId: '1tO2YwEG14Y' },
+        ],
     },
     {
         name: 'Raiden III',
@@ -1591,6 +1642,10 @@ const gameEntries: GameEntry[] = [
             { songName: 'Winged Fighter', videoId: '-2yayHs2-JA', startTime: 201, endTime: 277 },
             { songName: 'Evil Monk of Ancient Times', videoId: '-2yayHs2-JA', startTime: 323, endTime: 397 },
         ],
+    },
+    {
+        name: 'Solar Striker',
+        songSource: { songName: 'Stage 1', videoId: 'qmljujpHusY' },
     },
     {
         name: 'Soldier Blade',
