@@ -78,6 +78,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Retro Blitz', videoId: 'o-SVBG4IYSY' },
     },
     {
+        name: 'Abadox: The Deadly Inner War',
+        songSource: { songName: 'Internal Combat', videoId: 'tXxLHnwg7ec' },
+    },
+    {
         name: 'Air Duel',
         songSource: { songName: 'Stage 1', videoId: '8WsKeA4v01U' },
     },
@@ -111,6 +115,10 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'ALLTYNEX Second',
+        songSource: { songName: 'Encounter', videoId: 'HHINwzQWqgM' },
+    },
+    {
         name: 'Alpha Mission',
         series: Series.AlphaMission,
         songSource: {
@@ -138,7 +146,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Armed Police Batrider',
-        songSource: { songName: 'Easy to Go', videoId: 'UFc72Qz3S34' },
+        songSource: { songName: 'Easy to Go', videoId: '5f-5kmdPmLk' },
     },
     {
         name: 'Assault Shell',
@@ -282,7 +290,10 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Crimzon Clover',
-        songSource: { songName: 'UL-stage1', videoId: 'yYF3x1hACIU' },
+        songSource: [
+            { songName: 'Cybernated City', videoId: 'GHQ1hlVD-5w' },
+            { songName: 'UL-stage1', videoId: 'yYF3x1hACIU' },
+        ],
     },
     {
         name: 'Cygni: All Guns Blazing',
@@ -414,7 +425,7 @@ const gameEntries: GameEntry[] = [
         name: 'DoDonPachi II: Bee Storm',
         sortName: 'Dodonpachi 1.5',
         series: Series.Dodonpachi,
-        songSource: { songName: 'Awakening ・ Nightmare', videoId: 'J14LDuEJG4U' },
+        songSource: { songName: 'Awakening ・ Nightmare', videoId: '_L7_poH5PQg', startTime: 113, endTime: 184 },
     },
     {
         name: 'DoDonPachi Blissful Death',
@@ -639,6 +650,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Fixer', videoId: 'pyefFS8SwiA', startTime: 10, endTime: 119 },
     },
     {
+        name: 'Flame Zapper Kotsujin',
+        songSource: { songName: 'Sky is Well Supplied', videoId: '0Ys8TfcBIws' },
+    },
+    {
         name: 'Flying Shark',
         series: Series.FlyingShark,
         alias: 'Sky Shark',
@@ -667,6 +682,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Pure Spirit', videoId: 'OijiF6r1Xfc' },
     },
     {
+        name: 'Ghost Pilots',
+        songSource: { songName: 'Stage 1-1, 4, 13', videoId: 'abdL-S1dL_s' },
+    },
+    {
         name: 'Giga Wing',
         songSource: [
             { songName: 'Nighttime Battle', videoId: 'pnGYJToUTFk' },
@@ -678,6 +697,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Aeronaut', videoId: 'Go5MfC8S02o' },
     },
     {
+        name: 'Gleylancer',
+        songSource: { songName: 'Stage 1', videoId: 'REeqewfO5Lg' },
+    },
+    {
         name: 'Gradius',
         alias: 'Nemesis',
         series: Series.Gradius,
@@ -685,6 +708,7 @@ const gameEntries: GameEntry[] = [
             arrangements: [
                 { source: 'Arcade', videoId: '-Fcpo6qCXMY' },
                 { source: 'NES', videoId: 'FGqnctiqTGQ' },
+                { source: 'PC Engine', videoId: 'zAEIApqtnTg' },
             ],
         },
     },
@@ -696,6 +720,7 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Burning Heat', arrangements: [
             { source: 'Arcade', videoId: '76kJEPGvvMg' },
             { source: 'NES', videoId: 'oXhHwtJxHno' },
+            { source: 'Sharp X68000', videoId: 'kyc1UuYwiO8' },
         ] },
     },
     {
@@ -730,6 +755,16 @@ const gameEntries: GameEntry[] = [
         name: 'Gradius: The Interstellar Assault',
         series: Series.Gradius,
         songSource: { songName: 'The Chase, A Ruins, Toadstool', videoId: '05L6GWxUugg', startTime: 103, endTime: 326 },
+    },
+    {
+        name: 'Graze Counter',
+        songSource: {
+            songName: 'Graze Counter',
+            arrangements:[
+                { source: 'Original', videoId: 'c_N77ksMaNU' },
+                { source: 'GM', videoId: 'Fu3RFcnsEic' },
+            ],
+        },
     },
     {
         name: 'Grind Stormer',
@@ -800,6 +835,16 @@ const gameEntries: GameEntry[] = [
         ],
     },
     {
+        name: 'Gundemonium Recollection',
+        songSource: {
+            songName: 'Tuxedo Knight',
+            arrangements: [
+                { source: 'Original', videoId: 'L4-NMZWwtWc' },
+                { source: 'Arranged', videoId: '_BuVrmR3sNY' },
+            ],
+        },
+    },
+    {
         name: 'Gunnail',
         songSource: { songName: 'Stage 1', videoId: 'hpzlZb-z7Kc', startTime: 97, endTime: 524 },
     },
@@ -824,6 +869,20 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Segment 1 BEHIND', videoId: 'M7vl9LzMAa8' },
     },
     {
+        name: 'Hitogata Happa',
+        songSource: {
+            songName: 'Dedicated to the Honorable R.C.',
+            arrangements: [
+                { source: 'Original', videoId: 'jGu9Ixz1Wk4' },
+                { source: 'Arranged', videoId: 'Pide6YHdOrE' },
+            ],
+        },
+    },
+    {
+        name: 'Homura',
+        songSource: { songName: 'Stage 1', videoId: 'rJeDQGm1jD8' },
+    },
+    {
         name: 'Hotdog Storm',
         songSource: { songName: 'Stage 1', videoId: 'lHGdbyX82TE' },
     },
@@ -835,7 +894,16 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Ibara',
         series: Series.Ibara,
-        songSource: { songName: 'Bonds of Steel', videoId: 'XgSMvKTaMXU' },
+        songSource: [
+            {
+                songName: 'Bonds of Steel',
+                videoId: 'XgSMvKTaMXU',
+            },
+            {
+                songName: 'Show Time',
+                videoId: 'T65Zmc6iWCc',
+            },
+        ],
     },
     {
         name: 'Ikaruga',
@@ -859,11 +927,12 @@ const gameEntries: GameEntry[] = [
                     { source: 'Saturn', videoId: 'Si944QJcWHg' },
                 ],
             },
-            { songName: 'Stage 1 (Playstation arrangement)', videoId: '7fI0-TLbPkY' },
+            { songName: 'Stage 1 (Console arrangement)', videoId: '7fI0-TLbPkY' },
         ],
     },
     {
         name: 'Ironclad',
+        alias: "Choutetsu Brikin'ger",
         songSource: { songName: "Theme of Super Iron Brikin'ger", videoId: 'an9E8DuCAg8' },
     },
     {
@@ -873,6 +942,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Judgement Silversword',
         songSource: { songName: 'BGM 01', videoId: '-VIXuLTGoYo', startTime: 0, endTime: 123 },
+    },
+    {
+        name: 'Kamui',
+        songSource: { songName: 'Final Hour', videoId: 'Ij44absscCw' },
     },
     {
         name: 'Ketsui',
@@ -1073,6 +1146,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'NebulasRay',
         songSource: { songName: 'Exeo', videoId: 'PyHmUSQaNYM' },
+    },
+    {
+        name: 'Nyahax 93',
+        songSource: { songName: 'Carnival!', videoId: 'vMylOG43a20' },
     },
     {
         name: 'Omega Fighter',
@@ -1279,7 +1356,20 @@ const gameEntries: GameEntry[] = [
     {
         name: 'R-Type Delta',
         series: Series.RType,
-        songSource: { songName: 'Crazy Machine', videoId: 'BMecwpal5GE' },
+        songSource: {
+            songName: 'Crazy Machine',
+            arrangements: [
+                {
+                    source: 'Original',
+                    videoId: 'BMecwpal5GE',
+                },
+                {
+                    source: 'Arrange',
+                    videoId: 'Q24KLvAyNso',
+                    startTime: 4,
+                },
+            ],
+        },
     },
     {
         name: 'R-Type Final',
@@ -1302,6 +1392,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Raiden',
+        alias: 'Raiden Trad',
         series: Series.Raiden,
         songSource: {
             songName: 'Gallantry',
@@ -1309,6 +1400,14 @@ const gameEntries: GameEntry[] = [
                 {
                     source: 'Original',
                     videoId: 'vaGenJ5GXxE',
+                },
+                {
+                    source: 'Mega Drive',
+                    videoId: 'vtOHNnZKlCI',
+                },
+                {
+                    source: 'SNES',
+                    videoId: 'zSqXP-ITmv8',
                 },
                 {
                     source: 'The Raiden Project',
@@ -1319,7 +1418,6 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Raiden II',
-        alias: 'Raiden DX',
         sortName: 'Raiden 2',
         series: Series.Raiden,
         songSource: {
@@ -1335,6 +1433,15 @@ const gameEntries: GameEntry[] = [
                 },
             ],
         },
+    },
+    {
+        name: 'Raiden DX',
+        sortName: 'Raiden 2.5',
+        series: Series.Raiden,
+        songSource: [
+            { songName: 'Gallantry', videoId: 'h3EgBk9fiNI' },
+            { songName: 'Conflict', videoId: '1tO2YwEG14Y' },
+        ],
     },
     {
         name: 'Raiden III',
@@ -1427,7 +1534,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'REZON',
-        songSource: { songName: 'Stage 1 & 4', videoId: 'ZAKUutWAdDM', startTime: 2, endTime: 31 },
+        songSource: { songName: 'Stage 1 & 4', videoId: 'NVd5YiNB_fI' },
     },
     {
         name: 'Rolling Gunner',
@@ -1459,10 +1566,10 @@ const gameEntries: GameEntry[] = [
         alias: 'Sengoku Ace',
         series: Series.SengokuAce,
         songSource: [
-            { songName: 'Lake stage', videoId: 'niwt7Y0kbc8', startTime: 43, endTime: 131 },
-            { songName: 'Mountain stage', videoId: 'niwt7Y0kbc8', startTime: 141, endTime: 193 },
-            { songName: 'Fields stage', videoId: 'niwt7Y0kbc8', startTime: 194, endTime: 203 },
-            { songName: 'Town stage', videoId: 'niwt7Y0kbc8', startTime: 204, endTime: 234 },
+            { songName: 'Lake stage', videoId: 'niwt7Y0kbc8', startTime: 43, endTime: 132 },
+            { songName: 'Mountain stage', videoId: 'niwt7Y0kbc8', startTime: 141, endTime: 194 },
+            { songName: 'Fields stage', videoId: 'niwt7Y0kbc8', startTime: 194, endTime: 204 },
+            { songName: 'Town stage', videoId: 'niwt7Y0kbc8', startTime: 204, endTime: 235 },
         ],
     },
     {
@@ -1497,6 +1604,12 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1', videoId: 'MBFv2bBU-yI', startTime: 10, endTime: 121 },
     },
     {
+        name: 'Sky Robo',
+        series: Series.TerraCresta,
+        alias: 'Tatake! Big Fighter',
+        songSource: { songName: 'Stage 1', videoId: 'TX9afsgviIM', startTime: 11, endTime: 125 },
+    },
+    {
         name: 'Slap Fight',
         alias: 'Alcon',
         songSource: {
@@ -1518,12 +1631,21 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'Sol Cresta',
+        series: Series.TerraCresta,
+        songSource: { songName: 'Neptune Storm', videoId: 'cHpkRnODwyM' },
+    },
+    {
         name: 'Sol Divide',
         songSource: [
             { songName: 'Knight of Darkness', videoId: '-2yayHs2-JA', startTime: 75, endTime: 158 },
             { songName: 'Winged Fighter', videoId: '-2yayHs2-JA', startTime: 201, endTime: 277 },
             { songName: 'Evil Monk of Ancient Times', videoId: '-2yayHs2-JA', startTime: 323, endTime: 397 },
         ],
+    },
+    {
+        name: 'Solar Striker',
+        songSource: { songName: 'Stage 1', videoId: 'qmljujpHusY' },
     },
     {
         name: 'Soldier Blade',
@@ -2044,6 +2166,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Tyrian, the level', videoId: 'wNnTGbbDJfo' },
     },
     {
+        name: 'U.N. Defense Force: Earth Joker',
+        songSource: { songName: 'Round 1', videoId: 'h70kkYY4SC4' },
+    },
+    {
         name: 'U.N. Squadron',
         alias: 'Area 88',
         songSource: {
@@ -2073,6 +2199,16 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Varth: Operation Thunderstorm',
         songSource: { songName: 'Stage 1, 16', videoId: 'x1H0Otv5R_E' },
+    },
+    {
+        name: 'Vasara',
+        series: Series.Vasara,
+        songSource: { songName: 'Here is Mr. Sanada Yukimura', videoId: 'G6DMPvVzMPg' },
+    },
+    {
+        name: 'Vasara 2',
+        series: Series.Vasara,
+        songSource: { songName: 'Like the Wind', videoId: '_Di0WbKOkHg' },
     },
     {
         name: 'Vimana',

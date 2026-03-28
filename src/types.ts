@@ -27,11 +27,13 @@ export enum Series {
     SonicWings = 'Sonic Wings',
     SpaceInvaders = 'Space Invaders',
     Strikers1945 = 'Strikers 1945',
+    TerraCresta = 'Terra Cresta',
     ThunderCross = 'Thunder Cross',
     ThunderDragon = 'Thunder Dragon',
     Touhou = 'Touhou Project',
     Truxton = 'Truxton',
     Twinbee = 'Twinbee',
+    Vasara = 'Vasara',
     Zeal = 'Zeal',
     ZeroGunner = 'Zero Gunner',
 }
