@@ -12,11 +12,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { SESSION_DATE } from '../storage/dailyProgressStorage';
 
-function getMsUntilMidnightUTC(): number {
-    const now = new Date();
+function getMsUntilMidnightUTC(now: Date): number {
     const midnight = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
     return midnight.getTime() - now.getTime();
 }
@@ -28,8 +27,9 @@ function formatCountdown(ms: number): string {
     return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
 }
 
-const expired = ref(new Date().toISOString().slice(0, 10) !== SESSION_DATE);
-const timeUntilNextDaily = ref(formatCountdown(getMsUntilMidnightUTC()));
+const now = ref(new Date());
+const expired = computed(() => now.value.toISOString().slice(0, 10) !== SESSION_DATE);
+const timeUntilNextDaily = computed(() => formatCountdown(getMsUntilMidnightUTC(now.value)));
 
 // Full page reload is intentional — it re-initialises SESSION_DATE and DATA_VERSION
 // in dailyProgressStorage so the new day's quiz is picked up correctly.
@@ -40,14 +40,11 @@ function refresh() {
 let timer: ReturnType<typeof setInterval> | null = null;
 onMounted(() => {
     timer = setInterval(() => {
-        if (new Date().toISOString().slice(0, 10) !== SESSION_DATE) {
-            expired.value = true;
+        now.value = new Date();
+        if (expired.value) {
             clearInterval(timer ?? undefined);
             timer = null;
-            return;
         }
-        const ms = getMsUntilMidnightUTC();
-        timeUntilNextDaily.value = formatCountdown(ms);
     }, 1000);
 });
 onUnmounted(() => { clearInterval(timer ?? undefined); });
