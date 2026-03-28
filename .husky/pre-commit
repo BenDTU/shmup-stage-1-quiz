@@ -1,17 +1,13 @@
 #!/bin/sh
-# Automatically strip forceFirst: true from staged TypeScript files.
+# Automatically strip forceFirst from GameEntry objects in games.ts before committing.
 # This property is for local testing only and should never be committed.
 
-STAGED_TS=$(git diff --cached --name-only --diff-filter=ACM | grep '\.ts$')
+TARGET="src/data/games.ts"
 
-if [ -z "$STAGED_TS" ]; then
-    exit 0
-fi
-
-for file in $STAGED_TS; do
-    if grep -q 'forceFirst' "$file"; then
-        perl -i -ne 'print unless /forceFirst/' "$file"
-        git add "$file"
-        echo "Stripped forceFirst from $file"
+if git diff --cached --name-only | grep -qF "$TARGET"; then
+    if grep -q 'forceFirst' "$TARGET"; then
+        perl -i -ne 'print unless /forceFirst/' "$TARGET"
+        git add "$TARGET"
+        echo "Stripped forceFirst from $TARGET"
     fi
-done
+fi
