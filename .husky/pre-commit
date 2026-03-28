@@ -1,0 +1,17 @@
+#!/bin/sh
+# Automatically strip forceFirst: true from staged TypeScript files.
+# This property is for local testing only and should never be committed.
+
+STAGED_TS=$(git diff --cached --name-only --diff-filter=ACM | grep '\.ts$')
+
+if [ -z "$STAGED_TS" ]; then
+    exit 0
+fi
+
+for file in $STAGED_TS; do
+    if grep -q 'forceFirst' "$file"; then
+        perl -i -ne 'print unless /forceFirst/' "$file"
+        git add "$file"
+        echo "Stripped forceFirst from $file"
+    fi
+done

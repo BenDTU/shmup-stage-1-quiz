@@ -50,13 +50,6 @@ const uniqueVideoIds: { videoId: string; gameNames: string }[] = Array.from(
     videoIdToGames.entries(),
 ).map(([videoId, names]) => ({ videoId, gameNames: names.join(', ') }));
 
-describe('Game data integrity', () => {
-    it('no game should have forceFirst set (debug-only property)', () => {
-        const offenders = games.filter((g) => g.forceFirst).map((g) => g.name);
-        expect(offenders, `Games with forceFirst set: ${offenders.join(', ')}`).toHaveLength(0);
-    });
-});
-
 describe('YouTube video IDs in games.ts', () => {
     it.each(uniqueVideoIds)(
         'video "$videoId" (used by: $gameNames) must be publicly embeddable',
