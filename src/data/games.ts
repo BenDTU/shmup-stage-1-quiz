@@ -204,7 +204,13 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Blue Revolver',
-        songSource: { songName: 'Qygenomics', videoId: 'dTbpYrrSRPY' },
+        songSource: {
+            songName: 'Qygenomics',
+            arrangements: [
+                { source: 'Original', videoId: 'dTbpYrrSRPY' },
+                { source: 'Double Action', videoId: 'SBuLibossds' },
+            ],
+        },
     },
     {
         name: 'Brave Blade',
