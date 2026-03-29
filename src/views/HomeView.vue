@@ -13,27 +13,17 @@
                 </h2>
                 <div class="d-flex flex-column align-items-center gap-3 mb-5">
                     <button
-                        class="btn btn-success btn-lg w-100 py-3"
+                        v-for="{ mode, subtitle } in DIFFICULTY_MODES"
+                        :key="mode"
+                        :class="`btn btn-${MODE_COLOR[mode]} btn-lg w-100 py-3`"
                         style="max-width: 350px"
-                        @click="begin('novice')"
+                        @click="begin(mode)"
                     >
                         <div class="fw-bold fs-5">
-                            Novice
+                            {{ MODE_LABEL[mode] }}
                         </div>
                         <div class="small opacity-75">
-                            Select from a list of 4 games
-                        </div>
-                    </button>
-                    <button
-                        class="btn btn-danger btn-lg w-100 py-3"
-                        style="max-width: 350px"
-                        @click="begin('advanced')"
-                    >
-                        <div class="fw-bold fs-5">
-                            Advanced
-                        </div>
-                        <div class="small opacity-75">
-                            Select from the whole list of games
+                            {{ subtitle }}
                         </div>
                     </button>
                 </div>
@@ -73,7 +63,7 @@
                             @click="resumeDaily"
                         >
                             <div class="fw-bold fs-5">
-                                Resume Daily {{ dailyProgress.mode === 'novice' ? 'Novice' : 'Advanced' }}
+                                Resume Daily {{ MODE_LABEL[dailyProgress.mode] }}
                             </div>
                         </button>
                     </div>
@@ -92,19 +82,13 @@
                     </p>
                     <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 mb-4">
                         <button
+                            v-for="{ mode } in DIFFICULTY_MODES"
+                            :key="mode"
                             class="btn btn-outline-warning btn-lg py-3 daily-btn"
-                            @click="beginDaily('novice')"
+                            @click="beginDaily(mode)"
                         >
                             <div class="fw-bold fs-5">
-                                Daily Novice
-                            </div>
-                        </button>
-                        <button
-                            class="btn btn-outline-warning btn-lg py-3 daily-btn"
-                            @click="beginDaily('advanced')"
-                        >
-                            <div class="fw-bold fs-5">
-                                Daily Advanced
+                                Daily {{ MODE_LABEL[mode] }}
                             </div>
                         </button>
                     </div>
@@ -128,11 +112,18 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { useQuiz, QUIZ_SIZE } from '@/composables/useQuiz';
+import { useQuiz, QUIZ_SIZE, NOVICE_OPTION_COUNT, INTERMEDIATE_OPTION_COUNT } from '@/composables/useQuiz';
+import { MODE_LABEL, MODE_COLOR } from '@/utils/modeStyle';
 import { getDailyProgress, wasProgressInvalidated, STORAGE_KEY } from '@/storage/dailyProgressStorage';
 import { totalSongs, totalShmups } from '@/data/games';
 import type { QuizMode } from '@/types';
 import DailyCountdown from '@/components/DailyCountdown.vue';
+
+const DIFFICULTY_MODES: { mode: QuizMode; subtitle: string }[] = [
+    { mode: 'novice', subtitle: `Select from a list of ${NOVICE_OPTION_COUNT} games` },
+    { mode: 'intermediate', subtitle: `Select from a list of ${INTERMEDIATE_OPTION_COUNT} games` },
+    { mode: 'advanced', subtitle: 'Select from the whole list of games' },
+];
 
 const router = useRouter();
 const { startQuiz, startDailyQuiz, resumeDailyQuiz } = useQuiz();
@@ -191,11 +182,11 @@ function viewDailyResults() {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .daily-btn {
     box-shadow: var(--daily-glow);
     transition: box-shadow 0.2s ease;
-    width: 200px;
+    width: 230px;
     color: var(--bs-warning-text-emphasis);
     border-color: var(--bs-warning-text-emphasis);
 }

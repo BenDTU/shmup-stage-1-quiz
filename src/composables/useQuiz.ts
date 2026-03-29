@@ -73,12 +73,14 @@ interface QuizState {
     isStarted: boolean
     isAnswered: boolean
     mode: QuizMode
-    noviceOptions: number[][] // 4 option IDs per question (populated in novice mode only)
+    options: number[][] // option IDs per question (populated in novice/intermediate mode)
     questionQuotes: string[] // one quote pre-assigned per question
 }
 
 export const QUIZ_SIZE = 20;
 export const SERIES_LIMIT = 3;
+export const NOVICE_OPTION_COUNT = 4;
+export const INTERMEDIATE_OPTION_COUNT = 8;
 
 const state = reactive<QuizState>({
     questions: [],
@@ -87,7 +89,7 @@ const state = reactive<QuizState>({
     isStarted: false,
     isAnswered: false,
     mode: 'advanced',
-    noviceOptions: [],
+    options: [],
     questionQuotes: [],
 });
 
@@ -184,7 +186,8 @@ function buildQuiz(mode: QuizMode, random: RandomFn) {
     }
 
     let noviceOptions: number[][] = [];
-    if (mode === 'novice') {
+    if (mode === 'novice' || mode === 'intermediate') {
+        const optionCount = mode === 'novice' ? NOVICE_OPTION_COUNT : INTERMEDIATE_OPTION_COUNT;
         noviceOptions = selected.map((question, i) => {
             const priorIds = new Set(selected.slice(0, i).map((q) => q.id));
             const priorSeriesCounts: Partial<Record<Series, number>> = {};
@@ -205,7 +208,7 @@ function buildQuiz(mode: QuizMode, random: RandomFn) {
                     !(g.series && limitedSeries.has(g.series)),
             );
             const shuffledEligible = shuffle([...eligible], random);
-            const incorrectIds = shuffledEligible.slice(0, 3).map((g) => g.id);
+            const incorrectIds = shuffledEligible.slice(0, optionCount - 1).map((g) => g.id);
             return shuffle([...incorrectIds, question.id], random);
         });
     }
@@ -216,7 +219,7 @@ function buildQuiz(mode: QuizMode, random: RandomFn) {
     state.isStarted = true;
     state.isAnswered = false;
     state.mode = mode;
-    state.noviceOptions = noviceOptions;
+    state.options = noviceOptions;
     state.questionQuotes = shuffle([...quotes], random).slice(0, selected.length);
 }
 
@@ -300,7 +303,7 @@ function resetQuiz() {
     state.isStarted = false;
     state.isAnswered = false;
     state.mode = 'advanced';
-    state.noviceOptions = [];
+    state.options = [];
     state.questionQuotes = [];
     isResumed.value = false;
 }

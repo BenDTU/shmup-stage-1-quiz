@@ -1,0 +1,13 @@
+#!/bin/sh
+# Automatically strip forceFirst from GameEntry objects in games.ts before committing.
+# This property is for local testing only and should never be committed.
+
+TARGET="src/data/games.ts"
+
+if git diff --cached --name-only | grep -qF "$TARGET"; then
+    if grep -q 'forceFirst' "$TARGET"; then
+        perl -i -ne 'print unless /^\s+forceFirst\s*:/' "$TARGET"
+        git add "$TARGET"
+        echo "Stripped forceFirst from $TARGET"
+    fi
+fi

@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prepare": "husky",
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
@@ -27,6 +28,7 @@
     "@vue/tsconfig": "^0.8.1",
     "eslint": "^9.21.0",
     "eslint-plugin-vue": "^9.33.0",
+    "husky": "^9.1.7",
     "npm-run-all2": "^8.0.4",
     "sass": "^1.97.3",
     "typescript": "~5.9.3",
