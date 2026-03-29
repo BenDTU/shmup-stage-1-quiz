@@ -19,7 +19,7 @@
                         <p class="h5 text-muted mb-3">
                             <span
                                 class="badge"
-                                :class="state.mode === 'novice' ? 'bg-success' : 'bg-danger'"
+                                :class="`bg-${MODE_COLOR[state.mode]}`"
                             >{{ modeLabel }}</span>
                         </p>
                         <p
@@ -165,6 +165,7 @@ import { SESSION_DATE_FORMATTED } from '../storage/dailyProgressStorage';
 import { guessedGameName } from '../functions';
 import DailyCountdown from '../components/DailyCountdown.vue';
 import { SERIES_LIMIT } from '../composables/useQuiz';
+import { MODE_COLOR, MODE_LABEL } from '../utils/modeStyle';
 
 
 const router = useRouter();
@@ -177,8 +178,13 @@ onMounted(() => {
         const scoreParam = 'fill-score' in params ? parseInt(params['fill-score'] as string, 10) : undefined;
         const targetScore = scoreParam !== undefined && !isNaN(scoreParam) ? scoreParam : undefined;
 
-        if ('fill-basic' in params) {
+        if ('fill-novice' in params) {
             startQuiz('novice');
+            fillDebugAnswers(targetScore);
+            return;
+        }
+        if ('fill-intermediate' in params) {
+            startQuiz('intermediate');
             fillDebugAnswers(targetScore);
             return;
         }
@@ -187,12 +193,17 @@ onMounted(() => {
             fillDebugAnswers(targetScore);
             return;
         }
-        if ('fill-daily-basic' in params) {
+        if ('fill-novice-daily' in params) {
             startDailyQuiz('novice');
             fillDebugAnswers(targetScore);
             return;
         }
-        if ('fill-daily-advanced' in params) {
+        if ('fill-intermediate-daily' in params) {
+            startDailyQuiz('intermediate');
+            fillDebugAnswers(targetScore);
+            return;
+        }
+        if ('fill-advanced-daily' in params) {
             startDailyQuiz('advanced');
             fillDebugAnswers(targetScore);
             return;
@@ -208,7 +219,7 @@ const resultSquares = computed(() => state.answers.map((id, i) => state.question
 const score = computed(() => resultSquares.value.filter(Boolean).length);
 const total = computed(() => state.answers.length);
 const scorePercent = computed(() => Math.round((score.value / total.value) * 100));
-const modeLabel = computed(() => state.mode === 'novice' ? 'Novice' : 'Advanced');
+const modeLabel = computed(() => MODE_LABEL[state.mode]);
 
 const copied = ref(false);
 
@@ -227,7 +238,7 @@ function copyResults() {
         secondLineParts.join(' • '),
         `${score.value}/${total.value} (${scorePercent.value}%)`,
         squares,
-        window.location.origin,
+        `Play now - ${window.location.origin}`,
     ].join('\n');
     navigator.clipboard.writeText(text).then(() => {
         copied.value = true;
