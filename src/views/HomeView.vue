@@ -21,7 +21,7 @@
                             Novice
                         </div>
                         <div class="small opacity-75">
-                            Select from a list of 4 games
+                            Select from a list of {{ NOVICE_OPTION_COUNT }} games
                         </div>
                     </button>
                     <button
@@ -128,7 +128,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { useQuiz, QUIZ_SIZE } from '@/composables/useQuiz';
+import { useQuiz, QUIZ_SIZE, NOVICE_OPTION_COUNT } from '@/composables/useQuiz';
 import { getDailyProgress, wasProgressInvalidated, STORAGE_KEY } from '@/storage/dailyProgressStorage';
 import { totalSongs, totalShmups } from '@/data/games';
 import type { QuizMode } from '@/types';
