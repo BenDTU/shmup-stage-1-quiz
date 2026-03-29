@@ -606,7 +606,6 @@ const gameEntries: GameEntry[] = [
                 { source: 'Arcade', videoId: 'iyljD9_TY90' },
                 { source: 'Master System', videoId: 'KcJuHpHmf_0' },
                 { source: 'NES', videoId: 'qAeS1eXaCNQ' },
-                { source: 'Sega Ages', videoId: 'Kvp_vit1Ljo' },
             ],
         },
     },
