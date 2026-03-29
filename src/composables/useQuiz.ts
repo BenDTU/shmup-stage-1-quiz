@@ -79,6 +79,7 @@ interface QuizState {
 
 export const QUIZ_SIZE = 20;
 export const SERIES_LIMIT = 3;
+export const NOVICE_OPTION_COUNT = 8;
 
 const state = reactive<QuizState>({
     questions: [],
@@ -205,7 +206,7 @@ function buildQuiz(mode: QuizMode, random: RandomFn) {
                     !(g.series && limitedSeries.has(g.series)),
             );
             const shuffledEligible = shuffle([...eligible], random);
-            const incorrectIds = shuffledEligible.slice(0, 3).map((g) => g.id);
+            const incorrectIds = shuffledEligible.slice(0, NOVICE_OPTION_COUNT - 1).map((g) => g.id);
             return shuffle([...incorrectIds, question.id], random);
         });
     }
