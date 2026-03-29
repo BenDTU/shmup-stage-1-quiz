@@ -204,7 +204,13 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Blue Revolver',
-        songSource: { songName: 'Qygenomics', videoId: 'dTbpYrrSRPY' },
+        songSource: {
+            songName: 'Qygenomics',
+            arrangements: [
+                { source: 'Original', videoId: 'dTbpYrrSRPY' },
+                { source: 'Double Action', videoId: 'SBuLibossds' },
+            ],
+        },
     },
     {
         name: 'Brave Blade',
@@ -600,7 +606,6 @@ const gameEntries: GameEntry[] = [
                 { source: 'Arcade', videoId: 'iyljD9_TY90' },
                 { source: 'Master System', videoId: 'KcJuHpHmf_0' },
                 { source: 'NES', videoId: 'qAeS1eXaCNQ' },
-                { source: 'Sega Ages', videoId: 'Kvp_vit1Ljo' },
             ],
         },
     },
@@ -631,6 +636,15 @@ const gameEntries: GameEntry[] = [
         name: 'Fighter & Attacker',
         alias: 'F/A',
         songSource: { songName: 'Desert Storm', videoId: 'H23ZWktzasc' },
+    },
+    {
+        name: 'Fighting Hawk',
+        songSource: { songName: 'Start ~ Round A', videoId: 'tQcS5rh9a-Q', startTime: 21, endTime: 157 },
+    },
+    {
+        name: 'Final Star Force',
+        series: Series.StarForce,
+        songSource: { songName: 'Main BGM', videoId: 'MEcSvhcH76E', startTime: 120, endTime: 248 },
     },
     {
         name: 'Fire Shark',
@@ -671,6 +685,15 @@ const gameEntries: GameEntry[] = [
         series: Series.FlyingShark,
         alias: 'Sky Shark',
         songSource: { songName: 'Stage 1', videoId: 'yxsKzGZ8WHg' },
+    },
+    {
+        name: 'Formation Armed F',
+        songSource: {
+            songName: 'Start ~ Insect',
+            arrangements: [
+                { source: 'Arcade', videoId: 'Ko5h51ggdR8', startTime: 2, endTime: 97 },
+                { source: 'PC Engine', videoId: 'CK0E2Pnb69E', startTime: 0, endTime: 120 },
+            ] },
     },
     {
         name: 'G-Darius',
@@ -1578,6 +1601,11 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1', videoId: '5OADukw2FAA', startTime: 283, endTime: 401 },
     },
     {
+        name: 'Scramble Formation',
+        alias: 'Tokio',
+        songSource: { songName: 'Start ~ Dot Shooter', videoId: 'Pa6_lccEnXg' },
+    },
+    {
         name: 'Shienryu',
         alias: ['Gekioh Shooting King', 'Steel Dragon'],
         songSource: {
@@ -1792,6 +1820,19 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Broken Butterfly', videoId: 'JH460d3LzY4', startTime: 0, endTime: 100 },
     },
     {
+        name: 'Star Force',
+        alias: 'Mega Force',
+        series: Series.StarForce,
+        songSource: {
+            songName: 'Star Force',
+            arrangements :[
+                { source: 'Arcade', videoId: 'Jj8OYuL-2rg' },
+                { source: 'NES JP', videoId: 'PKtPKAJo6p0' },
+                { source: 'NES US', videoId: 'LhVZICQm5i8' },
+            ],
+        },
+    },
+    {
         name: 'STELLAVANITY - Prelude to the Destined Calamity -',
         songSource: { songName: 'Junk Doll Dances in the Moonlight', videoId: 'DcTL146ANTI' },
     },
@@ -1866,6 +1907,11 @@ const gameEntries: GameEntry[] = [
         name: 'Super Spacefortress Macross II',
         series: Series.Macross,
         songSource: { songName: 'Scooper', videoId: 'wnlpgkfsor0' }, // NOTE: Medium and Expert course themes don't seem to be on Youtube
+    },
+    {
+        name: 'Super Star Force',
+        series: Series.StarForce,
+        songSource: { songName: 'Take Off', videoId: 'Rlyl_BSuna8' },
     },
     {
         name: 'Super SWIV', // Super SWIV is SNES title, Firepower 2000 is US SNES title, Mega SWIV is Genesis / Mega Drive title
