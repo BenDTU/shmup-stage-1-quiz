@@ -65,17 +65,17 @@
                             Which game is this stage 1 theme from?
                         </h5>
 
-                        <!-- Novice mode: correct/incorrect alert (above options, shown when answered) -->
+                        <!-- Novice/Intermediate mode: correct/incorrect alert (above options, shown when answered) -->
                         <AnswerFeedback
-                            v-if="state.mode === 'novice' && state.isAnswered"
+                            v-if="state.mode !== 'advanced' && state.isAnswered"
                             :answer-type="userAnswerType"
                         />
 
-                        <!-- Novice mode: 4 option buttons -->
+                        <!-- Novice/Intermediate mode: multiple choice buttons -->
                         <NoviceOptions
-                            v-if="state.mode === 'novice'"
+                            v-if="state.mode !== 'advanced'"
                             v-model="selectedGameId"
-                            :options="state.noviceOptions[state.currentIndex] ?? []"
+                            :options="state.options[state.currentIndex] ?? []"
                             :is-answered="state.isAnswered"
                             :correct-id="currentQuestion.id"
                             :answered-id="state.answers[state.currentIndex]"
@@ -236,7 +236,7 @@ const advancedFeedbackDetails = computed<AdvancedFeedbackDetails>(() => ({
 // Only allow submitting a guess that corresponds to an available game in the pool
 const isValidGuess = computed(() => {
     if (selectedGameId.value === null) return false;
-    if (state.mode === 'novice') return true;
+    if (state.mode !== 'advanced') return true;
     return !usedGameIds.value.has(selectedGameId.value) && !seriesLimitedGameIds.value.has(selectedGameId.value);
 });
 

@@ -1,4 +1,4 @@
-export type QuizMode = 'novice' | 'advanced';
+export type QuizMode = 'novice' | 'intermediate' | 'advanced';
 
 export enum Series {
     _194X = '194X',
