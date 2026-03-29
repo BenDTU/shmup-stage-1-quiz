@@ -633,6 +633,15 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Desert Storm', videoId: 'H23ZWktzasc' },
     },
     {
+        name: 'Fighting Hawk',
+        songSource: { songName: 'Start ~ Round A', videoId: 'tQcS5rh9a-Q', startTime: 21, endTime: 157 },
+    },
+    {
+        name: 'Final Star Force',
+        series: Series.StarForce,
+        songSource: { songName: 'Main BGM', videoId: 'MEcSvhcH76E', startTime: 120, endTime: 248 },
+    },
+    {
         name: 'Fire Shark',
         alias: 'Same! Same! Same!',
         series: Series.FlyingShark,
@@ -671,6 +680,15 @@ const gameEntries: GameEntry[] = [
         series: Series.FlyingShark,
         alias: 'Sky Shark',
         songSource: { songName: 'Stage 1', videoId: 'yxsKzGZ8WHg' },
+    },
+    {
+        name: 'Formation Armed F',
+        songSource: {
+            songName: 'Start ~ Insect',
+            arrangements: [
+                { source: 'Arcade', videoId: 'Ko5h51ggdR8', startTime: 2, endTime: 97 },
+                { source: 'PC Engine', videoId: 'CK0E2Pnb69E', startTime: 0, endTime: 120 },
+            ] },
     },
     {
         name: 'G-Darius',
@@ -1578,6 +1596,11 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1', videoId: '5OADukw2FAA', startTime: 283, endTime: 401 },
     },
     {
+        name: 'Scramble Formation',
+        alias: 'Tokio',
+        songSource: { songName: 'Start ~ Dot Shooter', videoId: 'Pa6_lccEnXg' },
+    },
+    {
         name: 'Shienryu',
         alias: ['Gekioh Shooting King', 'Steel Dragon'],
         songSource: {
@@ -1790,6 +1813,19 @@ const gameEntries: GameEntry[] = [
             'Space Moth Lunar Edition',
         ],
         songSource: { songName: 'Broken Butterfly', videoId: 'JH460d3LzY4', startTime: 0, endTime: 100 },
+    },
+    {
+        name: 'Star Force',
+        alias: 'Mega Force',
+        series: Series.StarForce,
+        songSource: {
+            songName: 'Star Force',
+            arrangements :[
+                { source: 'Arcade', videoId: 'Jj8OYuL-2rg' },
+                { source: 'NES JP', videoId: 'PKtPKAJo6p0' },
+                { source: 'NES US', videoId: 'LhVZICQm5i8' },
+            ],
+        },
     },
     {
         name: 'STELLAVANITY - Prelude to the Destined Calamity -',
