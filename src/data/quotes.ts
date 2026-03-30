@@ -22,4 +22,5 @@ export const quotes: string[] = [
     'I can not ape', // Space Invaders Infinity Gene
     'Escape to the freedom', // Gradius III
     'Get it more!', // Blazing Star
+    'Good fighting is required!', // Fighting Hawk
 ];
