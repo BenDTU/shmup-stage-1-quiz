@@ -420,6 +420,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1 & 4', videoId: '6xG4t2wE0rM' },
     },
     {
+        name: 'Devil Engine',
+        songSource: { songName: 'Iron Attack', videoId: 'S6ERj-_lPls' },
+    },
+    {
         name: 'Dimahoo',
         alias: 'Great Mahou Daisakusen',
         series: Series.Mahou,
@@ -713,6 +717,18 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Gekirindan',
         songSource: { songName: 'Pure Spirit', videoId: 'OijiF6r1Xfc' },
+    },
+    {
+        name: 'Gemini Wing',
+        songSource: {
+            songName: 'Stage 1',
+            arrangements: [
+                { source: 'Arcade', videoId: 'Ee7LgU1M5EU' },
+                { source: 'Amiga', videoId: '8w2-fj4Esf0' },
+                { source: 'Commodore 64', videoId: 'Jzw3CierkvI', startTime: 68, endTime: 262 },
+                { source: 'Sharp X68000', videoId: 'qxkoRHRjRyg', endTime: 165 },
+            ],
+        },
     },
     {
         name: 'Ghost Pilots',
@@ -1132,12 +1148,20 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Main BGM', videoId: 'Eww_CkmhF1M' },
     },
     {
+        name: 'Megablast',
+        songSource: { songName: 'Round 1', videoId: 'WwyPXjQ7cFY' },
+    },
+    {
         name: 'Metal Black',
         songSource: { songName: 'Take off ~ Born to be free', videoId: 'GBS6KfJRyIg' },
     },
     {
         name: 'Metal Hawk',
         songSource: { songName: 'Game BGM 1', videoId: 'rX-6X3NIYX4' },
+    },
+    {
+        name: 'Metamor Jupiter',
+        songSource: { songName: 'Stage 1', videoId: 'npoIjq_2b9M' },
     },
     {
         name: "Miss Kobayashi's Dragon Maid Burst Forth!! Choro-gon☆Breath",
@@ -2336,6 +2360,16 @@ const gameEntries: GameEntry[] = [
         alias: 'XII Stag',
         series: Series.Zeal,
         songSource: { songName: 'Stage 1', videoId: 'CbFsLpKZcUA' },
+    },
+    {
+        name: 'Zanac',
+        songSource: {
+            songName: 'Area 1',
+            arrangements: [
+                { source: 'NES', videoId: 'rNeul9QZ7w' },
+                { source: 'MSX', videoId: 'mTOFoidc_04' },
+            ],
+        },
     },
     {
         name: 'Zed Blade',
