@@ -2366,7 +2366,7 @@ const gameEntries: GameEntry[] = [
         songSource: {
             songName: 'Area 1',
             arrangements: [
-                { source: 'NES', videoId: 'rNeul9QZ7w' },
+                { source: 'NES', videoId: '3rNeul9QZ7w' },
                 { source: 'MSX', videoId: 'mTOFoidc_04' },
             ],
         },
