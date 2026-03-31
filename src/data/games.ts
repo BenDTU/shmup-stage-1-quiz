@@ -314,6 +314,16 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1', videoId: 'vqi1eM9MNPw', startTime: 62, endTime: 213 },
     },
     {
+        name: 'Dangerous Seed',
+        songSource: {
+            songName: '1st Tube',
+            arrangements: [
+                { source: 'Arcade', videoId: 'C0Y5D8-zVsQ' },
+                { source: 'Mega Drive', videoId: 'n5gyrc28i_c' },
+            ],
+        },
+    },
+    {
         name: 'Danmaku Unlimited 2',
         series: Series.DanmakuUnlimited,
         songSource: { songName: 'First Sortie', videoId: 'vHREMLcVciY' },
@@ -1100,6 +1110,16 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Armed Satellite Phobos', videoId: 'thei1zxfJWA' },
     },
     {
+        name: 'Master of Weapon',
+        songSource: {
+            songName: 'Desertion ~ Briefing',
+            arrangements: [
+                // Can't find the arcade version on Youtube
+                { source: 'Mega Drive', videoId: 'NlSADKiZhBY' },
+            ],
+        },
+    },
+    {
         name: 'Mazinger Z',
         songSource: { songName: 'Theme of Z (Part 2)', videoId: 'uHktcVQgXys' },
     },
@@ -1177,6 +1197,16 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Omega Fighter',
         songSource: { songName: 'Mission 1', videoId: '2rqNnp0ivmo', startTime: 1, endTime: 47 },
+    },
+    {
+        name: 'Ordyne',
+        songSource: {
+            songName: 'Round 1',
+            arrangements: [
+                { source: 'Arcade', videoId: 'PSWZCwR3FjM' },
+                { source: 'PC Engine', videoId: 'nhTf4qLRvWM' },
+            ],
+        },
     },
     {
         name: 'Out Zone',
@@ -1920,6 +1950,17 @@ const gameEntries: GameEntry[] = [
             { songName: 'Stage 1', arrangements: [{ source: 'Super Nintendo', videoId: 't5IEOuoVOYo' }] },
             { songName: 'Stage 1 & 6', arrangements: [{ source: 'Mega Drive', videoId: 'fSoAOxs5ZCk' }] },
         ],
+    },
+    {
+        name: 'Task Force Harrier',
+        alias: 'Task Force Harrier EX',
+        songSource: {
+            songName: 'Night Mountain District',
+            arrangements: [
+                { source: 'Arcade', videoId: '_weKTSNiQN8', startTime: 2, endTime: 222 },
+                { source: 'Mega Drive', videoId: 'OfyvsPWS_yI' },
+            ],
+        },
     },
     {
         name: 'Tengai',
