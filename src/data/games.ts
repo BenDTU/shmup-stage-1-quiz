@@ -2159,7 +2159,8 @@ const gameEntries: GameEntry[] = [
                 },
                 {
                     source: 'Mega Drive',
-                    videoId: 'rWD0BEHbl2I',
+                    videoId: 'PwuBChnj7UI',
+                    endTime: 129,
                 },
                 {
                     source: 'PC Engine',
