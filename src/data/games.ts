@@ -715,6 +715,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'G-Zero', videoId: 'yratOaX9qhY' },
     },
     {
+        name: 'Gaiares',
+        songSource: { songName: 'Mission 1', videoId: '7BxFfHGcQ88' },
+    },
+    {
         name: 'Gekirindan',
         songSource: { songName: 'Pure Spirit', videoId: 'OijiF6r1Xfc' },
     },
