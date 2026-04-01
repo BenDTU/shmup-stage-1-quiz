@@ -2098,7 +2098,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Touhou 8: Imperishable Night',
         series: Series.Touhou,
-        songSource: { songName: 'Illusionary Night ~ Ghostly Eyes', videoId: 'inJ4ObsrNc' },
+        songSource: { songName: 'Illusionary Night ~ Ghostly Eyes', videoId: 'jinJ4ObsrNc' },
     },
     {
         name: 'Touhou 9: Phantasmagoria of Flower View',
