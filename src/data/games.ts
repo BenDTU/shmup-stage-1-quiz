@@ -2050,19 +2050,55 @@ const gameEntries: GameEntry[] = [
             ] },
     },
     {
+        name: 'Touhou 1: Highly Responsive to Prayers',
+        series: Series.Touhou,
+        songSource: { songName: 'Eternal Shrine Maiden', videoId: 'pixjDAEADYY' },
+    },
+    {
+        name: 'Touhou 2: Story of Eastern Wonderland',
+        series: Series.Touhou,
+        songSource: { songName: 'Hakurei ~ Eastern Wind', videoId: '-1qf-DCu9ZM' },
+    },
+    {
+        name: 'Touhou 3: Phantasmagoria of Dim. Dream',
+        series: Series.Touhou,
+        songSource: [
+            { songName: 'Eastern Mystical Love Consultation', videoId: 'mUJm5TLnE80' },
+            { songName: 'Reincarnation', videoId: 'l3jJnQRtAUk' },
+            { songName: 'Dim. Dream', videoId: 'U_RQnQ7aQU4' },
+            { songName: 'Tabula rasa ~ The Empty Girl', videoId: '_bqoAqRoZx0' },
+            { songName: 'Manaical Princess', videoId: 'iRjWLLI0K7U' },
+            { songName: 'Vanishing Dream ~ Lost Dream', videoId: 'Q8wO4plpXvA' },
+            { songName: 'Visionary Game ~ Dream War', videoId: 'FLOqCMC1bfc' },
+        ],
+    },
+    {
+        name: 'Touhou 4: Lotus Land Story',
+        series: Series.Touhou,
+        songSource: [
+            { songName: 'Witching Dream', videoId: 'EK8BsPAyXRE' },
+            { songName: "Selene's Light", videoId: '0Dp-5Q6POXU' },
+        ],
+    },
+    {
+        name: 'Touhou 5: Mystic Square',
+        series: Series.Touhou,
+        songSource: { songName: 'Dream Express', videoId: 'Ylzq72GG_cM' },
+    },
+    {
         name: 'Touhou 6: Embodiment of Scarlet Devil',
         series: Series.Touhou,
-        songSource: { songName: 'A Soul as Red as a Ground Cherry', videoId: 'nazi6JmAV_c' },
+        songSource: { songName: 'A Soul as Red as a Ground Cherry', videoId: '2-zBXJKw5IQ' },
     },
     {
         name: 'Touhou 7: Perfect Cherry Blossom',
         series: Series.Touhou,
-        songSource: { songName: 'Paradise ~ Deep Mountain', videoId: 'hzTtdlTAapw' },
+        songSource: { songName: 'Paradise ~ Deep Mountain', videoId: 'vkX5OpV_cRs' },
     },
     {
         name: 'Touhou 8: Imperishable Night',
         series: Series.Touhou,
-        songSource: { songName: 'Illusionary Night ~ Ghostly Eyes', videoId: 'buarznoa7ms' },
+        songSource: { songName: 'Illusionary Night ~ Ghostly Eyes', videoId: 'inJ4ObsrNc' },
     },
     {
         name: 'Touhou 9: Phantasmagoria of Flower View',
