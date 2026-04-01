@@ -2066,7 +2066,7 @@ const gameEntries: GameEntry[] = [
             { songName: 'Eastern Mystical Love Consultation', videoId: 'mUJm5TLnE80' },
             { songName: 'Reincarnation', videoId: 'l3jJnQRtAUk' },
             { songName: 'Dim. Dream', videoId: 'U_RQnQ7aQU4' },
-            { songName: 'Tabula rasa ~ The Empty Girl', videoId: '_bqoAqRoZx0' },
+            { songName: 'Tabula rasa ~ The Empty Girl', videoId: 'VJ1EAnTUQq0' },
             { songName: 'Manaical Princess', videoId: 'iRjWLLI0K7U' },
             { songName: 'Vanishing Dream ~ Lost Dream', videoId: 'Q8wO4plpXvA' },
             { songName: 'Visionary Game ~ Dream War', videoId: 'FLOqCMC1bfc' },
