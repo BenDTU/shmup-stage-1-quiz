@@ -1969,7 +1969,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Super Star Force',
         series: Series.StarForce,
-        songSource: { songName: 'Take Off', videoId: 'Rlyl_BSuna8' },
+        songSource: { songName: 'Take Off', videoId: 'FuVqt4ssdUI' },
     },
     {
         name: 'Super SWIV', // Super SWIV is SNES title, Firepower 2000 is US SNES title, Mega SWIV is Genesis / Mega Drive title
