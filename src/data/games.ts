@@ -1248,6 +1248,24 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Midnight Town', videoId: 'GjcgS4o0HFg' },
     },
     {
+        name: 'Nanostray',
+        series: Series.Nanostray,
+        songSource: [
+            { songName: 'Mitsurin Jungle', videoId: '6Dgv4FfGB0g' },
+            { songName: 'Mokuzu Depths', videoId: 'hqkweo5_UtA' },
+            { songName: 'Sunahara Desert', videoId: 'l66Oxr49iLQ' },
+        ],
+    },
+    {
+        name: 'Nanostray 2',
+        series: Series.Nanostray,
+        songSource: [
+            { songName: 'Mitsurin Jungle', videoId: '6Dgv4FfGB0g' },
+            { songName: 'Mokuzu Depths', videoId: 'hqkweo5_UtA' },
+            { songName: 'Sunahara Desert', videoId: 'l66Oxr49iLQ' },
+        ],
+    },
+    {
         name: 'Natsuki Chronicles',
         songSource: { songName: 'Hopeful Morning Glow', videoId: 'HuzP7m6Us28' },
     },
