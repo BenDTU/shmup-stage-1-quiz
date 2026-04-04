@@ -278,6 +278,16 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'InstaVista', videoId: 'A-SqHyJa-jU' },
     },
     {
+        name: 'Cosmo Gang: The Video',
+        songSource: {
+            songName: 'Alignment (Planet)',
+            arrangements: [
+                { source: 'Arcade', videoId: 'Z9ZFeHa-pns' },
+                { source: 'Super Nintendo', videoId: '2ZALXraGc_A', startTime: 4, endTime: 17 },
+            ],
+        },
+    },
+    {
         name: 'Cotton: Fantastic Night Dreams',
         alias: 'Cotton Reboot!',
         sortName: 'Cotton 1',
@@ -803,7 +813,7 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Sand Storm',
             arrangements: [
                 { source: 'Arcade', videoId: 'NyQzfqNIKTI' },
-                { source: 'SNES', videoId: 'd_w43Ew_-jI' },
+                { source: 'Super Nintendo', videoId: 'd_w43Ew_-jI' },
             ],
         },
     },
@@ -1552,7 +1562,7 @@ const gameEntries: GameEntry[] = [
                     videoId: 'vtOHNnZKlCI',
                 },
                 {
-                    source: 'SNES',
+                    source: 'Super Nintendo',
                     videoId: 'zSqXP-ITmv8',
                 },
                 {
