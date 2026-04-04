@@ -206,8 +206,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Blazeon',
         songSource: {
-            songName: 'Stage 1',
+            songName: 'Optimistic Departure',
             arrangements: [
+                { source: 'Arcade', videoId: 'SaLxZSK4FyA' },
+                { source: 'SNES', videoId: 'qHKLGLmfuew' },
             ],
         },
     },
