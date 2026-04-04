@@ -82,6 +82,16 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Internal Combat', videoId: 'tXxLHnwg7ec' },
     },
     {
+        name: 'Acrobat Mission',
+        songSource: {
+            songName: 'Mission 1',
+            arrangements: [
+                { source: 'Arcade', videoId: '9NpFVWZQYXk' },
+                { source: 'SNES', videoId: 'Z7xuMFm732M' },
+            ],
+        },
+    },
+    {
         name: 'Air Duel',
         songSource: { songName: 'Stage 1', videoId: '8WsKeA4v01U' },
     },
@@ -192,6 +202,14 @@ const gameEntries: GameEntry[] = [
     {
         name: 'BioMetal (US)',
         songSource: { songName: 'Twilight Zone', videoId: '6N3Bfm057xM' },
+    },
+    {
+        name: 'Blazeon',
+        songSource: {
+            songName: 'Stage 1',
+            arrangements: [
+            ],
+        },
     },
     {
         name: 'Blazing Lazers',
@@ -1001,6 +1019,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Final Hour', videoId: 'Ij44absscCw' },
     },
     {
+        name: 'Karous',
+        songSource: { songName: '1000 clouds', videoId: 'v8RbFJ2wnn8' },
+    },
+    {
         name: 'Ketsui',
         songSource: { songName: 'Interception - Noisy Town', videoId: 'z472pIce5CY' },
     },
@@ -1164,6 +1186,19 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Game BGM 1', videoId: 'rX-6X3NIYX4' },
     },
     {
+        name: 'Metal Torrent',
+        songSource: [
+            {
+                songName: 'Accipiter Theme',
+                videoId: 'sXVc2n6OOnY',
+            },
+            {
+                songName: 'Bateleur Theme',
+                videoId: '1mEhU4tA8t8',
+            },
+        ],
+    },
+    {
         name: 'Metamor Jupiter',
         songSource: { songName: 'Stage 1', videoId: 'npoIjq_2b9M' },
     },
@@ -1283,6 +1318,20 @@ const gameEntries: GameEntry[] = [
     {
         name: 'PD Ultraman Invader',
         songSource: { songName: 'Ultraman', videoId: 'UD8ILryBKPY' },
+    },
+    {
+        name: 'Phalanx (Sharp X68000)',
+        songSource: { songName: 'Assault', videoId: '9n8sXo2l7j0' },
+    },
+    {
+        name: 'Phalanx (SNES/GBA)',
+        songSource: {
+            songName: 'Assault',
+            arrangements: [
+                { source: 'SNES', videoId: 'QmQIEjLHVIQ' },
+                { source: 'GBA', videoId: 'u4vtCzjp4gg' },
+            ],
+        },
     },
     {
         name: 'Pink Sweets: Ibara Sorekara',
