@@ -1323,7 +1323,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Phalanx (Sharp X68000)',
-        songSource: { songName: 'Assault', videoId: '9n8sXo2l7j0' },
+        songSource: { songName: 'Assault', videoId: 'kwTLlUo9G14' },
     },
     {
         name: 'Phalanx (SNES/GBA)',
