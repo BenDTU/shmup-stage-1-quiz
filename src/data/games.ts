@@ -1259,11 +1259,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Nanostray 2',
         series: Series.Nanostray,
-        songSource: [
-            { songName: 'Mitsurin Jungle', videoId: '6Dgv4FfGB0g' },
-            { songName: 'Mokuzu Depths', videoId: 'hqkweo5_UtA' },
-            { songName: 'Sunahara Desert', videoId: 'l66Oxr49iLQ' },
-        ],
+        songSource: { songName: 'Tappeki Dock', videoId: 'x3qpC_4mO_U' },
     },
     {
         name: 'Natsuki Chronicles',
