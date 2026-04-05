@@ -2455,6 +2455,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Main BGM', videoId: 'Y6gEyApB4b4' },
     },
     {
+        name: 'Wolflame',
+        songSource: { songName: 'Stage 1, 4', videoId: 'PStagEoZemM' },
+    },
+    {
         name: 'X Multiply',
         songSource: { songName: 'Into the Human Body', videoId: 'MwwduquIWIo' },
     },
