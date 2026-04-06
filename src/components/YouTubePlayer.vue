@@ -129,6 +129,9 @@ function scheduleStop() {
 
 onUnmounted(() => {
     clearStopTimer();
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = null;
+    }
 });
 
 const currentQuote = computed(() => props.quote ?? '');
@@ -155,6 +158,20 @@ watch(() => props.videoId, () => {
     }
 }, { flush: 'post' });
 
+// Override the OS media overlay (e.g. Windows volume panel) with generic
+// metadata so the YouTube video title and thumbnail are not exposed while
+// the answer is still hidden.  Browsers route OS-level SMTC / media-key
+// notifications through the top-level page's mediaSession, so setting it
+// here shadows whatever YouTube's iframe reports.
+function setGenericMediaSession() {
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: 'Now Playing…',
+            artist: 'Stage 1 Quiz',
+        });
+    }
+}
+
 function startAudio() {
     // Seek back to the configured start time before unmuting, so the
     // listener always hears the track from the beginning regardless of
@@ -167,6 +184,7 @@ function startAudio() {
     audioUnlocked.value = true;
     emit('audioUnlocked');
     scheduleStop();
+    setGenericMediaSession();
 }
 
 const restartSpinning = ref(false);
