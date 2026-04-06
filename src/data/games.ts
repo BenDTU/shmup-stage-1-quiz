@@ -1292,7 +1292,7 @@ const gameEntries: GameEntry[] = [
         songSource: {
             songName: 'Round 1',
             arrangements: [
-                { source: 'Arcade', videoId: 'PSWZCwR3FjM' },
+                { source: 'Arcade', videoId: 'kczZUk7WMGs' },
                 { source: 'PC Engine', videoId: 'nhTf4qLRvWM' },
             ],
         },
