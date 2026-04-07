@@ -20,6 +20,7 @@ export enum Series {
     Ibara = 'Ibara',
     Macross = 'Macross',
     Mahou = 'Mahou',
+    Nanostray = 'Nanostray',
     OutZone = 'Out Zone',
     RType = 'R-Type',
     Raiden = 'Raiden',

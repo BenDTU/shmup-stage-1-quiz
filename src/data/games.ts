@@ -82,6 +82,16 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Internal Combat', videoId: 'tXxLHnwg7ec' },
     },
     {
+        name: 'Acrobat Mission',
+        songSource: {
+            songName: 'Mission 1',
+            arrangements: [
+                { source: 'Arcade', videoId: '9NpFVWZQYXk' },
+                { source: 'SNES', videoId: 'Z7xuMFm732M' },
+            ],
+        },
+    },
+    {
         name: 'Air Duel',
         songSource: { songName: 'Stage 1', videoId: '8WsKeA4v01U' },
     },
@@ -194,6 +204,16 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Twilight Zone', videoId: '6N3Bfm057xM' },
     },
     {
+        name: 'Blazeon',
+        songSource: {
+            songName: 'Optimistic Departure',
+            arrangements: [
+                { source: 'Arcade', videoId: 'SaLxZSK4FyA' },
+                { source: 'SNES', videoId: 'qHKLGLmfuew' },
+            ],
+        },
+    },
+    {
         name: 'Blazing Lazers',
         alias: 'Gunhed',
         songSource: { songName: 'Thunder Blaze', videoId: 'im7qZmxOSUI' },
@@ -256,6 +276,16 @@ const gameEntries: GameEntry[] = [
         name: 'Cosmo Dreamer',
         series: Series.Dreamer,
         songSource: { songName: 'InstaVista', videoId: 'A-SqHyJa-jU' },
+    },
+    {
+        name: 'Cosmo Gang: The Video',
+        songSource: {
+            songName: 'Alignment (Planet)',
+            arrangements: [
+                { source: 'Arcade', videoId: 'Z9ZFeHa-pns' },
+                { source: 'Super Nintendo', videoId: '2ZALXraGc_A', startTime: 4, endTime: 17 },
+            ],
+        },
     },
     {
         name: 'Cotton: Fantastic Night Dreams',
@@ -783,7 +813,7 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Sand Storm',
             arrangements: [
                 { source: 'Arcade', videoId: 'NyQzfqNIKTI' },
-                { source: 'SNES', videoId: 'd_w43Ew_-jI' },
+                { source: 'Super Nintendo', videoId: 'd_w43Ew_-jI' },
             ],
         },
     },
@@ -1001,6 +1031,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Final Hour', videoId: 'Ij44absscCw' },
     },
     {
+        name: 'Karous',
+        songSource: { songName: '1000 clouds', videoId: 'v8RbFJ2wnn8' },
+    },
+    {
         name: 'Ketsui',
         songSource: { songName: 'Interception - Noisy Town', videoId: 'z472pIce5CY' },
     },
@@ -1164,6 +1198,19 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Game BGM 1', videoId: 'rX-6X3NIYX4' },
     },
     {
+        name: 'Metal Torrent',
+        songSource: [
+            {
+                songName: 'Accipiter Theme',
+                videoId: 'sXVc2n6OOnY',
+            },
+            {
+                songName: 'Bateleur Theme',
+                videoId: '1mEhU4tA8t8',
+            },
+        ],
+    },
+    {
         name: 'Metamor Jupiter',
         songSource: { songName: 'Stage 1', videoId: 'npoIjq_2b9M' },
     },
@@ -1209,6 +1256,20 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Mystic Riders',
         songSource: { songName: 'Midnight Town', videoId: 'GjcgS4o0HFg' },
+    },
+    {
+        name: 'Nanostray',
+        series: Series.Nanostray,
+        songSource: [
+            { songName: 'Mitsurin Jungle', videoId: '6Dgv4FfGB0g' },
+            { songName: 'Mokuzu Depths', videoId: 'hqkweo5_UtA' },
+            { songName: 'Sunahara Desert', videoId: 'l66Oxr49iLQ' },
+        ],
+    },
+    {
+        name: 'Nanostray 2',
+        series: Series.Nanostray,
+        songSource: { songName: 'Tappeki Dock', videoId: 'x3qpC_4mO_U' },
     },
     {
         name: 'Natsuki Chronicles',
@@ -1283,6 +1344,20 @@ const gameEntries: GameEntry[] = [
     {
         name: 'PD Ultraman Invader',
         songSource: { songName: 'Ultraman', videoId: 'UD8ILryBKPY' },
+    },
+    {
+        name: 'Phalanx (Sharp X68000)',
+        songSource: { songName: 'Assault', videoId: 'kwTLlUo9G14' },
+    },
+    {
+        name: 'Phalanx (SNES/GBA)',
+        songSource: {
+            songName: 'Assault',
+            arrangements: [
+                { source: 'SNES', videoId: 'QmQIEjLHVIQ' },
+                { source: 'GBA', videoId: 'u4vtCzjp4gg' },
+            ],
+        },
     },
     {
         name: 'Pink Sweets: Ibara Sorekara',
@@ -1487,7 +1562,7 @@ const gameEntries: GameEntry[] = [
                     videoId: 'vtOHNnZKlCI',
                 },
                 {
-                    source: 'SNES',
+                    source: 'Super Nintendo',
                     videoId: 'zSqXP-ITmv8',
                 },
                 {
@@ -2378,6 +2453,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Vulgus',
         songSource: { songName: 'Main BGM', videoId: 'Y6gEyApB4b4' },
+    },
+    {
+        name: 'Wolflame',
+        songSource: { songName: 'Stage 1, 4', videoId: 'PStagEoZemM' },
     },
     {
         name: 'X Multiply',
