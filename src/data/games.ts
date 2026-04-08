@@ -1407,6 +1407,17 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Village Sky', videoId: 'AGt-RJr-khA' },
     },
     {
+        name: 'Power Strike II (Game Gear)',
+        alias: 'GG Aleste II',
+        series: Series.Aleste,
+        songSource: { songName: 'Power Plant', videoId: '6z9vTdPLuO8' },
+    },
+    {
+        name: 'Power Strike II (Master System)',
+        series: Series.Aleste,
+        songSource: { songName: 'Stage 1', videoId: 'O_hSv9paWmM', startTime: 202, endTime: 307 },
+    },
+    {
         name: 'Prehistoric Isle in 1930',
         sortName: 'Prehistoric Isle',
         songSource: { songName: 'Flying the Dinosaur', videoId: 'H7CYh7Y3E6w' },
