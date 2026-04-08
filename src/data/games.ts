@@ -518,7 +518,11 @@ const gameEntries: GameEntry[] = [
         alias: 'DoDonPachi DaiFukkatsu',
         sortName: 'Dodonpachi 3',
         series: Series.Dodonpachi,
-        songSource: { songName: 'The Year 2008, Tokyo', videoId: 'ZCaPtpNyjf4' },
+        songSource: [
+            { songName: 'The Year 2008, Tokyo', videoId: 'ZCaPtpNyjf4' },
+            { songName: 'Vertex', videoId: 'IeyVsRCfGHg' },
+            { songName: 'Fly Above the Sky', videoId: 'yvMH45_o6dA' },
+        ],
     },
     {
         name: 'DoDonPachi SaiDaiOuJou',
