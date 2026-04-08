@@ -2535,7 +2535,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Xevious',
-        songSource: { songName: 'BGM', videoId: 'w4vXIMFt9QU' },
+        songSource: { songName: 'In-game Music', videoId: 'pOtncMoOB0I' },
     },
     {
         name: 'Xevious 3D/G',
