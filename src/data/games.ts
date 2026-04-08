@@ -1785,6 +1785,14 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Start ~ Dot Shooter', videoId: 'Pa6_lccEnXg' },
     },
     {
+        name: 'Seicross (Arcade)',
+        songSource: { songName: 'Stage 1', videoId: 'wzkFaYkpvrM' },
+    },
+    {
+        name: 'Seicross (NES)',
+        songSource: { songName: 'Stage 1', videoId: 'tG74kRMpMH0' },
+    },
+    {
         name: 'Shienryu',
         alias: ['Gekioh Shooting King', 'Steel Dragon'],
         songSource: {
