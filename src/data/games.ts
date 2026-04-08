@@ -2134,6 +2134,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Thunder Force III',
+        alias: 'Thunder Force AC',
         series: Series.ThunderForce,
         songSource: [
             { songName: 'Back to the Fire', videoId: '7xEa6gf_RGk' },
