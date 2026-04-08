@@ -1410,7 +1410,7 @@ const gameEntries: GameEntry[] = [
         name: 'Power Strike II (Game Gear)',
         alias: 'GG Aleste II',
         series: Series.Aleste,
-        songSource: { songName: 'Power Plant', videoId: '6z9vTdPLuO8' },
+        songSource: { songName: 'Space Plant', videoId: '6z9vTdPLuO8' },
     },
     {
         name: 'Power Strike II (Master System)',
