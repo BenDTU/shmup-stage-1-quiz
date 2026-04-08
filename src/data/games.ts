@@ -204,6 +204,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Twilight Zone', videoId: '6N3Bfm057xM' },
     },
     {
+        name: 'Blast Wind',
+        songSource: { songName: 'Ultimate Destroyer', videoId: '7agjTfQrqpk' },
+    },
+    {
         name: 'Blazeon',
         songSource: {
             songName: 'Optimistic Departure',
@@ -235,6 +239,11 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Brave Blade',
         songSource: { songName: 'The Initial Battle', videoId: 's8ejVCXrdZw' },
+    },
+    {
+        name: 'Broken Thunder',
+        series: Series.ThunderForce,
+        songSource: { songName: 'Fire LEO-05P Syrinx', videoId: '2uiYSbe0npc' },
     },
     {
         name: 'Bullet Soul',
@@ -330,6 +339,10 @@ const gameEntries: GameEntry[] = [
             { songName: 'Cybernated City', videoId: 'GHQ1hlVD-5w' },
             { songName: 'UL-stage1', videoId: 'yYF3x1hACIU' },
         ],
+    },
+    {
+        name: 'Cybattler',
+        songSource: { songName: 'Interception', videoId: 'pZEdfyCUSmQ' },
     },
     {
         name: 'Cygni: All Guns Blazing',
@@ -505,7 +518,11 @@ const gameEntries: GameEntry[] = [
         alias: 'DoDonPachi DaiFukkatsu',
         sortName: 'Dodonpachi 3',
         series: Series.Dodonpachi,
-        songSource: { songName: 'The Year 2008, Tokyo', videoId: 'ZCaPtpNyjf4' },
+        songSource: [
+            { songName: 'The Year 2008, Tokyo', videoId: 'ZCaPtpNyjf4' },
+            { songName: 'Vertex', videoId: 'IeyVsRCfGHg' },
+            { songName: 'Fly Above the Sky', videoId: 'yvMH45_o6dA' },
+        ],
     },
     {
         name: 'DoDonPachi SaiDaiOuJou',
@@ -632,6 +649,10 @@ const gameEntries: GameEntry[] = [
                 { source: 'White Label', videoId: '1gALhcCbn4A' },
                 { source: 'Black Label', videoId: 'MUdtYy9UGAM' },
             ] },
+    },
+    {
+        name: 'Ether Vapor',
+        songSource: { songName: 'High Wind', videoId: '9r-Uk_oMvrg' },
     },
     {
         name: 'Ex-Calibre',
@@ -1023,6 +1044,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'War Upon the East Frontier', videoId: 'zhgBx6vSApM' },
     },
     {
+        name: "Jets'n'Guns",
+        songSource: { songName: 'FanVaCoolt', videoId: 'OTx_pJNGcz0' },
+    },
+    {
         name: 'Judgement Silversword',
         songSource: { songName: 'BGM 01', videoId: '-VIXuLTGoYo', startTime: 0, endTime: 123 },
     },
@@ -1382,6 +1407,17 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Village Sky', videoId: 'AGt-RJr-khA' },
     },
     {
+        name: 'Power Strike II (Game Gear)',
+        alias: 'GG Aleste II',
+        series: Series.Aleste,
+        songSource: { songName: 'Space Plant', videoId: '6z9vTdPLuO8' },
+    },
+    {
+        name: 'Power Strike II (Master System)',
+        series: Series.Aleste,
+        songSource: { songName: 'Stage 1', videoId: 'O_hSv9paWmM', startTime: 202, endTime: 307 },
+    },
+    {
         name: 'Prehistoric Isle in 1930',
         sortName: 'Prehistoric Isle',
         songSource: { songName: 'Flying the Dinosaur', videoId: 'H7CYh7Y3E6w' },
@@ -1545,6 +1581,16 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Radiant Silvergun',
         songSource: { songName: 'Return', videoId: 'BJnkpw2dyAs' },
+    },
+    {
+        name: 'Radirgy',
+        series: Series.Radirgy,
+        songSource: { songName: 'ukiha shopping mall', videoId: '_1QLg8TR4Oo' },
+    },
+    {
+        name: 'Radirgy Swag',
+        series: Series.Radirgy,
+        songSource: { songName: 'condition green', videoId: '729zyZ59OyU' },
     },
     {
         name: 'Raiden',
@@ -1737,6 +1783,14 @@ const gameEntries: GameEntry[] = [
         name: 'Scramble Formation',
         alias: 'Tokio',
         songSource: { songName: 'Start ~ Dot Shooter', videoId: 'Pa6_lccEnXg' },
+    },
+    {
+        name: 'Seicross (Arcade)',
+        songSource: { songName: 'Stage 1', videoId: 'wzkFaYkpvrM' },
+    },
+    {
+        name: 'Seicross (NES)',
+        songSource: { songName: 'Stage 1', videoId: 'tG74kRMpMH0' },
     },
     {
         name: 'Shienryu',
@@ -2102,8 +2156,44 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Fly to Live I', videoId: 'Gtz9ZfaG2m8' },
     },
     {
+        name: 'Thunder Force III',
+        alias: 'Thunder Force AC',
+        series: Series.ThunderForce,
+        songSource: [
+            { songName: 'Back to the Fire', videoId: '7xEa6gf_RGk' },
+            { songName: 'Venus Fire', videoId: 'g8Xcaes8ALM' },
+            { songName: 'The Grubby Dark Blue', videoId: 'judFwTuOGU4' },
+            { songName: 'Truth', videoId: 'KwEBp9_Znr0' },
+            { songName: 'Final Take a Chance', videoId: 'CcNiXoLdTLU' },
+        ],
+    },
+    {
         name: 'Thunder Force IV',
-        songSource: { songName: 'Fighting Back', videoId: 'IJE-iAE1Mt8' },
+        series: Series.ThunderForce,
+        songSource: [
+            { songName: 'Fighting Back', videoId: 'IJE-iAE1Mt8' },
+            { songName: 'Space Walk', videoId: 'XKvKOx4uIPg' },
+            { songName: 'The Sky Line', videoId: 'KEnYrJynuSc' },
+            { songName: 'Sand Hell', videoId: 'KOzgUtumOo0' },
+        ],
+    },
+    {
+        name: 'Thunder Force V',
+        series: Series.ThunderForce,
+        songSource: [
+            { songName: 'Legendary Wings', videoId: 'YR1xrjSvOZw' },
+            { songName: 'Beast Jungle', videoId: '0Sl0A8Sm5aI' },
+            { songName: 'Rising Blue Lightning', videoId: '8GVoLKNuGuI' },
+        ],
+    },
+    {
+        name: 'Thunder Force VI',
+        series: Series.ThunderForce,
+        songSource: [
+            { songName: 'Ruined Green', videoId: 'Vep8fRGwGKE' },
+            { songName: 'Bio Flame', videoId: 'oAEs_LNWNzc' },
+            { songName: 'Ever Blue', videoId: 'omLCF6mfoNg' },
+        ],
     },
     {
         name: 'Tiger-Heli',
@@ -2464,7 +2554,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Xevious',
-        songSource: { songName: 'BGM', videoId: 'w4vXIMFt9QU' },
+        songSource: { songName: 'In-game Music', videoId: 'pOtncMoOB0I' },
     },
     {
         name: 'Xevious 3D/G',
@@ -2489,6 +2579,11 @@ const gameEntries: GameEntry[] = [
                 { source: 'MSX', videoId: 'mTOFoidc_04' },
             ],
         },
+    },
+    {
+        name: 'Zanac Neo',
+
+        songSource: { songName: 'Instant Replicant', videoId: 'Jv8G7_35btg' },
     },
     {
         name: 'Zed Blade',
