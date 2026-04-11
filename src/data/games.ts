@@ -2170,6 +2170,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Tempest 2000',
+        alias: [ 'Tempest 3000', 'Tempest 4000' ],
         songSource: { songName: "Mind's Eye", videoId: 'ZdjlSWipbWM' },
     },
     {
