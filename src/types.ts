@@ -22,6 +22,7 @@ export enum Series {
     Mahou = 'Mahou',
     Nanostray = 'Nanostray',
     OutZone = 'Out Zone',
+    Psyvariar = 'Psyvariar',
     RType = 'R-Type',
     Radirgy = 'Radirgy',
     Raiden = 'Raiden',

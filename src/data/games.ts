@@ -92,6 +92,18 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'Air Buster',
+        alias: 'Aero Blasters',
+        songSource: {
+            songName: 'Seaside Front',
+            arrangements: [
+                { source: 'Arcade', videoId: '9NpFVWZQYXk' },
+                { source: 'Mega Drive', videoId: '8ipAllxpgMs' },
+                { source: 'PC Engine', videoId: 'a31IUDPILV0' },
+            ],
+        },
+    },
+    {
         name: 'Air Duel',
         songSource: { songName: 'Stage 1', videoId: '8WsKeA4v01U' },
     },
@@ -108,6 +120,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Air Zonk',
         songSource: { songName: 'Aqua Base stage', videoId: '9IJcqceH3CM' },
+    },
+    {
+        name: 'Aka to Blue',
+        songSource: { songName: 'RED7029', videoId: 'Za0F2ZwbjbM' },
     },
     {
         name: 'Akai Katana',
@@ -657,6 +673,13 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Ex-Calibre',
         songSource: { songName: "Cruisin'", videoId: 'ddJJ_geDcYU' },
+    },
+    {
+        name: 'Exceed 3rd - Jade Penetrate',
+        alias: 'Exceed 3rd - Jade Penetrate - Black Package',
+        songSource: {
+            songName: 'Wind Wings', videoId: 'gUZVglcDQXE',
+        },
     },
     {
         name: 'Explosive Breaker',
@@ -1434,8 +1457,17 @@ const gameEntries: GameEntry[] = [
         name: 'ProtoCorgi',
         songSource: { songName: 'Leviathan 1', videoId: 'UzpRYgSCwds' },
     },
+    /*
+    Delta is a compilation, need to look into how to handle this more
+    {
+        name: 'Psyvariar Delta',
+        series: Series.Psyvariar,
+        songSource: { songName: 'Earth', videoId: '9Sa2ymKCQUI' },
+    },
+    */
     {
         name: 'Psyvariar 2',
+        series: Series.Psyvariar,
         songSource: { songName: 'Weakboson - Gorge City', videoId: 'wZrKXcoHkKw' },
     },
     {
@@ -1586,6 +1618,14 @@ const gameEntries: GameEntry[] = [
         name: 'Radirgy',
         series: Series.Radirgy,
         songSource: { songName: 'ukiha shopping mall', videoId: '_1QLg8TR4Oo' },
+    },
+    {
+        name: 'Radirgy 2',
+        series: Series.Radirgy,
+        songSource: [
+            { songName: 'Portable Tragedy', videoId: 'Gi7GSlmdpXE' },
+            { songName: 'Happy Fake', videoId: 'sqInLaqiQdY' },
+        ],
     },
     {
         name: 'Radirgy Swag',
@@ -2118,6 +2158,10 @@ const gameEntries: GameEntry[] = [
                 { source: 'Mega Drive', videoId: 'OfyvsPWS_yI' },
             ],
         },
+    },
+    {
+        name: 'Tempest 2000',
+        songSource: { songName: "Mind's Eye", videoId: 'ZdjlSWipbWM' },
     },
     {
         name: 'Tengai',
