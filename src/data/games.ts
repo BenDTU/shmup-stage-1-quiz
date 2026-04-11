@@ -985,11 +985,12 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Gyruss',
-        songSource: { songName: 'Stage 1', videoId: 'mzCGqpUVxJ4' },
-    },
-    {
-        name: 'Gyruss (NES)',
-        songSource: { songName: 'Stage 1', videoId: 'e9zhVYuCCRI' },
+        songSource: { songName: 'Main Theme',
+            arrangements: [
+                { source: 'Arcade', videoId: 'PBzqbQSHhU0' },
+                { source: 'NES', videoId: 'quPLRVaEOns' },
+            ],
+        },
     },
     {
         name: "Halley's Comet",
