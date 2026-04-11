@@ -984,6 +984,14 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Falling Cherry Blossoms', videoId: 'EWYuTxCV11U' },
     },
     {
+        name: 'Gyruss',
+        songSource: { songName: 'Stage 1', videoId: 'mzCGqpUVxJ4' },
+    },
+    {
+        name: 'Gyruss (NES)',
+        songSource: { songName: 'Stage 1', videoId: 'e9zhVYuCCRI' },
+    },
+    {
         name: "Halley's Comet",
         songSource: { songName: 'Ed1986', videoId: 'QliWHAxJ8V4', startTime: 2, endTime: 146 },
     },
