@@ -373,6 +373,17 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1', videoId: 'vqi1eM9MNPw', startTime: 62, endTime: 213 },
     },
     {
+        name: 'Daioh Gale',
+        alias: ['Dezaemon', 'Dezaemon Plus'],
+        songSource: {
+            songName: 'Stage 1',
+            arrangements: [
+                { source: 'Dezaemon', videoId: 'hrgR5Fl2h5Y' },
+                { source: 'Dezaemon Plus', videoId: 'cdqGUeAtQUM' },
+            ],
+        },
+    },
+    {
         name: 'Dangerous Seed',
         songSource: {
             songName: '1st Tube',
