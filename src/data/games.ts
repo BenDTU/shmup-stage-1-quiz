@@ -357,6 +357,10 @@ const gameEntries: GameEntry[] = [
         ],
     },
     {
+        name: 'Crisis Wing',
+        songSource: { songName: 'URF!', videoId: 'p3TEz5Job74', startTime: 26, endTime: 126 },
+    },
+    {
         name: 'Cybattler',
         songSource: { songName: 'Interception', videoId: 'pZEdfyCUSmQ' },
     },
@@ -1293,7 +1297,7 @@ const gameEntries: GameEntry[] = [
             songName: 'Theme',
             arrangements: [
                 { source: 'Arcade', videoId: 'GqITupo_KG4' },
-                { source: 'Amstrad', videoId: 'z6GkfOo5RZ8' },
+                { source: 'Amstrad CPC', videoId: 'z6GkfOo5RZ8' },
                 { source: 'Commodore 64', videoId: 'uHq3iH25VnY', startTime: 169, endTime: 299 },
                 { source: 'PC Engine', videoId: 'jauE6kBJbBY', startTime: 39, endTime: 157 },
             ],
@@ -1495,14 +1499,6 @@ const gameEntries: GameEntry[] = [
         series: Series.Psyvariar,
         songSource: { songName: 'Weakboson - Gorge City', videoId: 'wZrKXcoHkKw' },
     },
-    /*
-    Delta is a compilation, need to look into how to handle this more
-    {
-        name: 'Psyvariar Delta',
-        series: Series.Psyvariar,
-        songSource: { songName: 'Earth', videoId: '9Sa2ymKCQUI' },
-    },
-    */
     {
         name: 'Pulstar',
         songSource: { songName: 'Front Line on the Earth', videoId: 'IexMUkiPg-M' },
@@ -1819,6 +1815,36 @@ const gameEntries: GameEntry[] = [
         name: 'Sagaia (Game Boy)',
         series: Series.Darius,
         songSource: { songName: 'Cosmic Air Way', videoId: 'ekMGtD9cDhQ' },
+    },
+    {
+        name: 'Saint Dragon',
+        songSource: {
+            songName: 'Metal Planet',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: '3no4tup4cvU',
+                },
+                {
+                    source: 'Amiga',
+                    videoId: '0GpVA06mWS8',
+                    endTime: 311,
+                },
+                {
+                    source: 'Amstrad CPC',
+                    videoId: '2cm1TycoaWI',
+                },
+                {
+                    source: 'Commodore 64',
+                    videoId: '_K5EcSVFY60',
+                },
+                {
+                    source: 'PC Engine',
+                    videoId: 'DCUd145hvlw',
+                    endTime: 251,
+                },
+            ],
+        },
     },
     {
         name: 'Salamander',
@@ -2729,6 +2755,15 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1, 3, 5', videoId: 'RXFcfd1oh4g', startTime: 2, endTime: 51 },
     },
 ];
+
+/*
+    Delta is a compilation, need to look into how to handle this more
+    {
+        name: 'Psyvariar Delta',
+        series: Series.Psyvariar,
+        songSource: { songName: 'Earth', videoId: '9Sa2ymKCQUI' },
+    },
+*/
 
 // Games without relevant YouTube links yet.
 // When a suitable YouTube video becomes available, replace '---' with the real videoId and move the entry into gameEntries above.
