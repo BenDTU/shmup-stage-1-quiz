@@ -2583,6 +2583,16 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Twin Flight', videoId: '4hG606bVSZU' },
     },
     {
+        name: 'Twinkle Star Sprites',
+        series: Series.TwinkleStarSprites,
+        songSource: { songName: 'Applicot Ground', videoId: '-UpVxnCIfFca' },
+    },
+    {
+        name: 'Twinkle Star Sprites: La Petite Princesse',
+        series: Series.TwinkleStarSprites,
+        songSource: { songName: 'Applicot Ground', videoId: '-feCSnMH9kHE' },
+    },
+    {
         name: 'Tyrian',
         songSource: { songName: 'Tyrian, the level', videoId: 'wNnTGbbDJfo' },
     },
