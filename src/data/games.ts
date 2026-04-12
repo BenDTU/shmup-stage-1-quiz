@@ -2585,7 +2585,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Twinkle Star Sprites',
         series: Series.TwinkleStarSprites,
-        songSource: { songName: 'Applicot Ground', videoId: '-UpVxnCIfFca' },
+        songSource: { songName: 'Applicot Ground', videoId: '-UpVxnCIfFc' },
     },
     {
         name: 'Twinkle Star Sprites: La Petite Princesse',
