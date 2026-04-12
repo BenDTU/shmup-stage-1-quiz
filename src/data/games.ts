@@ -1466,6 +1466,11 @@ const gameEntries: GameEntry[] = [
         name: 'ProtoCorgi',
         songSource: { songName: 'Leviathan 1', videoId: 'UzpRYgSCwds' },
     },
+    {
+        name: 'Psyvariar 2',
+        series: Series.Psyvariar,
+        songSource: { songName: 'Weakboson - Gorge City', videoId: 'wZrKXcoHkKw' },
+    },
     /*
     Delta is a compilation, need to look into how to handle this more
     {
@@ -1474,11 +1479,6 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Earth', videoId: '9Sa2ymKCQUI' },
     },
     */
-    {
-        name: 'Psyvariar 2',
-        series: Series.Psyvariar,
-        songSource: { songName: 'Weakboson - Gorge City', videoId: 'wZrKXcoHkKw' },
-    },
     {
         name: 'Pulstar',
         songSource: { songName: 'Front Line on the Earth', videoId: 'IexMUkiPg-M' },
@@ -2580,6 +2580,24 @@ const gameEntries: GameEntry[] = [
         name: 'Vasara 2',
         series: Series.Vasara,
         songSource: { songName: 'Like the Wind', videoId: '_Di0WbKOkHg' },
+    },
+    {
+        name: 'Viewpoint',
+        songSource: {
+            songName: 'Not All There',
+            arrangements: [
+                { source: 'Neo Geo', videoId: 'NUrSBCSGTiY' },
+                { source: 'Mega Drive', videoId: 'hW4oYFeUV-U' },
+                { source: 'Sharp X68000', videoId: 'nUzbmPTsmo4' },
+            ],
+        },
+    },
+    {
+        name: 'Viewpoint (PS1)',
+        songSource: {
+            songName: 'This Will Be Mine',
+            videoId: 'yV_kMe3I0og',
+        },
     },
     {
         name: 'Vimana',
