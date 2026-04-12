@@ -1287,6 +1287,19 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Fin Fantasy', videoId: '80A7SNQFokU' },
     },
     {
+        name: 'Mr Heli',
+        alias: 'Battle Chopper',
+        songSource: {
+            songName: 'Theme',
+            arrangements: [
+                { source: 'Arcade', videoId: 'GqITupo_KG4' },
+                { source: 'Amstrad', videoId: 'z6GkfOo5RZ8' },
+                { source: 'Commodore 64', videoId: 'uHq3iH25VnY', startTime: 169, endTime: 299 },
+                { source: 'PC Engine', videoId: 'jauE6kBJbBY', startTime: 39, endTime: 157 },
+            ],
+        },
+    },
+    {
         name: 'Muchi Muchi Pork!',
         songSource: { songName: 'Doki Doki in the Sky', videoId: 'iTb0FEaqsv4' },
     },
