@@ -38,6 +38,7 @@ export enum Series {
     Touhou = 'Touhou Project',
     Truxton = 'Truxton',
     Twinbee = 'Twinbee',
+    TwinkleStarSprites = 'Twinkle Star Sprites',
     Vasara = 'Vasara',
     Zeal = 'Zeal',
     ZeroGunner = 'Zero Gunner',

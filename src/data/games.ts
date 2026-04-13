@@ -357,6 +357,10 @@ const gameEntries: GameEntry[] = [
         ],
     },
     {
+        name: 'Crisis Wing',
+        songSource: { songName: 'URF!', videoId: 'p3TEz5Job74', startTime: 26, endTime: 126 },
+    },
+    {
         name: 'Cybattler',
         songSource: { songName: 'Interception', videoId: 'pZEdfyCUSmQ' },
     },
@@ -371,6 +375,17 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Daioh',
         songSource: { songName: 'Stage 1', videoId: 'vqi1eM9MNPw', startTime: 62, endTime: 213 },
+    },
+    {
+        name: 'Daioh Gale',
+        alias: ['Dezaemon', 'Dezaemon Plus'],
+        songSource: {
+            songName: 'Stage 1',
+            arrangements: [
+                { source: 'Dezaemon', videoId: 'hrgR5Fl2h5Y' },
+                { source: 'Dezaemon Plus', videoId: 'cdqGUeAtQUM' },
+            ],
+        },
     },
     {
         name: 'Dangerous Seed',
@@ -1276,6 +1291,19 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Fin Fantasy', videoId: '80A7SNQFokU' },
     },
     {
+        name: 'Mr Heli',
+        alias: 'Battle Chopper',
+        songSource: {
+            songName: 'Theme',
+            arrangements: [
+                { source: 'Arcade', videoId: 'GqITupo_KG4' },
+                { source: 'Amstrad CPC', videoId: 'z6GkfOo5RZ8' },
+                { source: 'Commodore 64', videoId: 'uHq3iH25VnY', startTime: 169, endTime: 299 },
+                { source: 'PC Engine', videoId: 'jauE6kBJbBY', startTime: 39, endTime: 157 },
+            ],
+        },
+    },
+    {
         name: 'Muchi Muchi Pork!',
         songSource: { songName: 'Doki Doki in the Sky', videoId: 'iTb0FEaqsv4' },
     },
@@ -1466,14 +1494,6 @@ const gameEntries: GameEntry[] = [
         name: 'ProtoCorgi',
         songSource: { songName: 'Leviathan 1', videoId: 'UzpRYgSCwds' },
     },
-    /*
-    Delta is a compilation, need to look into how to handle this more
-    {
-        name: 'Psyvariar Delta',
-        series: Series.Psyvariar,
-        songSource: { songName: 'Earth', videoId: '9Sa2ymKCQUI' },
-    },
-    */
     {
         name: 'Psyvariar 2',
         series: Series.Psyvariar,
@@ -1795,6 +1815,36 @@ const gameEntries: GameEntry[] = [
         name: 'Sagaia (Game Boy)',
         series: Series.Darius,
         songSource: { songName: 'Cosmic Air Way', videoId: 'ekMGtD9cDhQ' },
+    },
+    {
+        name: 'Saint Dragon',
+        songSource: {
+            songName: 'Metal Planet',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: '3no4tup4cvU',
+                },
+                {
+                    source: 'Amiga',
+                    videoId: '0GpVA06mWS8',
+                    endTime: 311,
+                },
+                {
+                    source: 'Amstrad CPC',
+                    videoId: '2cm1TycoaWI',
+                },
+                {
+                    source: 'Commodore 64',
+                    videoId: '_K5EcSVFY60',
+                },
+                {
+                    source: 'PC Engine',
+                    videoId: 'DCUd145hvlw',
+                    endTime: 251,
+                },
+            ],
+        },
     },
     {
         name: 'Salamander',
@@ -2533,6 +2583,16 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Twin Flight', videoId: '4hG606bVSZU' },
     },
     {
+        name: 'Twinkle Star Sprites',
+        series: Series.TwinkleStarSprites,
+        songSource: { songName: 'Applicot Ground', videoId: '-UpVxnCIfFc' },
+    },
+    {
+        name: 'Twinkle Star Sprites: La Petite Princesse',
+        series: Series.TwinkleStarSprites,
+        songSource: { songName: 'Applicot Ground', videoId: 'feCSnMH9kHE' },
+    },
+    {
         name: 'Tyrian',
         songSource: { songName: 'Tyrian, the level', videoId: 'wNnTGbbDJfo' },
     },
@@ -2580,6 +2640,24 @@ const gameEntries: GameEntry[] = [
         name: 'Vasara 2',
         series: Series.Vasara,
         songSource: { songName: 'Like the Wind', videoId: '_Di0WbKOkHg' },
+    },
+    {
+        name: 'Viewpoint',
+        songSource: {
+            songName: 'Not All There',
+            arrangements: [
+                { source: 'Neo Geo', videoId: 'NUrSBCSGTiY' },
+                { source: 'Mega Drive', videoId: 'hW4oYFeUV-U' },
+                { source: 'Sharp X68000', videoId: 'nUzbmPTsmo4' },
+            ],
+        },
+    },
+    {
+        name: 'Viewpoint (PS1)',
+        songSource: {
+            songName: 'This Will Be Mine',
+            videoId: 'yV_kMe3I0og',
+        },
     },
     {
         name: 'Vimana',
@@ -2687,6 +2765,15 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Stage 1, 3, 5', videoId: 'RXFcfd1oh4g', startTime: 2, endTime: 51 },
     },
 ];
+
+/*
+    Delta is a compilation, need to look into how to handle this more
+    {
+        name: 'Psyvariar Delta',
+        series: Series.Psyvariar,
+        songSource: { songName: 'Earth', videoId: '9Sa2ymKCQUI' },
+    },
+*/
 
 // Games without relevant YouTube links yet.
 // When a suitable YouTube video becomes available, replace '---' with the real videoId and move the entry into gameEntries above.
