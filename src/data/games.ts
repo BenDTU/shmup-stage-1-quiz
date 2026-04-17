@@ -668,7 +668,10 @@ const gameEntries: GameEntry[] = [
         series: Series.Espgaluda,
         songSource: {
             songName: 'Bloody Separation ~ Bloody Arrival',
-            videoId: '5A6oJRZSFBg',
+            arrangements: [
+                { source: 'Original', videoId: '5A6oJRZSFBg' },
+                { source: 'Perfect Remix', videoId: 'ePAEJvHb_2Q' },
+            ],
         },
     },
     {
