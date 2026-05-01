@@ -811,6 +811,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Mission 1', videoId: '7BxFfHGcQ88' },
     },
     {
+        name: 'Galactix',
+        songSource: { songName: 'Combat 1', videoId: 'v9h0y4i3GbQ', startTime: 144, endTime: 288 },
+    },
+    {
         name: 'Gekirindan',
         songSource: { songName: 'Pure Spirit', videoId: 'OijiF6r1Xfc' },
     },
@@ -1114,6 +1118,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Interception - Noisy Town', videoId: 'z472pIce5CY' },
     },
     {
+        name: 'Kiloblaster',
+        songSource: { songName: 'Butterfly', videoId: '8QRjCB-0Pp8' },
+    },
+    {
         name: 'Kingdom Grandprix',
         alias: 'Shippu Mahou Daisakusen',
         series: Series.Mahou,
@@ -1233,6 +1241,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Mad Shark',
         songSource: { songName: 'Round 1, Round 2, Round 5', videoId: '4eTABytlJZY', startTime: 9, endTime: 140 },
+    },
+    {
+        name: 'Major Stryker',
+        songSource: { songName: 'Super Nova', videoId: 'mwqvNNu1ql0' },
     },
     {
         name: 'Mars Matrix',
@@ -1914,6 +1926,14 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Silver Surfer',
         songSource: { songName: 'Stage BGM 1', videoId: 'BGNSHNf-nlU' },
+    },
+    {
+        name: 'Sine Mora',
+        alias: 'Sine Mora EX',
+        songSource: [
+            { songName: 'Moneta Point A', videoId: '2GNmu1x3sp0' },
+            { songName: 'Near Moneta Point', videoId: 'lywhgiIlYYk' },
+        ],
     },
     {
         name: 'Sinistron',
