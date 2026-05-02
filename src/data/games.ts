@@ -2800,7 +2800,7 @@ export const noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
     },
     {
         name: 'Sonic Wings Reunion',
-        sortName: 'Sonig Wings 5',
+        sortName: 'Sonic Wings 5',
         alias: ['Aero Fighters Reunion'],
         series: Series.SonicWings,
         songSource: { songName: 'Abu Dhabi, UAE stage' },
