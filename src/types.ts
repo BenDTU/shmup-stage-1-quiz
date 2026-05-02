@@ -61,6 +61,11 @@ export type SongEntry =
   | { songName: string; videoId: string; startTime?: number; endTime?: number }
   | { songName: string; arrangements: [SongArrangement, ...SongArrangement[]] };
 
+export type SongEntryWithoutSoundtrack =
+  | { songName: string }
+  | { songName: string; arrangements: [{ source: string }, ...{ source: string }[]] };
+
+
 interface GameEntryBase {
     name: string
     sortName?: string // optional override used for alphabetical sorting (e.g. 'Gradius 2' for 'Gradius II')
@@ -76,7 +81,7 @@ export type GameEntry = GameEntryBase & {
 export type GameEntryWithId = GameEntry & { id: number };
 
 export type NoSoundTrackGameEntry = GameEntryBase & {
-    songSource: { songName: string }
+    songSource: SongEntryWithoutSoundtrack
 };
 
 export type GameListEntry = { id: number; name: string; alias?: string | string[]; series?: Series };

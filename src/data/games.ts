@@ -2015,6 +2015,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Sonic Wings Special',
+        sortName: 'Sonic Wings 4',
         alias: ['Sonic Wings Limited', 'Aero Fighters Special'],
         series: Series.SonicWings,
         songSource: { songName: 'Japan stage', videoId: 'sXCTZsRJ6y8' },
@@ -2791,7 +2792,7 @@ const gameEntries: GameEntry[] = [
 
 // Games without relevant YouTube links yet.
 // When a suitable YouTube video becomes available, replace '---' with the real videoId and move the entry into gameEntries above.
-const _noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
+export const noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
     {
         name: 'Exzeal',
         series: Series.Zeal,
@@ -2799,6 +2800,7 @@ const _noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
     },
     {
         name: 'Sonic Wings Reunion',
+        sortName: 'Sonig Wings 5',
         alias: ['Aero Fighters Reunion'],
         series: Series.SonicWings,
         songSource: { songName: 'Abu Dhabi, UAE stage' },
