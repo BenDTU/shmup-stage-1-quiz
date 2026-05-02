@@ -63,7 +63,7 @@ export type SongEntry =
 
 export type SongEntryWithoutSoundtrack =
   | { songName: string }
-  | { songName: string; arrangements: [{ source: string }, ...{ source: string }[]] };
+  | { songName: string; arrangements: [Pick<SongArrangement, 'source'>, ...Pick<SongArrangement, 'source'>[]] };
 
 
 interface GameEntryBase {
