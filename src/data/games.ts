@@ -598,10 +598,6 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Submerged City', videoId: 'YmSOfpOkmDE' },
     },
     {
-        name: 'Drainus',
-        songSource: { songName: 'Determination', videoId: 'ppgo1QkNNxk' },
-    },
-    {
         name: 'Earth Defense Force',
         alias: 'Super Earth Defense Force',
         songSource: {
@@ -1139,11 +1135,6 @@ const gameEntries: GameEntry[] = [
         name: 'Lightning Fighters',
         alias: 'Trigon',
         songSource: { songName: 'Faraway', videoId: 'jQJQ_rrN5hA' },
-    },
-    {
-        name: 'Like Dreamer',
-        series: Series.Dreamer,
-        songSource: { songName: 'Cat Mischief', videoId: '1iEJRCaanBY' },
     },
     {
         name: 'Lords of Thunder',
@@ -2811,6 +2802,15 @@ const _noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
         alias: ['Aero Fighters Reunion'],
         series: Series.SonicWings,
         songSource: { songName: 'Abu Dhabi, UAE stage' },
+    },
+    {
+        name: 'Drainus',
+        songSource: { songName: 'Determination' },
+    },
+    {
+        name: 'Like Dreamer',
+        series: Series.Dreamer,
+        songSource: { songName: 'Cat Mischief' },
     },
 ];
 
