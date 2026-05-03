@@ -55,11 +55,25 @@
                                     <td>
                                         {{ song.songName }}
                                         <div class="d-sm-none mt-1">
-                                            <SongLinks :entry="song" />
+                                            <SongLinks
+                                                v-if="song.entry"
+                                                :entry="song.entry"
+                                            />
+                                            <span
+                                                v-else
+                                                class="icon-link text-secondary small"
+                                            ><i class="bi bi-youtube lh-1" /> Unavailable</span>
                                         </div>
                                     </td>
                                     <td class="text-nowrap d-none d-sm-table-cell">
-                                        <SongLinks :entry="song" />
+                                        <SongLinks
+                                            v-if="song.entry"
+                                            :entry="song.entry"
+                                        />
+                                        <span
+                                            v-else
+                                            class="icon-link text-secondary small"
+                                        ><i class="bi bi-youtube lh-1" /> Unavailable</span>
                                     </td>
                                 </tr>
                             </template>
@@ -82,31 +96,45 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { games, totalSongs, totalShmups } from '@/data/games';
+import { games, noSoundTrackGameEntries, totalSongs, totalShmups } from '@/data/games';
 import type { SongEntry } from '@/data/games';
 import SongLinks from '@/components/SongLinks.vue';
 
 interface GameGroup {
     gameName: string
+    sortKey: string
     aliases: string[]
-    songs: SongEntry[]
+    songs: Array<{ songName: string; entry?: SongEntry }>
 }
 
 function normalizeAlias(alias: string | string[]): string[] {
-    if (Array.isArray(alias)) {
-        return alias;
-    }
-    return [alias];
+    return Array.isArray(alias) ? alias : [alias];
 }
 
-const gameGroups: GameGroup[] = games.map((game) => {
+const availableGroups: GameGroup[] = games.map((game) => {
     const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource];
     return {
         gameName: game.name,
+        sortKey: (game.sortName ?? game.name).toLowerCase(),
         aliases: game.alias ? normalizeAlias(game.alias) : [],
-        songs: sources,
+        songs: sources.map((entry) => ({ songName: entry.songName, entry })),
     };
 });
+
+const unavailableGroups: GameGroup[] = noSoundTrackGameEntries.map((game) => {
+    const source = game.songSource;
+    return {
+        gameName: game.name,
+        sortKey: (game.sortName ?? game.name).toLowerCase(),
+        aliases: game.alias ? normalizeAlias(game.alias) : [],
+        songs: 'arrangements' in source
+            ? source.arrangements.map(() => ({ songName: source.songName }))
+            : [{ songName: source.songName }],
+    };
+});
+
+const gameGroups: GameGroup[] = [...availableGroups, ...unavailableGroups]
+    .sort((a, b) => a.sortKey.localeCompare(b.sortKey));
 
 const hoveredGame = ref<string | null>(null);
 </script>
