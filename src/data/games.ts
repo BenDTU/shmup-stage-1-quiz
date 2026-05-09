@@ -92,6 +92,18 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'Air Buster',
+        alias: 'Aero Blasters',
+        songSource: {
+            songName: 'Seaside Front',
+            arrangements: [
+                { source: 'Arcade', videoId: '9NpFVWZQYXk' },
+                { source: 'Mega Drive', videoId: '8ipAllxpgMs' },
+                { source: 'PC Engine', videoId: 'a31IUDPILV0' },
+            ],
+        },
+    },
+    {
         name: 'Air Duel',
         songSource: { songName: 'Stage 1', videoId: '8WsKeA4v01U' },
     },
@@ -108,6 +120,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Air Zonk',
         songSource: { songName: 'Aqua Base stage', videoId: '9IJcqceH3CM' },
+    },
+    {
+        name: 'Aka to Blue',
+        songSource: { songName: 'RED7029', videoId: 'Za0F2ZwbjbM' },
     },
     {
         name: 'Akai Katana',
@@ -204,6 +220,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Twilight Zone', videoId: '6N3Bfm057xM' },
     },
     {
+        name: 'Blast Wind',
+        songSource: { songName: 'Ultimate Destroyer', videoId: '7agjTfQrqpk' },
+    },
+    {
         name: 'Blazeon',
         songSource: {
             songName: 'Optimistic Departure',
@@ -235,6 +255,11 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Brave Blade',
         songSource: { songName: 'The Initial Battle', videoId: 's8ejVCXrdZw' },
+    },
+    {
+        name: 'Broken Thunder',
+        series: Series.ThunderForce,
+        songSource: { songName: 'Fire LEO-05P Syrinx', videoId: '2uiYSbe0npc' },
     },
     {
         name: 'Bullet Soul',
@@ -332,6 +357,14 @@ const gameEntries: GameEntry[] = [
         ],
     },
     {
+        name: 'Crisis Wing',
+        songSource: { songName: 'URF!', videoId: 'p3TEz5Job74', startTime: 26, endTime: 126 },
+    },
+    {
+        name: 'Cybattler',
+        songSource: { songName: 'Interception', videoId: 'pZEdfyCUSmQ' },
+    },
+    {
         name: 'Cygni: All Guns Blazing',
         songSource: { songName: 'Battle Over the White Sands', videoId: 'a-9kcVAaXXQ' },
     },
@@ -342,6 +375,17 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Daioh',
         songSource: { songName: 'Stage 1', videoId: 'vqi1eM9MNPw', startTime: 62, endTime: 213 },
+    },
+    {
+        name: 'Daioh Gale',
+        alias: ['Dezaemon', 'Dezaemon Plus'],
+        songSource: {
+            songName: 'Stage 1',
+            arrangements: [
+                { source: 'Dezaemon', videoId: 'hrgR5Fl2h5Y' },
+                { source: 'Dezaemon Plus', videoId: 'cdqGUeAtQUM' },
+            ],
+        },
     },
     {
         name: 'Dangerous Seed',
@@ -505,7 +549,11 @@ const gameEntries: GameEntry[] = [
         alias: 'DoDonPachi DaiFukkatsu',
         sortName: 'Dodonpachi 3',
         series: Series.Dodonpachi,
-        songSource: { songName: 'The Year 2008, Tokyo', videoId: 'ZCaPtpNyjf4' },
+        songSource: [
+            { songName: 'The Year 2008, Tokyo', videoId: 'ZCaPtpNyjf4' },
+            { songName: 'Vertex', videoId: 'IeyVsRCfGHg' },
+            { songName: 'Fly Above the Sky', videoId: 'yvMH45_o6dA' },
+        ],
     },
     {
         name: 'DoDonPachi SaiDaiOuJou',
@@ -548,10 +596,6 @@ const gameEntries: GameEntry[] = [
         sortName: 'Dragon Spirit 2',
         series: Series.DragonSpirit,
         songSource: { songName: 'Submerged City', videoId: 'YmSOfpOkmDE' },
-    },
-    {
-        name: 'Drainus',
-        songSource: { songName: 'Determination', videoId: 'ppgo1QkNNxk' },
     },
     {
         name: 'Earth Defense Force',
@@ -620,7 +664,10 @@ const gameEntries: GameEntry[] = [
         series: Series.Espgaluda,
         songSource: {
             songName: 'Bloody Separation ~ Bloody Arrival',
-            videoId: '5A6oJRZSFBg',
+            arrangements: [
+                { source: 'Original', videoId: '5A6oJRZSFBg' },
+                { source: 'Perfect Remix', videoId: 'ePAEJvHb_2Q' },
+            ],
         },
     },
     {
@@ -634,8 +681,19 @@ const gameEntries: GameEntry[] = [
             ] },
     },
     {
+        name: 'Ether Vapor',
+        songSource: { songName: 'High Wind', videoId: '9r-Uk_oMvrg' },
+    },
+    {
         name: 'Ex-Calibre',
         songSource: { songName: "Cruisin'", videoId: 'ddJJ_geDcYU' },
+    },
+    {
+        name: 'Exceed 3rd - Jade Penetrate',
+        alias: 'Exceed 3rd - Jade Penetrate - Black Package',
+        songSource: {
+            songName: 'Wind Wings', videoId: 'gUZVglcDQXE',
+        },
     },
     {
         name: 'Explosive Breaker',
@@ -747,6 +805,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Gaiares',
         songSource: { songName: 'Mission 1', videoId: '7BxFfHGcQ88' },
+    },
+    {
+        name: 'Galactix',
+        songSource: { songName: 'Combat 1', videoId: 'v9h0y4i3GbQ', startTime: 144, endTime: 288 },
     },
     {
         name: 'Gekirindan',
@@ -940,6 +1002,15 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Falling Cherry Blossoms', videoId: 'EWYuTxCV11U' },
     },
     {
+        name: 'Gyruss',
+        songSource: { songName: 'Main Theme',
+            arrangements: [
+                { source: 'Arcade', videoId: 'PBzqbQSHhU0' },
+                { source: 'NES', videoId: 'quPLRVaEOns' },
+            ],
+        },
+    },
+    {
         name: "Halley's Comet",
         songSource: { songName: 'Ed1986', videoId: 'QliWHAxJ8V4', startTime: 2, endTime: 146 },
     },
@@ -1023,6 +1094,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'War Upon the East Frontier', videoId: 'zhgBx6vSApM' },
     },
     {
+        name: "Jets'n'Guns",
+        songSource: { songName: 'FanVaCoolt', videoId: 'OTx_pJNGcz0' },
+    },
+    {
         name: 'Judgement Silversword',
         songSource: { songName: 'BGM 01', videoId: '-VIXuLTGoYo', startTime: 0, endTime: 123 },
     },
@@ -1037,6 +1112,10 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Ketsui',
         songSource: { songName: 'Interception - Noisy Town', videoId: 'z472pIce5CY' },
+    },
+    {
+        name: 'Kiloblaster',
+        songSource: { songName: 'Butterfly', videoId: '8QRjCB-0Pp8' },
     },
     {
         name: 'Kingdom Grandprix',
@@ -1056,11 +1135,6 @@ const gameEntries: GameEntry[] = [
         name: 'Lightning Fighters',
         alias: 'Trigon',
         songSource: { songName: 'Faraway', videoId: 'jQJQ_rrN5hA' },
-    },
-    {
-        name: 'Like Dreamer',
-        series: Series.Dreamer,
-        songSource: { songName: 'Cat Mischief', videoId: '1iEJRCaanBY' },
     },
     {
         name: 'Lords of Thunder',
@@ -1160,6 +1234,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Round 1, Round 2, Round 5', videoId: '4eTABytlJZY', startTime: 9, endTime: 140 },
     },
     {
+        name: 'Major Stryker',
+        songSource: { songName: 'Super Nova', videoId: 'mwqvNNu1ql0' },
+    },
+    {
         name: 'Mars Matrix',
         songSource: { songName: 'Armed Satellite Phobos', videoId: 'thei1zxfJWA' },
     },
@@ -1217,6 +1295,19 @@ const gameEntries: GameEntry[] = [
     {
         name: "Miss Kobayashi's Dragon Maid Burst Forth!! Choro-gon☆Breath",
         songSource: { songName: 'Fin Fantasy', videoId: '80A7SNQFokU' },
+    },
+    {
+        name: 'Mr Heli',
+        alias: 'Battle Chopper',
+        songSource: {
+            songName: 'Theme',
+            arrangements: [
+                { source: 'Arcade', videoId: 'GqITupo_KG4' },
+                { source: 'Amstrad CPC', videoId: 'z6GkfOo5RZ8' },
+                { source: 'Commodore 64', videoId: 'uHq3iH25VnY', startTime: 169, endTime: 299 },
+                { source: 'PC Engine', videoId: 'jauE6kBJbBY', startTime: 39, endTime: 157 },
+            ],
+        },
     },
     {
         name: 'Muchi Muchi Pork!',
@@ -1382,6 +1473,17 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Village Sky', videoId: 'AGt-RJr-khA' },
     },
     {
+        name: 'Power Strike II (Game Gear)',
+        alias: 'GG Aleste II',
+        series: Series.Aleste,
+        songSource: { songName: 'Space Plant', videoId: '6z9vTdPLuO8' },
+    },
+    {
+        name: 'Power Strike II (Master System)',
+        series: Series.Aleste,
+        songSource: { songName: 'Stage 1', videoId: 'O_hSv9paWmM', startTime: 202, endTime: 307 },
+    },
+    {
         name: 'Prehistoric Isle in 1930',
         sortName: 'Prehistoric Isle',
         songSource: { songName: 'Flying the Dinosaur', videoId: 'H7CYh7Y3E6w' },
@@ -1400,6 +1502,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Psyvariar 2',
+        series: Series.Psyvariar,
         songSource: { songName: 'Weakboson - Gorge City', videoId: 'wZrKXcoHkKw' },
     },
     {
@@ -1545,6 +1648,24 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Radiant Silvergun',
         songSource: { songName: 'Return', videoId: 'BJnkpw2dyAs' },
+    },
+    {
+        name: 'Radirgy',
+        series: Series.Radirgy,
+        songSource: { songName: 'ukiha shopping mall', videoId: '_1QLg8TR4Oo' },
+    },
+    {
+        name: 'Radirgy 2',
+        series: Series.Radirgy,
+        songSource: [
+            { songName: 'Portable Tragedy', videoId: 'Gi7GSlmdpXE' },
+            { songName: 'Happy Fake', videoId: 'sqInLaqiQdY' },
+        ],
+    },
+    {
+        name: 'Radirgy Swag',
+        series: Series.Radirgy,
+        songSource: { songName: 'condition green', videoId: '729zyZ59OyU' },
     },
     {
         name: 'Raiden',
@@ -1702,6 +1823,36 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Cosmic Air Way', videoId: 'ekMGtD9cDhQ' },
     },
     {
+        name: 'Saint Dragon',
+        songSource: {
+            songName: 'Metal Planet',
+            arrangements: [
+                {
+                    source: 'Arcade',
+                    videoId: '3no4tup4cvU',
+                },
+                {
+                    source: 'Amiga',
+                    videoId: '0GpVA06mWS8',
+                    endTime: 311,
+                },
+                {
+                    source: 'Amstrad CPC',
+                    videoId: '2cm1TycoaWI',
+                },
+                {
+                    source: 'Commodore 64',
+                    videoId: '_K5EcSVFY60',
+                },
+                {
+                    source: 'PC Engine',
+                    videoId: 'DCUd145hvlw',
+                    endTime: 251,
+                },
+            ],
+        },
+    },
+    {
         name: 'Salamander',
         alias: 'Life Force',
         series: Series.Gradius,
@@ -1739,6 +1890,14 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Start ~ Dot Shooter', videoId: 'Pa6_lccEnXg' },
     },
     {
+        name: 'Seicross (Arcade)',
+        songSource: { songName: 'Stage 1', videoId: 'wzkFaYkpvrM' },
+    },
+    {
+        name: 'Seicross (NES)',
+        songSource: { songName: 'Stage 1', videoId: 'tG74kRMpMH0' },
+    },
+    {
         name: 'Shienryu',
         alias: ['Gekioh Shooting King', 'Steel Dragon'],
         songSource: {
@@ -1758,6 +1917,14 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Silver Surfer',
         songSource: { songName: 'Stage BGM 1', videoId: 'BGNSHNf-nlU' },
+    },
+    {
+        name: 'Sine Mora',
+        alias: 'Sine Mora EX',
+        songSource: [
+            { songName: 'Moneta Point A', videoId: '2GNmu1x3sp0' },
+            { songName: 'Near Moneta Point', videoId: 'lywhgiIlYYk' },
+        ],
     },
     {
         name: 'Sinistron',
@@ -1848,6 +2015,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Sonic Wings Special',
+        sortName: 'Sonic Wings 4',
         alias: ['Sonic Wings Limited', 'Aero Fighters Special'],
         series: Series.SonicWings,
         songSource: { songName: 'Japan stage', videoId: 'sXCTZsRJ6y8' },
@@ -2066,6 +2234,11 @@ const gameEntries: GameEntry[] = [
         },
     },
     {
+        name: 'Tempest 2000',
+        alias: [ 'Tempest 3000', 'Tempest 4000' ],
+        songSource: { songName: "Mind's Eye", videoId: 'ZdjlSWipbWM' },
+    },
+    {
         name: 'Tengai',
         alias: ['Sengoku Blade', 'Sengoku Ace Episode II'],
         series: Series.SengokuAce,
@@ -2102,8 +2275,44 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Fly to Live I', videoId: 'Gtz9ZfaG2m8' },
     },
     {
+        name: 'Thunder Force III',
+        alias: 'Thunder Force AC',
+        series: Series.ThunderForce,
+        songSource: [
+            { songName: 'Back to the Fire', videoId: '7xEa6gf_RGk' },
+            { songName: 'Venus Fire', videoId: 'g8Xcaes8ALM' },
+            { songName: 'The Grubby Dark Blue', videoId: 'judFwTuOGU4' },
+            { songName: 'Truth', videoId: 'KwEBp9_Znr0' },
+            { songName: 'Final Take a Chance', videoId: 'CcNiXoLdTLU' },
+        ],
+    },
+    {
         name: 'Thunder Force IV',
-        songSource: { songName: 'Fighting Back', videoId: 'IJE-iAE1Mt8' },
+        series: Series.ThunderForce,
+        songSource: [
+            { songName: 'Fighting Back', videoId: 'IJE-iAE1Mt8' },
+            { songName: 'Space Walk', videoId: 'XKvKOx4uIPg' },
+            { songName: 'The Sky Line', videoId: 'KEnYrJynuSc' },
+            { songName: 'Sand Hell', videoId: 'KOzgUtumOo0' },
+        ],
+    },
+    {
+        name: 'Thunder Force V',
+        series: Series.ThunderForce,
+        songSource: [
+            { songName: 'Legendary Wings', videoId: 'YR1xrjSvOZw' },
+            { songName: 'Beast Jungle', videoId: '0Sl0A8Sm5aI' },
+            { songName: 'Rising Blue Lightning', videoId: '8GVoLKNuGuI' },
+        ],
+    },
+    {
+        name: 'Thunder Force VI',
+        series: Series.ThunderForce,
+        songSource: [
+            { songName: 'Ruined Green', videoId: 'Vep8fRGwGKE' },
+            { songName: 'Bio Flame', videoId: 'oAEs_LNWNzc' },
+            { songName: 'Ever Blue', videoId: 'omLCF6mfoNg' },
+        ],
     },
     {
         name: 'Tiger-Heli',
@@ -2389,6 +2598,16 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Twin Flight', videoId: '4hG606bVSZU' },
     },
     {
+        name: 'Twinkle Star Sprites',
+        series: Series.TwinkleStarSprites,
+        songSource: { songName: 'Applicot Ground', videoId: '-UpVxnCIfFc' },
+    },
+    {
+        name: 'Twinkle Star Sprites: La Petite Princesse',
+        series: Series.TwinkleStarSprites,
+        songSource: { songName: 'Applicot Ground', videoId: 'feCSnMH9kHE' },
+    },
+    {
         name: 'Tyrian',
         songSource: { songName: 'Tyrian, the level', videoId: 'wNnTGbbDJfo' },
     },
@@ -2438,6 +2657,24 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Like the Wind', videoId: '_Di0WbKOkHg' },
     },
     {
+        name: 'Viewpoint',
+        songSource: {
+            songName: 'Not All There',
+            arrangements: [
+                { source: 'Neo Geo', videoId: 'NUrSBCSGTiY' },
+                { source: 'Mega Drive', videoId: 'hW4oYFeUV-U' },
+                { source: 'Sharp X68000', videoId: 'nUzbmPTsmo4' },
+            ],
+        },
+    },
+    {
+        name: 'Viewpoint (PS1)',
+        songSource: {
+            songName: 'This Will Be Mine',
+            videoId: 'yV_kMe3I0og',
+        },
+    },
+    {
         name: 'Vimana',
         songSource: {
             songName: 'Opening ~ Space High',
@@ -2464,7 +2701,7 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Xevious',
-        songSource: { songName: 'BGM', videoId: 'w4vXIMFt9QU' },
+        songSource: { songName: 'In-game Music', videoId: 'pOtncMoOB0I' },
     },
     {
         name: 'Xevious 3D/G',
@@ -2489,6 +2726,11 @@ const gameEntries: GameEntry[] = [
                 { source: 'MSX', videoId: 'mTOFoidc_04' },
             ],
         },
+    },
+    {
+        name: 'Zanac Neo',
+
+        songSource: { songName: 'Instant Replicant', videoId: 'Jv8G7_35btg' },
     },
     {
         name: 'Zed Blade',
@@ -2539,9 +2781,18 @@ const gameEntries: GameEntry[] = [
     },
 ];
 
+/*
+    Delta is a compilation, need to look into how to handle this more
+    {
+        name: 'Psyvariar Delta',
+        series: Series.Psyvariar,
+        songSource: { songName: 'Earth', videoId: '9Sa2ymKCQUI' },
+    },
+*/
+
 // Games without relevant YouTube links yet.
 // When a suitable YouTube video becomes available, replace '---' with the real videoId and move the entry into gameEntries above.
-const _noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
+export const noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
     {
         name: 'Exzeal',
         series: Series.Zeal,
@@ -2549,9 +2800,19 @@ const _noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
     },
     {
         name: 'Sonic Wings Reunion',
+        sortName: 'Sonic Wings 5',
         alias: ['Aero Fighters Reunion'],
         series: Series.SonicWings,
         songSource: { songName: 'Abu Dhabi, UAE stage' },
+    },
+    {
+        name: 'Drainus',
+        songSource: { songName: 'Determination' },
+    },
+    {
+        name: 'Like Dreamer',
+        series: Series.Dreamer,
+        songSource: { songName: 'Cat Mischief' },
     },
 ];
 

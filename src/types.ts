@@ -22,7 +22,9 @@ export enum Series {
     Mahou = 'Mahou',
     Nanostray = 'Nanostray',
     OutZone = 'Out Zone',
+    Psyvariar = 'Psyvariar',
     RType = 'R-Type',
+    Radirgy = 'Radirgy',
     Raiden = 'Raiden',
     SengokuAce = 'Sengoku Ace',
     SonicWings = 'Sonic Wings',
@@ -32,9 +34,11 @@ export enum Series {
     TerraCresta = 'Terra Cresta',
     ThunderCross = 'Thunder Cross',
     ThunderDragon = 'Thunder Dragon',
+    ThunderForce = 'Thunder Force',
     Touhou = 'Touhou Project',
     Truxton = 'Truxton',
     Twinbee = 'Twinbee',
+    TwinkleStarSprites = 'Twinkle Star Sprites',
     Vasara = 'Vasara',
     Zeal = 'Zeal',
     ZeroGunner = 'Zero Gunner',
@@ -57,6 +61,11 @@ export type SongEntry =
   | { songName: string; videoId: string; startTime?: number; endTime?: number }
   | { songName: string; arrangements: [SongArrangement, ...SongArrangement[]] };
 
+export type SongEntryWithoutSoundtrack =
+  | { songName: string }
+  | { songName: string; arrangements: [Pick<SongArrangement, 'source'>, ...Pick<SongArrangement, 'source'>[]] };
+
+
 interface GameEntryBase {
     name: string
     sortName?: string // optional override used for alphabetical sorting (e.g. 'Gradius 2' for 'Gradius II')
@@ -72,7 +81,7 @@ export type GameEntry = GameEntryBase & {
 export type GameEntryWithId = GameEntry & { id: number };
 
 export type NoSoundTrackGameEntry = GameEntryBase & {
-    songSource: { songName: string }
+    songSource: SongEntryWithoutSoundtrack
 };
 
 export type GameListEntry = { id: number; name: string; alias?: string | string[]; series?: Series };
