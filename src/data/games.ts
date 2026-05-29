@@ -1021,6 +1021,7 @@ const gameEntries: GameEntry[] = [
             arrangements: [
                 { source: 'Arcade', videoId: '1VUMGMKTnKs' },
                 { source: 'Mega Drive', videoId: 'Ko2qiEWKhJg' },
+                { source: 'PC Engine', videoId: 'rF5kNgmBZ6k' },
             ],
         },
     },
