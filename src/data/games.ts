@@ -1016,7 +1016,14 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Hellfire',
-        songSource: { songName: 'Captain Lancer', videoId: '1VUMGMKTnKs' },
+        songSource: {
+            songName: 'Ready to Go ~ Captain Lancer',
+            arrangements: [
+                { source: 'Arcade', videoId: '1VUMGMKTnKs' },
+                { source: 'Mega Drive', videoId: 'Ko2qiEWKhJg' },
+                { source: 'PC Engine', videoId: 'rF5kNgmBZ6k' },
+            ],
+        },
     },
     {
         name: 'Hellsinker',
