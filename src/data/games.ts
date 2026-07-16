@@ -1539,12 +1539,6 @@ const gameEntries: GameEntry[] = [
                     videoId: '42xjbdXze8E',
                 },
                 {
-                    source: 'Amstrad CPC',
-                    videoId: 'TUqxvufguZY',
-                    startTime: 270,
-                    endTime: 321,
-                },
-                {
                     source: 'Atari ST',
                     videoId: 'B-xGUTHedU0',
                     startTime: 50,
@@ -1617,7 +1611,19 @@ const gameEntries: GameEntry[] = [
         name: 'R-Type III: The Third Lightning',
         sortName: 'R-Type 3: The Third Lightning',
         series: Series.RType,
-        songSource: { songName: 'Catapult Dimension', videoId: 'EsLgLrM2CbY' },
+        songSource: {
+            songName: 'Outer Space',
+            arrangements: [
+                {
+                    source: 'Original',
+                    videoId: 'EsLgLrM2CbY',
+                },
+                {
+                    source: 'Dimensions',
+                    videoId: 'bK7gkCTRdaw',
+                },
+            ],
+        },
     },
     {
         name: 'R-Type Delta',
