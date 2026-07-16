@@ -1611,7 +1611,19 @@ const gameEntries: GameEntry[] = [
         name: 'R-Type III: The Third Lightning',
         sortName: 'R-Type 3: The Third Lightning',
         series: Series.RType,
-        songSource: { songName: 'Catapult Dimension', videoId: 'EsLgLrM2CbY' },
+        songSource: {
+            songName: 'Outer Space',
+            arrangements: [
+                {
+                    source: 'Original',
+                    videoId: 'EsLgLrM2CbY',
+                },
+                {
+                    source: 'Dimensions',
+                    videoId: 'bK7gkCTRdaw',
+                },
+            ],
+        },
     },
     {
         name: 'R-Type Delta',
