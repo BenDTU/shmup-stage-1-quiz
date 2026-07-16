@@ -1539,12 +1539,6 @@ const gameEntries: GameEntry[] = [
                     videoId: '42xjbdXze8E',
                 },
                 {
-                    source: 'Amstrad CPC',
-                    videoId: 'TUqxvufguZY',
-                    startTime: 270,
-                    endTime: 321,
-                },
-                {
                     source: 'Atari ST',
                     videoId: 'B-xGUTHedU0',
                     startTime: 50,
