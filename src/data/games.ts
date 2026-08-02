@@ -2536,6 +2536,11 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Live in Future', videoId: 'xgxFHJZrAfc' },
     },
     {
+        name: 'Truxton Extreme',
+        sortName: 'Truxton III',
+        songSource: { songName: 'Brave Man, Far Away', videoId: 't2_9wKIo5h4' },
+    },
+    {
         name: 'Turbo Force',
         songSource: { songName: 'Stage 1 & 6', videoId: 'QB4vsrMuWNM' },
     },
