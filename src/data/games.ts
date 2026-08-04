@@ -12,6 +12,10 @@ export type { SongEntry, GameEntry, GameListEntry, Game, NoSoundTrackGameEntry }
 // startTime (seconds) is optional; omit it to start from the beginning of the video.
 const gameEntries: GameEntry[] = [
     {
+        name: '70s-style Robot Anime Geppy-X',
+        songSource: { songName: 'Geppy-X, takeoff!!', videoId: 'BnyaCeRjSs4' },
+    },
+    {
         name: '1942',
         sortName: '194X 1',
         series: Series._194X,
