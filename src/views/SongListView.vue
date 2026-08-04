@@ -134,7 +134,7 @@ const unavailableGroups: GameGroup[] = noSoundTrackGameEntries.map((game) => {
 });
 
 const gameGroups: GameGroup[] = [...availableGroups, ...unavailableGroups]
-    .sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+    .sort((a, b) => a.sortKey.localeCompare(b.sortKey, undefined, { sensitivity: 'base', numeric: true }));
 
 const hoveredGame = ref<string | null>(null);
 </script>
