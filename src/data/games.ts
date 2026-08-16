@@ -196,7 +196,13 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Battle Garegga',
-        songSource: { songName: 'Fly to the Leaden Sky', videoId: 'Szr0TSXcWok' },
+        songSource: {
+            songName: 'Fly to the Leaden Sky',
+            arrangements: [
+                { source: 'Original', videoId: 'Szr0TSXcWok' },
+                { source: 'Arrange', videoId: '9iDOL0lAYsg' },
+            ],
+        },
     },
     {
         name: 'Bells & Whistles',
