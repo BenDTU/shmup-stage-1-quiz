@@ -1820,7 +1820,13 @@ const gameEntries: GameEntry[] = [
         name: 'RayStorm',
         sortName: 'Rayforce 2',
         alias: 'Layer Section II',
-        songSource: { songName: 'Geometric City', videoId: 'kP5huZQRAY4' },
+        songSource: {
+            songName: 'Geometric City',
+            arrangements: [
+                { source: 'Original', videoId: 'kP5huZQRAY4' },
+                { source: 'Neu Tanz Mix', videoId: 'H8Z9u7Sl4pY' },
+            ],
+        },
     },
     {
         name: 'RayCrisis',
