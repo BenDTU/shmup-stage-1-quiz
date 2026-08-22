@@ -196,7 +196,13 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Battle Garegga',
-        songSource: { songName: 'Fly to the Leaden Sky', videoId: 'Szr0TSXcWok' },
+        songSource: {
+            songName: 'Fly to the Leaden Sky',
+            arrangements: [
+                { source: 'Original', videoId: 'Szr0TSXcWok' },
+                { source: 'Arrange', videoId: '9iDOL0lAYsg' },
+            ],
+        },
     },
     {
         name: 'Bells & Whistles',
@@ -1814,7 +1820,13 @@ const gameEntries: GameEntry[] = [
         name: 'RayStorm',
         sortName: 'Rayforce 2',
         alias: 'Layer Section II',
-        songSource: { songName: 'Geometric City', videoId: 'kP5huZQRAY4' },
+        songSource: {
+            songName: 'Geometric City',
+            arrangements: [
+                { source: 'Original', videoId: 'kP5huZQRAY4' },
+                { source: 'Neu Tanz Mix', videoId: 'H8Z9u7Sl4pY' },
+            ],
+        },
     },
     {
         name: 'RayCrisis',
