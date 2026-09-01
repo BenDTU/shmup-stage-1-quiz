@@ -12,6 +12,10 @@ export type { SongEntry, GameEntry, GameListEntry, Game, NoSoundTrackGameEntry }
 // startTime (seconds) is optional; omit it to start from the beginning of the video.
 const gameEntries: GameEntry[] = [
     {
+        name: '70s-style Robot Anime Geppy-X',
+        songSource: { songName: 'Geppy-X, takeoff!!', videoId: 'BnyaCeRjSs4' },
+    },
+    {
         name: '1942',
         sortName: '194X 1',
         series: Series._194X,
@@ -192,7 +196,13 @@ const gameEntries: GameEntry[] = [
     },
     {
         name: 'Battle Garegga',
-        songSource: { songName: 'Fly to the Leaden Sky', videoId: 'Szr0TSXcWok' },
+        songSource: {
+            songName: 'Fly to the Leaden Sky',
+            arrangements: [
+                { source: 'Original', videoId: 'Szr0TSXcWok' },
+                { source: 'Arrange', videoId: '9iDOL0lAYsg' },
+            ],
+        },
     },
     {
         name: 'Bells & Whistles',
@@ -1539,12 +1549,6 @@ const gameEntries: GameEntry[] = [
                     videoId: '42xjbdXze8E',
                 },
                 {
-                    source: 'Amstrad CPC',
-                    videoId: 'TUqxvufguZY',
-                    startTime: 270,
-                    endTime: 321,
-                },
-                {
                     source: 'Atari ST',
                     videoId: 'B-xGUTHedU0',
                     startTime: 50,
@@ -1617,7 +1621,19 @@ const gameEntries: GameEntry[] = [
         name: 'R-Type III: The Third Lightning',
         sortName: 'R-Type 3: The Third Lightning',
         series: Series.RType,
-        songSource: { songName: 'Catapult Dimension', videoId: 'EsLgLrM2CbY' },
+        songSource: {
+            songName: 'Outer Space',
+            arrangements: [
+                {
+                    source: 'Original',
+                    videoId: 'EsLgLrM2CbY',
+                },
+                {
+                    source: 'Dimensions',
+                    videoId: 'bK7gkCTRdaw',
+                },
+            ],
+        },
     },
     {
         name: 'R-Type Delta',
@@ -1804,7 +1820,13 @@ const gameEntries: GameEntry[] = [
         name: 'RayStorm',
         sortName: 'Rayforce 2',
         alias: 'Layer Section II',
-        songSource: { songName: 'Geometric City', videoId: 'kP5huZQRAY4' },
+        songSource: {
+            songName: 'Geometric City',
+            arrangements: [
+                { source: 'Original', videoId: 'kP5huZQRAY4' },
+                { source: 'Neu Tanz Mix', videoId: 'H8Z9u7Sl4pY' },
+            ],
+        },
     },
     {
         name: 'RayCrisis',
@@ -2528,6 +2550,11 @@ const gameEntries: GameEntry[] = [
         name: 'Truxton II',
         alias: 'Tatsujin Oh',
         songSource: { songName: 'Live in Future', videoId: 'xgxFHJZrAfc' },
+    },
+    {
+        name: 'Truxton Extreme',
+        sortName: 'Truxton III',
+        songSource: { songName: 'Brave Man, Far Away', videoId: 't2_9wKIo5h4' },
     },
     {
         name: 'Turbo Force',
