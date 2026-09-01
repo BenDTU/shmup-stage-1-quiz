@@ -2,6 +2,7 @@ import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import pluginVue from 'eslint-plugin-vue';
 import stylistic from '@stylistic/eslint-plugin';
+import globals from 'globals';
 
 /**
  * Custom ESLint rule that enforces the `games` array in games.ts is sorted
@@ -142,6 +143,11 @@ export default tseslint.config(
     ...tseslint.configs.recommended,
     ...pluginVue.configs['flat/recommended'],
     {
+        languageOptions: {
+            globals: {
+                ...globals.browser,
+            },
+        },
         rules: {
             'eqeqeq': ['error', 'always'],
             'no-console': 'warn',
@@ -178,7 +184,7 @@ export default tseslint.config(
             '@stylistic/object-curly-spacing': ['error', 'always'],
             'vue/html-indent': ['error', 4],
             'vue/script-indent': ['error', 4],
-            'vue/component-tags-order': ['error', { order: ['template', 'script', 'style'] }],
+            'vue/block-order': ['error', { order: ['template', 'script', 'style'] }],
         },
     },
     {
