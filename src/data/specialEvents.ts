@@ -1,4 +1,13 @@
 import { Series } from '../types';
+import { SESSION_DATE } from '../storage/dailyProgressStorage';
+
+/**
+ * The Bootstrap theme color used to reskin the daily-quiz "gold" UI (home page
+ * daily buttons, quiz header, results page daily styling, etc) for an event.
+ * See the `.special-event-*` classes in `src/assets/main.scss` for how each
+ * color is wired up.
+ */
+export type BootstrapThemeColor = 'primary' | 'secondary' | 'success' | 'danger' | 'info' | 'light' | 'dark';
 
 /**
  * A themed override applied to the daily quiz on a specific recurring date.
@@ -22,8 +31,8 @@ export interface SpecialEvent {
     }
     /** Message shown on the results page, above the mastered-series awards. */
     resultsMessage?: string
-    /** CSS color used for the results message text. */
-    resultsMessageColor?: string
+    /** Recolors the usual gold "daily" theme throughout the app. Defaults to gold when omitted. */
+    themeColor?: BootstrapThemeColor
 }
 
 const specialEvents: SpecialEvent[] = [
@@ -37,7 +46,7 @@ const specialEvents: SpecialEvent[] = [
             songName: 'Adventure of the Lovestruck Tomboy',
         },
         resultsMessage: 'Happy Cirno Day!',
-        resultsMessageColor: 'lightblue',
+        themeColor: 'info',
     },
 ];
 
@@ -46,3 +55,6 @@ export function getActiveSpecialEvent(sessionDate: string): SpecialEvent | undef
     const monthDay = sessionDate.slice(5);
     return specialEvents.find((event) => event.date === monthDay);
 }
+
+/** The special event active for the current page session's date, if any. */
+export const todaysSpecialEvent: SpecialEvent | undefined = getActiveSpecialEvent(SESSION_DATE);

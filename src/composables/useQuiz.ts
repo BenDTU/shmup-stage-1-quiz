@@ -3,7 +3,7 @@ import { games } from '../data/games';
 import { quotes } from '../data/quotes';
 import type { Series, Game, GameEntryWithId, QuizMode } from '../types';
 import { getDailyProgress, saveDailyProgress, SESSION_DATE } from '../storage/dailyProgressStorage';
-import { getActiveSpecialEvent, type SpecialEvent } from '../data/specialEvents';
+import { todaysSpecialEvent, type SpecialEvent } from '../data/specialEvents';
 
 type RandomFn = () => number;
 
@@ -264,7 +264,7 @@ function startQuiz(mode: QuizMode = 'advanced') {
 function startDailyQuiz(mode: QuizMode = 'advanced') {
     isDaily.value = true;
     isResumed.value = false;
-    activeSpecialEvent.value = getActiveSpecialEvent(SESSION_DATE);
+    activeSpecialEvent.value = todaysSpecialEvent;
     buildQuiz(mode, mulberry32(getDailySeed()), activeSpecialEvent.value);
 }
 
@@ -296,7 +296,7 @@ function resumeDailyQuiz(): boolean {
     if (!progress) return false;
     isDaily.value = true;
     isResumed.value = true;
-    activeSpecialEvent.value = getActiveSpecialEvent(SESSION_DATE);
+    activeSpecialEvent.value = todaysSpecialEvent;
     buildQuiz(progress.mode, mulberry32(getDailySeed()), activeSpecialEvent.value);
     state.answers = [...progress.answers];
     const finished = progress.answers.length === state.questions.length;

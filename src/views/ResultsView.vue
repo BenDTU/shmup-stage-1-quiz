@@ -78,8 +78,7 @@
                         </div>
                         <p
                             v-if="isDaily && activeSpecialEvent?.resultsMessage"
-                            class="fw-bold h4 mt-4 mb-0"
-                            :style="{ color: activeSpecialEvent.resultsMessageColor }"
+                            class="fw-bold h4 text-warning-emphasis mt-4 mb-0"
                         >
                             {{ activeSpecialEvent.resultsMessage }}
                         </p>
