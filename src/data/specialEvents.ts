@@ -56,5 +56,25 @@ export function getActiveSpecialEvent(sessionDate: string): SpecialEvent | undef
     return specialEvents.find((event) => event.date === monthDay);
 }
 
-/** The special event active for the current page session's date, if any. */
-export const todaysSpecialEvent: SpecialEvent | undefined = getActiveSpecialEvent(SESSION_DATE);
+const DEBUG_EVENT_STORAGE_KEY = 'shmup-quiz-debug-event';
+
+// Dev-only test hook: `?debug-event=<id>` persists an override to localStorage (so it
+// sticks across page navigation, unlike the query param itself). `?debug-event=off`
+// clears it. No effect in production builds.
+if (!import.meta.env.PROD && typeof window !== 'undefined') {
+    const override = new URLSearchParams(window.location.search).get('debug-event');
+    if (override === 'off') {
+        localStorage.removeItem(DEBUG_EVENT_STORAGE_KEY);
+    } else if (override && specialEvents.some((event) => event.id === override)) {
+        localStorage.setItem(DEBUG_EVENT_STORAGE_KEY, override);
+    }
+}
+
+function getDebugEventOverride(): SpecialEvent | undefined {
+    if (import.meta.env.PROD || typeof localStorage === 'undefined') return undefined;
+    const id = localStorage.getItem(DEBUG_EVENT_STORAGE_KEY);
+    return id ? specialEvents.find((event) => event.id === id) : undefined;
+}
+
+/** The special event active for the current page session, if any (see getDebugEventOverride for how to force one on outside production). */
+export const todaysSpecialEvent: SpecialEvent | undefined = getDebugEventOverride() ?? getActiveSpecialEvent(SESSION_DATE);
