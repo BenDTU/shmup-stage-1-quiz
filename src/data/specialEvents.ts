@@ -33,6 +33,8 @@ export interface SpecialEvent {
     resultsMessage?: string
     /** Recolors the usual gold "daily" theme throughout the app. Defaults to gold when omitted. */
     themeColor?: BootstrapThemeColor
+    /** If set, a home-page countdown ('X days until <name>!') is shown starting this many days before the event. */
+    countdownDays?: number
 }
 
 const specialEvents: SpecialEvent[] = [
@@ -47,6 +49,7 @@ const specialEvents: SpecialEvent[] = [
         },
         resultsMessage: 'Happy Cirno Day!',
         themeColor: 'info',
+        countdownDays: 7,
     },
 ];
 
@@ -54,6 +57,34 @@ const specialEvents: SpecialEvent[] = [
 export function getActiveSpecialEvent(sessionDate: string): SpecialEvent | undefined {
     const monthDay = sessionDate.slice(5);
     return specialEvents.find((event) => event.date === monthDay);
+}
+
+/** Days from `sessionDate` ('YYYY-MM-DD') until the next occurrence of `monthDay` ('MM-DD'), 0 if it's today. */
+function daysUntilNextOccurrence(monthDay: string, sessionDate: string): number {
+    const [year, month, day] = sessionDate.split('-').map(Number);
+    const [eventMonth, eventDay] = monthDay.split('-').map(Number);
+    const from = Date.UTC(year, month - 1, day);
+    let target = Date.UTC(year, eventMonth - 1, eventDay);
+    if (target < from) target = Date.UTC(year + 1, eventMonth - 1, eventDay);
+    return Math.round((target - from) / 86_400_000);
+}
+
+export interface UpcomingEventCountdown {
+    name: string
+    daysUntil: number
+    themeColor?: BootstrapThemeColor
+}
+
+/** The nearest upcoming event whose countdown window has started, for the given session date, if any. */
+export function getUpcomingEventCountdown(sessionDate: string): UpcomingEventCountdown | undefined {
+    for (const event of specialEvents) {
+        if (!event.countdownDays) continue;
+        const daysUntil = daysUntilNextOccurrence(event.date, sessionDate);
+        if (daysUntil > 0 && daysUntil <= event.countdownDays) {
+            return { name: event.name, daysUntil, themeColor: event.themeColor };
+        }
+    }
+    return undefined;
 }
 
 const DEBUG_EVENT_STORAGE_KEY = 'shmup-quiz-debug-event';
@@ -78,3 +109,6 @@ function getDebugEventOverride(): SpecialEvent | undefined {
 
 /** The special event active for the current page session, if any (see getDebugEventOverride for how to force one on outside production). */
 export const todaysSpecialEvent: SpecialEvent | undefined = getDebugEventOverride() ?? getActiveSpecialEvent(SESSION_DATE);
+
+/** The upcoming event countdown to show on the home page for the current page session, if any. */
+export const upcomingEventCountdown: UpcomingEventCountdown | undefined = getUpcomingEventCountdown(SESSION_DATE);
