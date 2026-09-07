@@ -1,5 +1,6 @@
 import type { QuizMode } from '../types';
 import { games } from '../data/games';
+import { formatUtcDate } from '../utils/date';
 
 export const STORAGE_KEY = 'shmup-quiz-daily';
 
@@ -12,14 +13,13 @@ export function wasProgressInvalidated(): boolean {
 // Captured once when the module first loads — fixed for the lifetime of this page session
 export const SESSION_DATE: string = new Date().toISOString().slice(0, 10);
 
-export const SESSION_DATE_FORMATTED: string = new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
-}).format(new Date(SESSION_DATE + 'T00:00:00Z'));
+export const SESSION_DATE_FORMATTED: string = formatUtcDate(SESSION_DATE);
 
 // Hash of the structure that drives PRNG consumption in resolveGame:
 // game ID, number of song sources, and arrangement count per source.
 // Changes whenever games are added/removed/reordered or song sources/arrangements change.
-const DATA_VERSION: number = (() => {
+// Exported so other progress stores (e.g. eventProgressStorage.ts) invalidate on the same basis.
+export const DATA_VERSION: number = (() => {
     let hash = 0;
     for (const g of games) {
         const sources = Array.isArray(g.songSource) ? g.songSource : [g.songSource];

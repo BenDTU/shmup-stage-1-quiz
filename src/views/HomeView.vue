@@ -29,26 +29,46 @@
                 </div>
                 <br>
                 <p
-                    v-if="upcomingEventCountdown"
+                    v-if="activeEventSelection"
+                    class="mb-3"
+                >
+                    <a
+                        href="#"
+                        :class="`text-${activeEvent?.themeColor ?? 'warning'}-emphasis text-decoration-underline fw-semibold`"
+                        @click.prevent="backToDaily"
+                    >← Back to Daily</a>
+                </p>
+                <p
+                    v-else-if="missedEventWindow"
+                    class="mb-3"
+                >
+                    <a
+                        href="#"
+                        :class="`text-${missedEventWindow.event.themeColor ?? 'warning'}-emphasis text-decoration-underline fw-semibold`"
+                        @click.prevent="activateMissedEvent"
+                    >I missed {{ missedEventWindow.event.name }}!</a>
+                </p>
+                <p
+                    v-else-if="upcomingEventCountdown"
                     :class="`text-${upcomingEventCountdown.themeColor ?? 'warning'}-emphasis fw-semibold mb-3`"
                 >
                     {{ upcomingEventCountdown.daysUntil }} day{{ upcomingEventCountdown.daysUntil === 1 ? '' : 's' }} until {{ upcomingEventCountdown.name }}!
                 </p>
                 <hr class="mt-1 mb-5 text-warning-emphasis opacity-100">
                 <h2 class="mb-2 text-warning-emphasis">
-                    Daily Challenge
+                    {{ challengeHeading }}
                 </h2>
 
                 <!-- Finished state -->
-                <template v-if="dailyProgress && dailyProgress.answers.length === QUIZ_SIZE">
+                <template v-if="challengeProgress && challengeProgress.answers.length === QUIZ_SIZE">
                     <p class="mb-3">
-                        You've completed today's challenge!
+                        {{ completedMessage }}
                     </p>
                     <div class="mb-4">
                         <button
                             class="btn btn-outline-warning btn-lg py-3 daily-btn"
                             style="width: auto"
-                            @click="viewDailyResults"
+                            @click="viewChallengeResults"
                         >
                             <div class="fw-bold">
                                 View Full Results
@@ -58,18 +78,18 @@
                 </template>
 
                 <!-- In-progress state -->
-                <template v-else-if="dailyProgress">
+                <template v-else-if="challengeProgress">
                     <p class="mb-4">
-                        You have an unfinished daily challenge — pick up where you left off!
+                        {{ inProgressMessage }}
                     </p>
                     <div class="mb-4">
                         <button
                             class="btn btn-outline-warning btn-lg py-3 daily-btn"
                             style="width: auto"
-                            @click="resumeDaily"
+                            @click="resumeChallenge"
                         >
                             <div class="fw-bold fs-5">
-                                Resume Daily {{ MODE_LABEL[dailyProgress.mode] }}
+                                Resume {{ challengeLabel }} {{ MODE_LABEL[challengeProgress.mode] }}
                             </div>
                         </button>
                     </div>
@@ -78,23 +98,23 @@
                 <!-- Default: no progress -->
                 <template v-else>
                     <p
-                        v-if="progressInvalidated"
+                        v-if="progressInvalidated && !activeEventSelection"
                         class="text-warning-emphasis small mb-3"
                     >
                         Today's daily challenge has been updated — your previous progress has been cleared.
                     </p>
                     <p class="mb-4">
-                        Once per day - challenge the same set of songs as everyone else!
+                        {{ defaultMessage }}
                     </p>
                     <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 mb-4">
                         <button
                             v-for="{ mode } in DIFFICULTY_MODES"
                             :key="mode"
                             class="btn btn-outline-warning btn-lg py-3 daily-btn"
-                            @click="beginDaily(mode)"
+                            @click="beginChallenge(mode)"
                         >
                             <div class="fw-bold fs-5">
-                                Daily {{ MODE_LABEL[mode] }}
+                                {{ challengeLabel }} {{ MODE_LABEL[mode] }}
                             </div>
                         </button>
                     </div>
@@ -116,13 +136,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuiz, QUIZ_SIZE, NOVICE_OPTION_COUNT, INTERMEDIATE_OPTION_COUNT } from '@/composables/useQuiz';
 import { MODE_LABEL, MODE_COLOR } from '@/utils/modeStyle';
 import { getDailyProgress, wasProgressInvalidated, STORAGE_KEY } from '@/storage/dailyProgressStorage';
+import {
+    getActiveEventSelection,
+    getEventProgress,
+    ACTIVE_EVENT_KEY,
+    EVENT_PROGRESS_KEY,
+} from '@/storage/eventProgressStorage';
+import { useActiveEvent } from '@/composables/useActiveEvent';
 import { totalSongs, totalShmups } from '@/data/games';
-import { upcomingEventCountdown } from '@/data/specialEvents';
+import { upcomingEventCountdown, missedEventWindow } from '@/data/specialEvents';
 import type { QuizMode } from '@/types';
 import DailyCountdown from '@/components/DailyCountdown.vue';
 
@@ -133,19 +160,47 @@ const DIFFICULTY_MODES: { mode: QuizMode; subtitle: string }[] = [
 ];
 
 const router = useRouter();
-const { startQuiz, startDailyQuiz, resumeDailyQuiz } = useQuiz();
+const { startQuiz, startDailyQuiz, startEventReplay, resumeDailyQuiz, resumeEventReplay } = useQuiz();
+const { activeEventSelection, activeThemeEvent: activeEvent, setActiveEvent, clearActiveEvent } = useActiveEvent();
 
 const dailyProgress = ref(getDailyProgress());
+const eventProgress = ref(activeEventSelection.value ? getEventProgress(activeEventSelection.value) : null);
 const progressInvalidated = wasProgressInvalidated();
+
+const challengeProgress = computed(() => (activeEventSelection.value ? eventProgress.value : dailyProgress.value));
+const challengeLabel = computed(() => activeEvent.value?.name ?? 'Daily');
+const challengeHeading = computed(() => `${challengeLabel.value} Challenge`);
+
+const completedMessage = computed(() => (
+    activeEvent.value ? `You've completed the ${activeEvent.value.name} challenge!` : "You've completed today's challenge!"
+));
+const inProgressMessage = computed(() => (
+    activeEvent.value
+        ? `You have an unfinished ${activeEvent.value.name} challenge — pick up where you left off!`
+        : 'You have an unfinished daily challenge — pick up where you left off!'
+));
+const defaultMessage = computed(() => (
+    activeEventSelection.value
+        ? `Replaying the ${activeEvent.value?.name} challenge — a one-time chance to catch up!`
+        : 'Once per day - challenge the same set of songs as everyone else!'
+));
 
 function handleStorageChange(e: StorageEvent) {
     if (e.key === null || e.key === STORAGE_KEY) {
         dailyProgress.value = getDailyProgress();
     }
+    if (e.key === null || e.key === ACTIVE_EVENT_KEY) {
+        activeEventSelection.value = getActiveEventSelection();
+    }
+    if (e.key === null || e.key === EVENT_PROGRESS_KEY) {
+        eventProgress.value = activeEventSelection.value ? getEventProgress(activeEventSelection.value) : null;
+    }
 }
 
 onMounted(() => {
     dailyProgress.value = getDailyProgress();
+    activeEventSelection.value = getActiveEventSelection();
+    eventProgress.value = activeEventSelection.value ? getEventProgress(activeEventSelection.value) : null;
     window.addEventListener('storage', handleStorageChange);
 });
 
@@ -158,33 +213,72 @@ function begin(mode: QuizMode) {
     router.push('/quiz');
 }
 
-function beginDaily(mode: QuizMode) {
-    const existing = getDailyProgress();
-    if (existing) {
-        dailyProgress.value = existing;
-        return;
+function activateMissedEvent() {
+    if (!missedEventWindow) return;
+    const selection = { eventId: missedEventWindow.event.id, occurrenceDate: missedEventWindow.occurrenceDate };
+    setActiveEvent(selection);
+    eventProgress.value = getEventProgress(selection);
+}
+
+function backToDaily() {
+    clearActiveEvent();
+    dailyProgress.value = getDailyProgress();
+}
+
+function beginChallenge(mode: QuizMode) {
+    if (activeEventSelection.value) {
+        const existing = getEventProgress(activeEventSelection.value);
+        if (existing) {
+            eventProgress.value = existing;
+            return;
+        }
+        startEventReplay(activeEventSelection.value, mode);
+    } else {
+        const existing = getDailyProgress();
+        if (existing) {
+            dailyProgress.value = existing;
+            return;
+        }
+        startDailyQuiz(mode);
     }
-    startDailyQuiz(mode);
     router.push('/quiz');
 }
 
-function resumeDaily() {
-    const current = getDailyProgress();
-    if (!current || current.answers.length >= QUIZ_SIZE) {
-        dailyProgress.value = current;
-        return;
+function resumeChallenge() {
+    if (activeEventSelection.value) {
+        const current = getEventProgress(activeEventSelection.value);
+        if (!current || current.answers.length >= QUIZ_SIZE) {
+            eventProgress.value = current;
+            return;
+        }
+        resumeEventReplay();
+    } else {
+        const current = getDailyProgress();
+        if (!current || current.answers.length >= QUIZ_SIZE) {
+            dailyProgress.value = current;
+            return;
+        }
+        resumeDailyQuiz();
     }
-    resumeDailyQuiz();
     router.push('/quiz');
 }
 
-function viewDailyResults() {
-    const current = getDailyProgress();
-    if (!current || current.answers.length < QUIZ_SIZE) {
-        dailyProgress.value = current;
-        return;
+function viewChallengeResults() {
+    if (activeEventSelection.value) {
+        const current = getEventProgress(activeEventSelection.value);
+        if (!current || current.answers.length < QUIZ_SIZE) {
+            eventProgress.value = current;
+            return;
+        }
+        resumeEventReplay();
+    } else {
+        const current = getDailyProgress();
+        if (!current || current.answers.length < QUIZ_SIZE) {
+            dailyProgress.value = current;
+            return;
+        }
+        resumeDailyQuiz();
     }
-    resumeDailyQuiz();
     router.push('/results');
 }
 </script>

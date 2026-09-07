@@ -5,21 +5,21 @@
     >
         <div class="row justify-content-center">
             <h1
-                v-if="isDaily"
+                v-if="isChallenge"
                 class="h3 text-warning-emphasis text-center mb-3"
             >
-                Daily Challenge!
+                {{ challengeHeading }}
             </h1>
             <div class="col-lg-8">
                 <!-- Progress bar -->
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span
                         class="fw-semibold"
-                        :class="isDaily ? 'text-warning-emphasis' : ''"
+                        :class="isChallenge ? 'text-warning-emphasis' : ''"
                     >Question {{ questionNumber }} of {{ state.questions.length }}</span>
                     <span
                         class="small"
-                        :class="isDaily ? 'text-warning-emphasis opacity-75' : 'text-muted'"
+                        :class="isChallenge ? 'text-warning-emphasis opacity-75' : 'text-muted'"
                     >Score: {{ state.answers.filter((id, i) => state.questions[i]?.id === id).length }} / {{ state.answers.length }}</span>
                 </div>
                 <div
@@ -45,7 +45,7 @@
                         :end-time="currentQuestion.endTime"
                         :hidden="!state.isAnswered"
                         :resuming="isResumed"
-                        :daily="isDaily"
+                        :daily="isChallenge"
                         :quote="state.questionQuotes[state.currentIndex]"
                         @audio-unlocked="handleAudioUnlocked"
                     />
@@ -55,12 +55,12 @@
                 <div
                     v-show="audioUnlocked"
                     class="card"
-                    :class="{ 'card-daily': isDaily }"
+                    :class="{ 'card-daily': isChallenge }"
                 >
                     <div class="card-body">
                         <h5
                             class="card-title mb-3"
-                            :class="{ 'text-warning-emphasis': isDaily }"
+                            :class="{ 'text-warning-emphasis': isChallenge }"
                         >
                             Which game is this stage 1 theme from?
                         </h5>
@@ -160,13 +160,16 @@ import AutocompleteInput from '../components/AutocompleteInput.vue';
 import NoviceOptions from '../components/NoviceOptions.vue';
 import AnswerFeedback from '../components/AnswerFeedback.vue';
 import { useQuiz } from '../composables/useQuiz';
-import { saveDailyProgress } from '../storage/dailyProgressStorage';
 import { guessedGameName } from '../functions';
 import { games } from '../data/games';
 import { AnswerType, type AdvancedFeedbackDetails } from '../types';
 
 const router = useRouter();
-const { state, isDaily, isResumed, isFinished, usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect, submitGuess, nextQuestion } = useQuiz();
+const {
+    state, isDaily, isResumed, isEventReplay, activeSpecialEvent, isFinished,
+    usedGameIds, seriesLimitedGameIds, seriesJustCompleted, seriesJustCompletedMajorityCorrect,
+    submitGuess, markQuizStarted, nextQuestion,
+} = useQuiz();
 
 const selectedGameId = ref<number | null>(null);
 const audioUnlocked = ref(false);
@@ -175,11 +178,14 @@ const autocompleteRef = ref<{ focus: () => void } | null>(null);
 const feedbackState = ref<'correct' | 'wrong' | null>(null);
 let feedbackTimer: ReturnType<typeof setTimeout> | null = null;
 
+// True for both today's real daily quiz and a replay of a past event — anywhere the "gold"
+// (or event-recolored) challenge styling should apply.
+const isChallenge = computed(() => isDaily.value || isEventReplay.value);
+const challengeHeading = computed(() => (activeSpecialEvent.value ? `${activeSpecialEvent.value.name} Challenge!` : 'Daily Challenge!'));
+
 function handleAudioUnlocked() {
     audioUnlocked.value = true;
-    if (isDaily.value && state.answers.length === 0) {
-        saveDailyProgress({ mode: state.mode, answers: [] });
-    }
+    markQuizStarted();
     isResumed.value = false;
 }
 
