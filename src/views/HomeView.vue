@@ -28,6 +28,12 @@
                     </button>
                 </div>
                 <br>
+                <p
+                    v-if="upcomingEventCountdown"
+                    :class="`text-${upcomingEventCountdown.themeColor ?? 'warning'}-emphasis fw-semibold mb-3`"
+                >
+                    {{ upcomingEventCountdown.daysUntil }} day{{ upcomingEventCountdown.daysUntil === 1 ? '' : 's' }} until {{ upcomingEventCountdown.name }}!
+                </p>
                 <hr class="mt-1 mb-5 text-warning-emphasis opacity-100">
                 <h2 class="mb-2 text-warning-emphasis">
                     Daily Challenge
@@ -116,6 +122,7 @@ import { useQuiz, QUIZ_SIZE, NOVICE_OPTION_COUNT, INTERMEDIATE_OPTION_COUNT } fr
 import { MODE_LABEL, MODE_COLOR } from '@/utils/modeStyle';
 import { getDailyProgress, wasProgressInvalidated, STORAGE_KEY } from '@/storage/dailyProgressStorage';
 import { totalSongs, totalShmups } from '@/data/games';
+import { upcomingEventCountdown } from '@/data/specialEvents';
 import type { QuizMode } from '@/types';
 import DailyCountdown from '@/components/DailyCountdown.vue';
 

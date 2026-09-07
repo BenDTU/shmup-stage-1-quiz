@@ -76,6 +76,12 @@
                         >
                             <DailyCountdown />
                         </div>
+                        <p
+                            v-if="isDaily && activeSpecialEvent?.resultsMessage"
+                            class="fw-bold h4 text-warning-emphasis mt-4 mb-0"
+                        >
+                            {{ activeSpecialEvent.resultsMessage }}
+                        </p>
                         <div
                             v-if="masteredSeries.length > 0"
                             class="mt-5"
@@ -170,7 +176,7 @@ import { MODE_COLOR, MODE_LABEL } from '../utils/modeStyle';
 
 const router = useRouter();
 const route = useRoute();
-const { state, isDaily, startQuiz, startDailyQuiz, fillDebugAnswers } = useQuiz();
+const { state, isDaily, activeSpecialEvent, startQuiz, startDailyQuiz, fillDebugAnswers } = useQuiz();
 
 onMounted(() => {
     if (!import.meta.env.PROD) {

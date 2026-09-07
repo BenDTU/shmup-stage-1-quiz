@@ -8,8 +8,12 @@
 
 :root {
   --bs-font-sans-serif: 'Geist Pixel', monospace;
-  --daily-glow: 0 0 10px 3px rgba(255, 193, 7, 0.5);
-  --daily-glow-intense: 0 0 18px 6px rgba(255, 193, 7, 0.75);
+  --daily-glow: 0 0 10px 3px rgba(var(--bs-warning-rgb), 0.5);
+  --daily-glow-intense: 0 0 18px 6px rgba(var(--bs-warning-rgb), 0.75);
+  // Always the dark-theme "warning-bg-subtle" equivalent, for UI (e.g. the video
+  // player overlay) that always renders against a dark backdrop regardless of the
+  // site's own light/dark theme. Kept in sync with the .special-event-* colors below.
+  --daily-bg-subtle-dark: #332701;
 }
 
 body {
@@ -99,5 +103,32 @@ h1, h2, h3, h4, h5, h6 {
     --bs-btn-active-border-color: #212529;
     --bs-btn-disabled-color: #212529;
     --bs-btn-disabled-border-color: #212529;
+  }
+}
+
+// Special-event theming: the daily-quiz UI is normally styled gold via Bootstrap's
+// "warning" color (see .daily-btn, .card-daily, text-warning-emphasis, etc. across
+// the app). A special event (src/data/specialEvents.ts) can recolor all of it for
+// the day by picking a different Bootstrap theme color — applied here by adding a
+// `special-event-<color>` class to <html> (see App.vue), which re-points the
+// "warning" tokens at that color's own light/dark-safe tokens.
+$special-event-dark-bg-subtle: (
+  primary: #031633,
+  secondary: #161719,
+  success: #051b11,
+  danger: #2c0b0e,
+  info: #032830,
+  light: #343a40,
+  dark: #1a1d20,
+);
+
+@each $color, $dark-bg-subtle in $special-event-dark-bg-subtle {
+  .special-event-#{$color} {
+    --bs-warning: var(--bs-#{$color});
+    --bs-warning-rgb: var(--bs-#{$color}-rgb);
+    --bs-warning-text-emphasis: var(--bs-#{$color}-text-emphasis);
+    --bs-warning-bg-subtle: var(--bs-#{$color}-bg-subtle);
+    --bs-warning-border-subtle: var(--bs-#{$color}-border-subtle);
+    --daily-bg-subtle-dark: #{$dark-bg-subtle};
   }
 }

@@ -3,6 +3,7 @@ import { games } from '../data/games';
 import { quotes } from '../data/quotes';
 import type { Series, Game, GameEntryWithId, QuizMode } from '../types';
 import { getDailyProgress, saveDailyProgress, SESSION_DATE } from '../storage/dailyProgressStorage';
+import { todaysSpecialEvent, type SpecialEvent } from '../data/specialEvents';
 
 type RandomFn = () => number;
 
@@ -38,10 +39,11 @@ function shuffle<T>(arr: T[], random: RandomFn = Math.random): T[] {
     return arr;
 }
 
-function resolveGame(entry: GameEntryWithId, random: RandomFn = Math.random): Game {
+function resolveGame(entry: GameEntryWithId, random: RandomFn = Math.random, forcedSongName?: string): Game {
     const { name, alias, series, id } = entry;
     const sources = Array.isArray(entry.songSource) ? entry.songSource : [entry.songSource];
-    const songEntry = sources[Math.floor(random() * sources.length)]!;
+    const songEntry = (forcedSongName && sources.find((s) => s.songName === forcedSongName))
+        || sources[Math.floor(random() * sources.length)]!;
 
     if (!('arrangements' in songEntry)) {
         const { songName, videoId, startTime = 0, endTime } = songEntry;
@@ -95,6 +97,7 @@ const state = reactive<QuizState>({
 
 const isDaily = ref(false);
 const isResumed = ref(false);
+const activeSpecialEvent = ref<SpecialEvent | undefined>(undefined);
 
 const isFinished = computed(
     () =>
@@ -161,7 +164,7 @@ const seriesLimitedGameIds = computed<Set<number>>(() => {
     }
     const limitedSeries = new Set<Series>(
         (Object.entries(shownSeriesCounts) as [Series, number][])
-            .filter(([, count]) => count >= SERIES_LIMIT)
+            .filter(([series, count]) => count >= SERIES_LIMIT && series !== activeSpecialEvent.value?.seriesOverride)
             .map(([series]) => series),
     );
     if (limitedSeries.size === 0) return new Set<number>();
@@ -170,19 +173,35 @@ const seriesLimitedGameIds = computed<Set<number>>(() => {
     );
 });
 
-function buildQuiz(mode: QuizMode, random: RandomFn) {
-    const forceFirstGames = games.filter((g) => g.forceFirst);
-    const shuffled = shuffle([...games].filter((g) => !g.forceFirst), random);
+function buildQuiz(mode: QuizMode, random: RandomFn, event?: SpecialEvent) {
+    // A special event's seriesOverride restricts the whole quiz to a single series and
+    // bypasses the usual per-series limit, both for questions and for wrong-answer options.
+    const pool = event?.seriesOverride ? games.filter((g) => g.series === event.seriesOverride) : games;
+    const bypassSeriesLimit = !!event?.seriesOverride;
+
+    // A special event's finalSong reserves one game to be resolved separately and appended
+    // last, forcing both which game and which of its songs is used.
+    const finalSongGame = event?.finalSong
+        ? pool.find((g) => g.name === event.finalSong!.gameName)
+        : undefined;
+    const candidatePool = finalSongGame ? pool.filter((g) => g.id !== finalSongGame.id) : pool;
+    const targetSize = finalSongGame ? QUIZ_SIZE - 1 : QUIZ_SIZE;
+
+    const forceFirstGames = candidatePool.filter((g) => g.forceFirst);
+    const shuffled = shuffle([...candidatePool].filter((g) => !g.forceFirst), random);
     const seriesCounts: Partial<Record<Series, number>> = {};
     const selected: Game[] = [];
     for (const game of [...forceFirstGames, ...shuffled]) {
-        if (selected.length >= QUIZ_SIZE) break;
-        if (game.series) {
+        if (selected.length >= targetSize) break;
+        if (game.series && !bypassSeriesLimit) {
             const count = seriesCounts[game.series] ?? 0;
             if (count >= SERIES_LIMIT) continue;
             seriesCounts[game.series] = count + 1;
         }
         selected.push(resolveGame(game, random));
+    }
+    if (finalSongGame) {
+        selected.push(resolveGame(finalSongGame, random, event!.finalSong!.songName));
     }
 
     let noviceOptions: number[][] = [];
@@ -196,12 +215,16 @@ function buildQuiz(mode: QuizMode, random: RandomFn) {
                     priorSeriesCounts[q.series] = (priorSeriesCounts[q.series] ?? 0) + 1;
                 }
             }
-            const limitedSeries = new Set<Series>(
-                (Object.entries(priorSeriesCounts) as [Series, number][])
-                    .filter(([, count]) => count >= SERIES_LIMIT)
-                    .map(([series]) => series),
-            );
-            const eligible = games.filter(
+            const limitedSeries = bypassSeriesLimit
+                ? new Set<Series>()
+                : new Set<Series>(
+                    (Object.entries(priorSeriesCounts) as [Series, number][])
+                        .filter(([, count]) => count >= SERIES_LIMIT)
+                        .map(([series]) => series),
+                );
+            // Prefer wrong-answer options from the event's pool (e.g. Touhou-only); only fall
+            // back to the full game list if that pool runs out of eligible candidates.
+            const eligible = pool.filter(
                 (g) =>
                     g.id !== question.id &&
                     !priorIds.has(g.id) &&
@@ -209,6 +232,14 @@ function buildQuiz(mode: QuizMode, random: RandomFn) {
             );
             const shuffledEligible = shuffle([...eligible], random);
             const incorrectIds = shuffledEligible.slice(0, optionCount - 1).map((g) => g.id);
+            if (incorrectIds.length < optionCount - 1 && pool !== games) {
+                const usedIds = new Set([...priorIds, ...incorrectIds, question.id]);
+                const fallbackEligible = games.filter((g) => !usedIds.has(g.id));
+                const shuffledFallback = shuffle([...fallbackEligible], random);
+                incorrectIds.push(
+                    ...shuffledFallback.slice(0, optionCount - 1 - incorrectIds.length).map((g) => g.id),
+                );
+            }
             return shuffle([...incorrectIds, question.id], random);
         });
     }
@@ -226,13 +257,15 @@ function buildQuiz(mode: QuizMode, random: RandomFn) {
 function startQuiz(mode: QuizMode = 'advanced') {
     isDaily.value = false;
     isResumed.value = false;
+    activeSpecialEvent.value = undefined;
     buildQuiz(mode, Math.random);
 }
 
 function startDailyQuiz(mode: QuizMode = 'advanced') {
     isDaily.value = true;
     isResumed.value = false;
-    buildQuiz(mode, mulberry32(getDailySeed()));
+    activeSpecialEvent.value = todaysSpecialEvent;
+    buildQuiz(mode, mulberry32(getDailySeed()), activeSpecialEvent.value);
 }
 
 function submitGuess(gameId: number) {
@@ -263,7 +296,8 @@ function resumeDailyQuiz(): boolean {
     if (!progress) return false;
     isDaily.value = true;
     isResumed.value = true;
-    buildQuiz(progress.mode, mulberry32(getDailySeed()));
+    activeSpecialEvent.value = todaysSpecialEvent;
+    buildQuiz(progress.mode, mulberry32(getDailySeed()), activeSpecialEvent.value);
     state.answers = [...progress.answers];
     const finished = progress.answers.length === state.questions.length;
     state.currentIndex = finished ? state.questions.length - 1 : progress.answers.length;
@@ -306,6 +340,7 @@ function resetQuiz() {
     state.options = [];
     state.questionQuotes = [];
     isResumed.value = false;
+    activeSpecialEvent.value = undefined;
 }
 
 export function useQuiz() {
@@ -313,6 +348,7 @@ export function useQuiz() {
         state,
         isDaily,
         isResumed,
+        activeSpecialEvent,
         isFinished,
         usedGameIds,
         seriesLimitedGameIds,

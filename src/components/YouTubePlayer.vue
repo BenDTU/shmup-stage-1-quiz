@@ -240,7 +240,7 @@ function onRestartAnimationEnd() {
 
   &:hover {
     color: var(--bs-warning);
-    background-color: #332701; // Equivalent of var(--bs-warning-bg-subtle) in dark mode
+    background-color: var(--daily-bg-subtle-dark); // dark-mode subtle bg for the current daily accent color
     border-color: var(--bs-warning);
     box-shadow: var(--daily-glow-intense);
   }
