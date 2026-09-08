@@ -1,5 +1,5 @@
 import type { QuizMode } from '../types';
-import { DATA_VERSION } from './dailyProgressStorage';
+import { DATA_VERSION, peekStoredDailyProgress } from './dailyProgressStorage';
 
 export const ACTIVE_EVENT_KEY = 'shmup-quiz-active-event';
 export const EVENT_PROGRESS_KEY = 'shmup-quiz-event-progress';
@@ -34,18 +34,38 @@ export interface EventProgress extends ActiveEventSelection {
     answers: number[];
 }
 
-/** Progress for the given event selection, kept separate from daily progress so switching between them is non-destructive. */
-export function getEventProgress(selection: ActiveEventSelection): EventProgress | null {
+function readStoredEventProgress(): EventProgress | null {
     try {
         const raw = localStorage.getItem(EVENT_PROGRESS_KEY);
-        if (!raw) return null;
-        const parsed = JSON.parse(raw) as EventProgress;
-        if (parsed.eventId !== selection.eventId || parsed.occurrenceDate !== selection.occurrenceDate) return null;
-        if (parsed.dataVersion !== DATA_VERSION) return null;
-        return parsed;
+        return raw ? (JSON.parse(raw) as EventProgress) : null;
     } catch {
         return null;
     }
+}
+
+/** Progress for the given event selection, kept separate from daily progress so switching between them is non-destructive. */
+export function getEventProgress(selection: ActiveEventSelection): EventProgress | null {
+    const stored = readStoredEventProgress();
+    if (
+        stored
+        && stored.eventId === selection.eventId
+        && stored.occurrenceDate === selection.occurrenceDate
+        && stored.dataVersion === DATA_VERSION
+    ) {
+        return stored;
+    }
+
+    // If the visitor played this event live on the day itself, that run is saved as ordinary
+    // daily progress — which "expires" the moment the date rolls past it, since daily progress
+    // only ever matches *today*. Adopt that now-orphaned entry instead of starting them over:
+    // the quiz it produced is deterministically identical to what a replay would build (same
+    // date seed, same event override), so the stored answers are directly reusable.
+    const daily = peekStoredDailyProgress();
+    if (daily && daily.date === selection.occurrenceDate && daily.dataVersion === DATA_VERSION) {
+        return { ...selection, dataVersion: daily.dataVersion, mode: daily.mode, answers: daily.answers };
+    }
+
+    return null;
 }
 
 export function saveEventProgress(selection: ActiveEventSelection, progress: Omit<EventProgress, keyof ActiveEventSelection | 'dataVersion'>): void {

@@ -59,3 +59,17 @@ export function getDailyProgress(): DailyProgress | null {
 export function saveDailyProgress(progress: Omit<DailyProgress, 'date' | 'dataVersion'>): void {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...progress, date: SESSION_DATE, dataVersion: DATA_VERSION }));
 }
+
+// Unlike getDailyProgress(), does not require date to match today — used to recover an
+// orphaned entry from a past day (e.g. a special event played live; see eventProgressStorage.ts).
+export function peekStoredDailyProgress(): DailyProgress | null {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw) as DailyProgress;
+        if (parsed.dataVersion !== DATA_VERSION) return null;
+        return parsed;
+    } catch {
+        return null;
+    }
+}
