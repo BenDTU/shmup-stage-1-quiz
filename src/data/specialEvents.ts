@@ -31,6 +31,8 @@ export interface SpecialEvent {
     }
     /** Message shown on the results page, above the mastered-series awards. */
     resultsMessage?: string
+    /** If set, replaces the usual "Once per day..." home-page blurb while this event is active (today or replaying). */
+    dailyMessage?: string
     /** Recolors the usual gold "daily" theme throughout the app. Defaults to gold when omitted. */
     themeColor?: BootstrapThemeColor
     /** If set, a home-page countdown ('X days until <name>!') is shown starting this many days before the event. */
@@ -50,6 +52,7 @@ const specialEvents: SpecialEvent[] = [
             songName: 'Adventure of the Lovestruck Tomboy',
         },
         resultsMessage: 'Happy Cirno Day! ⑨',
+        dailyMessage: 'How well do you know Touhou Project?',
         themeColor: 'info',
         countdownDays: 7,
         postEventDays: 7,

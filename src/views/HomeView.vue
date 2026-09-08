@@ -182,11 +182,11 @@ const inProgressMessage = computed(() => (
         ? `You have an unfinished ${activeEvent.value.name} challenge — pick up where you left off!`
         : 'You have an unfinished daily challenge — pick up where you left off!'
 ));
-const dailyMessage = computed(() => (
-    activeEventSelection.value
-        ? `Replaying the ${activeEvent.value?.name} challenge — a one-time chance to catch up!`
-        : 'Once per day - challenge the same set of songs as everyone else!'
-));
+const dailyMessage = computed(() => {
+    if (activeEvent.value?.dailyMessage) return activeEvent.value.dailyMessage;
+    if (activeEventSelection.value) return `Replaying the ${activeEvent.value?.name} challenge — a one-time chance to catch up!`;
+    return 'Once per day - challenge the same set of songs as everyone else!';
+});
 
 function handleStorageChange(e: StorageEvent) {
     if (e.key === null || e.key === STORAGE_KEY) {
