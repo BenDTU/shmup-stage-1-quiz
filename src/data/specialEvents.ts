@@ -31,10 +31,14 @@ export interface SpecialEvent {
     }
     /** Message shown on the results page, above the mastered-series awards. */
     resultsMessage?: string
+    /** If set, replaces the usual "Once per day..." home-page blurb while this event is active (today or replaying). */
+    dailyMessage?: string
     /** Recolors the usual gold "daily" theme throughout the app. Defaults to gold when omitted. */
     themeColor?: BootstrapThemeColor
     /** If set, a home-page countdown ('X days until <name>!') is shown starting this many days before the event. */
     countdownDays?: number
+    /** If set, a home-page 'I missed <name>!' link is shown for this many days after the event, letting a visitor opt into replaying it. */
+    postEventDays?: number
 }
 
 const specialEvents: SpecialEvent[] = [
@@ -47,9 +51,11 @@ const specialEvents: SpecialEvent[] = [
             gameName: 'Touhou 9: Phantasmagoria of Flower View',
             songName: 'Adventure of the Lovestruck Tomboy',
         },
-        resultsMessage: 'Happy Cirno Day!',
+        resultsMessage: 'Happy Cirno Day! ⑨',
+        dailyMessage: 'How well do you know Touhou Project?',
         themeColor: 'info',
         countdownDays: 7,
+        postEventDays: 7,
     },
 ];
 
@@ -57,6 +63,11 @@ const specialEvents: SpecialEvent[] = [
 export function getActiveSpecialEvent(sessionDate: string): SpecialEvent | undefined {
     const monthDay = sessionDate.slice(5);
     return specialEvents.find((event) => event.date === monthDay);
+}
+
+/** Returns the event with the given id, if any (e.g. one stored in an ActiveEventSelection). */
+export function getEventById(id: string): SpecialEvent | undefined {
+    return specialEvents.find((event) => event.id === id);
 }
 
 /** Days from `sessionDate` ('YYYY-MM-DD') until the next occurrence of `monthDay` ('MM-DD'), 0 if it's today. */
@@ -87,6 +98,36 @@ export function getUpcomingEventCountdown(sessionDate: string): UpcomingEventCou
     return undefined;
 }
 
+/** Days since (and the 'YYYY-MM-DD' of) the most recent occurrence of `monthDay` on or before `sessionDate`. */
+function daysSinceLastOccurrence(monthDay: string, sessionDate: string): { daysSince: number; occurrenceDate: string } {
+    const [year, month, day] = sessionDate.split('-').map(Number);
+    const [eventMonth, eventDay] = monthDay.split('-').map(Number);
+    const from = Date.UTC(year, month - 1, day);
+    let target = Date.UTC(year, eventMonth - 1, eventDay);
+    if (target > from) target = Date.UTC(year - 1, eventMonth - 1, eventDay);
+    const daysSince = Math.round((from - target) / 86_400_000);
+    const occurrenceDate = new Date(target).toISOString().slice(0, 10);
+    return { daysSince, occurrenceDate };
+}
+
+export interface MissedEventWindow {
+    event: SpecialEvent
+    /** The 'YYYY-MM-DD' of the specific occurrence that was missed, used to rebuild that exact quiz. */
+    occurrenceDate: string
+}
+
+/** The event whose "I missed it" replay window is currently open, for the given session date, if any. */
+export function getMissedEventWindow(sessionDate: string): MissedEventWindow | undefined {
+    for (const event of specialEvents) {
+        if (!event.postEventDays) continue;
+        const { daysSince, occurrenceDate } = daysSinceLastOccurrence(event.date, sessionDate);
+        if (daysSince > 0 && daysSince <= event.postEventDays) {
+            return { event, occurrenceDate };
+        }
+    }
+    return undefined;
+}
+
 const DEBUG_EVENT_STORAGE_KEY = 'shmup-quiz-debug-event';
 
 // Dev-only test hook: `?debug-event=<id>` persists an override to localStorage (so it
@@ -112,3 +153,6 @@ export const todaysSpecialEvent: SpecialEvent | undefined = getDebugEventOverrid
 
 /** The upcoming event countdown to show on the home page for the current page session, if any. */
 export const upcomingEventCountdown: UpcomingEventCountdown | undefined = getUpcomingEventCountdown(SESSION_DATE);
+
+/** The "I missed it" replay window to offer on the home page for the current page session, if any. */
+export const missedEventWindow: MissedEventWindow | undefined = getMissedEventWindow(SESSION_DATE);

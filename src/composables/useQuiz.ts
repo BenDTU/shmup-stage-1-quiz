@@ -3,7 +3,8 @@ import { games } from '../data/games';
 import { quotes } from '../data/quotes';
 import type { Series, Game, GameEntryWithId, QuizMode } from '../types';
 import { getDailyProgress, saveDailyProgress, SESSION_DATE } from '../storage/dailyProgressStorage';
-import { todaysSpecialEvent, type SpecialEvent } from '../data/specialEvents';
+import { getActiveEventSelection, getEventProgress, saveEventProgress, type ActiveEventSelection } from '../storage/eventProgressStorage';
+import { todaysSpecialEvent, getEventById, type SpecialEvent } from '../data/specialEvents';
 
 type RandomFn = () => number;
 
@@ -18,10 +19,11 @@ function mulberry32(seed: number): RandomFn {
     };
 }
 
-function getDailySeed(): number {
-    const today = SESSION_DATE;
+// Deterministic seed derived from a 'YYYY-MM-DD' date string, so everyone building the quiz
+// for that date (whether it's today's daily quiz or a past event being replayed) gets the same one.
+function getSeedForDate(dateStr: string): number {
     let hash = 0;
-    for (const char of today) {
+    for (const char of dateStr) {
         hash = (Math.imul(31, hash) + char.charCodeAt(0)) | 0;
     }
     // Run one round of Mulberry32 mixing to avoid adjacent-seed correlation
@@ -97,7 +99,9 @@ const state = reactive<QuizState>({
 
 const isDaily = ref(false);
 const isResumed = ref(false);
+const isEventReplay = ref(false);
 const activeSpecialEvent = ref<SpecialEvent | undefined>(undefined);
+const activeEventSelection = ref<ActiveEventSelection | undefined>(undefined);
 
 const isFinished = computed(
     () =>
@@ -257,15 +261,45 @@ function buildQuiz(mode: QuizMode, random: RandomFn, event?: SpecialEvent) {
 function startQuiz(mode: QuizMode = 'advanced') {
     isDaily.value = false;
     isResumed.value = false;
+    isEventReplay.value = false;
     activeSpecialEvent.value = undefined;
+    activeEventSelection.value = undefined;
     buildQuiz(mode, Math.random);
 }
 
 function startDailyQuiz(mode: QuizMode = 'advanced') {
     isDaily.value = true;
     isResumed.value = false;
+    isEventReplay.value = false;
     activeSpecialEvent.value = todaysSpecialEvent;
-    buildQuiz(mode, mulberry32(getDailySeed()), activeSpecialEvent.value);
+    activeEventSelection.value = undefined;
+    buildQuiz(mode, mulberry32(getSeedForDate(SESSION_DATE)), activeSpecialEvent.value);
+}
+
+function startEventReplay(selection: ActiveEventSelection, mode: QuizMode = 'advanced') {
+    const event = getEventById(selection.eventId);
+    if (!event) return;
+    isDaily.value = false;
+    isResumed.value = false;
+    isEventReplay.value = true;
+    activeSpecialEvent.value = event;
+    activeEventSelection.value = selection;
+    buildQuiz(mode, mulberry32(getSeedForDate(selection.occurrenceDate)), event);
+}
+
+// Persists the current answers to whichever progress store applies (daily or event replay); a no-op for a plain random quiz.
+function saveProgress() {
+    if (isDaily.value) {
+        saveDailyProgress({ mode: state.mode, answers: [...state.answers] });
+    } else if (isEventReplay.value && activeEventSelection.value) {
+        saveEventProgress(activeEventSelection.value, { mode: state.mode, answers: [...state.answers] });
+    }
+}
+
+// Records that the quiz has been started (0 answers so far), so a browser close before the
+// first answer still resumes into the right quiz rather than starting a fresh one.
+function markQuizStarted() {
+    if (state.answers.length === 0) saveProgress();
 }
 
 function submitGuess(gameId: number) {
@@ -276,12 +310,7 @@ function submitGuess(gameId: number) {
     if (!isSkip && !games.find((g) => g.id === gameId)) return;
     state.answers.push(gameId);
     state.isAnswered = true;
-    if (isDaily.value) {
-        saveDailyProgress({
-            mode: state.mode,
-            answers: [...state.answers],
-        });
-    }
+    saveProgress();
 }
 
 function nextQuestion() {
@@ -296,8 +325,30 @@ function resumeDailyQuiz(): boolean {
     if (!progress) return false;
     isDaily.value = true;
     isResumed.value = true;
+    isEventReplay.value = false;
     activeSpecialEvent.value = todaysSpecialEvent;
-    buildQuiz(progress.mode, mulberry32(getDailySeed()), activeSpecialEvent.value);
+    activeEventSelection.value = undefined;
+    buildQuiz(progress.mode, mulberry32(getSeedForDate(SESSION_DATE)), activeSpecialEvent.value);
+    state.answers = [...progress.answers];
+    const finished = progress.answers.length === state.questions.length;
+    state.currentIndex = finished ? state.questions.length - 1 : progress.answers.length;
+    state.isAnswered = finished;
+    return true;
+}
+
+function resumeEventReplay(): boolean {
+    const selection = getActiveEventSelection();
+    if (!selection) return false;
+    const event = getEventById(selection.eventId);
+    if (!event) return false;
+    const progress = getEventProgress(selection);
+    if (!progress) return false;
+    isDaily.value = false;
+    isResumed.value = true;
+    isEventReplay.value = true;
+    activeSpecialEvent.value = event;
+    activeEventSelection.value = selection;
+    buildQuiz(progress.mode, mulberry32(getSeedForDate(selection.occurrenceDate)), event);
     state.answers = [...progress.answers];
     const finished = progress.answers.length === state.questions.length;
     state.currentIndex = finished ? state.questions.length - 1 : progress.answers.length;
@@ -340,7 +391,9 @@ function resetQuiz() {
     state.options = [];
     state.questionQuotes = [];
     isResumed.value = false;
+    isEventReplay.value = false;
     activeSpecialEvent.value = undefined;
+    activeEventSelection.value = undefined;
 }
 
 export function useQuiz() {
@@ -348,7 +401,9 @@ export function useQuiz() {
         state,
         isDaily,
         isResumed,
+        isEventReplay,
         activeSpecialEvent,
+        activeEventSelection,
         isFinished,
         usedGameIds,
         seriesLimitedGameIds,
@@ -356,8 +411,11 @@ export function useQuiz() {
         seriesJustCompletedMajorityCorrect,
         startQuiz,
         startDailyQuiz,
+        startEventReplay,
         resumeDailyQuiz,
+        resumeEventReplay,
         submitGuess,
+        markQuizStarted,
         nextQuestion,
         resetQuiz,
         fillDebugAnswers,

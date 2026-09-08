@@ -6,15 +6,15 @@
                     <div class="text-center mb-5">
                         <h1
                             class="fw-bold"
-                            :class="isDaily ? 'display-6 text-warning-emphasis mb-1' : 'display-5 mb-3'"
+                            :class="isChallenge ? 'display-6 text-warning-emphasis mb-1' : 'display-5 mb-3'"
                         >
-                            {{ isDaily ? 'Daily Challenge Complete!' : 'Quiz Complete!' }} <i class="bi bi-trophy-fill" />
+                            {{ isChallenge ? challengeHeading : 'Quiz Complete!' }} <i class="bi bi-trophy-fill" />
                         </h1>
                         <p
-                            v-if="isDaily"
+                            v-if="displayDate"
                             class="text-warning-emphasis opacity-75 small mb-3"
                         >
-                            {{ SESSION_DATE_FORMATTED }}
+                            {{ displayDate }}
                         </p>
                         <p class="h5 text-muted mb-3">
                             <span
@@ -24,7 +24,7 @@
                         </p>
                         <p
                             class="lead"
-                            :class="isDaily ? 'text-warning-emphasis' : ''"
+                            :class="isChallenge ? 'text-warning-emphasis' : ''"
                         >
                             You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
                         </p>
@@ -77,8 +77,8 @@
                             <DailyCountdown />
                         </div>
                         <p
-                            v-if="isDaily && activeSpecialEvent?.resultsMessage"
-                            class="fw-bold h4 text-warning-emphasis mt-4 mb-0"
+                            v-if="isChallenge && activeSpecialEvent?.resultsMessage"
+                            class="fw-bold h4 text-warning-emphasis mt-5 mb-0"
                         >
                             {{ activeSpecialEvent.resultsMessage }}
                         </p>
@@ -90,7 +90,7 @@
                                 v-for="series in masteredSeries"
                                 :key="series"
                                 class="mb-1"
-                                :class="isDaily ? 'text-warning-emphasis' : ''"
+                                :class="isChallenge ? 'text-warning-emphasis' : ''"
                             >
                                 {{ series }} master! <i class="bi bi-trophy-fill" />
                             </p>
@@ -103,7 +103,7 @@
                     </h5>
                     <div
                         class="list-group mb-5"
-                        :class="isDaily ? 'list-group-daily' : ''"
+                        :class="isChallenge ? 'list-group-daily' : ''"
                     >
                         <div
                             v-for="(guessId, index) in state.answers"
@@ -169,6 +169,7 @@ import { useRouter, useRoute } from 'vue-router';
 import { useQuiz } from '../composables/useQuiz';
 import { SESSION_DATE_FORMATTED } from '../storage/dailyProgressStorage';
 import { guessedGameName } from '../functions';
+import { formatUtcDate } from '../utils/date';
 import DailyCountdown from '../components/DailyCountdown.vue';
 import { SERIES_LIMIT } from '../composables/useQuiz';
 import { MODE_COLOR, MODE_LABEL } from '../utils/modeStyle';
@@ -176,7 +177,24 @@ import { MODE_COLOR, MODE_LABEL } from '../utils/modeStyle';
 
 const router = useRouter();
 const route = useRoute();
-const { state, isDaily, activeSpecialEvent, startQuiz, startDailyQuiz, fillDebugAnswers } = useQuiz();
+const {
+    state, isDaily, isEventReplay, activeSpecialEvent, activeEventSelection,
+    startQuiz, startDailyQuiz, fillDebugAnswers,
+} = useQuiz();
+
+// True for both today's real daily quiz and a replay of a past event — anywhere the "gold"
+// (or event-recolored) challenge styling should apply.
+const isChallenge = computed(() => isDaily.value || isEventReplay.value);
+const challengeHeading = computed(() => (
+    activeSpecialEvent.value ? `${activeSpecialEvent.value.name} Challenge Complete!` : 'Daily Challenge Complete!'
+));
+// The date shown under the heading: today's date for the real daily quiz, or the specific
+// occurrence date being replayed — null (and hidden) for a plain random quiz.
+const displayDate = computed(() => {
+    if (isDaily.value) return SESSION_DATE_FORMATTED;
+    if (isEventReplay.value && activeEventSelection.value) return formatUtcDate(activeEventSelection.value.occurrenceDate);
+    return null;
+});
 
 onMounted(() => {
     if (!import.meta.env.PROD) {
@@ -231,7 +249,7 @@ const copied = ref(false);
 
 function copyResults() {
     const secondLineParts = [
-        (isDaily.value ? SESSION_DATE_FORMATTED : 'Random'),
+        (displayDate.value ?? 'Random'),
         modeLabel.value,
     ];
     const squareList = resultSquares.value.map(correct => correct ? '🟩' : '🟥');
