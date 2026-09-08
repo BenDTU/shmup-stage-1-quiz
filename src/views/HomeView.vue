@@ -106,11 +106,11 @@
                     <p class="mb-4">
                         {{ defaultMessage }}
                     </p>
-                    <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 mb-4">
+                    <div class="d-flex flex-column flex-md-row align-items-center align-items-md-stretch justify-content-center gap-3 mb-4">
                         <button
                             v-for="{ mode } in DIFFICULTY_MODES"
                             :key="mode"
-                            class="btn btn-outline-warning btn-lg py-3 daily-btn"
+                            class="btn btn-outline-warning btn-lg py-3 daily-btn d-flex flex-column justify-content-center"
                             @click="beginChallenge(mode)"
                         >
                             <div class="fw-bold fs-5">
