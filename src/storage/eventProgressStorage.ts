@@ -1,5 +1,7 @@
 import type { QuizMode } from '../types';
-import { DATA_VERSION, peekStoredDailyProgress } from './dailyProgressStorage';
+import { DATA_VERSION, peekStoredDailyProgress, SESSION_DATE } from './dailyProgressStorage';
+import { getEventById } from '../data/specialEvents';
+import { daysBetweenDates } from '../utils/date';
 
 export const ACTIVE_EVENT_KEY = 'shmup-quiz-active-event';
 export const EVENT_PROGRESS_KEY = 'shmup-quiz-event-progress';
@@ -11,10 +13,21 @@ export interface ActiveEventSelection {
     occurrenceDate: string;
 }
 
+// Auto-expires: a selection is only honored while today is still within that event's
+// postEventDays window, so a stale toggle left over from a previous visit (or a previous
+// year's occurrence) doesn't silently keep showing a replay long after it should have.
 export function getActiveEventSelection(): ActiveEventSelection | null {
     try {
         const raw = localStorage.getItem(ACTIVE_EVENT_KEY);
-        return raw ? (JSON.parse(raw) as ActiveEventSelection) : null;
+        if (!raw) return null;
+        const selection = JSON.parse(raw) as ActiveEventSelection;
+        const event = getEventById(selection.eventId);
+        const daysSince = daysBetweenDates(selection.occurrenceDate, SESSION_DATE);
+        if (!event?.postEventDays || daysSince < 0 || daysSince > event.postEventDays) {
+            localStorage.removeItem(ACTIVE_EVENT_KEY);
+            return null;
+        }
+        return selection;
     } catch {
         return null;
     }
