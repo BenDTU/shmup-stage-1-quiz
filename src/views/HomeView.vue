@@ -34,9 +34,9 @@
                 >
                     <a
                         href="#"
-                        :class="`text-${activeEvent?.themeColor ?? 'warning'}-emphasis text-decoration-underline fw-semibold`"
+                        class="text-decoration-underline fw-semibold back-to-daily-link"
                         @click.prevent="backToDaily"
-                    >← Back to Daily</a>
+                    >Back to Daily</a>
                 </p>
                 <p
                     v-else-if="missedEventWindow"
@@ -120,7 +120,10 @@
                     </div>
                 </template>
 
-                <DailyCountdown class="mb-5" />
+                <DailyCountdown
+                    v-if="!activeEventSelection"
+                    class="mb-5"
+                />
                 <hr class="mb-5 text-warning-emphasis opacity-100">
                 <p class="text-muted small mb-2">
                     There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups loaded in!
@@ -303,5 +306,8 @@ hr {
     box-shadow: var(--daily-glow);
 }
 
-
+// Always the usual daily gold, even while an event's own color is themeing the rest of the page.
+.back-to-daily-link {
+    color: var(--daily-gold-text-emphasis);
+}
 </style>

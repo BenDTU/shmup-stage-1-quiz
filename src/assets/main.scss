@@ -14,6 +14,10 @@
   // player overlay) that always renders against a dark backdrop regardless of the
   // site's own light/dark theme. Kept in sync with the .special-event-* colors below.
   --daily-bg-subtle-dark: #332701;
+  // Bootstrap's own warning-text-emphasis, pinned so it stays gold even when a
+  // .special-event-* class has re-pointed --bs-warning-text-emphasis elsewhere
+  // (e.g. the "Back to Daily" link, which should always read as the usual daily gold).
+  --daily-gold-text-emphasis: #664d03;
 }
 
 body {
@@ -42,6 +46,7 @@ h1, h2, h3, h4, h5, h6 {
 [data-bs-theme="dark"] {
   --bs-border-color: #fff;
   --bs-border-color-translucent: rgba(255, 255, 255, 0.25);
+  --daily-gold-text-emphasis: #ffda6a;
 
   .card {
     --bs-card-border-color: #fff;
