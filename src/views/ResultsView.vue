@@ -82,6 +82,10 @@
                         >
                             {{ activeSpecialEvent.resultsMessage }}
                         </p>
+                        <component
+                            :is="activeSpecialEvent.resultsExtra"
+                            v-if="isChallenge && activeSpecialEvent?.resultsExtra"
+                        />
                         <div
                             v-if="masteredSeries.length > 0"
                             class="mt-5"

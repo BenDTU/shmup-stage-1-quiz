@@ -1,3 +1,4 @@
+import { defineAsyncComponent, type Component } from 'vue';
 import { Series } from '../types';
 import { SESSION_DATE } from '../storage/dailyProgressStorage';
 
@@ -33,6 +34,8 @@ export interface SpecialEvent {
     resultsMessage?: string
     /** If set, replaces the usual "Once per day..." home-page blurb while this event is active (today or replaying). */
     dailyMessage?: string
+    /** Rendered on the results page directly below `resultsMessage`, if set. */
+    resultsExtra?: Component
     /** Recolors the usual gold "daily" theme throughout the app. Defaults to gold when omitted. */
     themeColor?: BootstrapThemeColor
     /** If set, a home-page countdown ('X days until <name>!') is shown starting this many days before the event. */
@@ -53,6 +56,7 @@ const specialEvents: SpecialEvent[] = [
         },
         resultsMessage: 'Happy Cirno Day! ⑨',
         dailyMessage: 'How well do you know Touhou Project?',
+        resultsExtra: defineAsyncComponent(() => import('../components/specialEvents/CirnoDayResults.vue')),
         themeColor: 'info',
         countdownDays: 7,
         postEventDays: 7,
