@@ -104,7 +104,7 @@
                         Today's daily challenge has been updated — your previous progress has been cleared.
                     </p>
                     <p class="mb-4">
-                        {{ defaultMessage }}
+                        {{ dailyMessage }}
                     </p>
                     <div class="d-flex flex-column flex-md-row align-items-center align-items-md-stretch justify-content-center gap-3 mb-4">
                         <button
@@ -182,7 +182,7 @@ const inProgressMessage = computed(() => (
         ? `You have an unfinished ${activeEvent.value.name} challenge — pick up where you left off!`
         : 'You have an unfinished daily challenge — pick up where you left off!'
 ));
-const defaultMessage = computed(() => (
+const dailyMessage = computed(() => (
     activeEventSelection.value
         ? `Replaying the ${activeEvent.value?.name} challenge — a one-time chance to catch up!`
         : 'Once per day - challenge the same set of songs as everyone else!'
