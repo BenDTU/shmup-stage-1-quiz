@@ -184,7 +184,7 @@ const inProgressMessage = computed(() => (
 ));
 const dailyMessage = computed(() => {
     if (activeEvent.value?.dailyMessage) return activeEvent.value.dailyMessage;
-    if (activeEventSelection.value) return `Replaying the ${activeEvent.value?.name} challenge — a one-time chance to catch up!`;
+    if (activeEventSelection.value) return `Replaying the ${activeEvent.value?.name} challenge!`;
     return 'Once per day - challenge the same set of songs as everyone else!';
 });
 
