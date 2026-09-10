@@ -78,7 +78,7 @@
                         </div>
                         <p
                             v-if="isChallenge && activeSpecialEvent?.resultsMessage"
-                            class="fw-bold h4 text-warning-emphasis mt-4 mb-0"
+                            class="fw-bold h4 text-warning-emphasis mt-5 mb-0"
                         >
                             {{ activeSpecialEvent.resultsMessage }}
                         </p>

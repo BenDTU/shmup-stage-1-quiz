@@ -49,7 +49,7 @@ const specialEvents: SpecialEvent[] = [
             gameName: 'Touhou 9: Phantasmagoria of Flower View',
             songName: 'Adventure of the Lovestruck Tomboy',
         },
-        resultsMessage: 'Happy Cirno Day!',
+        resultsMessage: 'Happy Cirno Day! ⑨',
         themeColor: 'info',
         countdownDays: 7,
         postEventDays: 7,

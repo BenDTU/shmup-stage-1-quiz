@@ -124,7 +124,7 @@
                     v-if="!activeEventSelection"
                     class="mb-5"
                 />
-                <hr class="mb-5 text-warning-emphasis opacity-100">
+                <hr class="mt-5 mb-5 text-warning-emphasis opacity-100">
                 <p class="text-muted small mb-2">
                     There are currently <strong>{{ totalSongs }}</strong> songs from <strong>{{ totalShmups }}</strong> shmups loaded in!
                 </p>
