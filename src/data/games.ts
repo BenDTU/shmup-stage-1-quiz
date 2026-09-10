@@ -2401,7 +2401,12 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Touhou 6: Embodiment of Scarlet Devil',
         series: Series.Touhou,
-        songSource: { songName: 'A Soul as Red as a Ground Cherry', videoId: '2-zBXJKw5IQ' },
+        songSource: {
+            songName: 'A Soul as Red as a Ground Cherry',
+            arrangements: [
+                { videoId: '2-zBXJKw5IQ', source: 'Original' },
+                { videoId: 'Fiv-XzMEflc', source: 'New Classic' },
+            ] },
     },
     {
         name: 'Touhou 7: Perfect Cherry Blossom',
