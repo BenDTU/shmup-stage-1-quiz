@@ -2405,7 +2405,7 @@ const gameEntries: GameEntry[] = [
             songName: 'A Soul as Red as a Ground Cherry',
             arrangements: [
                 { videoId: '2-zBXJKw5IQ', source: 'Original' },
-                { videoId: 'Fiv-XzMEflc', source: 'New Classic' },
+                { videoId: '9YaFBOISgQA', source: 'New Classic' },
             ] },
     },
     {
