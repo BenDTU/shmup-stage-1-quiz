@@ -1239,7 +1239,7 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Macross Plus',
         series: Series.Macross,
-        songSource: { songName: 'Area 1', videoId: 'h-VuFFy7LRA' },
+        songSource: { songName: 'Area 1', videoId: 'STu256NLnFs', startTime: 125, endTime: 248 },
     },
     {
         name: 'Macross: Scrambled Valkyrie',
