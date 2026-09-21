@@ -97,7 +97,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { gameEntries, totalSongs, totalShmups } from '@/data/games';
-import type { SongEntry, PlayableSongEntry } from '@/data/games';
+import type { SongEntry } from '@/data/games';
 import SongLinks from '@/components/SongLinks.vue';
 
 interface GameGroup {
@@ -111,8 +111,11 @@ function normalizeAlias(alias: string | string[]): string[] {
     return Array.isArray(alias) ? alias : [alias];
 }
 
-function hasVideo(entry: SongEntry): entry is PlayableSongEntry {
-    return 'arrangements' in entry || !!entry.videoId;
+// Whether at least one video is available for this song (top-level, or on any one arrangement) —
+// used to decide between showing links (SongLinks handles any still-missing arrangements) and the
+// plain "Unavailable" label for a song with no video at all.
+function hasVideo(entry: SongEntry): boolean {
+    return 'arrangements' in entry ? entry.arrangements.some((a) => !!a.videoId) : !!entry.videoId;
 }
 
 const gameGroups: GameGroup[] = gameEntries

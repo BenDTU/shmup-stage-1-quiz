@@ -1,7 +1,15 @@
-import { Series, type GameEntry, type GameEntryWithId, type SongEntry } from '../types';
+import {
+    Series,
+    type GameEntry,
+    type GameEntryWithId,
+    type SongEntry,
+    type SongArrangement,
+    type PlayableSongEntry,
+    type PlayableSongArrangement,
+} from '../types';
 
 export { Series } from '../types';
-export type { SongEntry, PlayableSongEntry, GameEntry, GameListEntry, Game } from '../types';
+export type { SongEntry, SongArrangement, PlayableSongEntry, PlayableSongArrangement, GameEntry, GameListEntry, Game } from '../types';
 
 // Update videoId and startTime values with the correct YouTube video IDs and
 // timestamps for each game's stage 1 theme.
@@ -10,9 +18,9 @@ export type { SongEntry, PlayableSongEntry, GameEntry, GameListEntry, Game } fro
 // name alone would be misleading (e.g. sortName: 'Gradius 2' for 'Gradius II').
 // IDs are auto-assigned from the array position of the games export (below) — just add entries with songSource.
 // startTime (seconds) is optional; omit it to start from the beginning of the video.
-// videoId is optional: if no suitable YouTube video exists yet for a game's theme, omit videoId
-// (and startTime/endTime). The game still shows up (greyed out) on the song list, but is left
-// out of built quizzes until a videoId is added.
+// videoId is optional, both on a song entry and on an individual arrangement: if no suitable
+// YouTube video exists (yet, or any more) omit videoId (and startTime/endTime). It still shows up
+// (greyed out) on the song list, but is left out of built quizzes until a videoId is added.
 export const gameEntries: GameEntry[] = [
     {
         name: '70s-style Robot Anime Geppy-X',
@@ -2429,7 +2437,7 @@ export const gameEntries: GameEntry[] = [
             songName: 'A Soul as Red as a Ground Cherry',
             arrangements: [
                 { videoId: '2-zBXJKw5IQ', source: 'Original' },
-                { videoId: '9YaFBOISgQA', source: 'New Classic' },
+                { source: 'New Classic' }, // removed, no longer has a public video
             ] },
     },
     {
@@ -2853,20 +2861,41 @@ export const gameEntries: GameEntry[] = [
     },
 */
 
-function isSongEntryPlayable(source: SongEntry): boolean {
-    return 'arrangements' in source || !!source.videoId;
+function isPlayableArrangement(arrangement: SongArrangement): arrangement is PlayableSongArrangement {
+    return !!arrangement.videoId;
 }
 
-function isGameEntryPlayable(entry: GameEntry): boolean {
+// Drops a song source entirely if it has no video (single-video form), or narrows it down to
+// only its playable arrangements (arranged form) — dropping it too if none remain.
+function toPlayableSongEntry(source: SongEntry): PlayableSongEntry | undefined {
+    if ('arrangements' in source) {
+        const arrangements = source.arrangements.filter(isPlayableArrangement);
+        return arrangements.length > 0
+            ? { songName: source.songName, arrangements: arrangements as [PlayableSongArrangement, ...PlayableSongArrangement[]] }
+            : undefined;
+    }
+    return source.videoId
+        ? { songName: source.songName, videoId: source.videoId, startTime: source.startTime, endTime: source.endTime }
+        : undefined;
+}
+
+// A game is only eligible for the quiz once it has at least one playable song source left (see
+// the note above gameEntries); entries left with none are skipped here but still appear, in full,
+// on the song list.
+function toPlayableGameEntry(entry: GameEntry): Omit<GameEntryWithId, 'id'> | undefined {
     const sources = Array.isArray(entry.songSource) ? entry.songSource : [entry.songSource];
-    return sources.every(isSongEntryPlayable);
+    const playableSources = sources.map(toPlayableSongEntry).filter((s): s is PlayableSongEntry => s !== undefined);
+    if (playableSources.length === 0) return undefined;
+    const songSource = Array.isArray(entry.songSource)
+        ? (playableSources as [PlayableSongEntry, ...PlayableSongEntry[]])
+        : playableSources[0]!;
+    return { ...entry, songSource };
 }
 
-// Games are only eligible for the quiz once every song in their songSource has a videoId; entries
-// missing one (see the note above gameEntries) are skipped here but still appear on the song list.
 export const games: GameEntryWithId[] = gameEntries
-    .filter(isGameEntryPlayable)
-    .map((entry, index) => ({ ...entry, id: index + 1 })) as GameEntryWithId[];
+    .map(toPlayableGameEntry)
+    .filter((entry): entry is Omit<GameEntryWithId, 'id'> => entry !== undefined)
+    .map((entry, index) => ({ ...entry, id: index + 1 }));
 
 export const totalShmups: number = games.length;
 
