@@ -6,6 +6,8 @@ This folder contains `games.ts`, the list of games and their stage 1 themes used
 
 Add a new object to the `gameEntries` array in `games.ts`. The array **must stay sorted alphabetically** by `name`, in a case-insensitive and numeric-aware way (matching the `local/sorted-games` ESLint rule). Run `npm run lint` to verify ordering — the custom `local/sorted-games` ESLint rule will report an error if any entry is out of order.
 
+If no suitable YouTube video exists yet for a game's theme, add the entry with `videoId` omitted (see [Songs pending a video](#songs-pending-a-video) below). It will still show up on the song list, greyed out, and is automatically left out of built quizzes until a `videoId` is added.
+
 Each entry must have a `name` and a `songSource`. IDs are auto-assigned from the array position, so you don't need to set one.
 
 ### Common fields
@@ -212,3 +214,16 @@ When a game has been released across many versions with different stage 1 songs,
   ]
 },
 ```
+
+### Songs pending a video
+
+If a game's stage 1 theme doesn't have a suitable YouTube video yet, add it in place (alphabetically, like any other entry) with `videoId` omitted:
+
+```ts
+{
+  name: 'Drainus',
+  songSource: { songName: 'Determination' },
+},
+```
+
+The game still appears on the song list — greyed out, with an "Unavailable" label instead of a link — but is automatically excluded from built quizzes. Once a suitable video is found, just add the `videoId`; no need to move the entry anywhere.

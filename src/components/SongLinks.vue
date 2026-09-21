@@ -13,9 +13,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { SongEntry } from '@/data/games';
+import type { PlayableSongEntry } from '@/data/games';
 
-const props = defineProps<{ entry: SongEntry }>();
+const props = defineProps<{ entry: PlayableSongEntry }>();
 
 function youtubeUrl(videoId: string, startTime?: number): string {
     return `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}${startTime ? `&t=${startTime}` : ''}`;

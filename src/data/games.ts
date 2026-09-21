@@ -1,16 +1,19 @@
-import { Series, type GameEntry, type GameEntryWithId, type NoSoundTrackGameEntry } from '../types';
+import { Series, type GameEntry, type GameEntryWithId, type SongEntry } from '../types';
 
 export { Series } from '../types';
-export type { SongEntry, GameEntry, GameListEntry, Game, NoSoundTrackGameEntry } from '../types';
+export type { SongEntry, PlayableSongEntry, GameEntry, GameListEntry, Game } from '../types';
 
 // Update videoId and startTime values with the correct YouTube video IDs and
 // timestamps for each game's stage 1 theme.
 // Keep this array sorted alphabetically by name (enforced by ESLint local/sorted-games rule).
 // Use the optional sortName property to override the sort key if the alphabetical order of the
 // name alone would be misleading (e.g. sortName: 'Gradius 2' for 'Gradius II').
-// IDs are auto-assigned from the array position — just add entries with songSource.
+// IDs are auto-assigned from the array position of the games export (below) — just add entries with songSource.
 // startTime (seconds) is optional; omit it to start from the beginning of the video.
-const gameEntries: GameEntry[] = [
+// videoId is optional: if no suitable YouTube video exists yet for a game's theme, omit videoId
+// (and startTime/endTime). The game still shows up (greyed out) on the song list, but is left
+// out of built quizzes until a videoId is added.
+export const gameEntries: GameEntry[] = [
     {
         name: '70s-style Robot Anime Geppy-X',
         songSource: { songName: 'Geppy-X, takeoff!!', videoId: 'BnyaCeRjSs4' },
@@ -608,6 +611,10 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Submerged City', videoId: 'YmSOfpOkmDE' },
     },
     {
+        name: 'Drainus',
+        songSource: { songName: 'Determination', videoId: 'YVjVRraddOE' },
+    },
+    {
         name: 'Earth Defense Force',
         alias: 'Super Earth Defense Force',
         songSource: {
@@ -708,6 +715,11 @@ const gameEntries: GameEntry[] = [
     {
         name: 'Explosive Breaker',
         songSource: { songName: 'Stage 1, 3-2', videoId: '69wGmxanW20' },
+    },
+    {
+        name: 'Exzeal',
+        series: Series.Zeal,
+        songSource: { songName: 'Typhoon #12' },
     },
     {
         name: 'Fantasy Zone',
@@ -1152,6 +1164,11 @@ const gameEntries: GameEntry[] = [
         name: 'Lightning Fighters',
         alias: 'Trigon',
         songSource: { songName: 'Faraway', videoId: 'jQJQ_rrN5hA' },
+    },
+    {
+        name: 'Like Dreamer',
+        series: Series.Dreamer,
+        songSource: { songName: 'Cat Mischief' },
     },
     {
         name: 'Lords of Thunder',
@@ -2050,6 +2067,13 @@ const gameEntries: GameEntry[] = [
         songSource: { songName: 'Japan stage', videoId: 'sXCTZsRJ6y8' },
     },
     {
+        name: 'Sonic Wings Reunion',
+        sortName: 'Sonic Wings 5',
+        alias: ['Aero Fighters Reunion'],
+        series: Series.SonicWings,
+        songSource: { songName: 'Abu Dhabi, UAE stage' },
+    },
+    {
         name: 'Sorcer Striker',
         alias: 'Mahou Daisakusen',
         series: Series.Mahou,
@@ -2829,33 +2853,20 @@ const gameEntries: GameEntry[] = [
     },
 */
 
-// Games without relevant YouTube links yet.
-// When a suitable YouTube video becomes available, replace '---' with the real videoId and move the entry into gameEntries above.
-export const noSoundTrackGameEntries: NoSoundTrackGameEntry[] = [
-    {
-        name: 'Exzeal',
-        series: Series.Zeal,
-        songSource: { songName: 'Typhoon #12' },
-    },
-    {
-        name: 'Sonic Wings Reunion',
-        sortName: 'Sonic Wings 5',
-        alias: ['Aero Fighters Reunion'],
-        series: Series.SonicWings,
-        songSource: { songName: 'Abu Dhabi, UAE stage' },
-    },
-    {
-        name: 'Drainus',
-        songSource: { songName: 'Determination' },
-    },
-    {
-        name: 'Like Dreamer',
-        series: Series.Dreamer,
-        songSource: { songName: 'Cat Mischief' },
-    },
-];
+function isSongEntryPlayable(source: SongEntry): boolean {
+    return 'arrangements' in source || !!source.videoId;
+}
 
-export const games: GameEntryWithId[] = gameEntries.map((entry, index) => ({ ...entry, id: index + 1 }));
+function isGameEntryPlayable(entry: GameEntry): boolean {
+    const sources = Array.isArray(entry.songSource) ? entry.songSource : [entry.songSource];
+    return sources.every(isSongEntryPlayable);
+}
+
+// Games are only eligible for the quiz once every song in their songSource has a videoId; entries
+// missing one (see the note above gameEntries) are skipped here but still appear on the song list.
+export const games: GameEntryWithId[] = gameEntries
+    .filter(isGameEntryPlayable)
+    .map((entry, index) => ({ ...entry, id: index + 1 })) as GameEntryWithId[];
 
 export const totalShmups: number = games.length;
 
