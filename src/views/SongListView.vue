@@ -56,7 +56,7 @@
                                         {{ song.songName }}
                                         <div class="d-sm-none mt-1">
                                             <SongLinks
-                                                v-if="song.entry"
+                                                v-if="hasVideo(song.entry)"
                                                 :entry="song.entry"
                                             />
                                             <span
@@ -67,7 +67,7 @@
                                     </td>
                                     <td class="text-nowrap d-none d-sm-table-cell">
                                         <SongLinks
-                                            v-if="song.entry"
+                                            v-if="hasVideo(song.entry)"
                                             :entry="song.entry"
                                         />
                                         <span
@@ -96,7 +96,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { games, noSoundTrackGameEntries, totalSongs, totalShmups } from '@/data/games';
+import { gameEntries, totalSongs, totalShmups } from '@/data/games';
 import type { SongEntry } from '@/data/games';
 import SongLinks from '@/components/SongLinks.vue';
 
@@ -104,36 +104,30 @@ interface GameGroup {
     gameName: string
     sortKey: string
     aliases: string[]
-    songs: Array<{ songName: string; entry?: SongEntry }>
+    songs: Array<{ songName: string; entry: SongEntry }>
 }
 
 function normalizeAlias(alias: string | string[]): string[] {
     return Array.isArray(alias) ? alias : [alias];
 }
 
-const availableGroups: GameGroup[] = games.map((game) => {
-    const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource];
-    return {
-        gameName: game.name,
-        sortKey: (game.sortName ?? game.name).toLowerCase(),
-        aliases: game.alias ? normalizeAlias(game.alias) : [],
-        songs: sources.map((entry) => ({ songName: entry.songName, entry })),
-    };
-});
+// Whether at least one video is available for this song (top-level, or on any one arrangement) —
+// used to decide between showing links (SongLinks handles any still-missing arrangements) and the
+// plain "Unavailable" label for a song with no video at all.
+function hasVideo(entry: SongEntry): boolean {
+    return 'arrangements' in entry ? entry.arrangements.some((a) => !!a.videoId) : !!entry.videoId;
+}
 
-const unavailableGroups: GameGroup[] = noSoundTrackGameEntries.map((game) => {
-    const source = game.songSource;
-    return {
-        gameName: game.name,
-        sortKey: (game.sortName ?? game.name).toLowerCase(),
-        aliases: game.alias ? normalizeAlias(game.alias) : [],
-        songs: 'arrangements' in source
-            ? source.arrangements.map(() => ({ songName: source.songName }))
-            : [{ songName: source.songName }],
-    };
-});
-
-const gameGroups: GameGroup[] = [...availableGroups, ...unavailableGroups]
+const gameGroups: GameGroup[] = gameEntries
+    .map((game) => {
+        const sources = Array.isArray(game.songSource) ? game.songSource : [game.songSource];
+        return {
+            gameName: game.name,
+            sortKey: (game.sortName ?? game.name).toLowerCase(),
+            aliases: game.alias ? normalizeAlias(game.alias) : [],
+            songs: sources.map((entry) => ({ songName: entry.songName, entry })),
+        };
+    })
     .sort((a, b) => a.sortKey.localeCompare(b.sortKey, undefined, { sensitivity: 'base', numeric: true }));
 
 const hoveredGame = ref<string | null>(null);

@@ -52,19 +52,27 @@ export enum AnswerType {
 
 export interface SongArrangement {
     source: string
-    videoId: string
+    videoId?: string // omit if no suitable video is currently available for this specific arrangement
     startTime?: number // seconds into the video where the stage 1 theme begins (defaults to 0)
     endTime?: number // seconds into the video where playback should stop (video will be paused)
 }
 
+export interface PlayableSongArrangement extends SongArrangement {
+    videoId: string
+}
+
+// videoId is optional: a game whose stage 1 theme (or one particular arrangement of it) has no
+// suitable YouTube video yet is still listed (greyed out on the song list) but is left out of
+// built quizzes until one is added.
 export type SongEntry =
-  | { songName: string; videoId: string; startTime?: number; endTime?: number }
+  | { songName: string; videoId?: string; startTime?: number; endTime?: number }
   | { songName: string; arrangements: [SongArrangement, ...SongArrangement[]] };
 
-export type SongEntryWithoutSoundtrack =
-  | { songName: string }
-  | { songName: string; arrangements: [Pick<SongArrangement, 'source'>, ...Pick<SongArrangement, 'source'>[]] };
-
+// Same shape as SongEntry, but with videoId guaranteed present (at the top level, and on every
+// arrangement) — what a game needs to be eligible for the quiz.
+export type PlayableSongEntry =
+  | { songName: string; videoId: string; startTime?: number; endTime?: number }
+  | { songName: string; arrangements: [PlayableSongArrangement, ...PlayableSongArrangement[]] };
 
 interface GameEntryBase {
     name: string
@@ -78,10 +86,9 @@ export type GameEntry = GameEntryBase & {
     songSource: SongEntry | [SongEntry, ...SongEntry[]]
 };
 
-export type GameEntryWithId = GameEntry & { id: number };
-
-export type NoSoundTrackGameEntry = GameEntryBase & {
-    songSource: SongEntryWithoutSoundtrack
+export type GameEntryWithId = GameEntryBase & {
+    id: number
+    songSource: PlayableSongEntry | [PlayableSongEntry, ...PlayableSongEntry[]]
 };
 
 export type GameListEntry = { id: number; name: string; alias?: string | string[]; series?: Series };
