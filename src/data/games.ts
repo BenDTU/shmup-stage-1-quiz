@@ -2780,7 +2780,7 @@ export const gameEntries: GameEntry[] = [
             songName: 'Area 1',
             arrangements: [
                 { source: 'Original', videoId: 'UUNG-NbCbHU' },
-                { source: 'Arrangement', videoId: 'enZ-rEt7U_A' },
+                { source: 'Arrange', videoId: 'enZ-rEt7U_A' },
             ],
         },
     },
