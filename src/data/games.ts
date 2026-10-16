@@ -2437,7 +2437,7 @@ export const gameEntries: GameEntry[] = [
             songName: 'A Soul as Red as a Ground Cherry',
             arrangements: [
                 { videoId: '2-zBXJKw5IQ', source: 'Original' },
-                { source: 'New Classic' }, // removed, no longer has a public video
+                { videoId: 'QSH1lc4e_Is', source: 'New Classic' },
             ] },
     },
     {
