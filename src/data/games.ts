@@ -1920,6 +1920,7 @@ export const gameEntries: GameEntry[] = [
             arrangements: [
                 { source: 'Arcade', videoId: 'gle0JLhaRxw' },
                 { source: 'NES', videoId: 'JYL5cz8Q-7o' },
+                { source: 'PC Engine', videoId: 'X6kqIEFjl44' },
             ],
         },
     },
