@@ -1413,6 +1413,11 @@ export const gameEntries: GameEntry[] = [
         songSource: { songName: 'Exeo', videoId: 'PyHmUSQaNYM' },
     },
     {
+        name: 'Nemesis (Game Boy)',
+        series: Series.Gradius,
+        songSource: { songName: 'Free Flyer ~ Challenger 1985', videoId: 'mwN6L0gezIs' },
+    },
+    {
         name: 'Nyahax 93',
         songSource: { songName: 'Carnival!', videoId: 'vMylOG43a20' },
     },
@@ -1910,7 +1915,13 @@ export const gameEntries: GameEntry[] = [
         name: 'Salamander',
         alias: 'Life Force',
         series: Series.Gradius,
-        songSource: { songName: 'Power of Anger', videoId: 'gle0JLhaRxw' },
+        songSource: {
+            songName: 'Power of Anger',
+            arrangements: [
+                { source: 'Arcade', videoId: 'gle0JLhaRxw' },
+                { source: 'NES', videoId: 'JYL5cz8Q-7o' },
+            ],
+        },
     },
     {
         name: 'Salamander 2',
