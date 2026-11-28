@@ -1415,7 +1415,7 @@ export const gameEntries: GameEntry[] = [
     {
         name: 'Nemesis (Game Boy)',
         series: Series.Gradius,
-        songSource: { songName: 'Free Flyer ~ Challenger 1985', videoId: 'mwN6L0gezIs' },
+        songSource: { songName: 'Free Flyer ~ Challenger 1985', videoId: 'bWhkgWtaPTM' },
     },
     {
         name: 'Nyahax 93',
